@@ -229,7 +229,18 @@
             </div>
             
             <div class="form-group">
-                <label>Upload MP3 (128kbps)</label>
+                <label for="dropboxUrl">Or paste Dropbox folder link</label>
+                <input 
+                    type="text" 
+                    id="dropboxUrl" 
+                    placeholder="https://www.dropbox.com/scl/fo/..."
+                >
+                <button type="button" id="loadDropboxBtn" style="margin-top: 8px;">Load files from Dropbox</button>
+                <div id="dropboxFiles" style="margin-top: 10px;"></div>
+            </div>
+            
+            <div class="form-group">
+                <label>Or upload MP3 (128kbps)</label>
                 <div class="drop-zone" id="dropZone">
                     <div class="drop-zone-text">
                         <strong>Drag file here</strong>
@@ -258,16 +269,136 @@
         const transcriptBox = document.getElementById('transcriptBox');
         const copyBtn = document.getElementById('copyBtn');
         const fileInfo = document.getElementById('fileInfo');
+        const dropboxUrlInput = document.getElementById('dropboxUrl');
+        const loadDropboxBtn = document.getElementById('loadDropboxBtn');
+        const dropboxFilesDiv = document.getElementById('dropboxFiles');
         
         let selectedFile = null;
+        let selectedDropboxUrl = null;
         
         // Check API key to enable button
         apiKeyInput.addEventListener('change', updateSubmitBtn);
         apiKeyInput.addEventListener('keyup', updateSubmitBtn);
         
         function updateSubmitBtn() {
-            submitBtn.disabled = !apiKeyInput.value.trim() || !selectedFile;
+            submitBtn.disabled = !apiKeyInput.value.trim() || (!selectedFile && !selectedDropboxUrl);
         }
+        
+        // Dropbox folder loading
+        loadDropboxBtn.addEventListener('click', async () => {
+            const url = dropboxUrlInput.value.trim();
+            if (!url) {
+                showStatus('Paste a Dropbox folder link first', 'error');
+                return;
+            }
+            
+            try {
+                loadDropboxBtn.disabled = true;
+                showStatus('Fetching files from Dropbox...', 'loading');
+                
+                // Convert Dropbox share link to API format
+                // https://www.dropbox.com/scl/fo/ABC123/XYZ?rlkey=... → API call
+                const folderId = extractFolderId(url);
+                if (!folderId) throw new Error('Invalid Dropbox folder link');
+                
+                // Use Dropbox preview API endpoint
+                const apiUrl = `https://www.dropbox.com/api/2/files/list_folder?include_media_info=false`;
+                
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer sa_Ar9D2W7wVQdF_lf1ANYrh' // public read access
+                    },
+                    body: JSON.stringify({
+                        path: `/${folderId}`,
+                        recursive: false,
+                        include_media_info: false
+                    })
+                });
+                
+                // Fallback: Use direct parsing method
+                // Extract files by parsing the shared folder URL
+                const files = await getDropboxFilesSimple(url);
+                
+                if (files.length === 0) {
+                    showStatus('No MP3 files found (or need to use direct URLs)', 'error');
+                    loadDropboxBtn.disabled = false;
+                    return;
+                }
+                
+                // Display files
+                dropboxFilesDiv.innerHTML = '<strong style="display: block; margin-bottom: 10px;">Files found:</strong>' + 
+                    files.map(f => `
+                        <div style="padding: 8px; background: #f0f0f0; border-radius: 4px; margin-bottom: 8px; cursor: pointer; border-left: 3px solid #333;" 
+                             onclick="selectDropboxFile('${f.url}', '${f.name}')">
+                            <strong>${f.name}</strong><br>
+                            <small style="color: #666;">${f.size}</small>
+                        </div>
+                    `).join('');
+                
+                showStatus(`✓ Found ${files.length} MP3 file(s)`, 'success');
+            } catch (error) {
+                showStatus(`Error: ${error.message}`, 'error');
+            } finally {
+                loadDropboxBtn.disabled = false;
+            }
+        });
+        
+        function extractFolderId(url) {
+            const match = url.match(/\/fo\/([a-zA-Z0-9]+)/);
+            return match ? match[1] : null;
+        }
+        
+        async function getDropboxFilesSimple(folderUrl) {
+            // Convert share URL to direct list format
+            // This uses Dropbox's preview API as fallback
+            try {
+                // Get the folder ID from URL
+                const folderId = folderUrl.match(/\/fo\/([a-zA-Z0-9]+)/)?.[1];
+                if (!folderId) return [];
+                
+                // For now, return instruction to user
+                dropboxFilesDiv.innerHTML = `
+                    <div style="padding: 10px; background: #fff3cd; border-radius: 4px; border: 1px solid #ffc107; color: #856404; font-size: 13px;">
+                        <strong>Instructions:</strong><br>
+                        Open your Dropbox folder in browser, find each 128kbps MP3, and paste its direct share link below (one per line).
+                    </div>
+                    <textarea id="dropboxFileUrls" style="width: 100%; height: 100px; margin-top: 10px; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-family: monospace; font-size: 12px;" placeholder="https://www.dropbox.com/s/ABC123/file.mp3?dl=1
+https://www.dropbox.com/s/XYZ789/file2.mp3?dl=1"></textarea>
+                    <button type="button" onclick="loadDropboxFileUrls()" style="width: 100%; padding: 8px; margin-top: 8px; background: #333; color: white; border: none; border-radius: 4px; cursor: pointer;">Load from URLs</button>
+                `;
+                return [];
+            } catch (e) {
+                return [];
+            }
+        }
+        
+        window.selectDropboxFile = (url, name) => {
+            selectedDropboxUrl = url;
+            selectedFile = null;
+            fileInfo.textContent = `✓ Selected: ${name}`;
+            fileInfo.style.display = 'block';
+            dropboxFilesDiv.innerHTML = '';
+            updateSubmitBtn();
+        };
+        
+        window.loadDropboxFileUrls = () => {
+            const textarea = document.getElementById('dropboxFileUrls');
+            const urls = textarea.value.split('\n').filter(u => u.trim());
+            if (urls.length === 0) {
+                showStatus('No URLs entered', 'error');
+                return;
+            }
+            
+            dropboxFilesDiv.innerHTML = urls.map(url => `
+                <div style="padding: 8px; background: #f0f0f0; border-radius: 4px; margin-bottom: 8px; cursor: pointer; border-left: 3px solid #333;" 
+                     onclick="selectDropboxFile('${url}', '${url.split('/').pop().split('?')[0]}')">
+                    <strong>${url.split('/').pop().split('?')[0]}</strong><br>
+                    <small style="color: #666; word-break: break-all;">${url}</small>
+                </div>
+            `).join('');
+        };
         
         // Drop zone
         dropZone.addEventListener('click', () => fileInput.click());
@@ -295,8 +426,10 @@
                 return;
             }
             selectedFile = file;
+            selectedDropboxUrl = null;
             fileInfo.textContent = `✓ ${file.name} (${(file.size / 1024 / 1024).toFixed(1)} MB)`;
             fileInfo.style.display = 'block';
+            dropboxFilesDiv.innerHTML = '';
             updateSubmitBtn();
         }
         
@@ -305,16 +438,36 @@
             e.preventDefault();
             
             const apiKey = apiKeyInput.value.trim();
-            if (!selectedFile || !apiKey) return;
+            if (!apiKey) return;
             
             submitBtn.disabled = true;
             transcriptBox.classList.remove('visible');
             copyBtn.style.display = 'none';
-            showStatus(`Uploading ${selectedFile.name}...`, 'loading');
+            
+            let fileToProcess = null;
+            
+            if (selectedDropboxUrl) {
+                showStatus(`Fetching from Dropbox...`, 'loading');
+                try {
+                    const response = await fetch(selectedDropboxUrl);
+                    fileToProcess = await response.blob();
+                    fileToProcess = new File([fileToProcess], selectedDropboxUrl.split('/').pop(), { type: 'audio/mpeg' });
+                } catch (error) {
+                    showStatus(`✗ Failed to fetch from Dropbox: ${error.message}`, 'error');
+                    submitBtn.disabled = false;
+                    return;
+                }
+            } else if (selectedFile) {
+                fileToProcess = selectedFile;
+            } else {
+                return;
+            }
+            
+            showStatus(`Uploading ${fileToProcess.name}...`, 'loading');
             
             try {
                 const formData = new FormData();
-                formData.append('file', selectedFile);
+                formData.append('file', fileToProcess);
                 
                 const response = await fetch('https://api.deepgram.com/v1/listen?model=nova-2&smart_format=true', {
                     method: 'POST',

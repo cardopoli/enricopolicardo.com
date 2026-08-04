@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <style>
-  /* ---- TWT tokens. Swap --sans / --mono to the site's exact faces when hosting. ---- */
+  /* ---- MVMNT tokens. Swap --sans / --mono to the site's exact faces when hosting. ---- */
   :root{
     --sans: "Geist", system-ui, -apple-system, sans-serif;
     --mono: "Geist Mono", ui-monospace, "Courier New", monospace;
@@ -176,7 +176,7 @@
   <header class="mast">
     <div class="mast-row">
       <div>
-        <div class="title">TWT <span class="slash">/</span> <em>Routine</em></div>
+        <div class="title">MVMNT <span class="slash">/</span> <em>Routine</em></div>
         <div class="tagline" id="tagline">Five patterns. Any room. Whatever the room gives you.</div>
       </div>
       <button class="theme-toggle" id="themeBtn" aria-label="Toggle light and dark">Light</button>
@@ -229,7 +229,7 @@
   </div>
 
   <footer>
-    <span>TWT / Routine — a movement catalogue</span>
+    <span>MVMNT / Routine — a movement catalogue</span>
     <span id="tierKey">B · bodyweight — BAND — DB · dumbbell/kb — GYM · barbell/machine</span>
   </footer>
 </div>
@@ -343,7 +343,7 @@
   // ---- State ----
   var level = 2;             // equipment level
   var session = [];          // [{id, sets, reps}]
-  var STORE_KEY = "twt_routine_saves_v1";
+  var STORE_KEY = "MVMNT_routine_saves_v1";
   var storeOK = true;
 
   // ---- Storage helpers (degrade quietly if unavailable) ----
@@ -497,13 +497,13 @@
   function applyTheme(mode){
     document.documentElement.setAttribute("data-theme", mode);
     themeBtn.textContent = mode==="light" ? "Dark" : "Light";
-    try{ window.localStorage.setItem("twt_routine_theme", mode); }catch(e){}
+    try{ window.localStorage.setItem("MVMNT_routine_theme", mode); }catch(e){}
   }
   themeBtn.addEventListener("click", function(){
     var cur = document.documentElement.getAttribute("data-theme")==="light" ? "light":"dark";
     applyTheme(cur==="light" ? "dark":"light");
   });
-  (function(){ var m="dark"; try{ m = window.localStorage.getItem("twt_routine_theme")||"dark"; }catch(e){} applyTheme(m); })();
+  (function(){ var m="dark"; try{ m = window.localStorage.getItem("MVMNT_routine_theme")||"dark"; }catch(e){} applyTheme(m); })();
 
   // ---- Clear / Print ----
   document.getElementById("clearBtn").addEventListener("click", function(){
@@ -601,8 +601,8 @@
   // ---- Plain-text export ----
   function buildText(){
     var kitNames = ["Bodyweight only","Bodyweight + bands","Bodyweight + dumbbells","Full gym"];
-    if(!session.length) return "TWT / ROUTINE\n(empty)";
-    var lines = ["TWT / ROUTINE", ""];
+    if(!session.length) return "MVMNT / ROUTINE\n(empty)";
+    var lines = ["MVMNT / ROUTINE", ""];
     session.forEach(function(s, i){
       var o = BY_ID[s.id]; if(!o) return;
       var unit = /carry/i.test(o.n) ? "m" : (o.tag==="Hang" || /plank|hold|wall sit/i.test(o.n) ? "s" : "reps");
@@ -655,7 +655,7 @@
   document.getElementById("shareBtn").addEventListener("click", function(){
     if(!session.length){ flash("Add some movements first."); return; }
     var txt = buildText();
-    if(navigator.share){ navigator.share({ title:"TWT / Routine", text:txt }).catch(function(){}); }
+    if(navigator.share){ navigator.share({ title:"MVMNT / Routine", text:txt }).catch(function(){}); }
     else{ copyText(txt, "No share sheet here - copied it as text instead."); }
   });
   document.getElementById("copyBtn").addEventListener("click", function(){

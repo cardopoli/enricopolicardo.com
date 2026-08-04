@@ -202,10 +202,11 @@
   <div class="kit">
     <div class="kit-label">What have you got today?</div>
     <div class="kit-opts" id="kitOpts" role="group" aria-label="Available equipment">
-      <button data-level="0" aria-pressed="false">Bodyweight only</button>
+      <button data-level="0" aria-pressed="false">Bodyweight</button>
       <button data-level="1" aria-pressed="false">+ Bands</button>
-      <button data-level="2" aria-pressed="true">+ Dumbbells</button>
-      <button data-level="3" aria-pressed="false">Full gym</button>
+      <button data-level="2" aria-pressed="false">+ Dumbbells</button>
+      <button data-level="3" aria-pressed="true">+ Kettlebells</button>
+      <button data-level="4" aria-pressed="false">Full gym</button>
     </div>
   </div>
 
@@ -246,7 +247,7 @@
 
   <footer>
     <span>MVMNT / Routine — a movement catalogue</span>
-    <span id="tierKey">B · bodyweight — BAND — DB · dumbbell/kb — GYM · barbell/machine</span>
+    <span id="tierKey">B bodyweight · BAND · DB dumbbell · KB kettlebell · GYM barbell/machine</span>
   </footer>
 </div>
 
@@ -255,7 +256,7 @@
   "use strict";
 
   // ---- Movement catalogue. tier: 0 body, 1 band, 2 dumbbell, 3 gym ----
-  var TIER_TAG = {0:"B", 1:"Band", 2:"DB", 3:"Gym"};
+  var TIER_TAG = {0:"B", 1:"Band", 2:"DB", 3:"KB", 4:"Gym"};
   var PATTERNS = [
     { code:"SQ", name:"Squat", note:"Knees and hips bend together. Sit between your feet.",
       opts:[
@@ -267,9 +268,11 @@
         {n:"Banded squat", t:1},
         {n:"Goblet squat", t:2},
         {n:"Dumbbell reverse lunge", t:2},
-        {n:"Kettlebell front squat", t:2},
-        {n:"Barbell back squat", t:3},
-        {n:"Leg press", t:3},
+        {n:"Kettlebell front squat (single)", t:3},
+        {n:"Barbell back squat", t:4},
+        {n:"Leg press", t:4},
+        {n:"Double kettlebell front squat", t:3},
+        {n:"Kettlebell cossack squat", t:3},
       ]},
     { code:"HG", name:"Hinge", note:"Push the hips back, flat back, load the hamstrings.",
       opts:[
@@ -280,10 +283,13 @@
         {n:"Banded pull-through", t:1},
         {n:"Banded RDL", t:1},
         {n:"Dumbbell Romanian deadlift", t:2},
-        {n:"Kettlebell swing", t:2},
+        {n:"Kettlebell swing (two-hand)", t:3},
         {n:"Single-leg dumbbell RDL", t:2},
-        {n:"Barbell deadlift", t:3},
-        {n:"Barbell hip thrust", t:3},
+        {n:"Barbell deadlift", t:4},
+        {n:"Barbell hip thrust", t:4},
+        {n:"Single-arm kettlebell swing", t:3},
+        {n:"Kettlebell deadlift", t:3},
+        {n:"Kettlebell clean (to rack)", t:3},
       ]},
     { code:"PU", name:"Push", note:"Away from you — chest, shoulders, triceps.",
       opts:[
@@ -295,9 +301,12 @@
         {n:"Band overhead press", t:1},
         {n:"Dumbbell bench / floor press", t:2},
         {n:"Dumbbell shoulder press", t:2},
-        {n:"Barbell bench press", t:3},
-        {n:"Overhead barbell press", t:3},
-        {n:"Parallel-bar dips", t:3},
+        {n:"Barbell bench press", t:4},
+        {n:"Overhead barbell press", t:4},
+        {n:"Parallel-bar dips", t:4},
+        {n:"Kettlebell overhead press", t:3},
+        {n:"Kettlebell push press", t:3},
+        {n:"Half-kneeling kettlebell press", t:3},
       ]},
     { code:"PL", name:"Pull", note:"Toward you — back and biceps. The one gyms forget.",
       opts:[
@@ -309,9 +318,12 @@
         {n:"Band face pull", t:1},
         {n:"One-arm dumbbell row", t:2},
         {n:"Chest-supported dumbbell row", t:2},
-        {n:"Lat pulldown", t:3},
-        {n:"Seated cable row", t:3},
-        {n:"Pull-up (assist as needed)", t:3},
+        {n:"Lat pulldown", t:4},
+        {n:"Seated cable row", t:4},
+        {n:"Pull-up (assist as needed)", t:4},
+        {n:"Single-arm kettlebell row", t:3},
+        {n:"Kettlebell high pull", t:3},
+        {n:"Kettlebell snatch", t:3},
       ]},
     { code:"CC", name:"Carry / Core", note:"Resist movement. Stay tall, brace, walk.",
       opts:[
@@ -325,7 +337,10 @@
         {n:"Suitcase carry (one side)", t:2},
         {n:"Overhead carry", t:2},
         {n:"Weighted plank", t:2},
-        {n:"Hanging knee raise", t:3},
+        {n:"Hanging knee raise", t:4},
+        {n:"Kettlebell racked carry", t:3},
+        {n:"Kettlebell halo", t:3},
+        {n:"Kettlebell windmill", t:3},
       ]},
     { code:"FM", name:"Free movement", note:"The body's own vocabulary — mobility, ground, hang, flow. Always available.",
       opts:[
@@ -341,7 +356,7 @@
         {n:"Get-up to stand (no weight)", t:0, tag:"Ground"},
         {n:"Dead hang", t:0, tag:"Hang"},
         {n:"Scapular pull-ups / hang shrugs", t:0, tag:"Hang"},
-        {n:"Turkish get-up (light weight)", t:2, tag:"Flow"},
+        {n:"Turkish get-up (kettlebell)", t:3, tag:"Flow"},
         {n:"Loaded carry flow", t:2, tag:"Flow"},
       ]},
   ];
@@ -356,7 +371,7 @@
     "SQ·06":"Band just above the knees; push the knees out against it the whole way.",
     "SQ·07":"Hold the weight at your chest, elbows inside the knees, sit down tall.",
     "SQ·08":"Step back, drop straight down, drive up through the front heel.",
-    "SQ·09":"Bells racked on the chest, elbows down, brace the middle, then squat.",
+    "SQ·09":"One bell racked on the chest, elbow tight in, brace, then squat tall.",
     "SQ·10":"Bar on the upper back, brace hard, break at hips and knees together.",
     "SQ·11":"Feet mid-platform, lower until the knees near 90°, don't slam the lockout.",
     "HG·01":"Hinge at the hip with a flat back; the free leg extends straight behind you.",
@@ -417,6 +432,20 @@
     "FM·12":"Hang with straight arms, lift the body by pulling the shoulder blades down.",
     "FM·13":"Weight locked overhead, rise to standing step by step, eyes on the weight, go slow.",
     "FM·14":"Carry, set down, move, pick up; keep a flat back on every pick-up.",
+    "SQ·12":"Both bells racked, elbows in and high, brace hard, sit between the feet.",
+    "SQ·13":"One bell at the chest, sink to one side, other leg straight, stay tall.",
+    "HG·12":"One hand on the bell, hips snap, free arm counterbalances, stay square.",
+    "HG·13":"Bell between the feet, hinge, flat back, stand by driving the hips through.",
+    "HG·14":"Swing to the hip, then punch the elbow round and catch it soft in the rack.",
+    "PU·12":"Bell in the rack, press straight overhead, ribs down, lock out tall.",
+    "PU·13":"Small dip of the knees, drive the legs, let that pop the bell overhead.",
+    "PU·14":"Half-kneeling, opposite knee up, brace hard, press without leaning back.",
+    "PL·12":"Hinge and brace on the free hand, row the bell to the hip, no twist.",
+    "PL·13":"Explosive hip drive pulls the bell up to chest height, elbow leads.",
+    "PL·14":"One motion hip-snap from floor to overhead; punch through, don't muscle it.",
+    "CC·12":"Bell in the front rack, stand dead tall, brace, walk smooth and level.",
+    "CC·13":"Circle the bell around the head close and slow, elbows tight, core braced.",
+    "CC·14":"Bell overhead, hinge to the side toward the floor, eyes on the bell.",
   };
 
   // Build stable catalogue ids: SQ·01 etc.
@@ -438,7 +467,7 @@
   }
 
   // ---- State ----
-  var level = 2;             // equipment level
+  var level = 3;             // equipment level
   var session = [];          // [{id, sets, reps}]
   var STORE_KEY = "MVMNT_routine_saves_v1";
   var storeOK = true;
@@ -469,6 +498,7 @@
     var html = "";
     PATTERNS.forEach(function(p){
       var visible = p.opts.filter(function(o){ return o.t <= level; });
+      visible.sort(function(a,b){ return a.t - b.t; });
       if(!visible.length) return;
       html += '<section class="pattern">';
       html += '<div class="p-head"><span class="p-name">'+p.name+'</span><span class="p-code">'+p.code+'</span></div>';
@@ -715,7 +745,7 @@
 
   // ---- Plain-text export ----
   function buildText(){
-    var kitNames = ["Bodyweight only","Bodyweight + bands","Bodyweight + dumbbells","Full gym"];
+    var kitNames = ["Bodyweight only","Bodyweight + bands","Bodyweight + dumbbells","Bodyweight + kettlebells","Full gym"];
     if(!session.length) return "MVMNT / ROUTINE\n(empty)";
     var lines = ["MVMNT / ROUTINE", ""];
     session.forEach(function(s, i){

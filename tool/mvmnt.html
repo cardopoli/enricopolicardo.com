@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>TWT — Routine</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+  /* ---- TWT tokens. Swap --sans / --mono to the site's exact faces when hosting. ---- */
+  :root{
+    --sans: "Geist", system-ui, -apple-system, sans-serif;
+    --mono: "Geist Mono", ui-monospace, "Courier New", monospace;
+    --bg:#191817; --panel:#201f1d; --fg:#e8e5dd; --muted:#86817a;
+    --hair:#33322f; --hair2:#403e3a;
+    --inv-bg:#e8e5dd; --inv-fg:#191817;
+  }
+  :root[data-theme="light"]{
+    --bg:#f1efe8; --panel:#e8e5dd; --fg:#1b1a18; --muted:#6d6a62;
+    --hair:#d6d2c8; --hair2:#c6c1b5;
+    --inv-bg:#1b1a18; --inv-fg:#f1efe8;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0; background:var(--bg); color:var(--fg);
+    font-family:var(--sans); font-weight:400; line-height:1.5;
+    font-size:16px; letter-spacing:-.005em;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 clamp(16px,4vw,40px)}
+
+  /* ---- Masthead ---- */
+  header.mast{border-bottom:1px solid var(--hair); padding:22px 0 18px}
+  .mast-row{display:flex; align-items:baseline; justify-content:space-between; gap:16px; flex-wrap:wrap}
+  .title{font-size:clamp(20px,3.2vw,26px); font-weight:500; letter-spacing:-.02em}
+  .title .slash{color:var(--muted); font-weight:400}
+  .title em{font-style:italic; font-weight:400}
+  .tagline{font-family:var(--mono); font-size:12px; color:var(--muted); margin-top:8px; letter-spacing:.01em}
+  .theme-toggle{
+    font-family:var(--mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase;
+    background:none; border:1px solid var(--hair2); color:var(--muted);
+    padding:6px 10px; cursor:pointer; border-radius:0;
+  }
+  .theme-toggle:hover{color:var(--fg); border-color:var(--fg)}
+
+  /* ---- Equipment bar ---- */
+  .kit{border-bottom:1px solid var(--hair); padding:16px 0}
+  .kit-label{font-family:var(--mono); font-size:11px; letter-spacing:.09em; text-transform:uppercase; color:var(--muted); margin-bottom:10px}
+  .kit-opts{display:flex; gap:0; flex-wrap:wrap; border:1px solid var(--hair2); width:fit-content; max-width:100%}
+  .kit-opts button{
+    font-family:var(--mono); font-size:12px; letter-spacing:.03em;
+    background:none; border:none; border-right:1px solid var(--hair2);
+    color:var(--muted); padding:9px 15px; cursor:pointer; border-radius:0; white-space:nowrap;
+  }
+  .kit-opts button:last-child{border-right:none}
+  .kit-opts button[aria-pressed="true"]{background:var(--inv-bg); color:var(--inv-fg)}
+  .kit-opts button:hover:not([aria-pressed="true"]){color:var(--fg)}
+
+  /* ---- Layout ---- */
+  .cols{display:grid; grid-template-columns:1fr 380px; gap:0; align-items:start}
+  @media(max-width:900px){ .cols{grid-template-columns:1fr} }
+  .library{padding:8px 0 60px; min-width:0}
+  .session-col{position:sticky; top:0; border-left:1px solid var(--hair); align-self:stretch}
+  @media(max-width:900px){ .session-col{position:static; border-left:none; border-top:1px solid var(--hair)} }
+
+  /* ---- Pattern block ---- */
+  .pattern{border-bottom:1px solid var(--hair); padding:22px 0}
+  .pattern:last-child{border-bottom:none}
+  .p-head{display:flex; align-items:baseline; gap:12px; margin-bottom:4px}
+  .p-name{font-size:19px; font-weight:500; letter-spacing:-.01em}
+  .p-code{font-family:var(--mono); font-size:11px; color:var(--muted); letter-spacing:.06em}
+  .p-note{font-family:var(--mono); font-size:12px; color:var(--muted); margin-bottom:14px; letter-spacing:.005em}
+  .opts{display:flex; flex-direction:column}
+  .opt{
+    display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:12px;
+    padding:9px 0; border-top:1px solid var(--hair); cursor:pointer;
+  }
+  .opt:hover{ }
+  .opt:hover .opt-name{ text-decoration:underline; text-underline-offset:3px; text-decoration-thickness:1px }
+  .opt-cat{font-family:var(--mono); font-size:11px; color:var(--muted); letter-spacing:.04em; min-width:48px}
+  .opt-name{font-size:15px}
+  .opt-tag{
+    font-family:var(--mono); font-size:10px; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--muted); border:1px solid var(--hair2); padding:2px 7px; white-space:nowrap;
+  }
+  .opt .plus{
+    font-family:var(--mono); font-size:15px; color:var(--muted);
+    width:26px; height:26px; display:grid; place-items:center; border:1px solid var(--hair2);
+  }
+  .opt:hover .plus{color:var(--fg); border-color:var(--fg)}
+  .opt.added .plus{background:var(--inv-bg); color:var(--inv-fg); border-color:var(--inv-bg)}
+  .opt.added .opt-name{color:var(--muted)}
+
+  /* ---- Session panel ---- */
+  .session{padding:22px clamp(16px,2.5vw,26px) 40px}
+  .s-title{font-family:var(--mono); font-size:11px; letter-spacing:.09em; text-transform:uppercase; color:var(--muted); display:flex; justify-content:space-between; align-items:baseline}
+  .s-meta{font-family:var(--mono); font-size:11px; color:var(--muted); margin:6px 0 16px; letter-spacing:.02em}
+  .s-empty{font-family:var(--mono); font-size:12px; color:var(--muted); line-height:1.7; border:1px dashed var(--hair2); padding:16px}
+  .s-list{display:flex; flex-direction:column; gap:0}
+  .s-item{border-top:1px solid var(--hair); padding:12px 0}
+  .s-item:last-child{border-bottom:1px solid var(--hair)}
+  .si-top{display:flex; justify-content:space-between; gap:8px; align-items:baseline}
+  .si-name{font-size:15px; font-weight:500}
+  .si-cat{font-family:var(--mono); font-size:10px; color:var(--muted); letter-spacing:.05em}
+  .si-controls{display:flex; align-items:center; gap:14px; margin-top:9px}
+  .si-field{display:flex; align-items:center; gap:6px}
+  .si-field label{font-family:var(--mono); font-size:10px; text-transform:uppercase; letter-spacing:.07em; color:var(--muted)}
+  .si-field input{
+    width:52px; font-family:var(--mono); font-size:13px; background:transparent;
+    border:1px solid var(--hair2); color:var(--fg); padding:4px 6px; border-radius:0; text-align:center;
+  }
+  .si-field input:focus{outline:none; border-color:var(--fg)}
+  .si-actions{margin-left:auto; display:flex; gap:4px}
+  .si-actions button{
+    font-family:var(--mono); font-size:12px; background:none; border:1px solid var(--hair2);
+    color:var(--muted); width:26px; height:26px; cursor:pointer; border-radius:0; line-height:1;
+  }
+  .si-actions button:hover{color:var(--fg); border-color:var(--fg)}
+
+  /* ---- Session tools ---- */
+  .s-tools{margin-top:22px; border-top:1px solid var(--hair2); padding-top:18px; display:flex; flex-direction:column; gap:12px}
+  .row{display:flex; gap:8px; flex-wrap:wrap}
+  .btn{
+    font-family:var(--mono); font-size:11px; letter-spacing:.06em; text-transform:uppercase;
+    background:none; border:1px solid var(--hair2); color:var(--fg); padding:9px 13px; cursor:pointer; border-radius:0;
+  }
+  .btn:hover{background:var(--inv-bg); color:var(--inv-fg); border-color:var(--inv-bg)}
+  .btn.ghost{color:var(--muted)}
+  .btn.ghost:hover{color:var(--inv-fg)}
+  .save-row{display:flex; gap:8px}
+  .save-row input{
+    flex:1; min-width:0; font-family:var(--mono); font-size:12px; background:transparent;
+    border:1px solid var(--hair2); color:var(--fg); padding:8px 10px; border-radius:0;
+  }
+  .save-row input:focus{outline:none; border-color:var(--fg)}
+  .save-row input::placeholder{color:var(--muted)}
+  .saved-list{display:flex; flex-direction:column; gap:0}
+  .saved-item{display:flex; align-items:center; justify-content:space-between; gap:8px; padding:8px 0; border-top:1px solid var(--hair); font-family:var(--mono); font-size:12px}
+  .saved-item:last-child{border-bottom:1px solid var(--hair)}
+  .saved-name{cursor:pointer; color:var(--fg)}
+  .saved-name:hover{text-decoration:underline; text-underline-offset:3px}
+  .saved-x{cursor:pointer; color:var(--muted); border:none; background:none; font-family:var(--mono); font-size:13px}
+  .saved-x:hover{color:var(--fg)}
+  .store-note{font-family:var(--mono); font-size:10px; color:var(--muted); line-height:1.6; letter-spacing:.01em}
+
+  footer{border-top:1px solid var(--hair); padding:18px 0 40px; font-family:var(--mono); font-size:11px; color:var(--muted); letter-spacing:.02em; display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap}
+
+  .share-note{font-family:var(--mono); font-size:10px; color:var(--muted); min-height:13px; letter-spacing:.02em; line-height:1.5}
+  .qr-box{margin-top:2px; display:flex; flex-direction:column; align-items:flex-start; gap:9px}
+  .qr-box #qr{background:#fff; padding:12px; display:inline-block; line-height:0}
+  .qr-box #qr img,.qr-box #qr canvas{display:block}
+  .qr-cap{font-family:var(--mono); font-size:10px; color:var(--muted); line-height:1.6; max-width:230px}
+
+  :focus-visible{outline:2px solid var(--fg); outline-offset:2px}
+
+  /* ---- Print: session only ---- */
+  @media print{
+    body{background:#fff; color:#000}
+    header.mast, .kit, .library, .session-col{border:none}
+    .cols{display:block}
+    .session-col{position:static}
+    .s-tools, .theme-toggle, .si-actions{display:none}
+    .si-field input{border:none}
+    footer{display:none}
+  }
+  @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="mast">
+    <div class="mast-row">
+      <div>
+        <div class="title">TWT <span class="slash">/</span> <em>Routine</em></div>
+        <div class="tagline" id="tagline">Five patterns. Any room. Whatever the room gives you.</div>
+      </div>
+      <button class="theme-toggle" id="themeBtn" aria-label="Toggle light and dark">Light</button>
+    </div>
+  </header>
+
+  <div class="kit">
+    <div class="kit-label">What have you got today?</div>
+    <div class="kit-opts" id="kitOpts" role="group" aria-label="Available equipment">
+      <button data-level="0" aria-pressed="false">Bodyweight only</button>
+      <button data-level="1" aria-pressed="false">+ Bands</button>
+      <button data-level="2" aria-pressed="true">+ Dumbbells</button>
+      <button data-level="3" aria-pressed="false">Full gym</button>
+    </div>
+  </div>
+
+  <div class="cols">
+    <main class="library" id="library"><!-- patterns injected --></main>
+
+    <aside class="session-col">
+      <div class="session">
+        <div class="s-title"><span>Today's session</span><span id="sCount">0</span></div>
+        <div class="s-meta" id="sMeta">Nothing added yet</div>
+        <div id="sBody">
+          <div class="s-empty">Pick movements from the catalogue. Aim for one from each pattern, or build around whatever the room allows. Two to three rounds is a session.</div>
+        </div>
+
+        <div class="s-tools">
+          <div class="row">
+            <button class="btn" id="shareBtn">Send to phone</button>
+            <button class="btn ghost" id="copyBtn">Copy as text</button>
+          </div>
+          <div class="row">
+            <button class="btn ghost" id="linkBtn">Copy link</button>
+            <button class="btn ghost" id="qrBtn">QR code</button>
+            <button class="btn ghost" id="printBtn">Print / PDF</button>
+            <button class="btn ghost" id="clearBtn">Clear</button>
+          </div>
+          <div class="share-note" id="shareNote"></div>
+          <div class="qr-box" id="qrBox" hidden><div id="qr"></div><div class="qr-cap" id="qrCap"></div></div>
+          <div class="save-row">
+            <input id="saveName" type="text" placeholder="Name this routine…" maxlength="40">
+            <button class="btn" id="saveBtn">Save</button>
+          </div>
+          <div class="saved-list" id="savedList"></div>
+          <div class="store-note" id="storeNote"></div>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <footer>
+    <span>TWT / Routine — a movement catalogue</span>
+    <span id="tierKey">B · bodyweight — BAND — DB · dumbbell/kb — GYM · barbell/machine</span>
+  </footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  // ---- Movement catalogue. tier: 0 body, 1 band, 2 dumbbell, 3 gym ----
+  var TIER_TAG = {0:"B", 1:"Band", 2:"DB", 3:"Gym"};
+  var PATTERNS = [
+    { code:"SQ", name:"Squat", note:"Knees and hips bend together. Sit between your feet.",
+      opts:[
+        {n:"Bodyweight squat", t:0},
+        {n:"Tempo squat (3s down, pause)", t:0},
+        {n:"Split squat, rear foot on a chair", t:0},
+        {n:"Cossack squat (side to side)", t:0},
+        {n:"Wall sit (hold)", t:0},
+        {n:"Banded squat", t:1},
+        {n:"Goblet squat", t:2},
+        {n:"Dumbbell reverse lunge", t:2},
+        {n:"Kettlebell front squat", t:2},
+        {n:"Barbell back squat", t:3},
+        {n:"Leg press", t:3},
+      ]},
+    { code:"HG", name:"Hinge", note:"Push the hips back, flat back, load the hamstrings.",
+      opts:[
+        {n:"Single-leg hinge (airplane)", t:0},
+        {n:"Glute bridge", t:0},
+        {n:"Single-leg glute bridge", t:0},
+        {n:"Bodyweight good morning", t:0},
+        {n:"Banded pull-through", t:1},
+        {n:"Banded RDL", t:1},
+        {n:"Dumbbell Romanian deadlift", t:2},
+        {n:"Kettlebell swing", t:2},
+        {n:"Single-leg dumbbell RDL", t:2},
+        {n:"Barbell deadlift", t:3},
+        {n:"Barbell hip thrust", t:3},
+      ]},
+    { code:"PU", name:"Push", note:"Away from you — chest, shoulders, triceps.",
+      opts:[
+        {n:"Press-up", t:0},
+        {n:"Incline press-up (hands raised)", t:0},
+        {n:"Feet-raised press-up", t:0},
+        {n:"Pike press-up (shoulders)", t:0},
+        {n:"Band chest press", t:1},
+        {n:"Band overhead press", t:1},
+        {n:"Dumbbell bench / floor press", t:2},
+        {n:"Dumbbell shoulder press", t:2},
+        {n:"Barbell bench press", t:3},
+        {n:"Overhead barbell press", t:3},
+        {n:"Parallel-bar dips", t:3},
+      ]},
+    { code:"PL", name:"Pull", note:"Toward you — back and biceps. The one gyms forget.",
+      opts:[
+        {n:"Inverted row under a table", t:0},
+        {n:"Towel row (door / post)", t:0},
+        {n:"Prone Y-T-W raises", t:0},
+        {n:"Band lat pulldown", t:1},
+        {n:"Band bent-over row", t:1},
+        {n:"Band face pull", t:1},
+        {n:"One-arm dumbbell row", t:2},
+        {n:"Chest-supported dumbbell row", t:2},
+        {n:"Lat pulldown", t:3},
+        {n:"Seated cable row", t:3},
+        {n:"Pull-up (assist as needed)", t:3},
+      ]},
+    { code:"CC", name:"Carry / Core", note:"Resist movement. Stay tall, brace, walk.",
+      opts:[
+        {n:"Plank (hold)", t:0},
+        {n:"Side plank (hold)", t:0},
+        {n:"Hollow hold", t:0},
+        {n:"Dead bug", t:0},
+        {n:"Bird dog", t:0},
+        {n:"Band Pallof press", t:1},
+        {n:"Farmer's carry", t:2},
+        {n:"Suitcase carry (one side)", t:2},
+        {n:"Overhead carry", t:2},
+        {n:"Weighted plank", t:2},
+        {n:"Hanging knee raise", t:3},
+      ]},
+    { code:"FM", name:"Free movement", note:"The body's own vocabulary — mobility, ground, hang, flow. Always available.",
+      opts:[
+        {n:"Cat-cow", t:0, tag:"Mobility"},
+        {n:"Open-book thoracic rotation", t:0, tag:"Mobility"},
+        {n:"90/90 hip switches", t:0, tag:"Mobility"},
+        {n:"Deep squat sit + reach", t:0, tag:"Mobility"},
+        {n:"Shoulder controlled circles", t:0, tag:"Mobility"},
+        {n:"Segmental spinal roll-down", t:0, tag:"Mobility"},
+        {n:"Bear crawl", t:0, tag:"Locomotion"},
+        {n:"Crab reach", t:0, tag:"Locomotion"},
+        {n:"Inchworm walkout", t:0, tag:"Locomotion"},
+        {n:"Get-up to stand (no weight)", t:0, tag:"Ground"},
+        {n:"Dead hang", t:0, tag:"Hang"},
+        {n:"Scapular pull-ups / hang shrugs", t:0, tag:"Hang"},
+        {n:"Turkish get-up (light weight)", t:2, tag:"Flow"},
+        {n:"Loaded carry flow", t:2, tag:"Flow"},
+      ]},
+  ];
+
+  // Build stable catalogue ids: SQ·01 etc.
+  PATTERNS.forEach(function(p){
+    p.opts.forEach(function(o, i){
+      o.id = p.code + "·" + String(i+1).padStart(2,"0");
+      o.pattern = p.name;
+    });
+  });
+  var BY_ID = {};
+  PATTERNS.forEach(function(p){ p.opts.forEach(function(o){ BY_ID[o.id] = o; }); });
+
+  // ---- State ----
+  var level = 2;             // equipment level
+  var session = [];          // [{id, sets, reps}]
+  var STORE_KEY = "twt_routine_saves_v1";
+  var storeOK = true;
+
+  // ---- Storage helpers (degrade quietly if unavailable) ----
+  function loadSaves(){
+    try{ var raw = window.localStorage.getItem(STORE_KEY); return raw ? JSON.parse(raw) : {}; }
+    catch(e){ storeOK = false; return {}; }
+  }
+  function writeSaves(obj){
+    try{ window.localStorage.setItem(STORE_KEY, JSON.stringify(obj)); return true; }
+    catch(e){ storeOK = false; return false; }
+  }
+
+  // ---- Defaults for a movement type ----
+  function defaultsFor(o){
+    if(o.tag === "Mobility" || o.tag === "Locomotion" || o.tag === "Ground"){ return {sets:2, reps:8}; }
+    if(o.tag === "Hang"){ return {sets:3, reps:20}; }         // reps read as seconds for holds
+    if(o.tag === "Flow"){ return {sets:3, reps:5}; }
+    if(/plank|hold|wall sit/i.test(o.n)){ return {sets:3, reps:30}; }
+    if(/carry/i.test(o.n)){ return {sets:3, reps:30}; }        // reps read as metres
+    return {sets:3, reps:10};
+  }
+
+  // ---- Render library ----
+  var libraryEl = document.getElementById("library");
+  function renderLibrary(){
+    var html = "";
+    PATTERNS.forEach(function(p){
+      var visible = p.opts.filter(function(o){ return o.t <= level; });
+      if(!visible.length) return;
+      html += '<section class="pattern">';
+      html += '<div class="p-head"><span class="p-name">'+p.name+'</span><span class="p-code">'+p.code+'</span></div>';
+      html += '<div class="p-note">'+p.note+'</div>';
+      html += '<div class="opts">';
+      visible.forEach(function(o){
+        var added = session.some(function(s){ return s.id === o.id; });
+        var tag = o.tag ? o.tag : TIER_TAG[o.t];
+        html += '<div class="opt'+(added?' added':'')+'" data-id="'+o.id+'" role="button" tabindex="0" aria-pressed="'+added+'">'
+              +   '<span class="opt-cat">'+o.id+'</span>'
+              +   '<span class="opt-name">'+o.n+'</span>'
+              +   '<span class="opt-tag">'+tag+'</span>'
+              +   '<span class="plus">'+(added?'✓':'+')+'</span>'
+              + '</div>';
+      });
+      html += '</div></section>';
+    });
+    libraryEl.innerHTML = html;
+  }
+
+  // ---- Render session ----
+  var sBody = document.getElementById("sBody");
+  var sCount = document.getElementById("sCount");
+  var sMeta = document.getElementById("sMeta");
+
+  function estimateMinutes(){
+    // rough: warmup 5 min + each set ~ 40s work + 60s rest
+    if(!session.length) return 0;
+    var secs = 5*60;
+    session.forEach(function(s){ secs += s.sets * 100; });
+    return Math.round(secs/60);
+  }
+
+  function renderSession(){
+    sCount.textContent = session.length;
+    if(!session.length){
+      sBody.innerHTML = '<div class="s-empty">Pick movements from the catalogue. Aim for one from each pattern, or build around whatever the room allows. Two to three rounds is a session.</div>';
+      sMeta.textContent = "Nothing added yet";
+      syncURL();
+      return;
+    }
+    var patterns = {};
+    session.forEach(function(s){ var o=BY_ID[s.id]; if(o) patterns[o.pattern]=true; });
+    sMeta.textContent = session.length + " movement" + (session.length>1?"s":"") + " · " + Object.keys(patterns).length + " pattern" + (Object.keys(patterns).length>1?"s":"") + " · ~" + estimateMinutes() + " min";
+
+    var html = '<div class="s-list">';
+    session.forEach(function(s, idx){
+      var o = BY_ID[s.id]; if(!o) return;
+      var unit = /carry/i.test(o.n) ? "m" : (o.tag==="Hang" || /plank|hold|wall sit/i.test(o.n) ? "s" : "reps");
+      html += '<div class="s-item" data-idx="'+idx+'">'
+            +   '<div class="si-top"><span class="si-name">'+o.n+'</span><span class="si-cat">'+o.id+'</span></div>'
+            +   '<div class="si-controls">'
+            +     '<div class="si-field"><label>Sets</label><input type="number" min="1" max="20" value="'+s.sets+'" data-f="sets"></div>'
+            +     '<div class="si-field"><label>'+unit+'</label><input type="number" min="1" max="600" value="'+s.reps+'" data-f="reps"></div>'
+            +     '<div class="si-actions">'
+            +       '<button data-a="up" title="Move up">↑</button>'
+            +       '<button data-a="down" title="Move down">↓</button>'
+            +       '<button data-a="del" title="Remove">×</button>'
+            +     '</div>'
+            +   '</div>'
+            + '</div>';
+    });
+    html += '</div>';
+    sBody.innerHTML = html;
+    syncURL();
+  }
+
+  // ---- Toggle a movement in/out of session ----
+  function toggle(id){
+    var i = session.findIndex(function(s){ return s.id === id; });
+    if(i >= 0){ session.splice(i,1); }
+    else{
+      var o = BY_ID[id]; if(!o) return;
+      var d = defaultsFor(o);
+      session.push({id:id, sets:d.sets, reps:d.reps});
+    }
+    renderLibrary(); renderSession();
+  }
+
+  // ---- Events: library ----
+  libraryEl.addEventListener("click", function(e){
+    var opt = e.target.closest(".opt"); if(!opt) return;
+    toggle(opt.getAttribute("data-id"));
+  });
+  libraryEl.addEventListener("keydown", function(e){
+    var opt = e.target.closest(".opt"); if(!opt) return;
+    if(e.key==="Enter" || e.key===" "){ e.preventDefault(); toggle(opt.getAttribute("data-id")); }
+  });
+
+  // ---- Events: session (edit / reorder / remove) ----
+  sBody.addEventListener("input", function(e){
+    var inp = e.target.closest("input"); if(!inp) return;
+    var item = e.target.closest(".s-item"); var idx = +item.getAttribute("data-idx");
+    var f = inp.getAttribute("data-f");
+    var v = parseInt(inp.value,10); if(isNaN(v)||v<1) v=1;
+    session[idx][f] = v;
+    sMeta.textContent = session.length + " movement" + (session.length>1?"s":"") + " · ~" + estimateMinutes() + " min";
+    syncURL();
+  });
+  sBody.addEventListener("click", function(e){
+    var btn = e.target.closest("button[data-a]"); if(!btn) return;
+    var item = e.target.closest(".s-item"); var idx = +item.getAttribute("data-idx");
+    var a = btn.getAttribute("data-a");
+    if(a==="del"){ session.splice(idx,1); }
+    else if(a==="up" && idx>0){ var t=session[idx-1]; session[idx-1]=session[idx]; session[idx]=t; }
+    else if(a==="down" && idx<session.length-1){ var u=session[idx+1]; session[idx+1]=session[idx]; session[idx]=u; }
+    renderLibrary(); renderSession();
+  });
+
+  // ---- Equipment level ----
+  var kitOpts = document.getElementById("kitOpts");
+  kitOpts.addEventListener("click", function(e){
+    var b = e.target.closest("button"); if(!b) return;
+    level = +b.getAttribute("data-level");
+    Array.prototype.forEach.call(kitOpts.children, function(c){
+      c.setAttribute("aria-pressed", c===b ? "true":"false");
+    });
+    renderLibrary();
+  });
+
+  // ---- Theme ----
+  var themeBtn = document.getElementById("themeBtn");
+  function applyTheme(mode){
+    document.documentElement.setAttribute("data-theme", mode);
+    themeBtn.textContent = mode==="light" ? "Dark" : "Light";
+    try{ window.localStorage.setItem("twt_routine_theme", mode); }catch(e){}
+  }
+  themeBtn.addEventListener("click", function(){
+    var cur = document.documentElement.getAttribute("data-theme")==="light" ? "light":"dark";
+    applyTheme(cur==="light" ? "dark":"light");
+  });
+  (function(){ var m="dark"; try{ m = window.localStorage.getItem("twt_routine_theme")||"dark"; }catch(e){} applyTheme(m); })();
+
+  // ---- Clear / Print ----
+  document.getElementById("clearBtn").addEventListener("click", function(){
+    if(!session.length) return;
+    session = []; renderLibrary(); renderSession();
+  });
+  document.getElementById("printBtn").addEventListener("click", function(){ window.print(); });
+
+  // ---- Save / Load routines ----
+  var savedListEl = document.getElementById("savedList");
+  var saveNameInp = document.getElementById("saveName");
+  var storeNote = document.getElementById("storeNote");
+
+  function renderSaved(){
+    var saves = loadSaves();
+    var names = Object.keys(saves);
+    if(!storeOK){
+      savedListEl.innerHTML = "";
+      storeNote.textContent = "Saving is unavailable in this preview. Download the file and open it directly (or host it) and saved routines will stick.";
+      return;
+    }
+    if(!names.length){
+      savedListEl.innerHTML = "";
+      storeNote.textContent = "Saved routines live in this browser and persist between visits.";
+      return;
+    }
+    storeNote.textContent = "Saved in this browser. Tap a name to load.";
+    var html = "";
+    names.forEach(function(name){
+      var count = saves[name] ? saves[name].length : 0;
+      html += '<div class="saved-item">'
+            +   '<span class="saved-name" data-name="'+encodeURIComponent(name)+'">'+name+' <span style="color:var(--muted)">· '+count+'</span></span>'
+            +   '<button class="saved-x" data-del="'+encodeURIComponent(name)+'" title="Delete">delete</button>'
+            + '</div>';
+    });
+    savedListEl.innerHTML = html;
+  }
+
+  document.getElementById("saveBtn").addEventListener("click", function(){
+    var name = (saveNameInp.value||"").trim();
+    if(!name){ saveNameInp.focus(); return; }
+    if(!session.length){ storeNote.textContent = "Add some movements before saving."; return; }
+    var saves = loadSaves();
+    saves[name] = session.map(function(s){ return {id:s.id, sets:s.sets, reps:s.reps}; });
+    if(writeSaves(saves)){ saveNameInp.value=""; }
+    renderSaved();
+  });
+
+  savedListEl.addEventListener("click", function(e){
+    var load = e.target.closest(".saved-name");
+    var del = e.target.closest(".saved-x");
+    var saves = loadSaves();
+    if(del){
+      var dn = decodeURIComponent(del.getAttribute("data-del"));
+      delete saves[dn]; writeSaves(saves); renderSaved(); return;
+    }
+    if(load){
+      var ln = decodeURIComponent(load.getAttribute("data-name"));
+      var arr = saves[ln]; if(!arr) return;
+      // keep only movements that still exist in the catalogue
+      session = arr.filter(function(s){ return BY_ID[s.id]; }).map(function(s){ return {id:s.id, sets:s.sets||3, reps:s.reps||10}; });
+      renderLibrary(); renderSession();
+    }
+  });
+
+  // ---- URL state: the routine travels in the link ----
+  var qrShown = false;
+  function syncURL(){
+    var code = session.map(function(s){ return s.id.replace("·","") + "." + s.sets + "." + s.reps; }).join("-");
+    var target = code ? ("#r=" + code) : "";
+    if((location.hash || "") !== target){
+      try{ history.replaceState(null, "", location.pathname + location.search + target); }
+      catch(e){ location.hash = target.replace(/^#/,""); }
+    }
+    if(qrShown) renderQR();
+  }
+  function decodeHash(){
+    var h = (location.hash || "").replace(/^#/,"");
+    if(h.indexOf("r=") !== 0) return [];
+    var body = h.slice(2); if(!body) return [];
+    var out = [];
+    body.split("-").forEach(function(tok){
+      var parts = tok.split(".");
+      var cn = parts[0] || ""; if(cn.length < 3) return;
+      var id = cn.slice(0,2) + "·" + cn.slice(2);
+      if(!BY_ID[id]) return;
+      var d = defaultsFor(BY_ID[id]);
+      var sets = parseInt(parts[1],10); if(isNaN(sets)||sets<1) sets = d.sets;
+      var reps = parseInt(parts[2],10); if(isNaN(reps)||reps<1) reps = d.reps;
+      out.push({id:id, sets:sets, reps:reps});
+    });
+    return out;
+  }
+
+  // ---- Plain-text export ----
+  function buildText(){
+    var kitNames = ["Bodyweight only","Bodyweight + bands","Bodyweight + dumbbells","Full gym"];
+    if(!session.length) return "TWT / ROUTINE\n(empty)";
+    var lines = ["TWT / ROUTINE", ""];
+    session.forEach(function(s, i){
+      var o = BY_ID[s.id]; if(!o) return;
+      var unit = /carry/i.test(o.n) ? "m" : (o.tag==="Hang" || /plank|hold|wall sit/i.test(o.n) ? "s" : "reps");
+      lines.push((i+1) + ". " + o.n + "  " + s.sets + " x " + s.reps + " " + unit);
+    });
+    lines.push("");
+    lines.push("~" + estimateMinutes() + " min - aim for 2-3 rounds - " + kitNames[level]);
+    if(/^https?:/.test(location.href)) lines.push(location.href);
+    return lines.join("\n");
+  }
+
+  // ---- Feedback line ----
+  function flash(msg){
+    var el = document.getElementById("shareNote"); if(!el) return;
+    el.textContent = msg;
+    clearTimeout(flash._t);
+    flash._t = setTimeout(function(){ el.textContent = ""; }, 3200);
+  }
+
+  // ---- Copy with fallback ----
+  function copyText(txt, okMsg){
+    function done(){ flash(okMsg || "Copied"); }
+    function fallback(){
+      try{
+        var ta = document.createElement("textarea"); ta.value = txt;
+        ta.style.position="fixed"; ta.style.opacity="0"; document.body.appendChild(ta);
+        ta.focus(); ta.select(); document.execCommand("copy"); document.body.removeChild(ta); done();
+      }catch(e){ flash("Couldn't copy automatically - select the text and copy it."); }
+    }
+    if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(txt).then(done, fallback); }
+    else{ fallback(); }
+  }
+
+  // ---- QR ----
+  function renderQR(){
+    var holder = document.getElementById("qr"), cap = document.getElementById("qrCap");
+    if(!holder) return;
+    holder.innerHTML = "";
+    if(typeof window.QRCode === "undefined"){ cap.textContent = "QR didn't load - check your connection and reload."; return; }
+    if(!session.length){ cap.textContent = "Add some movements first."; return; }
+    var hosted = /^https?:/.test(location.href);
+    var payload = hosted ? location.href : buildText();
+    try{
+      new window.QRCode(holder, { text: payload, width:168, height:168, colorDark:"#111111", colorLight:"#ffffff", correctLevel: window.QRCode.CorrectLevel.L });
+      cap.textContent = hosted ? "Scan with your phone camera to open this routine." : "Scan to read the routine as text. Once the file is hosted, the QR opens it live instead.";
+    }catch(e){ cap.textContent = "Routine's a bit long for a QR - use Copy as text."; }
+  }
+
+  // ---- Send-to-phone wiring ----
+  document.getElementById("shareBtn").addEventListener("click", function(){
+    if(!session.length){ flash("Add some movements first."); return; }
+    var txt = buildText();
+    if(navigator.share){ navigator.share({ title:"TWT / Routine", text:txt }).catch(function(){}); }
+    else{ copyText(txt, "No share sheet here - copied it as text instead."); }
+  });
+  document.getElementById("copyBtn").addEventListener("click", function(){
+    if(!session.length){ flash("Add some movements first."); return; }
+    copyText(buildText(), "Copied - paste into a note or message.");
+  });
+  document.getElementById("linkBtn").addEventListener("click", function(){
+    if(!session.length){ flash("Add some movements first."); return; }
+    if(/^https?:/.test(location.href)){ copyText(location.href, "Link copied - text it to your phone."); }
+    else{ copyText(buildText(), "Not hosted yet, so copied the routine as text."); }
+  });
+  document.getElementById("qrBtn").addEventListener("click", function(){
+    qrShown = !qrShown;
+    document.getElementById("qrBox").hidden = !qrShown;
+    this.textContent = qrShown ? "Hide QR" : "QR code";
+    if(qrShown) renderQR();
+  });
+
+  // ---- Init ----
+  session = decodeHash();
+  renderLibrary();
+  renderSession();
+  renderSaved();
+})();
+</script>
+</body>
+</html>

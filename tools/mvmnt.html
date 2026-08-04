@@ -77,7 +77,7 @@
   .p-note{font-family:var(--mono); font-size:12px; color:var(--muted); margin-bottom:14px; letter-spacing:.005em}
   .opts{display:flex; flex-direction:column}
   .opt{
-    display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:12px;
+    display:grid; grid-template-columns:auto 1fr auto auto auto; align-items:center; gap:12px;
     padding:9px 0; border-top:1px solid var(--hair); cursor:pointer;
   }
   .opt:hover{ }
@@ -95,6 +95,22 @@
   .opt:hover .plus{color:var(--fg); border-color:var(--fg)}
   .opt.added .plus{background:var(--inv-bg); color:var(--inv-fg); border-color:var(--inv-bg)}
   .opt.added .opt-name{color:var(--muted)}
+  .opt-info{
+    font-family:var(--mono); font-size:12px; color:var(--muted);
+    width:24px; height:24px; display:grid; place-items:center; padding:0;
+    border:1px solid var(--hair2); background:none; cursor:help; border-radius:0;
+  }
+  .opt-info:hover, .opt-info[aria-expanded="true"]{color:var(--fg); border-color:var(--fg)}
+  .opt-detail{padding:2px 0 14px 60px}
+  @media(max-width:520px){ .opt-detail{padding-left:0} }
+  .cue{font-size:13.5px; color:var(--fg); line-height:1.55; margin-bottom:8px; max-width:62ch}
+  .demo{
+    font-family:var(--mono); font-size:11px; letter-spacing:.05em; color:var(--muted);
+    text-decoration:none; border-bottom:1px solid var(--hair2); padding-bottom:1px;
+  }
+  .demo:hover{color:var(--fg); border-color:var(--fg)}
+  .si-cue{font-size:12.5px; color:var(--muted); line-height:1.5; margin-top:8px}
+  .si-cue .demo{font-size:10px; margin-left:6px; white-space:nowrap}
 
   /* ---- Session panel ---- */
   .session{padding:22px clamp(16px,2.5vw,26px) 40px}
@@ -330,15 +346,96 @@
       ]},
   ];
 
+  // ---- One-line form cues: the single thing that keeps each movement honest ----
+  var CUES = {
+    "SQ·01":"Feet shoulder-width, weight in the heels, knees track over the toes, chest up.",
+    "SQ·02":"Lower for a slow count of three, pause at the bottom, then stand at normal speed.",
+    "SQ·03":"Front shin vertical, drop the back knee straight down, keep the torso tall.",
+    "SQ·04":"Sink to one side with that foot flat; the other leg stays straight, toes up.",
+    "SQ·05":"Thighs parallel to the floor, knees over ankles, whole back flat to the wall.",
+    "SQ·06":"Band just above the knees; push the knees out against it the whole way.",
+    "SQ·07":"Hold the weight at your chest, elbows inside the knees, sit down tall.",
+    "SQ·08":"Step back, drop straight down, drive up through the front heel.",
+    "SQ·09":"Bells racked on the chest, elbows down, brace the middle, then squat.",
+    "SQ·10":"Bar on the upper back, brace hard, break at hips and knees together.",
+    "SQ·11":"Feet mid-platform, lower until the knees near 90°, don't slam the lockout.",
+    "HG·01":"Hinge at the hip with a flat back; the free leg extends straight behind you.",
+    "HG·02":"Drive through the heels, squeeze the glutes at the top, keep the ribs down.",
+    "HG·03":"One foot planted, drive the hips up level, don't let them tilt or twist.",
+    "HG·04":"Hands at the temples, push the hips back, flat back, feel the hamstrings load.",
+    "HG·05":"Hinge back, then snap the hips forward and squeeze; the arms stay loose.",
+    "HG·06":"Soft knees, push the hips back, keep the band tension over the mid-foot.",
+    "HG·07":"Weights close to the legs, push the hips back, slight knee bend, flat back.",
+    "HG·08":"It's a hip snap, not a squat or an arm lift; the arms are just ropes.",
+    "HG·09":"Hinge over the planted leg, keep the hips square, slow and controlled.",
+    "HG·10":"Bar over mid-foot, flat back, push the floor away, lock hips and knees together.",
+    "HG·11":"Shoulders on the bench, chin tucked, drive the hips up, ribs down, squeeze.",
+    "PU·01":"Straight line head to heels, elbows about 45°, chest to the floor, brace.",
+    "PU·02":"Hands on a raised surface, same straight body, an easier angle to build from.",
+    "PU·03":"Feet raised, body dead straight, harder; don't let the hips sag.",
+    "PU·04":"Hips high, lower the head toward the floor between the hands, elbows back.",
+    "PU·05":"Band behind you, press forward and slightly together, control the return.",
+    "PU·06":"Stand on the band, press straight up, ribs down, don't arch the low back.",
+    "PU·07":"Wrists stacked over the elbows, lower under control, press up and slightly in.",
+    "PU·08":"Press overhead, keep the ribs down, don't let it become a back-arch.",
+    "PU·09":"Shoulder blades pinched, feet planted, bar to the lower chest, drive up.",
+    "PU·10":"Brace, press the bar over the crown, move the head through at the top.",
+    "PU·11":"Lean slightly forward, lower to about 90° at the elbows, shoulders down, press.",
+    "PL·01":"Body straight, pull the chest to the edge, squeeze the shoulder blades.",
+    "PL·02":"Lean back on the towel, row the chest toward your hands, stay braced.",
+    "PL·03":"Face down, lift the arms into Y, T, W shapes; move from the shoulder blades.",
+    "PL·04":"Anchor high, pull the elbows down to your sides, keep the chest proud.",
+    "PL·05":"Hinge forward, row to the hips, shoulder blades back and down.",
+    "PL·06":"Pull toward the face, elbows high, split the band apart at your ears.",
+    "PL·07":"Support on a bench, flat back, row to the hip, no torso twist.",
+    "PL·08":"Chest on an incline bench, row both to the hips, control the way down.",
+    "PL·09":"Bar to the upper chest, lean back slightly, elbows drive down, no swinging.",
+    "PL·10":"Tall chest, pull to the navel, squeeze the back, don't round forward.",
+    "PL·11":"Full hang to chin over the bar; use a band or the floor to assist as needed.",
+    "CC·01":"Straight line, elbows under shoulders, squeeze glutes, don't let the hips drop.",
+    "CC·02":"Stack the feet, hips high, body in one line, don't sag toward the floor.",
+    "CC·03":"Low back pressed into the floor, arms and legs off, keep the ribs down.",
+    "CC·04":"Back flat, lower the opposite arm and leg slowly, no arching.",
+    "CC·05":"Extend opposite arm and leg, keep the hips level, no rotation.",
+    "CC·06":"Band out to the side, press straight out, resist the twist, stay braced.",
+    "CC·07":"Stand tall, shoulders back, brace, walk smooth, don't lean.",
+    "CC·08":"Weight on one side only; stay dead upright and resist leaning over.",
+    "CC·09":"Weight locked overhead, ribs down, walk tall and controlled.",
+    "CC·10":"Hold a plank with a plate on the back; keep the line and keep breathing.",
+    "CC·11":"Hang without swinging, curl the knees up by rounding the low back.",
+    "FM·01":"On all fours, alternate arching and rounding the whole spine, slowly.",
+    "FM·02":"Side-lying, open the top arm across, follow it with the eyes, hips still.",
+    "FM·03":"Both knees at 90°, rotate side to side without pushing off your hands.",
+    "FM·04":"Sit in the bottom of a squat, heels down, reach and open the hips.",
+    "FM·05":"Slow, full shoulder circles through as much range as you actually own.",
+    "FM·06":"Stand and roll down one vertebra at a time, then stack back up.",
+    "FM·07":"Knees hovering, move opposite hand and foot, flat back, small steps.",
+    "FM·08":"From a crab position, drive the hips up and reach the opposite hand over.",
+    "FM·09":"Hinge, walk the hands out to a plank, walk them back, stand tall.",
+    "FM·10":"Get from lying to standing any way you can; do it smoothly on both sides.",
+    "FM·11":"Just hang from the bar, shoulders active, breathe, build up the time.",
+    "FM·12":"Hang with straight arms, lift the body by pulling the shoulder blades down.",
+    "FM·13":"Weight locked overhead, rise to standing step by step, eyes on the weight, go slow.",
+    "FM·14":"Carry, set down, move, pick up; keep a flat back on every pick-up.",
+  };
+
   // Build stable catalogue ids: SQ·01 etc.
   PATTERNS.forEach(function(p){
     p.opts.forEach(function(o, i){
       o.id = p.code + "·" + String(i+1).padStart(2,"0");
       o.pattern = p.name;
+      o.cue = CUES[o.id] || "";
     });
   });
   var BY_ID = {};
   PATTERNS.forEach(function(p){ p.opts.forEach(function(o){ BY_ID[o.id] = o; }); });
+
+  // ---- Small helpers ----
+  function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+  function demoURL(o){
+    var q = o.n.replace(/\(.*?\)/g,"").replace(/\s+/g," ").trim() + " exercise form";
+    return "https://www.youtube.com/results?search_query=" + encodeURIComponent(q);
+  }
 
   // ---- State ----
   var level = 2;             // equipment level
@@ -380,11 +477,18 @@
       visible.forEach(function(o){
         var added = session.some(function(s){ return s.id === o.id; });
         var tag = o.tag ? o.tag : TIER_TAG[o.t];
-        html += '<div class="opt'+(added?' added':'')+'" data-id="'+o.id+'" role="button" tabindex="0" aria-pressed="'+added+'">'
+        html += '<div class="entry">'
+              + '<div class="opt'+(added?' added':'')+'" data-id="'+o.id+'" role="button" tabindex="0" aria-pressed="'+added+'">'
               +   '<span class="opt-cat">'+o.id+'</span>'
               +   '<span class="opt-name">'+o.n+'</span>'
               +   '<span class="opt-tag">'+tag+'</span>'
+              +   '<button class="opt-info" type="button" aria-label="How to do it" aria-expanded="false" title="'+esc(o.cue)+'">?</button>'
               +   '<span class="plus">'+(added?'✓':'+')+'</span>'
+              + '</div>'
+              + '<div class="opt-detail" hidden>'
+              +   (o.cue ? '<div class="cue">'+esc(o.cue)+'</div>' : '')
+              +   '<a class="demo" href="'+demoURL(o)+'" target="_blank" rel="noopener">Watch a demo ↗</a>'
+              + '</div>'
               + '</div>';
       });
       html += '</div></section>';
@@ -423,6 +527,7 @@
       var unit = /carry/i.test(o.n) ? "m" : (o.tag==="Hang" || /plank|hold|wall sit/i.test(o.n) ? "s" : "reps");
       html += '<div class="s-item" data-idx="'+idx+'">'
             +   '<div class="si-top"><span class="si-name">'+o.n+'</span><span class="si-cat">'+o.id+'</span></div>'
+            +   '<div class="si-cue">'+(o.cue?esc(o.cue):'')+'<a class="demo" href="'+demoURL(o)+'" target="_blank" rel="noopener">demo ↗</a></div>'
             +   '<div class="si-controls">'
             +     '<div class="si-field"><label>Sets</label><input type="number" min="1" max="20" value="'+s.sets+'" data-f="sets"></div>'
             +     '<div class="si-field"><label>'+unit+'</label><input type="number" min="1" max="600" value="'+s.reps+'" data-f="reps"></div>'
@@ -453,10 +558,20 @@
 
   // ---- Events: library ----
   libraryEl.addEventListener("click", function(e){
+    var info = e.target.closest(".opt-info");
+    if(info){
+      e.stopPropagation();
+      var det = info.closest(".entry").querySelector(".opt-detail");
+      var opening = det.hasAttribute("hidden");
+      if(opening){ det.removeAttribute("hidden"); info.setAttribute("aria-expanded","true"); }
+      else{ det.setAttribute("hidden",""); info.setAttribute("aria-expanded","false"); }
+      return;
+    }
     var opt = e.target.closest(".opt"); if(!opt) return;
     toggle(opt.getAttribute("data-id"));
   });
   libraryEl.addEventListener("keydown", function(e){
+    if(e.target.closest(".opt-info")) return; // let the button handle its own Enter/Space
     var opt = e.target.closest(".opt"); if(!opt) return;
     if(e.key==="Enter" || e.key===" "){ e.preventDefault(); toggle(opt.getAttribute("data-id")); }
   });

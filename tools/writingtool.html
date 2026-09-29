@@ -375,8 +375,25 @@
   ::-webkit-scrollbar-thumb { background: var(--rule); border-radius: 2px; }
 
   @media (max-width: 900px) {
-    .shell { grid-template-columns: 1fr; grid-template-rows: 52px auto 1fr auto; }
+    .shell {
+      grid-template-columns: 1fr;
+      grid-template-rows: 48px 1fr;
+      height: 100dvh;
+    }
     .left-panel, .right-panel { display: none; }
+    .topbar { padding: 0 16px; }
+    .topbar h1 { font-size: 12px; }
+    .topbar .sub { display: none; }
+    .mode-btn { padding: 5px 10px; font-size: 11px; }
+    .centre-panel { height: calc(100dvh - 48px); }
+    .question-bar { padding: 12px 16px; font-size: 13px; min-height: 44px; }
+    .write-area { padding: 16px; font-size: 16px; line-height: 1.75; -webkit-text-size-adjust: 100%; }
+    .keep-bar { padding: 10px 16px; }
+    .bottom-bar { padding: 8px 16px; }
+    .btn { padding: 6px 12px; font-size: 11px; }
+    .timer-bar { padding: 10px 16px; }
+    .build-output { padding: 14px 16px; }
+    #elicit-mode, #free-mode, #build-mode { height: 100%; }
   }
 </style>
 </head>

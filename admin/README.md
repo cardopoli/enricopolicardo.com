@@ -4,7 +4,11 @@ Open `/admin/` on the published site. Sveltia CMS connects to `cardopoli/enricop
 
 ## Sign in
 
-Choose **Sign In with Token**. For a fine-grained GitHub token, select only this repository and give **Contents: Read and write**. Metadata read access is automatic. Enter the token in the CMS login screen, never in these files. This setup uses direct commits and does not require pull-request permissions or an OAuth server.
+Choose **Sign In with GitHub**. This setup reuses your existing authenticator at `https://sveltia-cms-auth.cardopoli.workers.dev`.
+
+If the worker restricts sites through `ALLOWED_DOMAINS`, keep its existing domains and add `enricopolicardo.com` and `www.enricopolicardo.com` as comma-separated hostnames in Cloudflare Workers > sveltia-cms-auth > Settings > Variables and Secrets. Save and deploy the worker. No new OAuth app or client secret is required.
+
+Token sign-in remains an alternative, but is not needed for the normal GitHub sign-in flow.
 
 ## What you can manage
 
@@ -28,4 +32,4 @@ Commit the `admin` folder at the repository root. No build step or package manag
 - https://sveltiacms.app/en/docs/collections/entries/formats
 - https://sveltiacms.app/en/docs/ui/asset-library
 
-Sveltia is loaded from its official CDN distribution. The admin page requires an internet connection. An OAuth login can be added later by configuring a Sveltia authenticator; token login works without one.
+Sveltia is loaded from its official CDN distribution. The admin page requires an internet connection. GitHub OAuth uses your existing Sveltia authenticator.

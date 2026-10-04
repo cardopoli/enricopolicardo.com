@@ -2,7 +2,8 @@
   "backend": {
     "name": "github",
     "repo": "cardopoli/enricopolicardo.com",
-    "branch": "main"
+    "branch": "main",
+    "base_url": "https://sveltia-cms-auth.cardopoli.workers.dev"
   },
   "site_url": "https://enricopolicardo.com",
   "display_url": "https://enricopolicardo.com",

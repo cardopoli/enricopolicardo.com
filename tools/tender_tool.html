@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>URcommons / Tender Tracker</title>
+<title>Opportunities / Enrico Policardo</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
 
@@ -422,19 +422,19 @@
 <body>
 
 <div class="header">
-  <div class="header-title">URcommons / Tender Tracker</div>
+  <div class="header-title">Opportunities / Enrico Policardo</div>
   <div class="header-meta">Sources checked: <span id="last-updated">Waiting for first check</span> · <span id="total-count"></span> sources</div>
 </div>
 
 <div class="ticker-bar">
-  <div class="ticker-inner" id="live-summary">Daily source checks. New listings require deadline and eligibility verification.</div>
+  <div class="ticker-inner" id="live-summary">Competitions, open calls, residencies, commissions, grants and tenders. Sources checked daily at around 07:23 UTC.</div>
 </div>
 
 <div class="tab-bar">
   <div class="tab active" onclick="showTab('updates')">New listings</div>
   <div class="tab" onclick="showTab('urcommons')">🌱 URcommons</div>
-  <div class="tab" onclick="showTab('practice')">📷 My Practice</div>
-  <div class="tab" onclick="showTab('photography')">🏆 Photo Grants</div>
+  <div class="tab" onclick="showTab('practice')">📷 Arts & practice</div>
+  <div class="tab" onclick="showTab('photography')">🏆 Photography & competitions</div>
   <div class="tab" onclick="showTab('european')">🇪🇺 European</div>
   <div class="tab" onclick="showTab('sources')">🔗 Sources</div>
   <div class="tab" onclick="showTab('keywords')">🔍 Keywords</div>
@@ -445,8 +445,8 @@
 <!-- TAB 1: URCOMMONS -->
 <!-- ═══════════════════════════════════════════════ -->
 <div id="tab-updates" class="panel active">
-  <p>Public funding sources are checked daily at around 07:23 UTC. These are discovered links, including programme pages and older calls. Verify dates and eligibility on the source before applying.</p>
-  <div class="search-row" style="margin-top:1rem"><input id="search-updates" aria-label="Search new listings" placeholder="Search listings or funders" oninput="renderUpdates()"><select id="source-updates" aria-label="Filter source" onchange="renderUpdates()"><option value="">All sources</option></select><button class="btn" onclick="loadUpdates()">Refresh data</button></div>
+  <p>Daily checks for photography, visual arts, exhibitions, residencies, commissions, research, cultural and community projects, housing, rural regeneration and cross-border work. UK, Italy, Slovenia and Europe are the main focus; international calls are included. Listings are leads: check eligibility, deadlines, entry fees and rights before applying.</p>
+  <div class="search-row" style="margin-top:1rem"><input id="search-updates" aria-label="Search new listings" placeholder="Search listings or funders" oninput="renderUpdates()"><select id="source-updates" aria-label="Filter source" onchange="renderUpdates()"><option value="">All sources</option></select><select id="type-updates" aria-label="Filter opportunity type" onchange="renderUpdates()"><option value="">All opportunity types</option><option value="Competition / award">Competitions / awards</option><option value="Residency / fellowship">Residencies / fellowships</option><option value="Commission / tender">Commissions / tenders</option><option value="Grant / funding">Grants / funding</option><option value="Exhibition / open call">Exhibitions / open calls</option><option value="Other opportunity">Other opportunities</option></select><button class="btn" onclick="loadUpdates()">Refresh data</button></div>
   <label style="display:block;margin-bottom:1rem"><input id="show-older" type="checkbox" onchange="renderUpdates()"> Include listings mentioning previous years</label>
   <p id="update-status" role="status" style="margin-bottom:1rem">Loading source checks…</p>
   <div id="update-results" class="grid"></div>
@@ -462,7 +462,7 @@
   </div>
 
   <div class="search-row">
-    <input type="text" id="search-urcommons" placeholder="Filter tenders..." oninput="filterCards('urcommons')">
+    <input type="text" id="search-urcommons" placeholder="Filter opportunities..." oninput="filterCards('urcommons')">
     <select id="filter-urcommons" onchange="filterCards('urcommons')">
       <option value="">All status</option>
       <option value="urgent">Urgent</option>
@@ -1132,6 +1132,12 @@
 
   </div>
 
+  <div class="section-head">Artist opportunities / competitions / residencies</div>
+  <div class="source-grid">
+    <div class="source-card"><div class="source-name">Artquest</div><div class="source-type">Visual arts · commissions · exhibitions · residencies</div><a href="https://artquest.org.uk/opportunities/" target="_blank" rel="noopener" class="source-url">artquest.org.uk/opportunities ↗</a><div class="source-note">Artist opportunities across media, including photography, socially engaged practice and public art.</div></div>
+    <div class="source-card"><div class="source-name">On the Move</div><div class="source-type">International · residencies · mobility · research</div><a href="https://on-the-move.org/news" target="_blank" rel="noopener" class="source-url">on-the-move.org/news ↗</a><div class="source-note">Cross-border opportunities for artists and cultural professionals.</div></div>
+    <div class="source-card"><div class="source-name">Picter</div><div class="source-type">Photography · competitions · awards · open calls</div><a href="https://submit.picter.com/" target="_blank" rel="noopener" class="source-url">submit.picter.com ↗</a><div class="source-note">Photography and visual arts competitions. Check entry fees, image rights and eligibility for each call.</div></div>
+  </div>
   <div class="section-head">UK</div>
   <div class="source-grid">
 
@@ -1448,7 +1454,15 @@
       document.getElementById('source-health').innerHTML=data.sources.map(s=>'<p>'+safeText(s.name)+' · '+(s.status==='ok'?'Checked '+safeText(displayDate(s.last_success)):'Check failed: '+safeText(s.error)+' · last success '+safeText(displayDate(s.last_success)))+'</p>').join('');renderUpdates();
     }catch(e){status.textContent=updateData?'Could not refresh. Showing the previous source check.':'The first daily source check has not arrived yet. Existing tracked opportunities remain available in the other tabs.';}
   }
-  function renderUpdates(){if(!updateData)return;const q=document.getElementById('search-updates').value.toLowerCase(),source=document.getElementById('source-updates').value;const currentYear=new Date().getFullYear(),showOlder=document.getElementById('show-older').checked;const items=updateData.items.filter(i=>{const years=(i.title.match(/\b20\d{2}\b/g)||[]).map(Number);return i.present&&(showOlder||!years.length||Math.max(...years)>=currentYear)&&(!source||i.source===source)&&(!q||(i.title+' '+i.source).toLowerCase().includes(q));});
+  function opportunityType(title){
+    if(/commission|tender|appalt|incaric/i.test(title))return 'Commission / tender';
+    if(/residen|fellow|borsa.di.ricerca|research/i.test(title))return 'Residency / fellowship';
+    if(/contest|competit|concors|award|prize|premi/i.test(title))return 'Competition / award';
+    if(/grant|fund|contribut|bursar|finanziament/i.test(title))return 'Grant / funding';
+    if(/exhibit|mostr|festival|open.call|call.for|bando/i.test(title))return 'Exhibition / open call';
+    return 'Other opportunity';
+  }
+  function renderUpdates(){if(!updateData)return;const q=document.getElementById('search-updates').value.toLowerCase(),source=document.getElementById('source-updates').value;const type=document.getElementById('type-updates').value;const currentYear=new Date().getFullYear(),showOlder=document.getElementById('show-older').checked;const items=updateData.items.filter(i=>{const years=(i.title.match(/\b20\d{2}\b/g)||[]).map(Number);return i.present&&(!type||opportunityType(i.title)===type)&&(showOlder||!years.length||Math.max(...years)>=currentYear)&&(!source||i.source===source)&&(!q||(i.title+' '+i.source).toLowerCase().includes(q));});
     document.getElementById('update-results').innerHTML=items.map(i=>'<article class="source-card"><div class="source-name"><a href="'+safeText(safeLink(i.url))+'" target="_blank" rel="noopener noreferrer">'+safeText(i.title)+' ↗</a></div><div class="source-note">'+safeText(i.source)+' · first seen '+safeText(displayDate(i.first_seen))+' · last seen '+safeText(displayDate(i.last_seen))+'</div><div class="tag">Needs verification</div></article>').join('')||'<p class="empty">No matching listings. Check the source results below.</p>';
   }
 
@@ -1463,4 +1477,5 @@
 
 </body>
 </html>
+
 

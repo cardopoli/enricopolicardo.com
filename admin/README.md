@@ -12,10 +12,10 @@ Token sign-in remains an alternative, but is not needed for the normal GitHub si
 
 ## What you can manage
 
-- **Tools:** edit the complete source of the five existing HTML tools and the InDesign JSX script. The raw format and plain-text field avoid adding front matter or serialising code as an object.
+- **Tools:** edit the complete source of the five HTML tools (including the archived version) and the InDesign JSX script. The raw format and plain-text field avoid adding front matter or serialising code as an object.
 - **Homepage:** edit the existing `index.html` source.
-- **Document links:** maintain document titles, file links and notes. This list is stored in `admin/documents.json`; it does not automatically add links to the homepage.
-- **Asset Library:** upload, replace and organise files in `uploads`, `tools` and `This Was Tomorrow`. Existing source files may be classified as entries rather than assets; use the Tools collection for those.
+- **Document links:** maintain document titles, file links and notes. This list is stored in `data/documents.json`; its titles and notes appear on the homepage.
+- **Asset Library:** upload, replace and organise files in `uploads`, `tools` and `documents`. Existing source files may be classified as entries rather than assets; use the Tools collection for those.
 
 Uploading a new HTML tool into `tools` gives it a URL at `/enricopolicardo.com/tools/filename.html`. To add it to the Tools editor list, add a file definition to `admin/config.json` following an existing example. Renaming a file changes its URL; links embedded in HTML source are not automatically repaired.
 

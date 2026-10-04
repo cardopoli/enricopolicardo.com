@@ -446,6 +446,7 @@
 <div id="tab-updates" class="panel active">
   <p>Public funding sources are checked daily at around 07:23 UTC. These are discovered links, including programme pages and older calls. Verify dates and eligibility on the source before applying.</p>
   <div class="search-row" style="margin-top:1rem"><input id="search-updates" aria-label="Search new listings" placeholder="Search listings or funders" oninput="renderUpdates()"><select id="source-updates" aria-label="Filter source" onchange="renderUpdates()"><option value="">All sources</option></select><button class="btn" onclick="loadUpdates()">Refresh data</button></div>
+  <label style="display:block;margin-bottom:1rem"><input id="show-older" type="checkbox" onchange="renderUpdates()"> Include listings mentioning previous years</label>
   <p id="update-status" role="status" style="margin-bottom:1rem">Loading source checks…</p>
   <div id="update-results" class="grid"></div>
   <details style="margin-top:1rem"><summary>Source check results</summary><div id="source-health"></div></details>
@@ -1446,7 +1447,7 @@
       document.getElementById('source-health').innerHTML=data.sources.map(s=>'<p>'+safeText(s.name)+' · '+(s.status==='ok'?'Checked '+safeText(displayDate(s.last_success)):'Check failed: '+safeText(s.error)+' · last success '+safeText(displayDate(s.last_success)))+'</p>').join('');renderUpdates();
     }catch(e){status.textContent=updateData?'Could not refresh. Showing the previous source check.':'The first daily source check has not arrived yet. Existing tracked opportunities remain available in the other tabs.';}
   }
-  function renderUpdates(){if(!updateData)return;const q=document.getElementById('search-updates').value.toLowerCase(),source=document.getElementById('source-updates').value;const items=updateData.items.filter(i=>i.present&&(!source||i.source===source)&&(!q||(i.title+' '+i.source).toLowerCase().includes(q)));
+  function renderUpdates(){if(!updateData)return;const q=document.getElementById('search-updates').value.toLowerCase(),source=document.getElementById('source-updates').value;const currentYear=new Date().getFullYear(),showOlder=document.getElementById('show-older').checked;const items=updateData.items.filter(i=>{const years=(i.title.match(/\b20\d{2}\b/g)||[]).map(Number);return i.present&&(showOlder||!years.length||Math.max(...years)>=currentYear)&&(!source||i.source===source)&&(!q||(i.title+' '+i.source).toLowerCase().includes(q));});
     document.getElementById('update-results').innerHTML=items.map(i=>'<article class="source-card"><div class="source-name"><a href="'+safeText(safeLink(i.url))+'" target="_blank" rel="noopener noreferrer">'+safeText(i.title)+' ↗</a></div><div class="source-note">'+safeText(i.source)+' · first seen '+safeText(displayDate(i.first_seen))+' · last seen '+safeText(displayDate(i.last_seen))+'</div><div class="tag">Needs verification</div></article>').join('')||'<p class="empty">No matching listings. Check the source results below.</p>';
   }
 

@@ -1,12 +1,12 @@
 # Files and tools
 
-Open `/admin/` on the published site. Sveltia CMS connects to `cardopoli/enricopolicardo.com`, branch `main`.
+Open `https://cardopoli.github.io/enricopolicardo.com/admin/`. Sveltia CMS connects to `cardopoli/enricopolicardo.com`, branch `main`.
 
 ## Sign in
 
 Choose **Sign In with GitHub**. This setup reuses your existing authenticator at `https://sveltia-cms-auth.cardopoli.workers.dev`.
 
-If the worker restricts sites through `ALLOWED_DOMAINS`, keep its existing domains and add `enricopolicardo.com` and `www.enricopolicardo.com` as comma-separated hostnames in Cloudflare Workers > sveltia-cms-auth > Settings > Variables and Secrets. Save and deploy the worker. No new OAuth app or client secret is required.
+If the worker restricts sites through `ALLOWED_DOMAINS`, keep its existing domains and add `cardopoli.github.io` as comma-separated hostnames in Cloudflare Workers > sveltia-cms-auth > Settings > Variables and Secrets. Save and deploy the worker. No new OAuth app or client secret is required.
 
 Token sign-in remains an alternative, but is not needed for the normal GitHub sign-in flow.
 
@@ -17,7 +17,7 @@ Token sign-in remains an alternative, but is not needed for the normal GitHub si
 - **Document links:** maintain document titles, file links and notes. This list is stored in `admin/documents.json`; it does not automatically add links to the homepage.
 - **Asset Library:** upload, replace and organise files in `uploads`, `tools` and `This Was Tomorrow`. Existing source files may be classified as entries rather than assets; use the Tools collection for those.
 
-Uploading a new HTML tool into `tools` gives it a URL at `/tools/filename.html`. To add it to the Tools editor list, add a file definition to `admin/config.json` following an existing example. Renaming a file changes its URL; links embedded in HTML source are not automatically repaired.
+Uploading a new HTML tool into `tools` gives it a URL at `/enricopolicardo.com/tools/filename.html`. To add it to the Tools editor list, add a file definition to `admin/config.json` following an existing example. Renaming a file changes its URL; links embedded in HTML source are not automatically repaired.
 
 Saving to `main` updates the GitHub repository. The site's existing hosting/deployment must publish this branch for the changes to appear online. This installation does not change hosting, DNS or the existing tool files.
 

@@ -12,8 +12,8 @@ import urllib.robotparser
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / 'data/tender-updates.json'
-AGENT = 'TenderTracker/1.0 (public funding source monitor)'
-KEYWORDS = re.compile(r'band[oi]|grant|open.call|fund|contribut|residen|award|premi|finanziament|cooperat|call.for|opportunit', re.I)
+AGENT = 'TenderTracker/1.0 (public creative opportunity monitor)'
+KEYWORDS = re.compile(r'band[oi]|grant|open.call|fund|contribut|residen|award|premi|finanziament|cooperat|call.for|opportunit|contest|competit|concors|commission|tender|appalt|incaric|exhibit|mostr|fellow|bursar|research|fotograf|photograph|festival|training', re.I)
 
 class Links(HTMLParser):
     def __init__(self):
@@ -79,10 +79,12 @@ def main():
     previous = json.loads(OUTPUT.read_text()) if OUTPUT.exists() else {}
     now = dt.datetime.now(dt.timezone.utc).isoformat(timespec='seconds')
     old_sources = {s['url']:s for s in previous.get('sources',[])}
-    old_items = {i['id']:i for i in previous.get('items',[])}
+    current_sources=source_list(html)
+    valid_urls={s['url'] for s in current_sources}
+    old_items = {i['id']:dict(i,present=i.get('present',True) and i['source_url'] in valid_urls) for i in previous.get('items',[])}
     items = dict(old_items); sources=[]; successes=0
     with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:
-        for source, links, error in pool.map(check, source_list(html)):
+        for source, links, error in pool.map(check, current_sources):
             old = old_sources.get(source['url'],{})
             result = dict(source, checked_at=now, status='error' if error else 'ok', error=error, last_success=old.get('last_success'))
             if not error:
@@ -102,3 +104,4 @@ def main():
     if not successes: raise SystemExit('No source checks succeeded; previous listings preserved')
 
 if __name__=='__main__': main()
+

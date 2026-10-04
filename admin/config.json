@@ -1,0 +1,176 @@
+{
+  "backend": {
+    "name": "github",
+    "repo": "cardopoli/enricopolicardo.com",
+    "branch": "main"
+  },
+  "site_url": "https://enricopolicardo.com",
+  "display_url": "https://enricopolicardo.com",
+  "media_folder": "uploads",
+  "public_folder": "/uploads",
+  "collections": [
+    {
+      "name": "tools",
+      "label": "Tools",
+      "description": "Edit your existing HTML tools and InDesign script. Upload new tools through the Asset Library in the tools folder. Source editing preserves the file format.",
+      "media_folder": "tools",
+      "public_folder": "/tools",
+      "editor": {
+        "preview": false
+      },
+      "files": [
+        {
+          "name": "InDesign-Relinker",
+          "label": "InDesign relinker",
+          "file": "tools/InDesign_Relinker.jsx",
+          "format": "raw",
+          "fields": [
+            {
+              "name": "body",
+              "label": "File contents",
+              "widget": "text",
+              "hint": "The complete source file. Saving replaces its contents. Use the public link below to run HTML tools."
+            }
+          ]
+        },
+        {
+          "name": "deepgram-transcripts",
+          "label": "Deepgram transcripts",
+          "file": "tools/deepgram_transcripts.html",
+          "format": "raw",
+          "fields": [
+            {
+              "name": "body",
+              "label": "File contents",
+              "widget": "text",
+              "hint": "The complete source file. Saving replaces its contents. Use the public link below to run HTML tools."
+            }
+          ],
+          "preview_path": "/tools/deepgram_transcripts.html"
+        },
+        {
+          "name": "mvmnt",
+          "label": "MVMNT routine",
+          "file": "tools/mvmnt.html",
+          "format": "raw",
+          "fields": [
+            {
+              "name": "body",
+              "label": "File contents",
+              "widget": "text",
+              "hint": "The complete source file. Saving replaces its contents. Use the public link below to run HTML tools."
+            }
+          ],
+          "preview_path": "/tools/mvmnt.html"
+        },
+        {
+          "name": "tender-tool",
+          "label": "Tender tracker",
+          "file": "tools/tender_tool.html",
+          "format": "raw",
+          "fields": [
+            {
+              "name": "body",
+              "label": "File contents",
+              "widget": "text",
+              "hint": "The complete source file. Saving replaces its contents. Use the public link below to run HTML tools."
+            }
+          ],
+          "preview_path": "/tools/tender_tool.html"
+        },
+        {
+          "name": "writing-tool",
+          "label": "Writing desk",
+          "file": "tools/writing-tool.html",
+          "format": "raw",
+          "fields": [
+            {
+              "name": "body",
+              "label": "File contents",
+              "widget": "text",
+              "hint": "The complete source file. Saving replaces its contents. Use the public link below to run HTML tools."
+            }
+          ],
+          "preview_path": "/tools/writing-tool.html"
+        },
+        {
+          "name": "writingtool",
+          "label": "Earlier writing tool",
+          "file": "tools/writingtool.html",
+          "format": "raw",
+          "fields": [
+            {
+              "name": "body",
+              "label": "File contents",
+              "widget": "text",
+              "hint": "The complete source file. Saving replaces its contents. Use the public link below to run HTML tools."
+            }
+          ],
+          "preview_path": "/tools/writingtool.html"
+        }
+      ]
+    },
+    {
+      "name": "site",
+      "label": "Homepage",
+      "description": "Edit the existing homepage HTML.",
+      "editor": {
+        "preview": false
+      },
+      "files": [
+        {
+          "name": "homepage",
+          "label": "Homepage",
+          "file": "index.html",
+          "format": "raw",
+          "fields": [
+            {
+              "name": "body",
+              "label": "HTML",
+              "widget": "text"
+            }
+          ],
+          "preview_path": "/"
+        }
+      ]
+    },
+    {
+      "name": "documents",
+      "label": "Document links",
+      "media_folder": "This Was Tomorrow",
+      "public_folder": "/This Was Tomorrow",
+      "files": [
+        {
+          "name": "documents",
+          "label": "Documents and downloads",
+          "file": "admin/documents.json",
+          "fields": [
+            {
+              "name": "documents",
+              "label": "Documents",
+              "widget": "list",
+              "fields": [
+                {
+                  "name": "title",
+                  "label": "Title",
+                  "widget": "string"
+                },
+                {
+                  "name": "file",
+                  "label": "File",
+                  "widget": "file"
+                },
+                {
+                  "name": "notes",
+                  "label": "Notes",
+                  "widget": "text",
+                  "required": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

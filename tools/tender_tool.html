@@ -415,31 +415,23 @@
     margin-top: 0.3rem;
     line-height: 1.6;
   }
+.ticker-inner{animation:none;white-space:normal}.ticker-bar{white-space:normal}.dot-verify{background:var(--amber)}
 </style>
 </head>
 <body>
 
 <div class="header">
   <div class="header-title">URcommons / Tender Tracker</div>
-  <div class="header-meta">Last updated: <span id="last-updated"></span> · <span id="total-count"></span> sources tracked</div>
+  <div class="header-meta">Sources checked: <span id="last-updated">Waiting for first check</span> · <span id="total-count"></span> sources</div>
 </div>
 
 <div class="ticker-bar">
-  <div class="ticker-inner">
-    ⚡ URGENT → GAL Euroleader bando socioculturale: 17 Jul 2026 &nbsp;&nbsp;&nbsp;·&nbsp;&nbsp;&nbsp;
-    ACE DYCP opens 4 Jun 2026 closes 2 Jul 2026 &nbsp;&nbsp;&nbsp;·&nbsp;&nbsp;&nbsp;
-    Fondazione Friuli Restauro: scaduto 11 May 2026 &nbsp;&nbsp;&nbsp;·&nbsp;&nbsp;&nbsp;
-    Fondosviluppo FVG Cultura: aperto fino 31 Dec 2026 &nbsp;&nbsp;&nbsp;·&nbsp;&nbsp;&nbsp;
-    GAL Euroleader Azione 8 "IL BORC" borghi carnici: verificare scadenza &nbsp;&nbsp;&nbsp;·&nbsp;&nbsp;&nbsp;
-    Creative Europe Cooperation Projects 2027: apertura attesa inizio 2027 &nbsp;&nbsp;&nbsp;·&nbsp;&nbsp;&nbsp;
-    Centre for British Photography Realisation Grant 2026: verificare apertura &nbsp;&nbsp;&nbsp;·&nbsp;&nbsp;&nbsp;
-    PhMuseum Photography Grant 2027: apertura gen 2027 &nbsp;&nbsp;&nbsp;·&nbsp;&nbsp;&nbsp;
-    INTERREG ITA-SLO 2021-2027: verificare prossimi bandi su ita-slo.eu &nbsp;&nbsp;&nbsp;·&nbsp;&nbsp;&nbsp;
-  </div>
+  <div class="ticker-inner" id="live-summary">Daily source checks. New listings require deadline and eligibility verification.</div>
 </div>
 
 <div class="tab-bar">
-  <div class="tab active" onclick="showTab('urcommons')">🌱 URcommons</div>
+  <div class="tab active" onclick="showTab('updates')">New listings</div>
+  <div class="tab" onclick="showTab('urcommons')">🌱 URcommons</div>
   <div class="tab" onclick="showTab('practice')">📷 My Practice</div>
   <div class="tab" onclick="showTab('photography')">🏆 Photo Grants</div>
   <div class="tab" onclick="showTab('european')">🇪🇺 European</div>
@@ -451,7 +443,14 @@
 <!-- ═══════════════════════════════════════════════ -->
 <!-- TAB 1: URCOMMONS -->
 <!-- ═══════════════════════════════════════════════ -->
-<div id="tab-urcommons" class="panel active">
+<div id="tab-updates" class="panel active">
+  <p>Public funding sources are checked daily at around 07:23 UTC. These are discovered links, including programme pages and older calls. Verify dates and eligibility on the source before applying.</p>
+  <div class="search-row" style="margin-top:1rem"><input id="search-updates" aria-label="Search new listings" placeholder="Search listings or funders" oninput="renderUpdates()"><select id="source-updates" aria-label="Filter source" onchange="renderUpdates()"><option value="">All sources</option></select><button class="btn" onclick="loadUpdates()">Refresh data</button></div>
+  <p id="update-status" role="status" style="margin-bottom:1rem">Loading source checks…</p>
+  <div id="update-results" class="grid"></div>
+  <details style="margin-top:1rem"><summary>Source check results</summary><div id="source-health"></div></details>
+</div>
+<div id="tab-urcommons" class="panel">
 
   <div class="stats-bar">
     <div class="stat"><span class="urgent-c">⬛ 1 urgent</span> · deadline &lt;30d</div>
@@ -465,7 +464,7 @@
     <select id="filter-urcommons" onchange="filterCards('urcommons')">
       <option value="">All status</option>
       <option value="urgent">Urgent</option>
-      <option value="open">Open</option>
+      <option value="open">Open</option><option value="soon">Due within 60 days</option><option value="verify">Needs verification</option>
       <option value="rolling">Rolling</option>
       <option value="closed">Closed</option>
     </select>
@@ -1326,7 +1325,7 @@
     document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
     document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
     document.getElementById('tab-' + id).classList.add('active');
-    event.target.classList.add('active');
+    document.querySelectorAll('.tab').forEach(t => {if(t.getAttribute('onclick') === "showTab('"+id+"')") t.classList.add('active');});
   }
 
   // ── DATES ──
@@ -1363,8 +1362,21 @@
       }
     });
 
-    document.getElementById('last-updated').textContent = new Date().toLocaleDateString('en-GB');
-    document.getElementById('total-count').textContent = '30+';
+    document.querySelectorAll('.tender-card').forEach(card => {
+      const date = card.querySelector('.deadline-date')?.textContent.trim();
+      const parsed = date && /^\d{1,2} [A-Za-z]{3} \d{4}$/.test(date) ? Date.parse(date+' 23:59:59') : NaN;
+      const dayEl=card.querySelector('.deadline-days');
+      let status=card.dataset.status;
+      if(Number.isFinite(parsed)){const days=Math.ceil((parsed-Date.now())/86400000);status=days<0?'closed':days<=30?'urgent':days<=60?'soon':'open';if(dayEl){dayEl.textContent=days<0?'Deadline passed':days+'d left';dayEl.className='deadline-days '+status;}}
+      else if(!['closed','rolling','applied','won'].includes(status)){status='verify';if(dayEl)dayEl.textContent='Verify current call';}
+      card.dataset.status=status;card.classList.remove('urgent','soon','open','closed','verify');card.classList.add(status);
+      const dot=card.querySelector('.status-dot');if(dot)dot.className='status-dot dot-'+status;
+    });
+    ['urcommons','practice','photography','european'].forEach(tab=>{
+      const panel=document.getElementById('tab-'+tab);const cards=Array.from(panel.querySelectorAll('.tender-card'));const stats=panel.querySelector('.stats-bar');
+      if(stats)stats.textContent=['open','urgent','soon','rolling','verify','closed'].map(status=>cards.filter(c=>c.dataset.status===status).length+' '+status).join(' · ');
+      filterCards(tab);
+    });
   }
 
   // ── FILTER ──
@@ -1417,11 +1429,36 @@
     } catch(e) {}
   }
 
+
+  let updateData=null;
+  function safeText(value){return String(value||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+  function safeLink(value){try{const u=new URL(value);return ['https:','http:'].includes(u.protocol)?u.href:'#';}catch(e){return '#';}}
+  function displayDate(value){return value?new Date(value).toLocaleString('en-GB'):'Never';}
+  async function loadUpdates(){
+    const status=document.getElementById('update-status');
+    try{const response=await fetch('../data/tender-updates.json?t='+Date.now(),{cache:'no-store'});if(!response.ok)throw new Error('Data unavailable');const data=await response.json();if(!Array.isArray(data.items)||!Array.isArray(data.sources))throw new Error('Invalid data');updateData=data;
+      document.getElementById('last-updated').textContent=displayDate(data.checked_at);
+      document.getElementById('total-count').textContent=data.sources.length;
+      const stale=Date.now()-Date.parse(data.checked_at)>48*3600000;
+      status.textContent=(stale?'Checks are overdue. ':'')+data.successful_sources+' of '+data.sources.length+' sources checked successfully. Listings are leads for review.';
+      document.getElementById('live-summary').textContent=status.textContent;
+      const select=document.getElementById('source-updates'), selected=select.value;select.innerHTML='<option value="">All sources</option>'+data.sources.map(s=>'<option value="'+safeText(s.name)+'">'+safeText(s.name)+'</option>').join('');select.value=selected;
+      document.getElementById('source-health').innerHTML=data.sources.map(s=>'<p>'+safeText(s.name)+' · '+(s.status==='ok'?'Checked '+safeText(displayDate(s.last_success)):'Check failed: '+safeText(s.error)+' · last success '+safeText(displayDate(s.last_success)))+'</p>').join('');renderUpdates();
+    }catch(e){status.textContent=updateData?'Could not refresh. Showing the previous source check.':'The first daily source check has not arrived yet. Existing tracked opportunities remain available in the other tabs.';}
+  }
+  function renderUpdates(){if(!updateData)return;const q=document.getElementById('search-updates').value.toLowerCase(),source=document.getElementById('source-updates').value;const items=updateData.items.filter(i=>i.present&&(!source||i.source===source)&&(!q||(i.title+' '+i.source).toLowerCase().includes(q)));
+    document.getElementById('update-results').innerHTML=items.map(i=>'<article class="source-card"><div class="source-name"><a href="'+safeText(safeLink(i.url))+'" target="_blank" rel="noopener noreferrer">'+safeText(i.title)+' ↗</a></div><div class="source-note">'+safeText(i.source)+' · first seen '+safeText(displayDate(i.first_seen))+' · last seen '+safeText(displayDate(i.last_seen))+'</div><div class="tag">Needs verification</div></article>').join('')||'<p class="empty">No matching listings. Check the source results below.</p>';
+  }
+
   // ── INIT ──
   updateDeadlines();
   loadNotes();
   setInterval(updateDeadlines, 60000);
+  loadUpdates();
+  setInterval(()=>{if(!document.hidden)loadUpdates();},900000);
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden)loadUpdates();});
 </script>
 
 </body>
 </html>
+

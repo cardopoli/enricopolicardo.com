@@ -853,7 +853,7 @@
   try{var draft=JSON.parse(localStorage.getItem("MVMNT_draft_v2")||"null");if(draft){session=normalise(draft.session);equipment=Array.isArray(draft.equipment)?draft.equipment.filter(function(v){return Number.isInteger(v)&&v>=1&&v<=7;}):[];}}catch(e){}
   if(location.hash.indexOf("#r=")===0) session=decodeHash();
   updateKit();
-  window.addEventListener("hashchange",function(){session=decodeHash();renderLibrary();renderSession();});
+  window.addEventListener("hashchange",function(){if(location.hash && !location.hash.startsWith("#r=")) return;session=decodeHash();renderLibrary();renderSession();});
   document.getElementById("downloadBtn").addEventListener("click",function(){if(!session.length){flash("Add some movements first.");return;}var url=URL.createObjectURL(new Blob([buildText()],{type:"text/plain;charset=utf-8"}));var a=document.createElement("a");a.href=url;a.download="mvmnt-routine.txt";a.click();setTimeout(function(){URL.revokeObjectURL(url);},1000);});
   renderLibrary();
   renderSession();

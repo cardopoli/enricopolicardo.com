@@ -17,12 +17,14 @@ KEYWORDS = re.compile(r'band[oi]|grant|open.call|fund|contribut|residen|award|pr
 
 class Links(HTMLParser):
     def __init__(self):
-        super().__init__(); self.links = []; self.current = None
+        super().__init__(); self.links = []; self.current = None; self.skip = 0
     def handle_starttag(self, tag, attrs):
-        if tag == 'a': self.current = [dict(attrs).get('href', ''), []]
+        if tag in ('nav','header','footer','script','style'): self.skip += 1
+        if tag == 'a' and not self.skip: self.current = [dict(attrs).get('href', ''), []]
     def handle_data(self, value):
         if self.current: self.current[1].append(value)
     def handle_endtag(self, tag):
+        if tag in ('nav','header','footer','script','style'): self.skip = max(0,self.skip-1)
         if tag == 'a' and self.current:
             self.links.append((self.current[0], ' '.join(' '.join(self.current[1]).split())))
             self.current = None
@@ -63,6 +65,8 @@ def check(source):
             if parts.scheme not in ('http','https') or parts.hostname != urllib.parse.urlsplit(final).hostname: continue
             url = urllib.parse.urlunsplit((parts.scheme,parts.netloc,parts.path,parts.query,''))
             if len(title)<12 or not KEYWORDS.search(title): continue
+            if re.search(r'archivio|bandi.chiusi|graduator|bandi.di.concorso|bandi.gara|pubblica.amministrazione|sovvenzioni,.contributi|privacy|cookie',title,re.I): continue
+            if re.fullmatch(r'(all |our |open |current )?(funding|grants|funds|open calls|bandi|bandi in corso|progetti e bandi|opportunit[aà])',title,re.I): continue
             if url.rstrip('/') == final.rstrip('/'): continue
             if title.lower() in ('privacy policy','terms and conditions'): continue
             found[url] = {'title':title[:300], 'url':url, 'source':source['name'], 'source_url':source['url']}

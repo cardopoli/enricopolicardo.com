@@ -502,7 +502,7 @@
   function bounded(v, max, fallback){ var n = parseInt(v,10); return Number.isFinite(n) ? Math.max(1,Math.min(max,n)) : fallback; }
   function unitFor(o){ return /carry/i.test(o.n) ? "m" : (o.tag === "Hang" || /plank|hold|wall sit/i.test(o.n) ? "s" : "reps"); }
   function available(o){
-    var extra = {"SQ·03":6,"PL·01":6,"PL·02":7,"PL·04":7,"HG·05":7,"PU·05":7,"CC·06":7,"PL·08":6,"FM·11":5,"FM·12":5};
+    var extra = {"SQ·03":6,"PU·02":6,"PU·03":6,"PL·01":6,"PL·02":7,"PL·04":7,"HG·05":7,"PU·05":7,"CC·06":7,"PL·08":6,"FM·11":5,"FM·12":5};
     var ok = o.t === 0 || equipment.includes(o.t);
     if(o.id === "SQ·07" || ["CC·07","CC·08","CC·09","FM·14"].includes(o.id)) ok = equipment.includes(2) || equipment.includes(3);
     if(o.id === "PL·11") ok = equipment.includes(4) || equipment.includes(5);
@@ -515,6 +515,7 @@
   function defaultsFor(o){
     if(o.tag === "Mobility" || o.tag === "Locomotion" || o.tag === "Ground"){ return {sets:2, reps:8}; }
     if(o.tag === "Hang"){ return {sets:3, reps:20}; }         // reps read as seconds for holds
+    if(/carry/i.test(o.n)){ return {sets:3, reps:30}; }
     if(o.tag === "Flow"){ return {sets:3, reps:5}; }
     if(/plank|hold|wall sit/i.test(o.n)){ return {sets:3, reps:30}; }
     if(/carry/i.test(o.n)){ return {sets:3, reps:30}; }        // reps read as metres
@@ -535,7 +536,7 @@
       html += '<div class="opts">';
       visible.forEach(function(o){
         var added = session.some(function(s){ return s.id === o.id; });
-        var tag = o.tag ? o.tag : TIER_TAG[o.t];
+        var tag = o.tag ? o.tag : (["SQ·07","CC·07","CC·08","CC·09","FM·14"].includes(o.id) ? "DB / KB" : TIER_TAG[o.t]);
         html += '<div class="entry">'
               + '<div class="opt'+(added?' added':'')+'" data-id="'+o.id+'" >'
               +   '<span class="opt-cat">'+o.id+'</span>'

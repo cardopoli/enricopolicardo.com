@@ -3,7 +3,7 @@ const repo='cardopoli/enricopolicardo.com',api='https://api.github.com/repos/'+r
 const known={
  'tools/writing-tool.html':{title:'Writing desk',description:'Rough writing, collected lines and drafts. Prompts, timers and text exports.'},
  'tools/archive/writingtool.html':{title:'Earlier writing tool',description:'The earlier version, kept here for reference.'},
- 'tools/tender_tool.html':{title:'Tender tracker',description:'Organise tenders, opportunities and applications.'},
+ 'tools/tender_tool.html':{title:'Opportunities',description:'Competitions, open calls, residencies, commissions, grants and relevant tenders. Sources checked daily.'},
  'tools/deepgram_transcripts.html':{title:'Deepgram transcripts',description:'An audio transcription tool for This Was Tomorrow.'},
  'tools/mvmnt.html':{title:'MVMNT',description:'Build, save and share movement routines.'},
  'tools/InDesign_Relinker.jsx':{title:'InDesign relinker',description:'A downloadable script for Adobe InDesign.'},

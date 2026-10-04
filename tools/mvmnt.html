@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex">
-<title>MVMNT — Routine</title>
+<title>MVMNT - Routine</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -185,6 +185,19 @@
     footer{display:none}
   }
   @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+  [hidden]{display:none!important}
+  .back-link{display:block;font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:12px}
+  .catalogue-tools{display:flex;align-items:center;gap:14px;padding:20px 0;border-bottom:1px solid var(--hair);flex-wrap:wrap;font-family:var(--mono);font-size:12px}
+  .catalogue-tools input{flex:1;min-width:180px;background:var(--panel);color:var(--fg);border:1px solid var(--hair2);padding:12px;font:inherit}
+  .session-col{align-self:start;max-height:100vh;overflow:auto}
+  .saved-name{background:none;border:0;font:inherit;text-align:left;padding:4px 0}
+  .opt .plus,.opt-info,.si-actions button{min-width:36px;min-height:36px;background:transparent;color:var(--fg);cursor:pointer}
+  .kit-opts{border:0;gap:6px}.kit-opts button{border:1px solid var(--hair2);min-height:44px}
+  .s-meta:after{content:" • estimate includes 5 min preparation and 60s between sets";display:block;margin-top:5px}
+  @media(max-width:900px){.session-col{grid-row:1;max-height:none;overflow:visible}.session{padding-left:0;padding-right:0}.library{grid-row:2}}
+  @media(max-width:520px){.opt{grid-template-columns:1fr auto auto;gap:8px}.opt-cat{display:none}.opt-name{grid-column:1}.opt-tag{grid-column:1;grid-row:2;width:fit-content}.opt-info{grid-column:2;grid-row:1 / span 2}.plus{grid-column:3;grid-row:1 / span 2}.si-controls{flex-wrap:wrap}}
+  @media print{.library,.kit,.catalogue-tools,.back-link,.tagline,.si-cue a{display:none!important}.session-col{max-height:none;overflow:visible}.session{padding:0}.s-meta:after{display:block}*{color:#000!important}.s-item{break-inside:avoid}.si-field input{width:65px}header.mast{padding:0 0 20px}}
 </style>
 </head>
 <body>
@@ -192,39 +205,42 @@
   <header class="mast">
     <div class="mast-row">
       <div>
-        <div class="title">MVMNT <span class="slash">/</span> <em>Routine</em></div>
-        <div class="tagline" id="tagline">Five patterns. Any room. Whatever the room gives you.</div>
+        <a class="back-link" href="../">← All tools</a><div class="title">MVMNT <span class="slash">/</span> <em>Routine</em></div>
+        <div class="tagline" id="tagline">Build a routine, adjust each movement, then save or take it with you.</div>
       </div>
       <button class="theme-toggle" id="themeBtn" aria-label="Toggle light and dark">Light</button>
     </div>
   </header>
 
   <div class="kit">
-    <div class="kit-label">What have you got today?</div>
+    <div class="kit-label">Choose the equipment you have. Bodyweight movements are always included.</div>
     <div class="kit-opts" id="kitOpts" role="group" aria-label="Available equipment">
-      <button data-level="0" aria-pressed="false">Bodyweight</button>
-      <button data-level="1" aria-pressed="false">+ Bands</button>
-      <button data-level="2" aria-pressed="false">+ Dumbbells</button>
-      <button data-level="3" aria-pressed="true">+ Kettlebells</button>
-      <button data-level="4" aria-pressed="false">Full gym</button>
+      <button data-level="1" aria-pressed="false">Bands</button>
+      <button data-level="2" aria-pressed="false">Dumbbells</button>
+      <button data-level="3" aria-pressed="false">Kettlebells</button>
+      <button data-level="4" aria-pressed="false">Gym equipment</button>
+      <button data-level="5" aria-pressed="false">Pull-up bar</button>
+      <button data-level="6" aria-pressed="false">Bench / sturdy support</button>
+      <button data-level="7" aria-pressed="false">Secure band / row anchor</button>
     </div>
   </div>
 
+  <div class="catalogue-tools"><label for="search">Find a movement</label><input id="search" type="search" placeholder="Search name, pattern or equipment"><a href="#sessionPanel">Go to session ↓</a></div>
   <div class="cols">
     <main class="library" id="library"><!-- patterns injected --></main>
 
-    <aside class="session-col">
+    <aside class="session-col" id="sessionPanel">
       <div class="session">
         <div class="s-title"><span>Today's session</span><span id="sCount">0</span></div>
         <div class="s-meta" id="sMeta">Nothing added yet</div>
         <div id="sBody">
-          <div class="s-empty">Pick movements from the catalogue. Aim for one from each pattern, or build around whatever the room allows. Two to three rounds is a session.</div>
+          <div class="s-empty">Add movements using +. Set the number of sets and repetitions, seconds or metres for each. Complete the listed sets once; they are not extra rounds.</div>
         </div>
 
         <div class="s-tools">
           <div class="row">
-            <button class="btn" id="shareBtn">Send to phone</button>
-            <button class="btn ghost" id="copyBtn">Copy as text</button>
+            <button class="btn" id="shareBtn">Share routine</button>
+            <button class="btn ghost" id="downloadBtn">Download .txt</button><button class="btn ghost" id="copyBtn">Copy as text</button>
           </div>
           <div class="row">
             <button class="btn ghost" id="linkBtn">Copy link</button>
@@ -232,10 +248,10 @@
             <button class="btn ghost" id="printBtn">Print / PDF</button>
             <button class="btn ghost" id="clearBtn">Clear</button>
           </div>
-          <div class="share-note" id="shareNote"></div>
+          <div class="share-note" id="shareNote" role="status" aria-live="polite"></div>
           <div class="qr-box" id="qrBox" hidden><div id="qr"></div><div class="qr-cap" id="qrCap"></div></div>
           <div class="save-row">
-            <input id="saveName" type="text" placeholder="Name this routine…" maxlength="40">
+            <input aria-label="Routine name" id="saveName" type="text" placeholder="Name this routine…" maxlength="40">
             <button class="btn" id="saveBtn">Save</button>
           </div>
           <div class="saved-list" id="savedList"></div>
@@ -246,7 +262,7 @@
   </div>
 
   <footer>
-    <span>MVMNT / Routine — a movement catalogue</span>
+    <span>MVMNT / Routine - a movement catalogue</span>
     <span id="tierKey">B bodyweight · BAND · DB dumbbell · KB kettlebell · GYM barbell/machine</span>
   </footer>
 </div>
@@ -291,7 +307,7 @@
         {n:"Kettlebell deadlift", t:3},
         {n:"Kettlebell clean (to rack)", t:3},
       ]},
-    { code:"PU", name:"Push", note:"Away from you — chest, shoulders, triceps.",
+    { code:"PU", name:"Push", note:"Away from you - chest, shoulders, triceps.",
       opts:[
         {n:"Press-up", t:0},
         {n:"Incline press-up (hands raised)", t:0},
@@ -308,7 +324,7 @@
         {n:"Kettlebell push press", t:3},
         {n:"Half-kneeling kettlebell press", t:3},
       ]},
-    { code:"PL", name:"Pull", note:"Toward you — back and biceps. The one gyms forget.",
+    { code:"PL", name:"Pull", note:"Pull towards you using your back and arms.",
       opts:[
         {n:"Inverted row under a table", t:0},
         {n:"Towel row (door / post)", t:0},
@@ -342,7 +358,7 @@
         {n:"Kettlebell halo", t:3},
         {n:"Kettlebell windmill", t:3},
       ]},
-    { code:"FM", name:"Free movement", note:"The body's own vocabulary — mobility, ground, hang, flow. Always available.",
+    { code:"FM", name:"Free movement", note:"Mobility, floor work and movement practice. Check the equipment needed.",
       opts:[
         {n:"Cat-cow", t:0, tag:"Mobility"},
         {n:"Open-book thoracic rotation", t:0, tag:"Mobility"},
@@ -467,14 +483,15 @@
   }
 
   // ---- State ----
-  var level = 3;             // equipment level
+  var equipment = [];
+  var query = "";
   var session = [];          // [{id, sets, reps}]
   var STORE_KEY = "MVMNT_routine_saves_v1";
   var storeOK = true;
 
   // ---- Storage helpers (degrade quietly if unavailable) ----
   function loadSaves(){
-    try{ var raw = window.localStorage.getItem(STORE_KEY); return raw ? JSON.parse(raw) : {}; }
+    try{ var raw = window.localStorage.getItem(STORE_KEY); var value = raw ? JSON.parse(raw) : {}; return value && typeof value === "object" && !Array.isArray(value) ? value : {}; }
     catch(e){ storeOK = false; return {}; }
   }
   function writeSaves(obj){
@@ -482,6 +499,18 @@
     catch(e){ storeOK = false; return false; }
   }
 
+  function bounded(v, max, fallback){ var n = parseInt(v,10); return Number.isFinite(n) ? Math.max(1,Math.min(max,n)) : fallback; }
+  function unitFor(o){ return /carry/i.test(o.n) ? "m" : (o.tag === "Hang" || /plank|hold|wall sit/i.test(o.n) ? "s" : "reps"); }
+  function available(o){
+    var extra = {"SQ·03":6,"PL·01":6,"PL·02":7,"PL·04":7,"HG·05":7,"PU·05":7,"CC·06":7,"PL·08":6,"FM·11":5,"FM·12":5};
+    var ok = o.t === 0 || equipment.includes(o.t);
+    if(o.id === "SQ·07" || ["CC·07","CC·08","CC·09","FM·14"].includes(o.id)) ok = equipment.includes(2) || equipment.includes(3);
+    if(o.id === "PL·11") ok = equipment.includes(4) || equipment.includes(5);
+    return ok && (!extra[o.id] || equipment.includes(extra[o.id]) || equipment.includes(4));
+  }
+  function normalise(arr){ return Array.isArray(arr) ? arr.filter(function(s){return s && BY_ID[s.id];}).filter(function(s,i,a){return a.findIndex(function(x){return x.id===s.id;})===i;}).map(function(s){return {id:s.id,sets:bounded(s.sets,20,3),reps:bounded(s.reps,600,10)};}) : []; }
+  function updateKit(){ Array.from(document.getElementById("kitOpts").children).forEach(function(b){b.setAttribute("aria-pressed",equipment.includes(+b.dataset.level));}); }
+  function persistDraft(){try{localStorage.setItem("MVMNT_draft_v2",JSON.stringify({session:session,equipment:equipment}));}catch(e){}}
   // ---- Defaults for a movement type ----
   function defaultsFor(o){
     if(o.tag === "Mobility" || o.tag === "Locomotion" || o.tag === "Ground"){ return {sets:2, reps:8}; }
@@ -497,7 +526,7 @@
   function renderLibrary(){
     var html = "";
     PATTERNS.forEach(function(p){
-      var visible = p.opts.filter(function(o){ return o.t <= level; });
+      var visible = p.opts.filter(function(o){ return available(o) && (!query || (o.n+" "+o.pattern+" "+TIER_TAG[o.t]+" "+(o.tag||"")).toLowerCase().includes(query)); });
       visible.sort(function(a,b){ return a.t - b.t; });
       if(!visible.length) return;
       html += '<section class="pattern">';
@@ -508,22 +537,22 @@
         var added = session.some(function(s){ return s.id === o.id; });
         var tag = o.tag ? o.tag : TIER_TAG[o.t];
         html += '<div class="entry">'
-              + '<div class="opt'+(added?' added':'')+'" data-id="'+o.id+'" role="button" tabindex="0" aria-pressed="'+added+'">'
+              + '<div class="opt'+(added?' added':'')+'" data-id="'+o.id+'" >'
               +   '<span class="opt-cat">'+o.id+'</span>'
               +   '<span class="opt-name">'+o.n+'</span>'
               +   '<span class="opt-tag">'+tag+'</span>'
               +   '<button class="opt-info" type="button" aria-label="How to do it" aria-expanded="false" title="'+esc(o.cue)+'">?</button>'
-              +   '<span class="plus">'+(added?'✓':'+')+'</span>'
+              +   '<button class="plus" type="button" aria-label="'+(added?'Remove ':'Add ')+esc(o.n)+'" aria-pressed="'+added+'">'+(added?'✓':'+')+'</button>'
               + '</div>'
               + '<div class="opt-detail" hidden>'
               +   (o.cue ? '<div class="cue">'+esc(o.cue)+'</div>' : '')
-              +   '<a class="demo" href="'+demoURL(o)+'" target="_blank" rel="noopener">Watch a demo ↗</a>'
+              +   '<a class="demo" href="'+demoURL(o)+'" target="_blank" rel="noopener">Search video examples ↗</a>'
               + '</div>'
               + '</div>';
       });
       html += '</div></section>';
     });
-    libraryEl.innerHTML = html;
+    libraryEl.innerHTML = html || '<p class="s-empty">No movements match. Change your search or equipment.</p>';
   }
 
   // ---- Render session ----
@@ -532,17 +561,17 @@
   var sMeta = document.getElementById("sMeta");
 
   function estimateMinutes(){
-    // rough: warmup 5 min + each set ~ 40s work + 60s rest
     if(!session.length) return 0;
-    var secs = 5*60;
-    session.forEach(function(s){ secs += s.sets * 100; });
-    return Math.round(secs/60);
+    var secs = 300;
+    session.forEach(function(s){var unit=unitFor(BY_ID[s.id]); var work=unit==="s"?s.reps:unit==="m"?s.reps/0.8:s.reps*3; secs += s.sets*work + Math.max(0,s.sets-1)*60;});
+    return Math.ceil(secs/60);
   }
 
   function renderSession(){
+    persistDraft();
     sCount.textContent = session.length;
     if(!session.length){
-      sBody.innerHTML = '<div class="s-empty">Pick movements from the catalogue. Aim for one from each pattern, or build around whatever the room allows. Two to three rounds is a session.</div>';
+      sBody.innerHTML = '<div class="s-empty">Add movements using +. Set the number of sets and repetitions, seconds or metres for each. Complete the listed sets once; they are not extra rounds.</div>';
       sMeta.textContent = "Nothing added yet";
       syncURL();
       return;
@@ -554,13 +583,13 @@
     var html = '<div class="s-list">';
     session.forEach(function(s, idx){
       var o = BY_ID[s.id]; if(!o) return;
-      var unit = /carry/i.test(o.n) ? "m" : (o.tag==="Hang" || /plank|hold|wall sit/i.test(o.n) ? "s" : "reps");
+      var unit = unitFor(o);
       html += '<div class="s-item" data-idx="'+idx+'">'
             +   '<div class="si-top"><span class="si-name">'+o.n+'</span><span class="si-cat">'+o.id+'</span></div>'
-            +   '<div class="si-cue">'+(o.cue?esc(o.cue):'')+'<a class="demo" href="'+demoURL(o)+'" target="_blank" rel="noopener">demo ↗</a></div>'
+            +   '<div class="si-cue">'+(o.cue?esc(o.cue):'')+'<a class="demo" href="'+demoURL(o)+'" target="_blank" rel="noopener">video search ↗</a></div>'
             +   '<div class="si-controls">'
-            +     '<div class="si-field"><label>Sets</label><input type="number" min="1" max="20" value="'+s.sets+'" data-f="sets"></div>'
-            +     '<div class="si-field"><label>'+unit+'</label><input type="number" min="1" max="600" value="'+s.reps+'" data-f="reps"></div>'
+            +     '<div class="si-field"><label>Sets</label><input aria-label="Sets for '+esc(o.n)+'" type="number" min="1" max="20" value="'+s.sets+'" data-f="sets"></div>'
+            +     '<div class="si-field"><label>'+unit+'</label><input aria-label="'+unit+' for '+esc(o.n)+'" type="number" min="1" max="600" value="'+s.reps+'" data-f="reps"></div>'
             +     '<div class="si-actions">'
             +       '<button data-a="up" title="Move up">↑</button>'
             +       '<button data-a="down" title="Move down">↓</button>'
@@ -611,8 +640,8 @@
     var inp = e.target.closest("input"); if(!inp) return;
     var item = e.target.closest(".s-item"); var idx = +item.getAttribute("data-idx");
     var f = inp.getAttribute("data-f");
-    var v = parseInt(inp.value,10); if(isNaN(v)||v<1) v=1;
-    session[idx][f] = v;
+    var v = bounded(inp.value, f==="sets"?20:600,1);
+    session[idx][f] = v; persistDraft();
     sMeta.textContent = session.length + " movement" + (session.length>1?"s":"") + " · ~" + estimateMinutes() + " min";
     syncURL();
   });
@@ -630,12 +659,11 @@
   var kitOpts = document.getElementById("kitOpts");
   kitOpts.addEventListener("click", function(e){
     var b = e.target.closest("button"); if(!b) return;
-    level = +b.getAttribute("data-level");
-    Array.prototype.forEach.call(kitOpts.children, function(c){
-      c.setAttribute("aria-pressed", c===b ? "true":"false");
-    });
-    renderLibrary();
+    var key = +b.getAttribute("data-level");
+    if(equipment.includes(key)) equipment=equipment.filter(function(v){return v!==key;}); else equipment.push(key);
+    updateKit(); persistDraft(); renderLibrary();
   });
+  document.getElementById("search").addEventListener("input",function(){query=this.value.trim().toLowerCase();renderLibrary();});
 
   // ---- Theme ----
   var themeBtn = document.getElementById("themeBtn");
@@ -648,7 +676,7 @@
     var cur = document.documentElement.getAttribute("data-theme")==="light" ? "light":"dark";
     applyTheme(cur==="light" ? "dark":"light");
   });
-  (function(){ var m="dark"; try{ m = window.localStorage.getItem("MVMNT_routine_theme")||"dark"; }catch(e){} applyTheme(m); })();
+  (function(){ var m="light"; try{ m = window.localStorage.getItem("MVMNT_routine_theme")||"light"; }catch(e){} applyTheme(m); })();
 
   // ---- Clear / Print ----
   document.getElementById("clearBtn").addEventListener("click", function(){
@@ -667,7 +695,7 @@
     var names = Object.keys(saves);
     if(!storeOK){
       savedListEl.innerHTML = "";
-      storeNote.textContent = "Saving is unavailable in this preview. Download the file and open it directly (or host it) and saved routines will stick.";
+      storeNote.textContent = "Browser storage is unavailable. Download or copy your routine to keep it.";
       return;
     }
     if(!names.length){
@@ -678,9 +706,9 @@
     storeNote.textContent = "Saved in this browser. Tap a name to load.";
     var html = "";
     names.forEach(function(name){
-      var count = saves[name] ? saves[name].length : 0;
+      var count = Array.isArray(saves[name]) ? saves[name].length : 0;
       html += '<div class="saved-item">'
-            +   '<span class="saved-name" data-name="'+encodeURIComponent(name)+'">'+name+' <span style="color:var(--muted)">· '+count+'</span></span>'
+            +   '<button class="saved-name" data-name="'+encodeURIComponent(name)+'">'+esc(name)+' <span style="color:var(--muted)">· '+count+'</span></button>'
             +   '<button class="saved-x" data-del="'+encodeURIComponent(name)+'" title="Delete">delete</button>'
             + '</div>';
     });
@@ -692,8 +720,8 @@
     if(!name){ saveNameInp.focus(); return; }
     if(!session.length){ storeNote.textContent = "Add some movements before saving."; return; }
     var saves = loadSaves();
-    saves[name] = session.map(function(s){ return {id:s.id, sets:s.sets, reps:s.reps}; });
-    if(writeSaves(saves)){ saveNameInp.value=""; }
+    Object.defineProperty(saves,name,{value:session.map(function(s){ return {id:s.id, sets:s.sets, reps:s.reps}; }),enumerable:true,configurable:true,writable:true});
+    if(writeSaves(saves)){ saveNameInp.value=""; flash("Routine saved in this browser."); }
     renderSaved();
   });
 
@@ -709,7 +737,7 @@
       var ln = decodeURIComponent(load.getAttribute("data-name"));
       var arr = saves[ln]; if(!arr) return;
       // keep only movements that still exist in the catalogue
-      session = arr.filter(function(s){ return BY_ID[s.id]; }).map(function(s){ return {id:s.id, sets:s.sets||3, reps:s.reps||10}; });
+      session = normalise(arr);
       renderLibrary(); renderSession();
     }
   });
@@ -723,6 +751,7 @@
       try{ history.replaceState(null, "", location.pathname + location.search + target); }
       catch(e){ location.hash = target.replace(/^#/,""); }
     }
+    persistDraft();
     if(qrShown) renderQR();
   }
   function decodeHash(){
@@ -740,21 +769,21 @@
       var reps = parseInt(parts[2],10); if(isNaN(reps)||reps<1) reps = d.reps;
       out.push({id:id, sets:sets, reps:reps});
     });
-    return out;
+    return normalise(out);
   }
 
   // ---- Plain-text export ----
   function buildText(){
-    var kitNames = ["Bodyweight only","Bodyweight + bands","Bodyweight + dumbbells","Bodyweight + kettlebells","Full gym"];
+
     if(!session.length) return "MVMNT / ROUTINE\n(empty)";
     var lines = ["MVMNT / ROUTINE", ""];
     session.forEach(function(s, i){
       var o = BY_ID[s.id]; if(!o) return;
-      var unit = /carry/i.test(o.n) ? "m" : (o.tag==="Hang" || /plank|hold|wall sit/i.test(o.n) ? "s" : "reps");
+      var unit = unitFor(o);
       lines.push((i+1) + ". " + o.n + "  " + s.sets + " x " + s.reps + " " + unit);
     });
     lines.push("");
-    lines.push("~" + estimateMinutes() + " min - aim for 2-3 rounds - " + kitNames[level]);
+    lines.push("~" + estimateMinutes() + " min including 5 min preparation and 60s between sets. Complete the listed sets once.");
     if(/^https?:/.test(location.href)) lines.push(location.href);
     return lines.join("\n");
   }
@@ -774,7 +803,7 @@
       try{
         var ta = document.createElement("textarea"); ta.value = txt;
         ta.style.position="fixed"; ta.style.opacity="0"; document.body.appendChild(ta);
-        ta.focus(); ta.select(); document.execCommand("copy"); document.body.removeChild(ta); done();
+        ta.focus(); ta.select(); if(!document.execCommand("copy")) throw new Error("Copy failed"); document.body.removeChild(ta); done();
       }catch(e){ flash("Couldn't copy automatically - select the text and copy it."); }
     }
     if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(txt).then(done, fallback); }
@@ -816,11 +845,16 @@
     qrShown = !qrShown;
     document.getElementById("qrBox").hidden = !qrShown;
     this.textContent = qrShown ? "Hide QR" : "QR code";
+    persistDraft();
     if(qrShown) renderQR();
   });
 
   // ---- Init ----
-  session = decodeHash();
+  try{var draft=JSON.parse(localStorage.getItem("MVMNT_draft_v2")||"null");if(draft){session=normalise(draft.session);equipment=Array.isArray(draft.equipment)?draft.equipment.filter(function(v){return Number.isInteger(v)&&v>=1&&v<=7;}):[];}}catch(e){}
+  if(location.hash.indexOf("#r=")===0) session=decodeHash();
+  updateKit();
+  window.addEventListener("hashchange",function(){session=decodeHash();renderLibrary();renderSession();});
+  document.getElementById("downloadBtn").addEventListener("click",function(){if(!session.length){flash("Add some movements first.");return;}var url=URL.createObjectURL(new Blob([buildText()],{type:"text/plain;charset=utf-8"}));var a=document.createElement("a");a.href=url;a.download="mvmnt-routine.txt";a.click();setTimeout(function(){URL.revokeObjectURL(url);},1000);});
   renderLibrary();
   renderSession();
   renderSaved();
@@ -828,3 +862,4 @@
 </script>
 </body>
 </html>
+

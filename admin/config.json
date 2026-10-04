@@ -97,7 +97,7 @@
         {
           "name": "writingtool",
           "label": "Earlier writing tool",
-          "file": "tools/writingtool.html",
+          "file": "tools/archive/writingtool.html",
           "format": "raw",
           "fields": [
             {
@@ -107,7 +107,7 @@
               "hint": "The complete source file. Saving replaces its contents. Use the public link below to run HTML tools."
             }
           ],
-          "preview_path": "/enricopolicardo.com/tools/writingtool.html"
+          "preview_path": "/enricopolicardo.com/tools/archive/writingtool.html"
         }
       ]
     },
@@ -138,13 +138,13 @@
     {
       "name": "documents",
       "label": "Document links",
-      "media_folder": "This Was Tomorrow",
-      "public_folder": "/enricopolicardo.com/This Was Tomorrow",
+      "media_folder": "documents",
+      "public_folder": "/enricopolicardo.com/documents",
       "files": [
         {
           "name": "documents",
           "label": "Documents and downloads",
-          "file": "admin/documents.json",
+          "file": "data/documents.json",
           "fields": [
             {
               "name": "documents",

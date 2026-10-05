@@ -1,6 +1,7 @@
 'use strict';
 const repo='cardopoli/enricopolicardo.com',api='https://api.github.com/repos/'+repo+'/git/trees/main?recursive=1';
 const known={
+ 'tools/bread.html':{title:'Bread bench',description:'Baker percentages, flour blends, sourdough builds, bake schedules and saved recipes.'},
  'tools/writing-tool.html':{title:'Writing desk',description:'Rough writing, collected lines and drafts. Prompts, timers and text exports.'},
  'tools/archive/writingtool.html':{title:'Earlier writing tool',description:'The earlier version, kept here for reference.'},
  'tools/tender_tool.html':{title:'Opportunities',description:'Competitions, open calls, residencies, commissions, grants and relevant tenders. Sources checked daily.'},

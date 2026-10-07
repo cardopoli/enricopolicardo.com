@@ -1,12 +1,12 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-06T14:17:19+00:00",
+  "checked_at": "2026-10-07T14:36:27+00:00",
   "successful_sources": 21,
   "sources": [
     {
       "name": "GAL Euroleader",
       "url": "https://www.euroleader.it/bandi",
-      "checked_at": "2026-10-06T14:17:19+00:00",
+      "checked_at": "2026-10-07T14:36:27+00:00",
       "status": "error",
       "error": "<urlopen error [Errno 111] Connection refused>",
       "last_success": null,
@@ -15,61 +15,61 @@
     {
       "name": "GAL Torre Natisone",
       "url": "https://torrenatisonegal.com/bandi-aperti/",
-      "checked_at": "2026-10-06T14:17:19+00:00",
+      "checked_at": "2026-10-07T14:36:27+00:00",
       "status": "ok",
       "error": null,
-      "last_success": "2026-10-06T14:17:19+00:00",
+      "last_success": "2026-10-07T14:36:27+00:00",
       "listings": 1
     },
     {
       "name": "GAL Carso — Las Kras",
       "url": "https://galcarso.eu/it/bandi-per-il-territorio/",
-      "checked_at": "2026-10-06T14:17:19+00:00",
+      "checked_at": "2026-10-07T14:36:27+00:00",
       "status": "ok",
       "error": null,
-      "last_success": "2026-10-06T14:17:19+00:00",
+      "last_success": "2026-10-07T14:36:27+00:00",
       "listings": 0
     },
     {
       "name": "GAL Open Leader",
       "url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/economia-imprese/agricoltura-foreste/psr-programma-sviluppo-rurale/FOGLIA115/",
-      "checked_at": "2026-10-06T14:17:19+00:00",
+      "checked_at": "2026-10-07T14:36:27+00:00",
       "status": "ok",
       "error": null,
-      "last_success": "2026-10-06T14:17:19+00:00",
+      "last_success": "2026-10-07T14:36:27+00:00",
       "listings": 7
     },
     {
       "name": "Regione FVG — Cultura",
       "url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/cultura-sport/attivita-culturali/",
-      "checked_at": "2026-10-06T14:17:19+00:00",
+      "checked_at": "2026-10-07T14:36:27+00:00",
       "status": "ok",
       "error": null,
-      "last_success": "2026-10-06T14:17:19+00:00",
+      "last_success": "2026-10-07T14:36:27+00:00",
       "listings": 26
     },
     {
       "name": "Fondazione Friuli",
       "url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
-      "checked_at": "2026-10-06T14:17:19+00:00",
+      "checked_at": "2026-10-07T14:36:27+00:00",
       "status": "ok",
       "error": null,
-      "last_success": "2026-10-06T14:17:19+00:00",
+      "last_success": "2026-10-07T14:36:27+00:00",
       "listings": 100
     },
     {
       "name": "Fondosviluppo FVG",
       "url": "https://www.fondosviluppofvg.it",
-      "checked_at": "2026-10-06T14:17:19+00:00",
+      "checked_at": "2026-10-07T14:36:27+00:00",
       "status": "ok",
       "error": null,
-      "last_success": "2026-10-06T14:17:19+00:00",
+      "last_success": "2026-10-07T14:36:27+00:00",
       "listings": 0
     },
     {
       "name": "Obiettivo Europa",
       "url": "https://www.obiettivoeuropa.com/bandi/aperti/",
-      "checked_at": "2026-10-06T14:17:19+00:00",
+      "checked_at": "2026-10-07T14:36:27+00:00",
       "status": "error",
       "error": "HTTP Error 404: Not Found",
       "last_success": null,
@@ -78,61 +78,61 @@
     {
       "name": "Fondazione Cariplo",
       "url": "https://www.fondazionecariplo.it/contributi/bandi/",
-      "checked_at": "2026-10-06T14:17:19+00:00",
+      "checked_at": "2026-10-07T14:36:27+00:00",
       "status": "ok",
       "error": null,
-      "last_success": "2026-10-06T14:17:19+00:00",
+      "last_success": "2026-10-07T14:36:27+00:00",
       "listings": 0
     },
     {
       "name": "Fondazione CRT (Torino)",
       "url": "https://www.fondazionecrt.it/progetti-e-bandi/",
-      "checked_at": "2026-10-06T14:17:19+00:00",
+      "checked_at": "2026-10-07T14:36:27+00:00",
       "status": "ok",
       "error": null,
-      "last_success": "2026-10-06T14:17:19+00:00",
+      "last_success": "2026-10-07T14:36:27+00:00",
       "listings": 3
     },
     {
       "name": "Compagnia di San Paolo",
       "url": "https://www.compagniadisanpaolo.it/it/cosa-facciamo/contributi/",
-      "checked_at": "2026-10-06T14:17:19+00:00",
+      "checked_at": "2026-10-07T14:36:27+00:00",
       "status": "ok",
       "error": null,
-      "last_success": "2026-10-06T14:17:19+00:00",
+      "last_success": "2026-10-07T14:36:27+00:00",
       "listings": 12
     },
     {
       "name": "Fondazione con il Sud",
       "url": "https://www.fondazioneconilsud.it",
-      "checked_at": "2026-10-06T14:17:19+00:00",
+      "checked_at": "2026-10-07T14:36:27+00:00",
       "status": "ok",
       "error": null,
-      "last_success": "2026-10-06T14:17:19+00:00",
+      "last_success": "2026-10-07T14:36:27+00:00",
       "listings": 7
     },
     {
       "name": "Artquest",
       "url": "https://artquest.org.uk/opportunities/",
-      "checked_at": "2026-10-06T14:17:19+00:00",
+      "checked_at": "2026-10-07T14:36:27+00:00",
       "status": "ok",
       "error": null,
-      "last_success": "2026-10-06T14:17:19+00:00",
+      "last_success": "2026-10-07T14:36:27+00:00",
       "listings": 15
     },
     {
       "name": "On the Move",
       "url": "https://on-the-move.org/news",
-      "checked_at": "2026-10-06T14:17:19+00:00",
+      "checked_at": "2026-10-07T14:36:27+00:00",
       "status": "ok",
       "error": null,
-      "last_success": "2026-10-06T14:17:19+00:00",
+      "last_success": "2026-10-07T14:36:27+00:00",
       "listings": 7
     },
     {
       "name": "Picter",
       "url": "https://submit.picter.com/",
-      "checked_at": "2026-10-06T14:17:19+00:00",
+      "checked_at": "2026-10-07T14:36:27+00:00",
       "status": "error",
       "error": "HTTP Error 429: Too Many Requests",
       "last_success": null,
@@ -141,7 +141,7 @@
     {
       "name": "Arts Council England",
       "url": "https://www.artscouncil.org.uk/our-open-funds",
-      "checked_at": "2026-10-06T14:17:19+00:00",
+      "checked_at": "2026-10-07T14:36:27+00:00",
       "status": "error",
       "error": "HTTP Error 403: Forbidden",
       "last_success": null,
@@ -150,86 +150,136 @@
     {
       "name": "Esmée Fairbairn Foundation",
       "url": "https://esmeefairbairn.org.uk/what-we-fund",
-      "checked_at": "2026-10-06T14:17:19+00:00",
+      "checked_at": "2026-10-07T14:36:27+00:00",
       "status": "ok",
       "error": null,
-      "last_success": "2026-10-06T14:17:19+00:00",
+      "last_success": "2026-10-07T14:36:27+00:00",
       "listings": 2
     },
     {
       "name": "Paul Hamlyn Foundation",
       "url": "https://www.phf.org.uk/funding/",
-      "checked_at": "2026-10-06T14:17:19+00:00",
+      "checked_at": "2026-10-07T14:36:27+00:00",
       "status": "ok",
       "error": null,
-      "last_success": "2026-10-06T14:17:19+00:00",
+      "last_success": "2026-10-07T14:36:27+00:00",
       "listings": 15
     },
     {
       "name": "Calouste Gulbenkian Foundation UK",
       "url": "https://gulbenkian.pt/uk-branch/",
-      "checked_at": "2026-10-06T14:17:19+00:00",
+      "checked_at": "2026-10-07T14:36:27+00:00",
       "status": "ok",
       "error": null,
-      "last_success": "2026-10-06T14:17:19+00:00",
+      "last_success": "2026-10-07T14:36:27+00:00",
       "listings": 5
     },
     {
       "name": "INTERREG Italia-Slovenia",
       "url": "https://www.ita-slo.eu/en/calls",
-      "checked_at": "2026-10-06T14:17:19+00:00",
+      "checked_at": "2026-10-07T14:36:27+00:00",
       "status": "ok",
       "error": null,
-      "last_success": "2026-10-06T14:17:19+00:00",
+      "last_success": "2026-10-07T14:36:27+00:00",
       "listings": 0
     },
     {
       "name": "Creative Europe",
       "url": "https://culture.ec.europa.eu/creative-europe",
-      "checked_at": "2026-10-06T14:17:19+00:00",
+      "checked_at": "2026-10-07T14:36:27+00:00",
       "status": "ok",
       "error": null,
-      "last_success": "2026-10-06T14:17:19+00:00",
+      "last_success": "2026-10-07T14:36:27+00:00",
       "listings": 0
     },
     {
       "name": "PhMuseum",
       "url": "https://phmuseum.com/grants",
-      "checked_at": "2026-10-06T14:17:19+00:00",
+      "checked_at": "2026-10-07T14:36:27+00:00",
       "status": "ok",
       "error": null,
-      "last_success": "2026-10-06T14:17:19+00:00",
+      "last_success": "2026-10-07T14:36:27+00:00",
       "listings": 32
     },
     {
       "name": "Monographica Open Calls",
       "url": "https://opencalls.monographica.com",
-      "checked_at": "2026-10-06T14:17:19+00:00",
+      "checked_at": "2026-10-07T14:36:27+00:00",
       "status": "ok",
       "error": null,
-      "last_success": "2026-10-06T14:17:19+00:00",
+      "last_success": "2026-10-07T14:36:27+00:00",
       "listings": 100
     },
     {
       "name": "Contemporary Lynx",
       "url": "https://contemporarylynx.co.uk",
-      "checked_at": "2026-10-06T14:17:19+00:00",
+      "checked_at": "2026-10-07T14:36:27+00:00",
       "status": "ok",
       "error": null,
-      "last_success": "2026-10-06T14:17:19+00:00",
-      "listings": 3
+      "last_success": "2026-10-07T14:36:27+00:00",
+      "listings": 4
     },
     {
       "name": "New European Bauhaus",
       "url": "https://new-european-bauhaus.europa.eu",
-      "checked_at": "2026-10-06T14:17:19+00:00",
+      "checked_at": "2026-10-07T14:36:27+00:00",
       "status": "ok",
       "error": null,
-      "last_success": "2026-10-06T14:17:19+00:00",
+      "last_success": "2026-10-07T14:36:27+00:00",
       "listings": 0
     }
   ],
   "items": [
+    {
+      "title": "World Street Photo Awards 2026",
+      "url": "https://opencalls.monographica.com/world-street-photo-awards-2026/",
+      "source": "Monographica Open Calls",
+      "source_url": "https://opencalls.monographica.com",
+      "id": "2dbd7a30afd82eb16818",
+      "first_seen": "2026-10-07T14:36:27+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
+      "present": true
+    },
+    {
+      "title": "LensCulture Black & White Photography Awards 2026",
+      "url": "https://opencalls.monographica.com/lensculture-black-and-white-photography-awards-2026/",
+      "source": "Monographica Open Calls",
+      "source_url": "https://opencalls.monographica.com",
+      "id": "3de48eaa491b414f1389",
+      "first_seen": "2026-10-07T14:36:27+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
+      "present": true
+    },
+    {
+      "title": "PhotoWork Junior Fellowship 2027",
+      "url": "https://opencalls.monographica.com/photowork-junior-fellowship-2027/",
+      "source": "Monographica Open Calls",
+      "source_url": "https://opencalls.monographica.com",
+      "id": "a9d617110f4151d1bd09",
+      "first_seen": "2026-10-07T14:36:27+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
+      "present": true
+    },
+    {
+      "title": "exhibition Architecture In States of Collapse Monika Sosnowska at South London Gallery Monika Sosnowska at South London Gallery",
+      "url": "https://contemporarylynx.co.uk/architecture-in-states-of-collapse-monika-sosnowska-at-south-london-gallery",
+      "source": "Contemporary Lynx",
+      "source_url": "https://contemporarylynx.co.uk",
+      "id": "82fccb0e31927dc85be9",
+      "first_seen": "2026-10-07T14:36:27+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
+      "present": true
+    },
+    {
+      "title": "12 Open Calls to Apply for in Autumn 2026: A Season of New Opportunities",
+      "url": "https://contemporarylynx.co.uk/12-open-calls-to-apply-for-in-autumn-2026",
+      "source": "Contemporary Lynx",
+      "source_url": "https://contemporarylynx.co.uk",
+      "id": "5fc92a74d5ddc248202c",
+      "first_seen": "2026-10-07T14:36:27+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
+      "present": true
+    },
     {
       "title": "Commissions & Tenders (1)",
       "url": "https://on-the-move.org/news?f%5B0%5D=category%3A1",
@@ -237,7 +287,7 @@
       "source_url": "https://on-the-move.org/news",
       "id": "b22ce5210ffa6b338e5b",
       "first_seen": "2026-10-06T14:17:19+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -247,7 +297,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "d91b2f4605b958b658fe",
       "first_seen": "2026-10-06T14:17:19+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -258,7 +308,7 @@
       "id": "3cd7a2a2e1cd41738147",
       "first_seen": "2026-10-06T14:17:19+00:00",
       "last_seen": "2026-10-06T14:17:19+00:00",
-      "present": true
+      "present": false
     },
     {
       "title": "Abstract Mind 2027 — 12th International Exhibition on Abstract Art · CICA Museum",
@@ -268,7 +318,7 @@
       "id": "314d56bcadff0b8380c8",
       "first_seen": "2026-10-06T14:17:19+00:00",
       "last_seen": "2026-10-06T14:17:19+00:00",
-      "present": true
+      "present": false
     },
     {
       "title": "Call for Submissions — Exhibitions 2027–2028 · Spellerberg Projects",
@@ -277,7 +327,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "f9c1b0c34afe3e85eaa0",
       "first_seen": "2026-10-05T17:22:06+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -287,7 +337,7 @@
       "source_url": "https://www.phf.org.uk/funding/",
       "id": "457d629278996d44027a",
       "first_seen": "2026-10-05T16:11:48+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -297,7 +347,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "76c2272e8c71c8f6ca80",
       "first_seen": "2026-10-05T16:11:48+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -307,7 +357,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "07e39ef16a92bfa2d6ed",
       "first_seen": "2026-10-05T16:11:48+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -317,7 +367,7 @@
       "source_url": "https://torrenatisonegal.com/bandi-aperti/",
       "id": "1b73d5935de7b3868e96",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -327,7 +377,7 @@
       "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/economia-imprese/agricoltura-foreste/psr-programma-sviluppo-rurale/FOGLIA115/",
       "id": "ee6631190a334d6fe01d",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -337,7 +387,7 @@
       "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/cultura-sport/attivita-culturali/",
       "id": "66678e59af5ad236a13d",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -347,7 +397,7 @@
       "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/cultura-sport/attivita-culturali/",
       "id": "682f7f9a000ea25cfcf5",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -357,7 +407,7 @@
       "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/cultura-sport/attivita-culturali/",
       "id": "c948a20aaaa476e6f0d6",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -367,7 +417,7 @@
       "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/cultura-sport/attivita-culturali/",
       "id": "f104d251700f04304e09",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -377,7 +427,7 @@
       "source_url": "https://www.fondazioneconilsud.it",
       "id": "a359cffd0edcf17dbbeb",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -387,7 +437,7 @@
       "source_url": "https://artquest.org.uk/opportunities/",
       "id": "6b9910c931ed79a69bb2",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -397,7 +447,7 @@
       "source_url": "https://artquest.org.uk/opportunities/",
       "id": "34efe66fbdad401abb7c",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -407,7 +457,7 @@
       "source_url": "https://artquest.org.uk/opportunities/",
       "id": "a657bf1d30454388c9c3",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -417,7 +467,7 @@
       "source_url": "https://artquest.org.uk/opportunities/",
       "id": "d49ca16493f62f24d7ae",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -437,7 +487,7 @@
       "source_url": "https://artquest.org.uk/opportunities/",
       "id": "4928391eec07586e72be",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -447,7 +497,7 @@
       "source_url": "https://artquest.org.uk/opportunities/",
       "id": "20769ee63ea496adf3b2",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -457,7 +507,7 @@
       "source_url": "https://artquest.org.uk/opportunities/",
       "id": "a6045646a8ce7482a413",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -467,7 +517,7 @@
       "source_url": "https://artquest.org.uk/opportunities/",
       "id": "3ff7aa5db8a4ec4e7468",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -477,7 +527,7 @@
       "source_url": "https://artquest.org.uk/opportunities/",
       "id": "f8f9e1de41449f9db40f",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -487,7 +537,7 @@
       "source_url": "https://artquest.org.uk/opportunities/",
       "id": "8b6c91b6d38e5b67273f",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -497,7 +547,7 @@
       "source_url": "https://artquest.org.uk/opportunities/",
       "id": "2e56f4b43283b58d3dc3",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -507,7 +557,7 @@
       "source_url": "https://artquest.org.uk/opportunities/",
       "id": "e098ce81948872a88a68",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -517,7 +567,7 @@
       "source_url": "https://artquest.org.uk/opportunities/",
       "id": "f530b500d46c805cad87",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -527,7 +577,7 @@
       "source_url": "https://artquest.org.uk/opportunities/",
       "id": "8e68f2389e49d855c095",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -537,7 +587,7 @@
       "source_url": "https://artquest.org.uk/opportunities/",
       "id": "063cfe0f0de8de5c21ba",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -547,7 +597,7 @@
       "source_url": "https://on-the-move.org/news",
       "id": "c3b343637fb9da6ca428",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -557,27 +607,27 @@
       "source_url": "https://on-the-move.org/news",
       "id": "5cb67035aa8ebcf3fea2",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
-      "title": "Project Funding (10)",
+      "title": "Project Funding (11)",
       "url": "https://on-the-move.org/news?f%5B0%5D=category%3A3",
       "source": "On the Move",
       "source_url": "https://on-the-move.org/news",
       "id": "f6c9d62533a934666e2f",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
-      "title": "Residencies (18)",
+      "title": "Residencies (19)",
       "url": "https://on-the-move.org/news?f%5B0%5D=category%3A7",
       "source": "On the Move",
       "source_url": "https://on-the-move.org/news",
       "id": "e56e059203d9d9c7d3d8",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -587,7 +637,7 @@
       "source_url": "https://on-the-move.org/news",
       "id": "c40ded99d197ac3602a9",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -597,7 +647,7 @@
       "source_url": "https://on-the-move.org/news",
       "id": "82edbcf301fdcc41b5e5",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -607,7 +657,7 @@
       "source_url": "https://gulbenkian.pt/uk-branch/",
       "id": "664b4097fea20e35006a",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -617,17 +667,17 @@
       "source_url": "https://phmuseum.com/grants",
       "id": "5440c52f8582d0ba1516",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
-      "title": "Gallery exhibition",
+      "title": "Monthly solo exhibition slot, no sales commission",
       "url": "https://opencalls.monographica.com/prize/exhibition/",
       "source": "Monographica Open Calls",
       "source_url": "https://opencalls.monographica.com",
       "id": "3fc75d8af95def88204e",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -667,7 +717,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "2049275e678ee7504f2f",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -677,7 +727,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "92081b50563b75828c66",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -687,7 +737,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "b8c38ab2fd63e1091986",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -697,7 +747,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "c4ce0849b90c69cbec8c",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -707,7 +757,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "5880db8ee3a3beb3440a",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -717,7 +767,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "17052d15e084fd0e7e82",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -727,7 +777,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "437817e08c3aa2bd4970",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -737,7 +787,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "86ddf72375c596672a05",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -747,7 +797,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "fd8486611964abc14fa7",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -757,7 +807,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "19b9898372163286738a",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -767,7 +817,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "fba15069e4244ad276db",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -777,7 +827,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "a756abb6786e9e6aa33a",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -787,7 +837,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "d2f51882497f15300735",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -797,7 +847,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "c053a9eb4b2e03d480c0",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -807,7 +857,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "ba25603ff2b87da1988e",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -817,7 +867,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "67d7bd3c920ef2ab2231",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -827,7 +877,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "a70aa6b687f92aebc111",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -837,7 +887,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "59ebf0fb28426839106a",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -847,7 +897,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "57ef874dca935e0d521c",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -857,7 +907,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "3cee36080e362b2981c2",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -867,7 +917,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "5ff697ebdf968bb1c90f",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -877,7 +927,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "e1ae124b0397e0f71643",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -887,7 +937,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "76102a84f606b92c4851",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -897,7 +947,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "f0412ee2bc025b4d5f39",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -907,7 +957,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "eb9ce571bdeb60065509",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -917,7 +967,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "c1412aec5287d2c0f900",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -927,7 +977,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "2bcadf22099a5246ce5f",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -937,7 +987,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "eabf95cc0f849bcb5e17",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -947,7 +997,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "b7fda11ac1da6f3163e9",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -957,7 +1007,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "b4059cb300d9d7605f87",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -967,7 +1017,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "867487c9e00d08cd87f8",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -977,7 +1027,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "0ffd0d99f04e1f0cca31",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -987,7 +1037,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "fd8d2e78b67b1fa822b7",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -997,7 +1047,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "fa865e1584bacfb8ccdf",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1007,7 +1057,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "0cdc9da30fc265f82669",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1017,7 +1067,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "cbee71da078d9491cfc3",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1027,7 +1077,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "22774a85c3fb1754b4ce",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1037,7 +1087,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "22d543f90f44bf63b025",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1047,7 +1097,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "e7289afcf68a3ce232d3",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1057,7 +1107,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "2568b618f5722a67b592",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1067,7 +1117,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "b5309a20c81fc594f0c8",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1077,7 +1127,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "b26a07a9d6a4736da384",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1087,7 +1137,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "281a4259b65289944b74",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1097,7 +1147,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "b0489a81b9235f077ad6",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1107,7 +1157,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "cfc4940e1e9892210188",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1117,7 +1167,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "eaf629ab8b8325d64745",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1127,7 +1177,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "025a7d87d4b78d521f44",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1137,7 +1187,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "982d3962c6d6d9d535b3",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1147,7 +1197,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "a4d45b647b0eec3ead8b",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1157,7 +1207,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "660216e1c9c7e2aef33a",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1167,7 +1217,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "d4a18d1516a975ff902f",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1177,7 +1227,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "5869818aaa85812afd35",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1187,7 +1237,7 @@
       "source_url": "https://contemporarylynx.co.uk",
       "id": "42ba26249be98d859c32",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1198,7 +1248,7 @@
       "id": "708e902fc324e5a43f59",
       "first_seen": "2026-10-04T17:56:34+00:00",
       "last_seen": "2026-10-06T14:17:19+00:00",
-      "present": true
+      "present": false
     },
     {
       "title": "Artisceniche.xls (BANDO Arti Sceniche 2015)",
@@ -1207,7 +1257,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "72750dcc9ff34328ac6a",
       "first_seen": "2026-10-04T17:39:04+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1217,7 +1267,7 @@
       "source_url": "https://www.fondazionecrt.it/progetti-e-bandi/",
       "id": "523964711fc4ba18804d",
       "first_seen": "2026-10-04T17:39:04+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1227,7 +1277,7 @@
       "source_url": "https://www.fondazionecrt.it/progetti-e-bandi/",
       "id": "37c3f35fa6f62d1c14dd",
       "first_seen": "2026-10-04T17:39:04+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1237,7 +1287,7 @@
       "source_url": "https://www.fondazionecrt.it/progetti-e-bandi/",
       "id": "ed229ae151e2a925e827",
       "first_seen": "2026-10-04T17:39:04+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1247,7 +1297,7 @@
       "source_url": "https://www.compagniadisanpaolo.it/it/cosa-facciamo/contributi/",
       "id": "c7190acfd419a7364e67",
       "first_seen": "2026-10-04T17:39:04+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1257,7 +1307,7 @@
       "source_url": "https://www.compagniadisanpaolo.it/it/cosa-facciamo/contributi/",
       "id": "5bfc99b4b69864c3c888",
       "first_seen": "2026-10-04T17:39:04+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1267,7 +1317,7 @@
       "source_url": "https://www.compagniadisanpaolo.it/it/cosa-facciamo/contributi/",
       "id": "88363ca04bf068fb7d20",
       "first_seen": "2026-10-04T17:39:04+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1277,7 +1327,7 @@
       "source_url": "https://www.compagniadisanpaolo.it/it/cosa-facciamo/contributi/",
       "id": "c5a767d7221cf433900c",
       "first_seen": "2026-10-04T17:39:04+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1287,7 +1337,7 @@
       "source_url": "https://www.compagniadisanpaolo.it/it/cosa-facciamo/contributi/",
       "id": "2b7dd28946e6df0e23a8",
       "first_seen": "2026-10-04T17:39:04+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1297,7 +1347,7 @@
       "source_url": "https://www.compagniadisanpaolo.it/it/cosa-facciamo/contributi/",
       "id": "332305d9d9393bc82258",
       "first_seen": "2026-10-04T17:39:04+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1307,7 +1357,7 @@
       "source_url": "https://www.compagniadisanpaolo.it/it/cosa-facciamo/contributi/",
       "id": "72d1eb55a33dae2d6fd5",
       "first_seen": "2026-10-04T17:39:04+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1317,7 +1367,7 @@
       "source_url": "https://www.compagniadisanpaolo.it/it/cosa-facciamo/contributi/",
       "id": "3e0e26d11ba82a23e485",
       "first_seen": "2026-10-04T17:39:04+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1327,7 +1377,7 @@
       "source_url": "https://www.compagniadisanpaolo.it/it/cosa-facciamo/contributi/",
       "id": "45218b3781c5220c6dd1",
       "first_seen": "2026-10-04T17:39:04+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1337,7 +1387,7 @@
       "source_url": "https://www.compagniadisanpaolo.it/it/cosa-facciamo/contributi/",
       "id": "49fdf4b7b9c75ba960bf",
       "first_seen": "2026-10-04T17:39:04+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1347,7 +1397,7 @@
       "source_url": "https://www.compagniadisanpaolo.it/it/cosa-facciamo/contributi/",
       "id": "c6e47fcdbfbd289ce008",
       "first_seen": "2026-10-04T17:39:04+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1357,7 +1407,7 @@
       "source_url": "https://www.compagniadisanpaolo.it/it/cosa-facciamo/contributi/",
       "id": "689ced72eb0125579901",
       "first_seen": "2026-10-04T17:39:04+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1367,7 +1417,7 @@
       "source_url": "https://www.phf.org.uk/funding/",
       "id": "f7f7655a2bad420dc33c",
       "first_seen": "2026-10-04T17:39:04+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1377,7 +1427,7 @@
       "source_url": "https://www.phf.org.uk/funding/",
       "id": "d135a0150078b8b94059",
       "first_seen": "2026-10-04T17:39:04+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1387,7 +1437,7 @@
       "source_url": "https://www.phf.org.uk/funding/",
       "id": "62ddc127c55d7943ab0a",
       "first_seen": "2026-10-04T17:39:04+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1397,7 +1447,7 @@
       "source_url": "https://www.phf.org.uk/funding/",
       "id": "7b9214369febf538866e",
       "first_seen": "2026-10-04T17:39:04+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1407,7 +1457,7 @@
       "source_url": "https://www.phf.org.uk/funding/",
       "id": "8b95b3ce536ae080496d",
       "first_seen": "2026-10-04T17:39:04+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1417,7 +1467,7 @@
       "source_url": "https://www.phf.org.uk/funding/",
       "id": "18d43b99cf1d1d38b722",
       "first_seen": "2026-10-04T17:39:04+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1427,7 +1477,7 @@
       "source_url": "https://www.phf.org.uk/funding/",
       "id": "fca0d367f2177f404a4b",
       "first_seen": "2026-10-04T17:39:04+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1437,7 +1487,7 @@
       "source_url": "https://www.phf.org.uk/funding/",
       "id": "f2612a99b8f437efab95",
       "first_seen": "2026-10-04T17:39:04+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1447,7 +1497,7 @@
       "source_url": "https://www.phf.org.uk/funding/",
       "id": "28f193d6289703593f4f",
       "first_seen": "2026-10-04T17:39:04+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1457,7 +1507,7 @@
       "source_url": "https://www.phf.org.uk/funding/",
       "id": "45af0ea0553f8b09a7fc",
       "first_seen": "2026-10-04T17:39:04+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1467,7 +1517,7 @@
       "source_url": "https://www.phf.org.uk/funding/",
       "id": "bc1fd014bd5b90bee5b1",
       "first_seen": "2026-10-04T17:39:04+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1477,7 +1527,7 @@
       "source_url": "https://www.phf.org.uk/funding/",
       "id": "9a1aa6926f352fda953b",
       "first_seen": "2026-10-04T17:39:04+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1487,7 +1537,7 @@
       "source_url": "https://www.phf.org.uk/funding/",
       "id": "24ba50a2e8104169731e",
       "first_seen": "2026-10-04T17:39:04+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1497,7 +1547,7 @@
       "source_url": "https://www.phf.org.uk/funding/",
       "id": "99e15c691c2a5f895c07",
       "first_seen": "2026-10-04T17:39:04+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1577,7 +1627,7 @@
       "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/economia-imprese/agricoltura-foreste/psr-programma-sviluppo-rurale/FOGLIA115/",
       "id": "380d00ab6e3a5d2d6e7c",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1587,7 +1637,7 @@
       "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/economia-imprese/agricoltura-foreste/psr-programma-sviluppo-rurale/FOGLIA115/",
       "id": "e3556d14bd1669ca0584",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1597,7 +1647,7 @@
       "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/economia-imprese/agricoltura-foreste/psr-programma-sviluppo-rurale/FOGLIA115/",
       "id": "9b65ae2458d24692f86f",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1607,7 +1657,7 @@
       "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/economia-imprese/agricoltura-foreste/psr-programma-sviluppo-rurale/FOGLIA115/",
       "id": "6f4154044b237f091b88",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1617,7 +1667,7 @@
       "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/economia-imprese/agricoltura-foreste/psr-programma-sviluppo-rurale/FOGLIA115/",
       "id": "1538d856f24237008708",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1627,7 +1677,7 @@
       "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/economia-imprese/agricoltura-foreste/psr-programma-sviluppo-rurale/FOGLIA115/",
       "id": "f68750ef40f2d6e2dd49",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1637,7 +1687,7 @@
       "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/cultura-sport/attivita-culturali/",
       "id": "b5edef2a64eca082b98a",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1647,7 +1697,7 @@
       "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/cultura-sport/attivita-culturali/",
       "id": "f79a24c2ea08e441dff5",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1657,7 +1707,7 @@
       "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/cultura-sport/attivita-culturali/",
       "id": "257b37ed51ef7e07f4f7",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1667,7 +1717,7 @@
       "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/cultura-sport/attivita-culturali/",
       "id": "ec6579cb17a6ed03bcdb",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1677,7 +1727,7 @@
       "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/cultura-sport/attivita-culturali/",
       "id": "3480220317483afdae4e",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1687,7 +1737,7 @@
       "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/cultura-sport/attivita-culturali/",
       "id": "4cfdf408856b3a349c33",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1697,7 +1747,7 @@
       "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/cultura-sport/attivita-culturali/",
       "id": "b7a97c48c7e0287f05e5",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1707,7 +1757,7 @@
       "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/cultura-sport/attivita-culturali/",
       "id": "cfe1f9d15b141969e421",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1717,7 +1767,7 @@
       "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/cultura-sport/attivita-culturali/",
       "id": "05b73ca21db618e37268",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1727,7 +1777,7 @@
       "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/cultura-sport/attivita-culturali/",
       "id": "d1d0aaab30b6ee30a10f",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1737,7 +1787,7 @@
       "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/cultura-sport/attivita-culturali/",
       "id": "7080985996c098d9f2f2",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1747,7 +1797,7 @@
       "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/cultura-sport/attivita-culturali/",
       "id": "2ecee3c5654bd1b4ccf5",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1757,7 +1807,7 @@
       "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/cultura-sport/attivita-culturali/",
       "id": "82eff9ac0d67ecfd11d9",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1767,7 +1817,7 @@
       "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/cultura-sport/attivita-culturali/",
       "id": "5829b627c58e3ea5ef3f",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1777,7 +1827,7 @@
       "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/cultura-sport/attivita-culturali/",
       "id": "431e0b20cb2449eaeac3",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1787,7 +1837,7 @@
       "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/cultura-sport/attivita-culturali/",
       "id": "b466dc1aec13f6df4654",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1797,7 +1847,7 @@
       "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/cultura-sport/attivita-culturali/",
       "id": "719a71beb5de26616fe7",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1807,7 +1857,7 @@
       "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/cultura-sport/attivita-culturali/",
       "id": "0998f763a3c99921338e",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1817,7 +1867,7 @@
       "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/cultura-sport/attivita-culturali/",
       "id": "faf264c00c023670eaee",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1827,7 +1877,7 @@
       "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/cultura-sport/attivita-culturali/",
       "id": "40091b3e50760c4a7eaa",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1837,7 +1887,7 @@
       "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/cultura-sport/attivita-culturali/",
       "id": "f4e633e3dde57205f395",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1847,7 +1897,7 @@
       "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/cultura-sport/attivita-culturali/",
       "id": "2e30de5bfdaec48cb6e1",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1877,7 +1927,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "5f923899072a00780514",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1887,7 +1937,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "5fbd505baa2b85a67ef0",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1897,7 +1947,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "068a6ed4ee0acf0a1172",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1907,7 +1957,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "4e09ba62c7dcf398538a",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1917,7 +1967,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "bffa0519cc852cd53ffe",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1927,7 +1977,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "abae935267f455887661",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1937,7 +1987,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "b9a8a5c32838fe363d5a",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1947,7 +1997,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "e29539c23759be5a1a19",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1957,7 +2007,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "f7058cbfde2174919e45",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1967,7 +2017,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "5683b5f658ae21ddf748",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1977,7 +2027,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "295de7881702aeab2b3f",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1987,7 +2037,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "9b2e3a51d6979c9466cf",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -1997,7 +2047,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "ffd5bba72f4c5afa5e22",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2007,7 +2057,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "a4322346e58e396e6bf5",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2017,7 +2067,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "930a367393464cef7017",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2027,7 +2077,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "064fe5d5cc0021868369",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2037,7 +2087,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "2f9191ea4c0a479a3a31",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2047,7 +2097,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "b8063a21e39ffc9e6556",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2057,7 +2107,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "45b69ce862ac6c589f97",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2067,7 +2117,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "b94936870a55376ae1a1",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2077,7 +2127,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "579eb09d3094b5877ab7",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2087,7 +2137,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "dbcaf09363475309b25a",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2097,7 +2147,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "c45a9e649c023664e4db",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2107,7 +2157,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "48bb6d3fccb41442f36a",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2117,7 +2167,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "392c477c618e7744452e",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2127,7 +2177,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "e112afe9be932d008a37",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2137,7 +2187,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "3b122da617891ac1268e",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2147,7 +2197,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "9ad7cbe82ec254872889",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2157,7 +2207,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "b6643d07c43249cd2819",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2167,7 +2217,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "3a4b0daf3d4950aef5b0",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2177,7 +2227,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "71892a82c1fd63e32370",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2187,7 +2237,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "ac16790db1039fb910c3",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2197,7 +2247,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "619464bb08433a5dd3d0",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2207,7 +2257,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "b12412472dc4335e98c7",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2217,7 +2267,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "83ed552fb27f60015eaf",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2227,7 +2277,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "3332eda8683abf8c7188",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2237,7 +2287,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "3da61269f4d615bbcfcd",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2247,7 +2297,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "c67909801edd99c0217f",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2257,7 +2307,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "cdb6225ac7e3092bd883",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2267,7 +2317,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "db33554bd51baebe30dc",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2277,7 +2327,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "e2a919d8d3adf1c2821f",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2287,7 +2337,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "1f0db4fa2359ecf354e9",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2297,7 +2347,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "38c7b003a3eba0092c0f",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2307,7 +2357,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "1304b59ed3907ee1d61f",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2317,7 +2367,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "e3b5929b6cc8783d88dc",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2327,7 +2377,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "a2c0722bfa7b8c93e143",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2337,7 +2387,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "316e0412cb3a2d843947",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2347,7 +2397,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "a3be0dd8cb728b0469f1",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2357,7 +2407,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "12fa5ef4dbf14f064419",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2367,7 +2417,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "cafe5a5a3ab4c4b20b2b",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2377,7 +2427,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "cbe4ed372aca3b18f909",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2387,7 +2437,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "da8842eb5a995e67f530",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2397,7 +2447,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "a3ffdc38bbce80fa974a",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2407,7 +2457,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "b374f031d71469adfe8f",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2417,7 +2467,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "dad44dc8db3ae1636026",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2427,7 +2477,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "83ca30bc9151ec52d01d",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2437,7 +2487,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "005dc52d50c3efc8baad",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2447,7 +2497,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "6004810816d0cebf6ea4",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2457,7 +2507,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "57d01dad91a6070d6853",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2467,7 +2517,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "7a3b1ee3f68f0fc76b4e",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2477,7 +2527,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "4cf188534187c9fc2f5d",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2487,7 +2537,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "1e44f0f154cd35230133",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2497,7 +2547,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "cbd1bb5e4a6ff66976b7",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2507,7 +2557,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "bcc420b0bcf411c6ee9a",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2517,7 +2567,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "ba9ccbb90ef522ecc111",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2527,7 +2577,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "e9df4812b194c8f4a2d8",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2537,7 +2587,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "f6fd5254b947229fcdd8",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2547,7 +2597,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "3498d068a2d82759fc61",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2557,7 +2607,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "e5be5ed869224cf648f7",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2567,7 +2617,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "e4e7bda86309ebeffac0",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2577,7 +2627,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "5866e238c915182799c5",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2587,7 +2637,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "e61d69f2a7cbfa5ab53f",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2597,7 +2647,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "864828dbd12db10c377f",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2607,7 +2657,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "f906887113e8f2012312",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2617,7 +2667,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "5e733be976168e840373",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2627,7 +2677,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "194043f93e4f012be06d",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2637,7 +2687,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "383b91397e2ab0bf1f72",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2647,7 +2697,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "2a2fd3def26f17eab3a7",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2657,7 +2707,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "cc0022690cd191a36ad5",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2667,7 +2717,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "3c584ff4e8528a49d60e",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2677,7 +2727,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "09a49a44a022d73b4ee5",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2687,7 +2737,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "4f3e957132f6ab745b62",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2697,7 +2747,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "da8edf9a15ac3021fa24",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2707,7 +2757,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "6eb2749e37c73996d157",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2717,7 +2767,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "1483bbb9f8c3931c7a60",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2727,7 +2777,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "376d539dea9078beef0d",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2737,7 +2787,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "450c8ff81ab1f92851fa",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2747,7 +2797,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "c2dcc1fef763b51308eb",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2757,7 +2807,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "ea92b840b06b222fd2d0",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2767,7 +2817,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "84086f192e217fee6f3d",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2777,7 +2827,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "d5cb6a2e68d81f1db61d",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2787,7 +2837,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "b021017b41e06118e99b",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2797,7 +2847,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "2e8a317ae872fc66f939",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2807,7 +2857,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "5ea9cb087065f3eab6f3",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2817,7 +2867,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "58652b8771ed8055ab7f",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2827,7 +2877,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "3b622006a0333db9230d",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2837,7 +2887,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "0c894311dce462a19389",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2847,7 +2897,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "42de18551db29147f466",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2857,7 +2907,7 @@
       "source_url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
       "id": "c32d1643b6f17dbdcb47",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2937,7 +2987,7 @@
       "source_url": "https://www.fondazioneconilsud.it",
       "id": "ce7c89f70383737e7cb4",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2947,7 +2997,7 @@
       "source_url": "https://www.fondazioneconilsud.it",
       "id": "615b9cbabc9f361edd07",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2957,7 +3007,7 @@
       "source_url": "https://www.fondazioneconilsud.it",
       "id": "7205e3fca7e42d334a3e",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2967,7 +3017,7 @@
       "source_url": "https://www.fondazioneconilsud.it",
       "id": "e039ac97960a82718bb0",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2977,7 +3027,7 @@
       "source_url": "https://www.fondazioneconilsud.it",
       "id": "b4b6a1a0ecc75351776a",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -2987,7 +3037,7 @@
       "source_url": "https://www.fondazioneconilsud.it",
       "id": "dc94134a77eb9d3aa48f",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3017,7 +3067,7 @@
       "source_url": "https://esmeefairbairn.org.uk/what-we-fund",
       "id": "0c62a981c50ac6790269",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3027,7 +3077,7 @@
       "source_url": "https://esmeefairbairn.org.uk/what-we-fund",
       "id": "bfd71e904b3b3ad008ff",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3047,7 +3097,7 @@
       "source_url": "https://gulbenkian.pt/uk-branch/",
       "id": "fdaf4646da2171c74790",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3057,7 +3107,7 @@
       "source_url": "https://gulbenkian.pt/uk-branch/",
       "id": "d8a0129d653de5a352c3",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3067,7 +3117,7 @@
       "source_url": "https://gulbenkian.pt/uk-branch/",
       "id": "cfb82ed178b793e49664",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3077,7 +3127,7 @@
       "source_url": "https://gulbenkian.pt/uk-branch/",
       "id": "ebeef9bc63c68724c501",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3167,7 +3217,7 @@
       "source_url": "https://phmuseum.com/grants",
       "id": "2649afde1d23d937d234",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3177,7 +3227,7 @@
       "source_url": "https://phmuseum.com/grants",
       "id": "8660c2ce8b925a83ea49",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3187,7 +3237,7 @@
       "source_url": "https://phmuseum.com/grants",
       "id": "47720a22a4853d376cee",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3197,7 +3247,7 @@
       "source_url": "https://phmuseum.com/grants",
       "id": "17b524bc026aa8963ec7",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3207,7 +3257,7 @@
       "source_url": "https://phmuseum.com/grants",
       "id": "266f77432730abfe4db2",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3217,7 +3267,7 @@
       "source_url": "https://phmuseum.com/grants",
       "id": "782f9cf5d184f3399e67",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3227,7 +3277,7 @@
       "source_url": "https://phmuseum.com/grants",
       "id": "1951ed1c302a1092614f",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3237,7 +3287,7 @@
       "source_url": "https://phmuseum.com/grants",
       "id": "e7ab479aaa54ac6d0374",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3247,7 +3297,7 @@
       "source_url": "https://phmuseum.com/grants",
       "id": "0592f438db903ec4ba8c",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3257,7 +3307,7 @@
       "source_url": "https://phmuseum.com/grants",
       "id": "ba13dcdd735422ccd44f",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3267,7 +3317,7 @@
       "source_url": "https://phmuseum.com/grants",
       "id": "2c44a27a36911edcda9b",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3277,7 +3327,7 @@
       "source_url": "https://phmuseum.com/grants",
       "id": "a1f6a9b4792a13498b79",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3287,7 +3337,7 @@
       "source_url": "https://phmuseum.com/grants",
       "id": "2cd77a1a455f68bdf153",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3297,7 +3347,7 @@
       "source_url": "https://phmuseum.com/grants",
       "id": "0678f58b990402bb49bd",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3307,7 +3357,7 @@
       "source_url": "https://phmuseum.com/grants",
       "id": "d31b767a1b077efcedf6",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3317,7 +3367,7 @@
       "source_url": "https://phmuseum.com/grants",
       "id": "75afe0ba840d6b939e30",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3327,7 +3377,7 @@
       "source_url": "https://phmuseum.com/grants",
       "id": "9510855bbed546372fd7",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3337,7 +3387,7 @@
       "source_url": "https://phmuseum.com/grants",
       "id": "23b2c72968e61836c0e0",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3347,7 +3397,7 @@
       "source_url": "https://phmuseum.com/grants",
       "id": "3fb0d6473c8e98f88907",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3357,7 +3407,7 @@
       "source_url": "https://phmuseum.com/grants",
       "id": "c82c0b04685b50714b8b",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3367,7 +3417,7 @@
       "source_url": "https://phmuseum.com/grants",
       "id": "7d0b1000af11fd9fa034",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3377,7 +3427,7 @@
       "source_url": "https://phmuseum.com/grants",
       "id": "6c0033d2bff1f9ebee5d",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3387,7 +3437,7 @@
       "source_url": "https://phmuseum.com/grants",
       "id": "19cc9d4a8048a39c025d",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3397,7 +3447,7 @@
       "source_url": "https://phmuseum.com/grants",
       "id": "96f86c86bc1372b62e60",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3407,7 +3457,7 @@
       "source_url": "https://phmuseum.com/grants",
       "id": "4dc4f2dd3bf9e0e47a25",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3417,7 +3467,7 @@
       "source_url": "https://phmuseum.com/grants",
       "id": "bb954552fb48f2f55567",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3427,7 +3477,7 @@
       "source_url": "https://phmuseum.com/grants",
       "id": "4c347903852072c27529",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3437,7 +3487,7 @@
       "source_url": "https://phmuseum.com/grants",
       "id": "e7e716c30d4f5d579370",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3447,7 +3497,7 @@
       "source_url": "https://phmuseum.com/grants",
       "id": "c4076ad362bf1ab1c393",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3457,7 +3507,7 @@
       "source_url": "https://phmuseum.com/grants",
       "id": "a8abe81a7be02cec5274",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3467,7 +3517,7 @@
       "source_url": "https://phmuseum.com/grants",
       "id": "12b914cff12e69d30284",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3477,7 +3527,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "67b7031afb8c7de7a2ed",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3507,17 +3557,17 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "9025eac7afc47df70f87",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
-      "title": "Juror's Award for Best of Show",
+      "title": "Up to 8 Awards of Excellence",
       "url": "https://opencalls.monographica.com/prize/",
       "source": "Monographica Open Calls",
       "source_url": "https://opencalls.monographica.com",
       "id": "d51b6bc9113e0693c9b0",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3567,7 +3617,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "4a68835769a2b00df783",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3577,7 +3627,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "792959ea20ff3b782b63",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3587,7 +3637,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "b6490b0fe093aa99469f",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3597,7 +3647,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "9160d67ce7dcd6d8f3ad",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3607,7 +3657,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "be316905e1b445347af7",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3617,7 +3667,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "8923a309d22e325469ad",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3627,7 +3677,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "9ddfb31389a08001e9fe",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3637,7 +3687,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "6ae1255511e420a89054",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3647,7 +3697,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "d934f62ebae2a5715d19",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3657,7 +3707,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "3aeca7331da430b139f0",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3667,7 +3717,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "6c461c11bc6463adca35",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3677,7 +3727,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "a6976e6b4d6685f50dca",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3687,7 +3737,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "5665a488cf03334316b3",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3697,7 +3747,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "4c161aac86e1670d4a9b",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3707,7 +3757,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "36f9d82e189077aad2d3",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3717,7 +3767,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "e23b3c9b1325a503d1d7",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3727,7 +3777,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "7579dc31c83d63f40c38",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3737,7 +3787,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "e0c0a2fa892ce6c09fd5",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3747,7 +3797,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "5ea369c06ea64a102f70",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3757,7 +3807,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "9a073a6a8e2de6a7d327",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3767,7 +3817,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "a1138da82348aac7a737",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3777,7 +3827,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "eae80b3e069146963027",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3787,7 +3837,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "f1eec8bca2fb8bf83cef",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3797,7 +3847,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "ff12b3e3d3a4e75252ed",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3807,7 +3857,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "ea0a1792ae21b0cdca71",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3817,7 +3867,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "3c61aee1ff342dddb71c",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3827,7 +3877,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "4e3e3d945be2456baf8a",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3837,7 +3887,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "8d4014920d2fa419266c",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3847,7 +3897,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "2455c9ac9dd66e8cfbd1",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3857,7 +3907,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "4f0b4a5c4aafc04fb2b9",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3867,7 +3917,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "a1d5234909eb8f043a6f",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3877,7 +3927,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "c0a2c7e3da898035927c",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3887,7 +3937,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "8f34c868235fac6d7eef",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3897,7 +3947,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "1d673e6579501bf4d6a7",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3907,7 +3957,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "49b625a36b5fb0703e8b",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3917,7 +3967,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "6607097206a39b164b0d",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3927,7 +3977,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "930e17a64d26b95a9b81",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     },
     {
@@ -3938,7 +3988,7 @@
       "id": "72185f1c16b52f0a6426",
       "first_seen": "2026-10-04T17:37:00+00:00",
       "last_seen": "2026-10-06T14:17:19+00:00",
-      "present": true
+      "present": false
     },
     {
       "title": "Chromatic Photography Awards 2026",
@@ -4477,7 +4527,7 @@
       "source_url": "https://contemporarylynx.co.uk",
       "id": "9e2019f7d01a35978a18",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-06T14:17:19+00:00",
+      "last_seen": "2026-10-07T14:36:27+00:00",
       "present": true
     }
   ]

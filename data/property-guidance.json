@@ -1,0 +1,35 @@
+{
+  "last_reviewed": "2026-10-19",
+  "italy": {
+    "last_reviewed": "2026-10-19",
+    "summary": "Buy directly where no agent commission is owed; compare itemised notary quotes, check prima casa and prezzo-valore eligibility, and use a technician for planning and cadastral conformity.",
+    "savings": "Ask about the statutory notarial-fee reduction for eligible prezzo-valore transactions. A separate preliminary contract may be unnecessary for an immediate purchase, but do not waive protections where checks or financing are outstanding.",
+    "warning": "Tax relief and prezzo-valore do not necessarily apply to ruins, F/2 buildings or agricultural land. Obtain case-specific advice before committing.",
+    "resources": [
+      {
+        "title": "Agenzia delle Entrate - buying a home",
+        "url": "https://www.agenziaentrate.gov.it/portale/documents/d/guest/guida_acquisto_casa_le_imposte_e_le_agevolazioni"
+      },
+      {
+        "title": "Independent Italian notary fee estimate",
+        "url": "https://tools.realestate/s/global/general/italy-notary-fees"
+      }
+    ]
+  },
+  "slovenia": {
+    "last_reviewed": "2026-10-19",
+    "summary": "A direct seller purchase can avoid agent commission. For straightforward sales, compare quotes for contract review, signature certification and registration rather than assuming a full notarial deed is required.",
+    "savings": "Check who contractually bears real-estate transfer tax, usually the seller for applicable transfers. Compare itemised professional quotes and avoid duplicate legal services.",
+    "warning": "Agricultural land and forests may involve administrative approval and statutory pre-emption rights. New builds or VAT transactions have different tax treatment.",
+    "resources": [
+      {
+        "title": "FURS - property transfer tax",
+        "url": "https://www.fu.gov.si/davki_in_druge_dajatve/podrocja/davek_na_promet_nepremicnin"
+      },
+      {
+        "title": "European e-Justice - Slovenian land register",
+        "url": "https://e-justice.europa.eu/topics/registers-business-insolvency-land/land-registers-eu-countries/si_sl"
+      }
+    ]
+  }
+}

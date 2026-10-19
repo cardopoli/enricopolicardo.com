@@ -1,0 +1,207 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Property toolkit / Enrico Policardo</title><style>
+*{box-sizing:border-box}body{margin:0;background:#faf9f6;color:#23221f;font:16px/1.5 Georgia,serif}main{max-width:1080px;margin:auto;padding:40px 28px}
+h1{font-size:38px;font-weight:400;margin:24px 0 4px}h2{font-size:23px;font-weight:400;margin:34px 0 14px}h3{font-size:18px;font-weight:400;margin:0}
+p{max-width:760px}.muted,small{color:#67645c}a{color:inherit;text-underline-offset:3px}
+button,input,select,textarea{font:14px/1.5 system-ui;color:inherit}button{padding:8px 14px;border:1px solid #bab6aa;background:transparent;cursor:pointer}button:hover,button[aria-selected=true]{background:#23221f;color:#fff}
+input,select,textarea{padding:8px;border:1px solid #c9c5bb;background:#fff;border-radius:0}textarea{width:100%;min-height:140px}
+label{font:12px/1.5 system-ui;display:flex;flex-direction:column;gap:4px}
+.bar{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;border-top:1px solid #bdb8ad;border-bottom:1px solid #bdb8ad;padding:16px 0;margin:26px 0}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 10px}
+.notice{padding:12px 16px;border-left:3px solid #9a713c;background:#eee9df;font:13px/1.6 system-ui;margin:16px 0;max-width:760px}
+.phase{border-top:1px solid #bdb8ad;padding:18px 0 6px}.phase>header{display:flex;justify-content:space-between;gap:12px;align-items:baseline}.phase>header small{font:12px system-ui}
+.step{display:grid;grid-template-columns:28px 1fr;gap:4px 10px;padding:12px 0;border-bottom:1px solid #dedacf}.step input{margin:5px 0 0;width:18px;height:18px}
+.step strong{font-weight:400}.step.done strong{text-decoration:line-through;color:#67645c}.step p{grid-column:2;margin:2px 0 0;font:14px/1.6 system-ui;color:#3d3b36}
+.tags{grid-column:2;font:11px system-ui;color:#67645c;display:flex;gap:10px;flex-wrap:wrap;margin-top:4px}.tags a{color:#67645c}
+.who{font:11px system-ui;letter-spacing:.5px;text-transform:uppercase;color:#9a713c;margin-left:6px}
+table{width:100%;border-collapse:collapse;font:14px/1.5 system-ui;max-width:900px}th,td{text-align:left;padding:10px 6px;border-bottom:1px solid #dedacf;vertical-align:top}th{font-weight:600}
+.tools{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 36px}.tool{padding:12px 0;border-bottom:1px solid #dedacf}.tool a{font-size:17px}.tool p{margin:2px 0 0;font:13px/1.6 system-ui;color:#3d3b36}
+dl{max-width:820px}dt{margin-top:14px}dd{margin:2px 0 0;font:14px/1.6 system-ui;color:#3d3b36}
+#status{font:13px system-ui;min-height:20px}footer{margin-top:45px;border-top:1px solid #ccc;padding-top:18px;font-size:12px}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,a:focus-visible{outline:2px solid #816239;outline-offset:3px}[hidden]{display:none!important}
+@media(max-width:760px){main{padding:22px 18px}h1{font-size:30px}.tools{grid-template-columns:1fr}.bar>*{flex:1 1 100%}}
+@media print{.bar,.tabs,#status,footer button{display:none!important}body{background:#fff}}
+</style></head><body><main>
+<a href="../">Directory</a>
+<h1>Property toolkit</h1>
+<p class="muted">Buying anything from a ruin to a flat: where to look, what to check, and every step to a safe purchase, notary stage included. One checklist per property, saved in this browser.</p>
+<div class="notice">A working checklist, not legal or tax advice. Figures and rules were checked against the sources linked on each step (October 2026); laws change, so confirm with your notary and a local technician before you sign anything.</div>
+
+<div class="bar">
+<label>Property<select id="prop"></select></label>
+<button id="newProp">New property</button><button id="renameProp">Rename</button><button id="deleteProp">Delete</button>
+<label>Country<select id="country"></select></label>
+<label>Type<select id="type"><option value="flat">Flat in a condominium</option><option value="house">House</option><option value="ruin">Ruin or rural building</option><option value="land">Land</option></select></label>
+</div>
+
+<div class="tabs" role="tablist">
+<button role="tab" data-tab="steps" aria-selected="true">Steps</button><button role="tab" data-tab="costs">Costs and taxes</button><button role="tab" data-tab="tools">Search and check tools</button><button role="tab" data-tab="words">Glossary</button><button role="tab" data-tab="notes">Notes</button>
+</div>
+<p id="status" aria-live="polite"></p>
+
+<section id="tab-steps"></section>
+<section id="tab-costs" hidden></section>
+<section id="tab-tools" hidden></section>
+<section id="tab-words" hidden></section>
+<section id="tab-notes" hidden><h2>Notes for this property</h2><textarea id="notes" placeholder="Address, cadastral references (foglio, particella, subalterno), contacts, prices, doubts..."></textarea></section>
+
+<footer><button id="export">Export checklist as text</button> <button onclick="print()">Print</button>
+<p class="muted">To add a country, copy one block in <code>COUNTRIES</code> inside this file (steps, costs, tools, glossary) and fill it in from verified sources. Step types: flat, house, ruin, land, or all.</p></footer>
+</main>
+<script>
+const S={
+ ae:['Agenzia Entrate: guida acquisto casa','https://www.agenziaentrate.gov.it/portale/documents/d/guest/guida_acquisto_casa_le_imposte_e_le_agevolazioni'],
+ ae1c:['Agenzia Entrate: prima casa','https://www.agenziaentrate.gov.it/portale/schede/agevolazioni/scheda-acquisto-prima-casa/infogen-agevolazioni-acquisto-prima-casa'],
+ tax:['Catasto in rete: tax table (Oct 2025)','https://blog.catastoinrete.it/quali-sono-le-imposte-da-pagare-per-acquistare-casa/'],
+ comp:['Notaio Online: compravendita guide (Sept 2026)','https://notaionline.it/guida/compravendita-guida-completa/'],
+ dep:['Notaio Online: deposito prezzo','https://notaionline.it/guida/deposito-prezzo-notaio/'],
+ prel:['EC News: preliminare tax','https://www.ecnews.it/fiscale/fisco-e-patrimonio/imposte-indirette/contratto-preliminare-imposta-di-registro-e-rapporto-con-il-definitivo/'],
+ cat:['Filodiritto: conformità catastale','https://www.filodiritto.com/le-nuove-regole-dettate-materia-di-conformita-dei-dati-catastali'],
+ cdu:['Comune di Udine: guida CDU 2025','https://www.comune.udine.it/content/download/11551/153429/file/guida_CDU_2025.pdf'],
+ ape:['Edilizia.com: when APE is not needed','https://www.edilizia.com/certificazioni/certificazione-energetica/certificazione-energetica-quando-non-serve-allegare-lape/'],
+ pa:['EC News: prelazione agraria','https://www.ecnews.it/fiscale/?p=121904'],
+ ris:['Studio Cataldi: riscatto agrario','https://www.studiocataldi.it/articoli/40863-prelazione-agraria-e-azione-di-riscatto.asp'],
+ condo:['Brocardi: art. 63 disp. att. c.c.','https://brocardi.it/disposizioni-per-attuazione-del-codice-civile/capo-i/sezione-iii/art63.html'],
+ rea:['Fiscozen: agents and REA','https://www.fiscozen.it/guide/albo-mediatori-immobiliari/'],
+ vis:['Informazione Fiscale: visura catastale','https://www.informazionefiscale.it/visura-catastale-online-gratis-come-quando-chi'],
+ agr:['EC News: registro on farmland (2020)','https://www.ecnews.it/fiscale/fisco-e-patrimonio/imposte-indirette/registro-al-9-per-i-coltivatori-diretti-e-gli-iap-che-rinunciano-alla-ppc-in-atto/'],
+ idro:['ISPRA IdroGEO','https://idrogeo.isprambiente.it/app/'],
+ fu:['FURS: davek na promet nepremičnin','https://www.fu.gov.si/davki_in_druge_dajatve/podrocja/davek_na_promet_nepremicnin'],
+ sidata:['DATA: nakup nepremičnine (2021)','https://data.si/blog/nakup-nepremicnine/'],
+ zk:['e-Justice: Slovenian land register','https://e-justice.europa.eu/topics/registers-business-insolvency-land/land-registers-eu-countries/si_sl'],
+ sipre:['GOV.SI: predkupna pravica','https://www.gov.si/zbirke/storitve/uveljavljanje-predkupne-pravice/'],
+ siue:['GOV.SI: notice to farmland sellers (2026)','https://www.gov.si/novice/2026-03-26-obvestilo-prodajalcem-kmetijskih-zemljisc/']
+};
+const COUNTRIES={
+it:{name:'Italy',
+phases:[
+{title:'1. Before you look',steps:[
+{id:'cf',t:'Get a codice fiscale',d:'Needed for the offer, the bank and the deed. Non-residents can request it from an Italian consulate or Agenzia Entrate office.',for:['all'],who:'You'},
+{id:'budget',t:'Set a budget that includes taxes and fees',d:'Price plus purchase taxes, notary, agent (if any), technician and a margin for surprises. Use the Costs tab.',for:['all'],who:'You'},
+{id:'primacasa',t:'Check whether you qualify for prima casa relief',d:'It cuts the registro tax from 9% to 2% on a private sale. Conditions on residence and other properties apply, so read the Agenzia Entrate page and confirm with the notary.',for:['flat','house'],who:'You',src:['ae1c']},
+{id:'mutuo',t:'If borrowing, get a mortgage pre-approval',d:'The bank will order its own valuation (perizia), which can delay the deed. Make the preliminare conditional on the loan.',for:['all'],who:'Bank'}]},
+{title:'2. Search and shortlist',steps:[
+{id:'portals',t:'Search the portals and public auctions',d:'Search terms and links are in the Tools tab. Auctions follow their own rules: read the court\'s perizia and ordinance in full.',for:['all'],who:'You'},
+{id:'omi',t:'Compare the asking price with OMI values',d:'The Agenzia Entrate property market observatory gives price ranges by zone and building type.',for:['flat','house'],who:'You'},
+{id:'site',t:'Run the site filters',d:'Flood and landslide hazard (IdroGEO), seismic zone, winter sun (PVGIS), road access in snow, noise from roads and railways, mobile and broadband signal, distance to a station.',for:['house','ruin','land'],who:'You',src:['idro']},
+{id:'agent',t:'If there is an agent, check they are registered',d:'Estate agents must file a SCIA and be listed in the REA section kept by the Camera di Commercio. Ask for their REA number.',for:['all'],who:'You',src:['rea']}]},
+{title:'3. Desk checks before any offer',steps:[
+{id:'visura',t:'Pull the visura catastale',d:'Shows owners, category and cadastral data. A non-owner can get it online for a small fee (1.35 euro per property via the Visura Catastale Telematica service) or at a provincial Territorio office.',for:['all'],who:'You',src:['vis']},
+{id:'f2',t:'Check how a ruin is registered',d:'Category F/2 (unità collabente) or a building missing from the urban cadastre changes what you can do and what documents the deed needs. Ask your technician before relying on the listing.',for:['ruin'],who:'Technician'},
+{id:'zoning',t:'Check zoning and constraints at the Comune',d:'Zoning plan (PRG/PRGC or PSC), landscape and park constraints, hydrogeological constraints, usi civici. These decide whether a ruin can be rebuilt and with what volume.',for:['house','ruin','land'],who:'Technician'},
+{id:'prel',t:'Check agricultural pre-emption (prelazione agraria)',d:'Qualifying farming tenants, then neighbouring coltivatori diretti or IAP, can step in on farmland sales. They get the preliminare by registered letter and have 30 days to use the right. If skipped, they can claim the land back (riscatto) within a year of the sale being registered. Land zoned for non-agricultural use is excluded.',for:['ruin','land'],who:'Notary',src:['pa','ris']},
+{id:'condo',t:'Ask the condominium administrator for the figures',d:'Arrears, approved extraordinary works and the regolamento. The buyer is jointly liable for the current and previous year\'s contributions, so get a written statement and settle who pays what in the preliminare.',for:['flat'],who:'Administrator',src:['condo']}]},
+{title:'4. Technical survey',steps:[
+{id:'tecnico',t:'Hire your own geometra or architect',d:'The notary does not inspect the building or look for undeclared works. Your technician does.',for:['all'],who:'Technician',src:['comp']},
+{id:'atti',t:'Accesso agli atti at the Comune',d:'Your technician requests the building permits on file and compares them with the actual state.',for:['flat','house','ruin'],who:'Technician'},
+{id:'conform',t:'Confirm urban planning and cadastral conformity',d:'Any mismatch must be fixed before the deed (sanatoria, updated planimetria), at the seller\'s cost if agreed. Both declarations are required in the deed on pain of nullity.',for:['flat','house','ruin'],who:'Technician',src:['comp','cat']},
+{id:'struct',t:'Structure, services and access',d:'Structural and seismic condition, damp, roof, drainage, utility connections, access rights (servitù) and boundaries on the ground versus the cadastral map.',for:['house','ruin','land'],who:'Technician'}]},
+{title:'5. Offer',steps:[
+{id:'offer',t:'Make a written proposta d\'acquisto',d:'State price, deadline for acceptance, deed date and conditions (loan, conformity, clear title). An irrevocable offer binds you for its term; once accepted, the contract is formed. Keep any deposit small and paid traceably.',for:['all'],who:'You',src:['comp']}]},
+{title:'6. Preliminare (compromesso)',steps:[
+{id:'prelim',t:'Sign a written preliminare',d:'Price, payment schedule, deed date, conditions and what happens if either side backs out. It obliges both sides to sign the deed but does not transfer ownership. Have the notary or a lawyer read it first.',for:['all'],who:'Notary',src:['comp']},
+{id:'caparra',t:'Choose caparra confirmatoria or acconto knowingly',d:'With a caparra, if the seller defaults you can claim back double; if you default you lose it. An acconto is simply part payment. Pay by traceable means only.',for:['all'],who:'You'},
+{id:'reg',t:'Register the preliminare within 30 days',d:'At the Agenzia Entrate: fixed registro of 200 euro plus 0.5% on caparra and acconti (not subject to VAT). That 0.5% is credited against the tax on the final deed.',for:['all'],who:'You or notary',src:['comp','prel']},
+{id:'trascr',t:'Consider registering (trascrizione) the preliminare',d:'Done through a notary. It protects you against mortgages, seizures or sales registered against the seller before the deed. Worth it with long gaps or large deposits.',for:['all'],who:'Notary',src:['comp']}]},
+{title:'7. Notary stage',steps:[
+{id:'choose',t:'Choose the notary',d:'By custom the buyer chooses and pays. Ask for a written quote covering fees and the taxes they will collect.',for:['all'],who:'You'},
+{id:'docsbuy',t:'Send your documents',d:'ID, codice fiscale, marital status and property regime, prima casa declarations if claimed, loan documents.',for:['all'],who:'You',src:['comp']},
+{id:'docssell',t:'Make sure the seller sends theirs',d:'Title of provenance (or succession and acceptance of inheritance), planimetria, APE, building permits, mortgage payoff figures.',for:['all'],who:'Seller',src:['comp']},
+{id:'title',t:'Notary checks title and encumbrances',d:'Twenty-year chain of title, mortgages, seizures, and that cadastral owners match the property registers. Ask to see the results.',for:['all'],who:'Notary',src:['comp','cat']},
+{id:'cdu',t:'Certificato di destinazione urbanistica for land',d:'Required for undeveloped land, and for built property whose grounds exceed 5,000 m². Without it the deed can be void. Request it from the Comune in good time.',for:['ruin','land'],who:'Seller or notary',src:['cdu']},
+{id:'ape',t:'APE (energy certificate)',d:'Must be attached. If missing the deed stays valid but a fine of 3,000 to 18,000 euro applies. A ruin is exempt only if its state is expressly declared in the deed; category F/2 alone is not enough.',for:['all'],who:'Seller',src:['comp','ape']},
+{id:'pv',t:'Ask for prezzo-valore',d:'For homes bought from private sellers, an individual buyer can ask for registro to be calculated on the cadastral value rather than the price, while the deed states the real price. Ask the notary whether it applies.',for:['flat','house'],who:'Notary',src:['ae']},
+{id:'deposit',t:'Ask for the price to be deposited with the notary',d:'On request of either party, the balance goes to the notary\'s dedicated account and is released to the seller only after the deed is registered and no new encumbrance has appeared. Ask for it in the preliminare.',for:['all'],who:'Notary',src:['dep']},
+{id:'draft',t:'Read the draft deed before the day',d:'Check names, cadastral references, price, payment details, declarations on conformity and APE, and the agent\'s details and fee, which must be stated.',for:['all'],who:'You'}]},
+{title:'8. Rogito day',steps:[
+{id:'sign',t:'Sign the deed',d:'The notary reads it aloud. You pay the balance traceably (or into the notary\'s account), plus taxes and fees, which the notary pays over. Keys and meter readings on the day.',for:['all'],who:'Notary',src:['comp']}]},
+{title:'9. After the deed',steps:[
+{id:'reg2',t:'Notary registers and transcribes the deed',d:'Registration, trascrizione in the property registers and cadastral voltura. Ask for your certified copy.',for:['all'],who:'Notary',src:['comp']},
+{id:'util',t:'Utilities, waste tax and residence',d:'Transfer electricity, gas and water contracts, register for TARI at the Comune, and move residence within the prima casa deadline if you claimed it.',for:['all'],who:'You'},
+{id:'imu',t:'Diary IMU if this is not your main home',d:'Local property tax paid in two instalments. Check the Comune\'s rates.',for:['all'],who:'You'},
+{id:'condo2',t:'Tell the condominium administrator',d:'Send a copy of the deed so charges go to you from the right date.',for:['flat'],who:'You'}]}
+],
+costs:{head:['Purchase','Registro','Ipotecaria','Catastale'],rows:[
+['From a private seller, prima casa','2% (minimum 1,000 euro)','50 euro','50 euro'],
+['From a private seller, other homes','9% (minimum 1,000 euro)','50 euro','50 euro'],
+['From a builder with VAT, prima casa','VAT 4% + registro 200 euro','200 euro','200 euro'],
+['From a builder with VAT, other homes','VAT 10% (22% for A/1, A/8, A/9) + registro 200 euro','200 euro','200 euro'],
+['Agricultural land, ordinary buyer','15% (2020 source: confirm)','see notary','see notary'],
+['Preliminare','200 euro + 0.5% on caparra and acconti','-','-']],
+note:'Tax figures from Catasto in Rete (October 2025) and the Agenzia Entrate guide (October 2025 edition); preliminare figures from Notaio Online (September 2026). Add notary fees, agent commission (negotiable, state it in writing), technician and, if borrowing, bank costs. Confirm current rates with the notary.',src:['tax','ae','comp','agr']},
+tools:[
+{g:'Listings',items:[
+['Immobiliare.it','https://www.immobiliare.it','Largest portal. Filter by map, save searches.'],
+['Idealista','https://www.idealista.it','Good map search and alerts.'],
+['Casa.it','https://www.casa.it','Another large portal; some listings only appear here.'],
+['Portale Vendite Pubbliche','https://pvp.giustizia.it/pvp/','Official register of court auctions. Read the perizia.']]},
+{g:'Search words',items:[
+['Ruins and rural','','rudere, rustico, casale, fienile, stavolo (Friuli), baita, cascina, da ristrutturare, collabente'],
+['Land','','terreno agricolo, bosco, prato, terreno edificabile, fondo rustico'],
+['Flats','','appartamento, bilocale, trilocale, spese condominiali, classe energetica']]},
+{g:'Checks',items:[
+['Agenzia Entrate: visure and OMI','https://www.agenziaentrate.gov.it','Visura catastale, ispezioni ipotecarie, OMI market values.'],
+['IdroGEO (ISPRA)','https://idrogeo.isprambiente.it/app/','Landslide and flood hazard by address.'],
+['PVGIS','https://re.jrc.ec.europa.eu/pvg_tools/en/','Solar irradiance and horizon shading.'],
+['Geoportale Nazionale','https://gn.mase.gov.it','National maps, protected areas.'],
+['Eagle FVG','https://eaglefvg.regione.fvg.it','Friuli Venezia Giulia regional maps and orthophotos.'],
+['Trenitalia','https://www.trenitalia.com','Check station services before you fall for a place.']]}],
+words:[
+['Rogito','The notarial deed that transfers ownership.'],['Preliminare / compromesso','Binding promise to buy and sell. No transfer yet.'],['Caparra confirmatoria','Deposit with penalty effect: double back or forfeit.'],['Visura catastale','Cadastral record: owners, category, data.'],['Ispezione ipotecaria','Search of the property registers for mortgages and seizures.'],['Planimetria','Floor plan filed at the cadastre.'],['APE','Energy performance certificate.'],['CDU','Certificato di destinazione urbanistica: zoning certificate for land.'],['F/2','Cadastral category for collapsed or unusable buildings.'],['Prelazione agraria','Farmers\' right of first refusal on farmland.'],['Geometra','Surveyor and building technician: your eyes on the building and the Comune\'s files.'],['Voltura','Cadastral change of owner after the deed.']]
+},
+si:{name:'Slovenia',
+phases:[
+{title:'1. Search and identify',steps:[
+{id:'s-ids',t:'Identify the property in eProstor',d:'Find the cadastral municipality, parcel or building number and GURS value from the address.',for:['all'],who:'You',src:['sidata']},
+{id:'s-zk',t:'Check the land register (zemljiška knjiga)',d:'Free online through e-Sodstvo after registering. Confirms the owner and shows mortgages and easements.',for:['all'],who:'You',src:['zk','sidata']},
+{id:'s-env',t:'Check hazards and zoning',d:'Atlas okolja for flood and protected areas; the municipality for zoning (lokacijska informacija). Verify locally.',for:['house','ruin','land'],who:'You'}]},
+{title:'2. Farmland and forest',steps:[
+{id:'s-offer',t:'Expect the pre-emption procedure',d:'The seller posts the offer on the administrative unit (upravna enota) notice board; once posted it binds the seller. Stronger pre-emption holders must be offered the same terms, and the sale needs the unit\'s approval.',for:['ruin','land'],who:'Seller',src:['siue']},
+{id:'s-prot',t:'Protected areas: state or park pre-emption',d:'In protected areas the ministry, Triglav National Park or the local community may hold pre-emption, with 30 days to accept a complete offer.',for:['ruin','land'],who:'Seller',src:['sipre']}]},
+{title:'3. Contract and transfer',steps:[
+{id:'s-contract',t:'Have a lawyer draft or review the contract',d:'Parties, property IDs, price and payment, encumbrances, and the seller\'s zemljiškoknjižno dovolilo so you can register. Ask about escrow with a notary or lawyer.',for:['all'],who:'Lawyer',src:['sidata']},
+{id:'s-energy',t:'Energy certificate',d:'The seller provides it before signing.',for:['flat','house'],who:'Seller',src:['sidata']},
+{id:'s-tax',t:'Transfer tax',d:'2% of the transfer value. Usually paid by the seller; VAT applies instead on new builds.',for:['all'],who:'Seller',src:['fu','sidata']},
+{id:'s-notary',t:'Notarise the seller\'s signature',d:'Needed for registration. Seller usually pays notarisation, buyer pays registration.',for:['all'],who:'Notary',src:['sidata']},
+{id:'s-reg',t:'Register ownership in the land register',d:'Through a notary, at court or electronically. You own the property only once the entry is made.',for:['all'],who:'Notary',src:['sidata']}]}],
+costs:{head:['Item','Rate','Who usually pays',''],rows:[['Transfer tax (davek na promet nepremičnin)','2%','Seller',''],['New build','VAT instead of transfer tax','-',''],['Notarisation and registration','Fees vary','Seller / buyer','']],note:'Slovenia section is lighter and partly based on a 2021 guide: confirm with a Slovenian lawyer or notary.',src:['fu','sidata']},
+tools:[
+{g:'Listings',items:[['Nepremičnine.net','https://www.nepremicnine.net','Main listings portal.']]},
+{g:'Search words',items:[['Property types','','hiša, stanovanje, kmetija, razvalina, vikend, kmetijsko zemljišče, gozd, gradbena parcela']]},
+{g:'Checks',items:[
+['eProstor (GURS)','https://eprostor.gov.si','Cadastre, parcel and building IDs, values.'],
+['e-Sodstvo land register','https://evlozisce.sodisce.si/esodstvo/index.html','Free online extracts after registration.'],
+['Atlas okolja (ARSO)','https://gis.arso.gov.si/atlasokolja/','Environmental, flood and protected-area maps.'],
+['PVGIS','https://re.jrc.ec.europa.eu/pvg_tools/en/','Solar irradiance and horizon shading.']]}],
+words:[['Zemljiška knjiga','Land register: owners and rights.'],['Kataster','Cadastre: the physical data.'],['Zemljiškoknjižno dovolilo','Seller\'s consent to register the buyer.'],['Upravna enota','Administrative unit; approves farmland sales.'],['Predkupna pravica','Pre-emption right.']]}
+};
+const KEY='property-toolkit-v1',$=id=>document.getElementById(id);
+let store={current:null,props:{}};
+try{store=JSON.parse(localStorage.getItem(KEY))||store}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(store));$('status').textContent=''}catch(e){$('status').textContent='Browser storage unavailable: export to keep your progress.'}}
+function uid(){return 'p'+Date.now().toString(36)}
+function cur(){return store.props[store.current]}
+function ensure(){if(!store.current||!cur()){const id=uid();store.props[id]={name:'My first property',country:'it',type:'ruin',done:{},notes:''};store.current=id;save()}}
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+function srcLinks(a){return (a||[]).map(k=>S[k]?`<a href="${S[k][1]}" target="_blank" rel="noopener">${esc(S[k][0])}</a>`:'').join('')}
+function visible(st,type){return st.for.includes('all')||st.for.includes(type)}
+function renderSteps(){const p=cur(),c=COUNTRIES[p.country];let total=0,done=0,html='';
+ for(const ph of c.phases){const steps=ph.steps.filter(s=>visible(s,p.type));if(!steps.length)continue;const d=steps.filter(s=>p.done[s.id]).length;total+=steps.length;done+=d;
+  html+=`<div class="phase"><header><h2 style="margin:0">${esc(ph.title)}</h2><small>${d} of ${steps.length}</small></header>`+steps.map(s=>`<div class="step${p.done[s.id]?' done':''}"><input type="checkbox" id="c-${s.id}" data-id="${s.id}" ${p.done[s.id]?'checked':''}><label for="c-${s.id}" style="font:inherit;display:block"><strong>${esc(s.t)}</strong><span class="who">${esc(s.who||'')}</span></label><p>${esc(s.d)}</p>${s.src?`<div class="tags">${srcLinks(s.src)}</div>`:''}</div>`).join('')+'</div>'}
+ $('tab-steps').innerHTML=`<p class="muted">${done} of ${total} steps done for ${esc(p.name)}.</p>`+html;
+ $('tab-steps').querySelectorAll('input[type=checkbox]').forEach(b=>b.onchange=()=>{p.done[b.dataset.id]=b.checked;save();renderSteps()})}
+function renderCosts(){const c=COUNTRIES[cur().country].costs;$('tab-costs').innerHTML=`<h2>Costs and taxes</h2><table><thead><tr>${c.head.map(h=>`<th>${esc(h)}</th>`).join('')}</tr></thead><tbody>${c.rows.map(r=>`<tr>${r.map(x=>`<td>${esc(x)}</td>`).join('')}</tr>`).join('')}</tbody></table><p class="muted" style="font:13px/1.6 system-ui">${esc(c.note)}</p><div class="tags" style="margin-left:0">${srcLinks(c.src)}</div>`}
+function renderTools(){const c=COUNTRIES[cur().country];$('tab-tools').innerHTML=c.tools.map(g=>`<h2>${esc(g.g)}</h2><div class="tools">${g.items.map(([n,u,d])=>`<div class="tool">${u?`<a href="${u}" target="_blank" rel="noopener">${esc(n)}</a>`:`<strong style="font-weight:400;font-size:17px">${esc(n)}</strong>`}<p>${esc(d)}</p></div>`).join('')}</div>`).join('')}
+function renderWords(){$('tab-words').innerHTML='<h2>Glossary</h2><dl>'+COUNTRIES[cur().country].words.map(([t,d])=>`<dt>${esc(t)}</dt><dd>${esc(d)}</dd>`).join('')+'</dl>'}
+function renderBar(){$('prop').innerHTML=Object.entries(store.props).map(([id,p])=>`<option value="${id}" ${id===store.current?'selected':''}>${esc(p.name)}</option>`).join('');$('country').innerHTML=Object.entries(COUNTRIES).map(([k,c])=>`<option value="${k}" ${k===cur().country?'selected':''}>${c.name}</option>`).join('');$('type').value=cur().type;$('notes').value=cur().notes||''}
+function render(){ensure();renderBar();renderSteps();renderCosts();renderTools();renderWords()}
+$('prop').onchange=e=>{store.current=e.target.value;save();render()};
+$('country').onchange=e=>{cur().country=e.target.value;save();render()};
+$('type').onchange=e=>{cur().type=e.target.value;save();render()};
+$('notes').oninput=e=>{cur().notes=e.target.value;save()};
+$('newProp').onclick=()=>{const n=prompt('Name this property (for example: Pioverno stone house)');if(!n)return;const id=uid();store.props[id]={name:n,country:cur().country,type:cur().type,done:{},notes:''};store.current=id;save();render()};
+$('renameProp').onclick=()=>{const n=prompt('New name',cur().name);if(n){cur().name=n;save();render()}};
+$('deleteProp').onclick=()=>{if(!confirm('Delete "'+cur().name+'" and its checklist?'))return;delete store.props[store.current];store.current=Object.keys(store.props)[0]||null;save();render()};
+document.querySelectorAll('[role=tab]').forEach(b=>b.onclick=()=>{document.querySelectorAll('[role=tab]').forEach(x=>x.setAttribute('aria-selected',x===b));document.querySelectorAll('main>section').forEach(s=>s.hidden=s.id!=='tab-'+b.dataset.tab)});
+$('export').onclick=()=>{const p=cur(),c=COUNTRIES[p.country];let t=`${p.name} (${c.name}, ${$('type').selectedOptions[0].text})\n\n`;for(const ph of c.phases){const st=ph.steps.filter(s=>visible(s,p.type));if(!st.length)continue;t+=ph.title+'\n'+st.map(s=>`[${p.done[s.id]?'x':' '}] ${s.t} - ${s.d}`).join('\n')+'\n\n'}if(p.notes)t+='Notes\n'+p.notes+'\n';const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([t],{type:'text/plain'}));a.download=p.name.replace(/[^\w-]+/g,'-').toLowerCase()+'-checklist.txt';a.click()};
+render();
+</script></body></html>

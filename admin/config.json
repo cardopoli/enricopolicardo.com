@@ -108,6 +108,21 @@
             }
           ],
           "preview_path": "/enricopolicardo.com/tools/archive/writingtool.html"
+        },
+        {
+          "name": "property-toolkit",
+          "label": "Property toolkit",
+          "file": "tools/property-toolkit.html",
+          "format": "raw",
+          "fields": [
+            {
+              "name": "body",
+              "label": "File contents",
+              "widget": "text",
+              "hint": "The complete source file. Saving replaces its contents. Use the public link below to run HTML tools."
+            }
+          ],
+          "preview_path": "/enricopolicardo.com/tools/property-toolkit.html"
         }
       ]
     },

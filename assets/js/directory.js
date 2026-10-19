@@ -7,6 +7,7 @@ const known={
  'tools/archive/writingtool.html':{title:'Earlier writing tool',description:'The earlier version, kept here for reference.'},
  'tools/tender_tool.html':{title:'Opportunities',description:'Competitions, open calls, residencies, commissions, grants and relevant tenders. Sources checked daily.'},
  'tools/deepgram_transcripts.html':{title:'Deepgram transcripts',description:'An audio transcription tool for This Was Tomorrow.'},
+ 'tools/property-toolkit.html':{title:'Property toolkit',description:'Buying anything from a ruin to a flat in Italy or Slovenia: search tools, checks, costs and every step to the notary, with a saved checklist per property.'},
  'tools/mvmnt.html':{title:'MVMNT',description:'Build, save and share movement routines.'},
  'tools/InDesign_Relinker.jsx':{title:'InDesign relinker',description:'A downloadable script for Adobe InDesign.'},
  'documents/this-was-tomorrow/field-guide-and-release.pdf':{title:'Field guide and release form',description:'This Was Tomorrow - information and release form.'}

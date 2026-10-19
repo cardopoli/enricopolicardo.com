@@ -23,7 +23,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 </style></head><body><main>
 <a href="../">Directory</a>
 <h1>Property toolkit</h1>
-<p class="muted">Buying anything from a ruin to a flat: where to look, what to check, and every step to a safe purchase, notary stage included. One checklist per property, saved in this browser.</p>
+<p class="muted">One property at a time: check it, calculate the purchase cost and find the cheapest legal route. Your details are saved in this browser.</p>
 <div class="notice">A working checklist, not legal or tax advice. Figures and rules were checked against the sources linked on each step (October 2026); laws change, so confirm with your notary and a local technician before you sign anything.</div>
 
 <div class="bar">
@@ -34,18 +34,17 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 </div>
 
 <div class="tabs" role="tablist">
-<button role="tab" data-tab="steps" aria-selected="true">Steps</button><button role="tab" data-tab="costs">Costs and taxes</button><button role="tab" data-tab="tools">Search and check tools</button><button role="tab" data-tab="words">Glossary</button><button role="tab" data-tab="notes">Notes</button>
+<button role="tab" data-tab="steps" aria-selected="true">Checklist & notes</button><button role="tab" data-tab="costs">Costs & savings</button><button role="tab" data-tab="tools">Resources & glossary</button>
 </div>
 <p id="status" aria-live="polite"></p>
 
-<section id="tab-steps"></section>
+<section id="tab-steps"><div id="stepsContent"></div><details class="phase"><summary><strong>Property notes</strong></summary><h2>Notes for this property</h2><textarea id="notes" placeholder="Address, cadastral references, contacts, quotes, doubts..."></textarea></details></section>
 <section id="tab-costs" hidden></section>
 <section id="tab-tools" hidden></section>
-<section id="tab-words" hidden></section>
-<section id="tab-notes" hidden><h2>Notes for this property</h2><textarea id="notes" placeholder="Address, cadastral references (foglio, particella, subalterno), contacts, prices, doubts..."></textarea></section>
+
 
 <footer><button id="export">Export checklist as text</button> <button onclick="print()">Print</button>
-<p class="muted">To add a country, copy one block in <code>COUNTRIES</code> inside this file (steps, costs, tools, glossary) and fill it in from verified sources. Step types: flat, house, ruin, land, or all.</p></footer>
+<p class="muted">Reference content lives in the country records in this tool. Update the source link, jurisdiction, applicable date and rule together. Legal or tax changes must be verified before publication.</p></footer>
 </main>
 <script>
 const S={
@@ -187,18 +186,18 @@ function visible(st,type){return st.for.includes('all')||st.for.includes(type)}
 function renderSteps(){const p=cur(),c=COUNTRIES[p.country];let total=0,done=0,html='';
  for(const ph of c.phases){const steps=ph.steps.filter(s=>visible(s,p.type));if(!steps.length)continue;const d=steps.filter(s=>p.done[s.id]).length;total+=steps.length;done+=d;
   html+=`<div class="phase"><header><h2 style="margin:0">${esc(ph.title)}</h2><small>${d} of ${steps.length}</small></header>`+steps.map(s=>`<div class="step${p.done[s.id]?' done':''}"><input type="checkbox" id="c-${s.id}" data-id="${s.id}" ${p.done[s.id]?'checked':''}><label for="c-${s.id}" style="font:inherit;display:block"><strong>${esc(s.t)}</strong><span class="who">${esc(s.who||'')}</span></label><p>${esc(s.d)}</p>${s.src?`<div class="tags">${srcLinks(s.src)}</div>`:''}</div>`).join('')+'</div>'}
- $('tab-steps').innerHTML=`<p class="muted">${done} of ${total} steps done for ${esc(p.name)}.</p>`+html;
- $('tab-steps').querySelectorAll('input[type=checkbox]').forEach(b=>b.onchange=()=>{p.done[b.dataset.id]=b.checked;save();renderSteps()})}
+ $('stepsContent').innerHTML=`<p class="muted">${done} of ${total} steps done for ${esc(p.name)}.</p>`+html;
+ $('stepsContent').querySelectorAll('input[type=checkbox]').forEach(b=>b.onchange=()=>{p.done[b.dataset.id]=b.checked;save();renderSteps()})}
 function costDefaults(){return {price:150000,deposit:0,depositPaid:0,taxBase:'price',cadastral:0,sale:'private-first',agentRate:3,agentVat:22,notary:0,technical:1200,bank:0,works:0,other:0,contingency:10,sloveniaTaxBuyer:false}}
 function costNumber(id){const e=$(id);return e&&e.value!==''&&e.checkValidity()?Number(e.value):NaN}
 function money(v){return Number.isFinite(v)?new Intl.NumberFormat('en-GB',{style:'currency',currency:'EUR',maximumFractionDigits:2}).format(v):'Check input'}
 function savingsGuide(country,type){const rural=['ruin','land'].includes(type);const it=country==='it';return '<details open class="phase"><summary><strong>Cheapest legal route - practical checklist</strong></summary><p class="muted">Keep compulsory costs, optional professional work and tax eligibility separate. Saving on intermediaries is useful; skipping essential due diligence is not.</p><ol>'+(
 it?[
 'Search for direct-owner listings. An estate agent is not compulsory; avoid an agency fee only where no commission is contractually due.',
-'Ask at least three notaries for written, itemised quotes: deed fee, VAT, disbursements, mortgage deed if applicable and taxes separately. The buyer can normally select the notary.',
+'Ask at least three notaries for written, itemised quotes: deed fee, VAT, disbursements, mortgage deed if applicable and taxes separately. The buyer can normally select the notary. Ask whether an eligible prezzo-valore transaction qualifies for the statutory 30% reduction in the notarial fee, distinct from tax savings.',
 'Ask the notary to check whether prima casa relief applies. Never assume eligibility from the property type alone.',
 'For an eligible residential purchase from a private seller, ask specifically for prezzo-valore taxation on the legally applicable cadastral basis. This is not available for every transaction.',
-'Order inexpensive public records and compare zoning, encumbrances and market prices before paying professionals for detailed checks.',
+'Order inexpensive public records and compare zoning, encumbrances and market prices before paying professionals for detailed checks. A separate preliminary contract is not always needed when you can safely proceed directly to the deed; do not waive necessary protections.',
 rural?'For rural buildings, ruins and land, pay a qualified geometra/engineer/architect to check building legality, access, cadastral correspondence, planning and agricultural pre-emption before signing an unconditional offer.':'For a flat or house, check planning/building compliance and cadastral correspondence; consider a technician before making an unconditional offer.'
 ]:[
 'Search for direct-owner listings. An agency is optional; check whether a commission is contractually owed before excluding it.',
@@ -215,7 +214,7 @@ $('tab-costs').innerHTML='<h2>Purchase cost calculator</h2><p class="muted">Indi
 (italy?'<label>Purchase / tax scenario<select data-cost="sale" id="costSale"><option value="private-first">Private seller - prima casa</option><option value="private-other">Private seller - other home</option><option value="builder-first">VAT sale - prima casa (4%)</option><option value="builder-other">VAT sale - other home (10%)</option><option value="builder-luxury">VAT sale - luxury classification (22%)</option><option value="land">Agricultural land - indicative 15%</option><option value="custom">Other / uncertain - tax excluded</option></select></label><label>Registration tax basis<select data-cost="taxBase" id="costTaxBase"><option value="price">Purchase price</option><option value="cadastral">Cadastral taxable value (only if legally eligible)</option></select></label>'+field('cadastral','Cadastral taxable value (€)'):
 '<label>Slovenian transfer tax responsibility<select data-cost="sloveniaTaxBuyer" id="costSlTax"><option value="false">Normally seller pays (exclude from my budget)</option><option value="true">Buyer pays by agreement (include 2%)</option></select></label>')+
 field('agentRate','Estate agent fee (%)')+field('agentVat','VAT on agent fee (%)')+field('notary','Notary / legal fees (quote including VAT, €)')+field('technical','Surveyor / technical checks (€)')+field('bank','Mortgage and bank costs (€)')+field('works','Renovations and immediate works (€)')+field('other','Other fees and moving costs (€)')+field('contingency','Contingency on fees and works (%)')+'</div>'+
-'<div class="notice">'+(italy?'Notary fee: enter a quote including VAT and disbursements. Italian purchase deed fees commonly vary; roughly €1,500-€3,000 before VAT is an illustrative range, not an automatic charge. Mortgage deeds are separate. Taxes are calculated below, so do not include them in this field.':'Notary and registration: a straightforward Slovenian sale may cost considerably less than €2,500. Fees depend on whether the notary only certifies a signature or also drafts the contract, handles registration or mortgage work. Enter your actual quote including VAT. Exclude transfer tax, which is calculated separately.')+'</div><div class="notice" '+(italy?'':'hidden')+'><strong>Independent Italian notary-fee estimators</strong><p><a href="https://tools.realestate/s/global/general/italy-notary-fees" target="_blank" rel="noopener noreferrer">tools.realestate fee estimator</a> | <a href="https://notaionline.it/calcolo-notaio/" target="_blank" rel="noopener noreferrer">NotaioOnline estimator</a></p><p>Third-party estimates, not official quotes. Separate professional fees, VAT, disbursements and mortgage deeds from purchase taxes to avoid double counting.</p></div><div id="costErrors" class="notice" hidden></div><div class="cost-results"><h3>Estimated purchase budget</h3><table><tbody id="costBreakdown"></tbody></table><p id="costMethod" class="muted"></p></div>'+
+'<div class="notice">'+(italy?'Notary fee: enter a quote including VAT and disbursements. Italian purchase deed fees commonly vary; there is no universal fixed fee; request comparable itemised quotations. Mortgage deeds are separate. Taxes are calculated below, so do not include them in this field.':'Notary and registration: a straightforward Slovenian sale may cost considerably less than €2,500. Fees depend on whether the notary only certifies a signature or also drafts the contract, handles registration or mortgage work. Enter your actual quote including VAT. Exclude transfer tax, which is calculated separately.')+'</div><div class="notice" '+(italy?'':'hidden')+'><strong>Independent Italian notary-fee estimators</strong><p><a href="https://tools.realestate/s/global/general/italy-notary-fees" target="_blank" rel="noopener noreferrer">tools.realestate fee estimator</a> | <a href="https://notaionline.it/calcolo-notaio/" target="_blank" rel="noopener noreferrer">NotaioOnline estimator</a></p><p>Third-party estimates, not official quotes. Separate professional fees, VAT, disbursements and mortgage deeds from purchase taxes to avoid double counting.</p></div><div id="costErrors" class="notice" hidden></div><div class="cost-results"><h3>Estimated purchase budget</h3><table><tbody id="costBreakdown"></tbody></table><p id="costMethod" class="muted"></p></div>'+
 savingsGuide(p.country,p.type)+'<details><summary>Country tax reference and assumptions</summary><table><thead><tr>'+c.head.map(h=>'<th>'+esc(h)+'</th>').join('')+'</tr></thead><tbody>'+c.rows.map(r=>'<tr>'+r.map(x=>'<td>'+esc(x)+'</td>').join('')+'</tr>').join('')+'</tbody></table><p class="muted">'+esc(c.note)+'</p><div class="tags">'+srcLinks(c.src)+'</div></details>';
 if(italy){$('costSale').value=v.sale;$('costTaxBase').value=v.taxBase}else $('costSlTax').value=String(v.sloveniaTaxBuyer);
 $('tab-costs').querySelectorAll('[data-cost]').forEach(e=>e.addEventListener('input',()=>{const key=e.dataset.cost;p.calculator[key]=key==='sloveniaTaxBuyer'?e.value==='true':e.tagName==='SELECT'?e.value:e.value;save();calculateCosts()}));
@@ -232,7 +231,7 @@ rows.forEach(([label,value],i)=>{const tr=document.createElement('tr');if(i===9|
 $('costMethod').textContent=taxDescription+'. Deposit is part of the purchase price, not an extra cost. Contingency applies to fees and works, not the property price or purchase taxes. Figures exclude financing interest and recurring ownership costs.'+(uncertain?' This transaction requires a customised tax quotation.':'')+' Confirm the tax basis, eligibility and final charges with a local notary before relying on this estimate.';}
 
 function renderTools(){const c=COUNTRIES[cur().country];$('tab-tools').innerHTML=c.tools.map(g=>`<h2>${esc(g.g)}</h2><div class="tools">${g.items.map(([n,u,d])=>`<div class="tool">${u?`<a href="${u}" target="_blank" rel="noopener">${esc(n)}</a>`:`<strong style="font-weight:400;font-size:17px">${esc(n)}</strong>`}<p>${esc(d)}</p></div>`).join('')}</div>`).join('')}
-function renderWords(){$('tab-words').innerHTML='<h2>Glossary</h2><dl>'+COUNTRIES[cur().country].words.map(([t,d])=>`<dt>${esc(t)}</dt><dd>${esc(d)}</dd>`).join('')+'</dl>'}
+function renderWords(){const c=COUNTRIES[cur().country];$('tab-tools').insertAdjacentHTML('beforeend','<details class="phase"><summary><strong>Glossary</strong></summary><dl>'+c.words.map(([t,d])=>'<dt>'+esc(t)+'</dt><dd>'+esc(d)+'</dd>').join('')+'</dl></details>')}
 function renderBar(){$('prop').innerHTML=Object.entries(store.props).map(([id,p])=>`<option value="${id}" ${id===store.current?'selected':''}>${esc(p.name)}</option>`).join('');$('country').innerHTML=Object.entries(COUNTRIES).map(([k,c])=>`<option value="${k}" ${k===cur().country?'selected':''}>${c.name}</option>`).join('');$('type').value=cur().type;$('notes').value=cur().notes||''}
 function render(){ensure();renderBar();renderSteps();renderCosts();renderTools();renderWords()}
 $('prop').onchange=e=>{store.current=e.target.value;save();render()};

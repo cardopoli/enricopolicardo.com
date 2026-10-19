@@ -187,6 +187,144 @@
           ]
         }
       ]
+    },
+    {
+      "name": "property_reference",
+      "label": "Property guidance",
+      "description": "Update country guidance and verified source links here. These fields update the Property Toolkit guidance panel automatically after publication. Calculator rules are maintained separately in code.",
+      "editor": {
+        "preview": false
+      },
+      "files": [
+        {
+          "name": "property-guidance",
+          "label": "Property buying guidance (Italy & Slovenia)",
+          "file": "data/property-guidance.json",
+          "format": "json",
+          "fields": [
+            {
+              "name": "last_reviewed",
+              "label": "Overall review date",
+              "widget": "datetime",
+              "date_format": "YYYY-MM-DD",
+              "time_format": false,
+              "format": "YYYY-MM-DD"
+            },
+            {
+              "name": "italy",
+              "label": "Italy",
+              "widget": "object",
+              "fields": [
+                {
+                  "name": "last_reviewed",
+                  "label": "Last reviewed",
+                  "widget": "datetime",
+                  "date_format": "YYYY-MM-DD",
+                  "time_format": false,
+                  "format": "YYYY-MM-DD",
+                  "required": true
+                },
+                {
+                  "name": "summary",
+                  "label": "Cheapest legal route",
+                  "widget": "text",
+                  "required": false
+                },
+                {
+                  "name": "savings",
+                  "label": "Ways to save",
+                  "widget": "text",
+                  "required": false
+                },
+                {
+                  "name": "warning",
+                  "label": "Restrictions and warnings",
+                  "widget": "text",
+                  "required": false
+                },
+                {
+                  "name": "resources",
+                  "label": "Reference links",
+                  "widget": "list",
+                  "required": false,
+                  "fields": [
+                    {
+                      "name": "title",
+                      "label": "Link label",
+                      "widget": "string"
+                    },
+                    {
+                      "name": "url",
+                      "label": "Source URL",
+                      "widget": "string",
+                      "pattern": [
+                        "^https://.+",
+                        "Use an https URL"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "slovenia",
+              "label": "Slovenia",
+              "widget": "object",
+              "fields": [
+                {
+                  "name": "last_reviewed",
+                  "label": "Last reviewed",
+                  "widget": "datetime",
+                  "date_format": "YYYY-MM-DD",
+                  "time_format": false,
+                  "format": "YYYY-MM-DD",
+                  "required": true
+                },
+                {
+                  "name": "summary",
+                  "label": "Cheapest legal route",
+                  "widget": "text",
+                  "required": false
+                },
+                {
+                  "name": "savings",
+                  "label": "Ways to save",
+                  "widget": "text",
+                  "required": false
+                },
+                {
+                  "name": "warning",
+                  "label": "Restrictions and warnings",
+                  "widget": "text",
+                  "required": false
+                },
+                {
+                  "name": "resources",
+                  "label": "Reference links",
+                  "widget": "list",
+                  "required": false,
+                  "fields": [
+                    {
+                      "name": "title",
+                      "label": "Link label",
+                      "widget": "string"
+                    },
+                    {
+                      "name": "url",
+                      "label": "Source URL",
+                      "widget": "string",
+                      "pattern": [
+                        "^https://.+",
+                        "Use an https URL"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ]
 }

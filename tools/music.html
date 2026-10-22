@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="referrer" content="no-referrer">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src https://api.dropboxapi.com; media-src https://*.dropboxusercontent.com; img-src 'self' data:; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src https://api.dropboxapi.com; media-src https://*.dropboxusercontent.com; img-src 'self' data: https://*.dropboxusercontent.com; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="robots" content="noindex, nofollow">
 <title>Music | Enrico Policardo</title><meta name="description" content="A personal Dropbox music player. Browse folders, queue tracks and listen.">
 <style>
@@ -120,7 +120,47 @@ footer{font-size:11px;line-height:1.7;color:var(--dim);margin-top:56px;max-width
 #resume{color:var(--ink)}
 audio{display:none}
 
+/* album art */
+.title-wrap{display:flex;gap:22px;align-items:flex-end;min-width:0}
+.folder-art{width:112px;height:112px;object-fit:cover;flex:none;background:var(--hair)}
+.np{display:flex;gap:16px;align-items:center;cursor:pointer;border-radius:4px}
+.np-text{min-width:0;flex:1}
+.np-art{width:56px;height:56px;object-fit:cover;flex:none;background:var(--hair)}
+.np:hover .playing{text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px}
+
+/* pinned + recent albums */
+.shelf{display:flex;flex-direction:column;gap:8px;margin:28px 0 -10px}
+.shelf-group{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.shelf-label{font-family:var(--mono);font-size:10.5px;letter-spacing:1px;text-transform:uppercase;color:var(--dim);width:64px}
+.chip{font-size:13px;padding:6px 12px;border:1px solid var(--faint);border-radius:999px;color:var(--ink);max-width:240px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chip:hover{border-color:var(--ink)}
+.chip.here{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+#pin[aria-pressed=true]{color:var(--ink)}
+
+/* full-screen now playing */
+.full{position:fixed;inset:0;z-index:20;background:var(--bg);overflow:hidden;animation:rise .28s ease}
+@keyframes rise{from{transform:translateY(24px);opacity:0}to{transform:none;opacity:1}}
+.full-bg{position:absolute;inset:-12%;transition:background .6s}
+.full-bg img{width:100%;height:100%;object-fit:cover;filter:blur(64px) saturate(1.15) brightness(.5);transform:scale(1.1)}
+.full::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,14,14,.55),rgba(14,14,14,.25) 40%,rgba(14,14,14,.8));pointer-events:none}
+.full-inner{position:relative;z-index:1;height:100%;max-width:520px;margin:0 auto;display:flex;flex-direction:column;justify-content:center;gap:22px;padding:max(18px,env(safe-area-inset-top)) 26px max(26px,env(safe-area-inset-bottom))}
+.full-top{position:absolute;top:max(12px,env(safe-area-inset-top));left:26px;right:26px;display:flex;justify-content:space-between}
+.full-art{width:min(100%,46vh);aspect-ratio:1;margin:0 auto;position:relative;box-shadow:0 24px 60px rgba(0,0,0,.45)}
+.full-art img,.full-blank{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.full-blank{background:var(--faint)}
+.full-meta{text-align:center;min-width:0}
+.full-title{font-size:26px;font-weight:700;line-height:1.15;letter-spacing:-.01em;overflow-wrap:anywhere}
+.full-where{font-family:var(--mono);font-size:11px;letter-spacing:.5px;color:var(--dim);margin-top:6px;overflow-wrap:anywhere}
+.full .progress{margin:0}
+.full-transport{display:flex;justify-content:center;align-items:center;gap:34px}
+.full .skip{width:52px;height:52px}.full .skip svg{width:24px;height:24px}
+.play.big{width:84px;height:84px}.play.big svg{width:30px;height:30px}
+.full-modes{justify-content:center}
+body.full-open{overflow:hidden}
+
 @media (max-width:860px){
+ .folder-art{width:76px;height:76px}.title-wrap{gap:16px}
+ .np-art{width:44px;height:44px}
  :root{--bar:150px}
  .library{grid-template-columns:1fr;gap:40px;margin-top:3vh}
  .queue{position:static}.queue .list{max-height:none}
@@ -161,9 +201,10 @@ audio{display:none}
  <div class="library">
   <section>
    <div class="head">
-    <div><h1 id="folder-title">Choose your music folder</h1><p class="path" id="path"></p></div>
-    <div class="acts"><button id="up" type="button" class="act">↑ Up</button><button id="select-folder" type="button" class="act strong">Use this folder</button><button id="change-folder" type="button" class="act">Change folder</button></div>
+    <div class="title-wrap"><img id="folder-art" class="folder-art" alt="" hidden><div><h1 id="folder-title">Choose your music folder</h1><p class="path" id="path"></p></div></div>
+    <div class="acts"><button id="up" type="button" class="act">↑ Up</button><button id="select-folder" type="button" class="act strong">Use this folder</button><button id="pin" type="button" class="act" aria-pressed="false" hidden>Pin</button><button id="change-folder" type="button" class="act">Change folder</button></div>
    </div>
+   <div class="shelf" id="shelf" hidden></div>
    <input class="search" id="search" type="search" placeholder="Filter this folder…" aria-label="Filter music" autocomplete="off">
    <div class="acts"><button id="play-folder" type="button" class="act strong">Play all</button><button id="add-folder" type="button" class="act">Add all to queue</button><button id="scan" type="button" class="act">Search everything</button><button id="cancel-scan" type="button" class="act" hidden>Stop search</button><button id="refresh" type="button" class="act">Refresh</button></div>
    <p class="count" id="result-count"></p>
@@ -185,9 +226,10 @@ audio{display:none}
   <button id="play" type="button" class="play" aria-label="Play"><svg viewBox="0 0 24 24" fill="#0e0e0e" aria-hidden="true"><path id="play-icon" d="M8 5v14l11-7z"/></svg></button>
   <button id="next" type="button" class="skip" aria-label="Next track"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 5h2v14h-2zM4 5l11 7-11 7z"/></svg></button>
  </div>
- <div class="np">
-  <div class="playing" id="now">Choose a track</div>
-  <div class="progress"><span class="time mono" id="time-now">0:00</span><input class="seek" id="seek" type="range" min="0" max="1000" value="0" step="1" aria-label="Position in track" disabled><span class="time end mono" id="time-total">0:00</span></div>
+ <div class="np" id="np-open" role="button" tabindex="0" aria-label="Open now playing">
+  <img id="np-art" class="np-art" alt="" hidden>
+  <div class="np-text"><div class="playing" id="now">Choose a track</div>
+  <div class="progress"><span class="time mono" id="time-now">0:00</span><input class="seek" id="seek" type="range" min="0" max="1000" value="0" step="1" aria-label="Position in track" disabled><span class="time end mono" id="time-total">0:00</span></div></div>
  </div>
  <div class="modes">
   <button id="shuffle" type="button" class="act" aria-pressed="false">Shuffle</button>
@@ -196,6 +238,21 @@ audio{display:none}
  </div>
  <audio id="audio" preload="none"></audio>
 </div></section>
+<section class="full" id="full" hidden aria-label="Now playing" aria-modal="true" role="dialog">
+ <div class="full-bg" id="full-bg"><img id="full-bg-img" alt="" hidden></div>
+ <div class="full-inner">
+  <div class="full-top"><button id="full-close" type="button" class="act">↓ Library</button><span class="act" aria-hidden="true">Now playing</span></div>
+  <div class="full-art"><img id="full-art" alt="" hidden><div class="full-blank" id="full-blank"></div></div>
+  <div class="full-meta"><div class="full-title" id="full-title">Choose a track</div><div class="full-where" id="full-where"></div></div>
+  <div class="progress"><span class="time mono" id="full-now">0:00</span><input class="seek" id="full-seek" type="range" min="0" max="1000" value="0" step="1" aria-label="Position in track" disabled><span class="time end mono" id="full-total">0:00</span></div>
+  <div class="full-transport">
+   <button id="full-prev" type="button" class="skip" aria-label="Previous track"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 5h2v14H6zM20 5v14L9 12z"/></svg></button>
+   <button id="full-play" type="button" class="play big" aria-label="Play"><svg viewBox="0 0 24 24" fill="#0e0e0e" aria-hidden="true"><path id="full-play-icon" d="M8 5v14l11-7z"/></svg></button>
+   <button id="full-next" type="button" class="skip" aria-label="Next track"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 5h2v14h-2zM4 5l11 7-11 7z"/></svg></button>
+  </div>
+  <div class="modes full-modes"><button id="full-shuffle" type="button" class="act">Shuffle</button><button id="full-repeat" type="button" class="act">Repeat: off</button></div>
+ </div>
+</section>
 <script type="module" src="../assets/js/music/player.mjs"></script>
 <script type="module" src="../assets/js/music/ui.mjs"></script>
 </body></html>

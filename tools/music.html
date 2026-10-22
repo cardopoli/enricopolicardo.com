@@ -24,6 +24,8 @@ main{max-width:1240px;margin:0 auto;padding:0 max(22px,env(safe-area-inset-left)
 .top a:hover,.top button:hover{color:#fff}
 .crumbs{display:flex;gap:10px;white-space:nowrap;min-width:0}
 .crumbs i{font-style:normal;opacity:.45}.crumbs .here{color:var(--ink)}
+.crumbs{overflow:hidden}.crumbs .short{display:none}
+@media (max-width:480px){.crumbs .long{display:none}.crumbs .short{display:inline}}
 .top button{font-size:11px;letter-spacing:1px;text-transform:uppercase}
 
 /* small text actions - the only "buttons" in the library */
@@ -176,7 +178,7 @@ body.full-open{overflow:hidden}
 </style></head><body><main>
 
 <div class="top">
- <nav class="crumbs" aria-label="Breadcrumb"><a href="../">Enrico Policardo</a><i>/</i><a href="../#tools">Tools</a><i>/</i><span class="here">Music</span></nav>
+ <nav class="crumbs" aria-label="Breadcrumb"><a href="../" aria-label="Enrico Policardo"><span class="long">Enrico Policardo</span><span class="short">EP</span></a><i>/</i><a href="../#tools">Tools</a><i>/</i><span class="here">Music</span></nav>
  <button id="disconnect" type="button" hidden>Disconnect</button>
 </div>
 

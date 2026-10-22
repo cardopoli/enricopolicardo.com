@@ -16,7 +16,7 @@ export function inFolder(path, root) { const p=String(path).toLowerCase(), r=Str
 export function track(file) { return {id:file.id, name:file.name, path:file.path_lower, display:file.path_display || file.path_lower}; }
 export function shuffled(items, random = Math.random) { const a=[...items]; for(let i=a.length-1;i>0;i--){ const j=Math.floor(random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
 export class Dropbox {
-  constructor(session, save, transport = fetch) { this.session=session; this.save=save; this.transport=transport; this.refreshing=null; this.closed=false; }
+  constructor(session, save, transport = fetch) { this.session=session; this.save=save; this.transport=(...args)=>transport(...args); this.refreshing=null; this.closed=false; }
   async token(form) {
     const r=await this.transport('https://api.dropboxapi.com/oauth2/token',{method:'POST',body:new URLSearchParams(form),referrerPolicy:'no-referrer'});
     const d=await r.json();

@@ -1,6 +1,7 @@
 'use strict';
 const repo='cardopoli/enricopolicardo.com',api='https://api.github.com/repos/'+repo+'/git/trees/main?recursive=1';
 const known={
+ 'tools/music.html':{title:'Music',description:'Connect Dropbox, browse your albums and listen. A personal player with queue, shuffle, repeat and saved playback.'},
  'tools/pasto-semplice.html':{title:'Pasto Semplice / Simple Plate',description:'Simple seasonal recipes in Italian and English, weekly meal plans, combined shopping lists and TXT/PDF exports.'},
  'tools/bread.html':{title:'Bread bench',description:'Baker percentages, flour blends, sourdough builds, bake schedules and saved recipes.'},
  'tools/writing-tool.html':{title:'Writing desk',description:'Rough writing, collected lines and drafts. Prompts, timers and text exports.'},
@@ -15,7 +16,7 @@ const known={
 let files=[...Object.keys(known).map(path=>({path,type:'blob'})),...['index.html','README.md','admin/index.html','admin/config.json','admin/README.md','data/documents.json','assets/css/directory.css','assets/js/directory.js'].map(path=>({path,type:'blob'}))];
 const $=id=>document.getElementById(id),ext=p=>p.split('.').pop().toLowerCase(),url=p=>'./'+p.split('/').map(encodeURIComponent).join('/');
 function visibleFile(f){return f.type==='blob'&&!f.path.split('/').some(p=>p.startsWith('.'))}
-function group(f){return f.path.startsWith('admin/')||f.path.startsWith('assets/')||f.path.startsWith('data/')||f.path.startsWith('This Was Tomorrow/')||f.path==='tools/writingtool.html'||f.path==='README.md'||f.path==='index.html'?'system':f.path.startsWith('tools/')?'tools':['pdf','doc','docx','txt','md','csv','xls','xlsx','ppt','pptx'].includes(ext(f.path))?'documents':'other'}
+function group(f){return f.path.startsWith('tests/')||f.path.startsWith('admin/')||f.path.startsWith('assets/')||f.path.startsWith('data/')||f.path.startsWith('This Was Tomorrow/')||f.path==='tools/writingtool.html'||f.path==='README.md'||f.path==='index.html'?'system':f.path.startsWith('tools/')?'tools':['pdf','doc','docx','txt','md','csv','xls','xlsx','ppt','pptx'].includes(ext(f.path))?'documents':'other'}
 function label(f){return known[f.path]?.title||f.path.split('/').pop().replace(/\.[^.]+$/,'').replace(/[_-]/g,' ')}
 function el(tag,text,cls){const e=document.createElement(tag);if(text)e.textContent=text;if(cls)e.className=cls;return e}
 function link(text,href,download=false){const a=el('a',text);a.href=href;if(download)a.setAttribute('download','');return a}

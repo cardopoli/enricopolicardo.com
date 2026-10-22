@@ -1,36 +1,201 @@
 <!doctype html>
-<html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="referrer" content="no-referrer">
+<html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="referrer" content="no-referrer">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src https://api.dropboxapi.com; media-src https://*.dropboxusercontent.com; img-src 'self' data:; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="robots" content="noindex, nofollow">
 <title>Music | Enrico Policardo</title><meta name="description" content="A personal Dropbox music player. Browse folders, queue tracks and listen.">
 <style>
-:root{color-scheme:dark;--bg:#131413;--fg:#edeee7;--muted:#a1a69e;--rule:#343932;--accent:#d6e8b2}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,sans-serif}main{max-width:1120px;margin:auto;padding:30px clamp(18px,4vw,48px) 220px}a{color:inherit}button,input{font:inherit;color:inherit}button{background:none;border:0;cursor:pointer;padding:10px 12px;min-height:44px;text-align:left}button:hover{color:var(--accent)}button:disabled{opacity:.4;cursor:default}button.primary{background:var(--accent);color:#171d10;border-radius:3px;padding:10px 18px}input:not([type=checkbox]){background:#1d211c;border:1px solid var(--rule);border-radius:3px;padding:11px;max-width:100%;min-height:44px}input[type=checkbox]{accent-color:var(--accent)}:focus-visible{outline:2px solid var(--accent);outline-offset:3px}[hidden]{display:none!important}.top{display:flex;justify-content:space-between;align-items:center;gap:12px}.top a{font-size:13px;text-decoration:none;color:var(--muted)}h1{font-size:clamp(36px,6vw,64px);font-weight:400;letter-spacing:-.05em;margin:35px 0 4px}h2{font-size:20px;font-weight:500;margin:0 0 12px}.muted,small{color:var(--muted)}.intro{max-width:55ch;margin:0 0 30px}.line{display:flex;gap:12px;align-items:center;flex-wrap:wrap}.setup{max-width:650px;border-top:1px solid var(--rule);padding-top:24px}.setup label{display:block;margin-top:18px}.setup input[type=text]{width:100%}.setup p{font-size:14px;color:var(--muted)}summary{cursor:pointer;padding:12px 0;min-height:44px}.library{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:40px;margin-top:28px}.path{word-break:break-word;margin:12px 0;color:var(--muted);font-size:14px}.search{width:100%;margin:16px 0}.list{list-style:none;padding:0;margin:12px 0}.row{display:flex;align-items:center;border-bottom:1px solid #252a23;gap:8px;min-width:0}.row .name{flex:1;min-width:0;overflow-wrap:anywhere}.row small{display:block;font-size:12px}.row.active{color:var(--accent)}.queue{border-left:1px solid var(--rule);padding-left:24px}.queue .list{max-height:55vh;overflow:auto}.queue button{font-size:13px}.player{position:fixed;bottom:0;left:0;right:0;background:#1c201b;border-top:1px solid var(--rule);padding:16px clamp(18px,4vw,48px);z-index:5}.player-inner{max-width:1024px;margin:auto}.playing{overflow-wrap:anywhere}.playing small{display:block}audio{width:100%;height:40px;margin-top:10px}.player .line{gap:4px}.player button{font-size:13px}.player button[aria-pressed=true]{color:var(--accent);text-decoration:underline;text-underline-offset:5px}#status{min-height:24px;font-size:14px;color:var(--muted);margin:18px 0}#status.error{color:#ffc6b6}kbd{font:inherit}footer{font-size:12px;color:var(--muted);margin-top:40px}@media(max-width:760px){.library{grid-template-columns:1fr;gap:28px}.queue{border-left:0;border-top:1px solid var(--rule);padding:20px 0 0}.queue .list{max-height:260px}main{padding-bottom:260px}.top{align-items:flex-start}h1{margin-top:25px}.player{padding:12px 18px}.player .line{gap:0}.player button{padding:8px;min-height:44px}}
+:root{color-scheme:dark;--bg:#0e0e0e;--ink:#ecebe7;--dim:rgba(236,235,231,.55);--faint:rgba(236,235,231,.12);--hair:rgba(236,235,231,.07);
+ --sans:system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;--mono:ui-monospace,'SF Mono',Menlo,'Courier New',monospace;--bar:112px}
+*,*::before,*::after{box-sizing:border-box}
+html,body{background:var(--bg);color:var(--ink)}
+body{margin:0;font:15px/1.45 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button,input{font:inherit;color:inherit}
+button{background:none;border:0;padding:0;cursor:pointer}
+button:disabled{opacity:.3;cursor:default}
+:focus-visible{outline:1px solid var(--ink);outline-offset:4px}
+[hidden]{display:none!important}
+.mono,.act,.top,.path,.count,.row small,.np-where,.time,#status,footer,.setup p,.setup label{font-family:var(--mono)}
+
+main{max-width:1240px;margin:0 auto;padding:0 max(22px,env(safe-area-inset-left)) calc(var(--bar) + 64px)}
+
+/* top line */
+.top{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:max(18px,env(safe-area-inset-top)) 0 18px;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--dim)}
+.top a:hover,.top button:hover{color:#fff}
+.crumbs{display:flex;gap:10px;white-space:nowrap;min-width:0}
+.crumbs i{font-style:normal;opacity:.45}.crumbs .here{color:var(--ink)}
+.top button{font-size:11px;letter-spacing:1px;text-transform:uppercase}
+
+/* small text actions - the only "buttons" in the library */
+.act{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--dim);padding:8px 0;min-height:36px;white-space:nowrap}
+.act:hover:not(:disabled){color:#fff}
+.act.strong{color:var(--ink)}
+.acts{display:flex;flex-wrap:wrap;gap:4px 22px;align-items:center}
+
+/* connect screen */
+.setup{max-width:520px;margin:18vh auto 0;text-align:left}
+.setup h1{font-size:clamp(40px,7vw,72px);font-weight:700;letter-spacing:-.03em;line-height:1;margin:0 0 14px}
+.setup .lead{font-family:var(--sans);font-size:17px;line-height:1.45;color:var(--dim);margin:0 0 40px;max-width:42ch}
+.connect{display:inline-flex;align-items:center;gap:14px;font-weight:700;font-size:17px;padding:0;min-height:56px}
+.connect .disc{width:56px;height:56px;border-radius:50%;background:var(--ink);display:grid;place-items:center;transition:transform .18s}
+.connect:hover .disc{transform:scale(1.05)}
+.connect svg{width:20px;height:20px;margin-left:3px}
+.setup label{display:flex;gap:10px;align-items:center;margin:26px 0 0;font-size:11px;letter-spacing:.5px;color:var(--dim);cursor:pointer}
+.setup input[type=checkbox]{accent-color:var(--ink);width:14px;height:14px;margin:0}
+.setup p{font-size:11px;line-height:1.7;color:var(--dim)}
+.setup details{margin-top:34px;border-top:1px solid var(--faint);padding-top:6px}
+.setup summary{cursor:pointer;list-style:none;padding:10px 0;font-family:var(--mono);font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--dim)}
+.setup summary::-webkit-details-marker{display:none}
+.setup summary::after{content:' +'}.setup details[open] summary::after{content:' −'}
+.setup code{font-family:var(--mono);font-size:11px;color:var(--ink);overflow-wrap:anywhere}
+.setup a{text-decoration:underline;text-underline-offset:3px}
+.setup input[type=text]{width:100%;background:none;border:0;border-bottom:1px solid var(--faint);padding:10px 0;font-family:var(--mono);font-size:13px;outline:none}
+.setup input[type=text]:focus{border-color:var(--ink)}
+.setup .field{display:block;margin-top:18px}
+
+#status{min-height:18px;font-size:11px;letter-spacing:.5px;color:var(--dim);margin:8px 0 0}
+#status.error{color:#ff9d8a}
+
+/* library */
+.library{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:64px;margin-top:5vh;align-items:start}
+.head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap}
+#folder-title{font-size:clamp(30px,4.5vw,52px);font-weight:700;letter-spacing:-.03em;line-height:1.02;margin:0;overflow-wrap:anywhere}
+.path{font-size:11px;color:var(--dim);margin:10px 0 0;overflow-wrap:anywhere}
+.search{width:100%;background:none;border:0;border-bottom:1px solid var(--faint);color:var(--ink);font-size:20px;padding:14px 0;margin:28px 0 6px;outline:none;border-radius:0}
+.search:focus{border-color:var(--ink)}
+.search::placeholder{color:rgba(236,235,231,.3)}
+.search::-webkit-search-cancel-button{filter:invert(1);opacity:.5}
+.count{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--dim);margin:14px 0 4px}
+
+.list{list-style:none;margin:0;padding:0}
+.row{display:flex;align-items:center;gap:12px;border-top:1px solid var(--hair);min-width:0}
+.row:last-child{border-bottom:1px solid var(--hair)}
+.row .name{flex:1;min-width:0;text-align:left;padding:12px 0;min-height:48px;font-size:15px;line-height:1.3;overflow-wrap:anywhere}
+.row .name:hover:not(:disabled){color:#fff}
+.row .name:disabled{opacity:.45}
+.row small{display:block;margin-top:3px;font-size:11px;color:var(--dim)}
+.row > button:not(.name){width:36px;height:36px;flex:none;font-family:var(--mono);font-size:16px;color:var(--dim);opacity:0;transition:opacity .15s;border-radius:50%}
+.row:hover > button:not(.name),.row > button:not(.name):focus-visible{opacity:1}
+.row > button:not(.name):hover{color:#fff;background:var(--faint)}
+@media (hover:none){.row > button:not(.name){opacity:1}}
+.row.active .name{font-weight:700;color:#fff}
+.row.active .name::before{content:'';display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--ink);margin-right:10px;vertical-align:middle;transform:translateY(-1px)}
+
+/* queue */
+.queue{position:sticky;top:24px}
+.queue .qhead{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--dim);padding-bottom:6px}
+.queue h2{font:inherit;margin:0;color:var(--ink)}
+.queue .count{margin:0 0 10px}
+.queue .list{max-height:calc(100vh - var(--bar) - 140px);overflow:auto;overscroll-behavior:contain}
+.queue .row .name{font-size:13px;min-height:42px;padding:10px 0}
+
+footer{font-size:11px;line-height:1.7;color:var(--dim);margin-top:56px;max-width:60ch}
+
+/* the player - one quiet bar */
+.player{position:fixed;left:0;right:0;bottom:0;z-index:5;background:rgba(14,14,14,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--faint)}
+.player-inner{max-width:1240px;margin:0 auto;padding:14px max(22px,env(safe-area-inset-right)) max(16px,env(safe-area-inset-bottom)) max(22px,env(safe-area-inset-left));display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:8px 24px;align-items:center}
+.transport{display:flex;align-items:center;gap:14px}
+.skip{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;color:var(--dim)}
+.skip:hover:not(:disabled){color:#fff}
+.skip svg{width:18px;height:18px}
+.play{width:60px;height:60px;border-radius:50%;background:var(--ink);display:grid;place-items:center;transition:transform .18s;flex:none}
+.play:hover:not(:disabled){transform:scale(1.05)}.play:active:not(:disabled){transform:scale(.96)}
+.play svg{width:22px;height:22px}
+.np{min-width:0}
+.playing{font-size:16px;font-weight:700;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.playing small{display:block;font-family:var(--mono);font-weight:400;font-size:11px;letter-spacing:.5px;color:var(--dim);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.progress{display:flex;align-items:center;gap:12px;margin-top:8px}
+.time{font-size:10.5px;color:var(--dim);font-variant-numeric:tabular-nums;min-width:38px}
+.time.end{text-align:right}
+.seek{flex:1;-webkit-appearance:none;appearance:none;height:16px;background:transparent;margin:0;cursor:pointer;--p:0%}
+.seek::-webkit-slider-runnable-track{height:2px;background:linear-gradient(to right,var(--ink) var(--p),var(--faint) var(--p))}
+.seek::-moz-range-track{height:2px;background:var(--faint)}
+.seek::-moz-range-progress{height:2px;background:var(--ink)}
+.seek::-webkit-slider-thumb{-webkit-appearance:none;width:11px;height:11px;border-radius:50%;background:var(--ink);margin-top:-4.5px;border:0}
+.seek::-moz-range-thumb{width:11px;height:11px;border-radius:50%;background:var(--ink);border:0}
+.seek:disabled{opacity:.3;cursor:default}
+.modes{display:flex;gap:18px}
+.modes .act[aria-pressed=true],.modes .act.on{color:var(--ink)}
+.modes .act[aria-pressed=true]::before,.modes .act.on::before{content:'';display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--ink);margin-right:7px;vertical-align:middle;transform:translateY(-1px)}
+#resume{color:var(--ink)}
+audio{display:none}
+
+@media (max-width:860px){
+ :root{--bar:150px}
+ .library{grid-template-columns:1fr;gap:40px;margin-top:3vh}
+ .queue{position:static}.queue .list{max-height:none}
+ .setup{margin-top:10vh}
+ .player-inner{grid-template-columns:minmax(0,1fr) auto;gap:6px 16px}
+ .np{grid-column:1 / -1;grid-row:1}
+ .transport{grid-row:2;grid-column:1}
+ .modes{grid-row:2;grid-column:2;gap:14px}
+ .play{width:52px;height:52px}
+}
+@media (max-width:420px){.modes .act{font-size:10px;letter-spacing:.5px}.transport{gap:6px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style></head><body><main>
-<div class="top"><a href="../">← Tools · Enrico Policardo</a><button id="disconnect" hidden>Disconnect Dropbox</button></div>
-<h1>Music</h1><p class="intro muted">Your folders. Your music. A player for the collection you already have.</p>
+
+<div class="top">
+ <nav class="crumbs" aria-label="Breadcrumb"><a href="../">Enrico Policardo</a><i>/</i><a href="../#tools">Tools</a><i>/</i><span class="here">Music</span></nav>
+ <button id="disconnect" type="button" hidden>Disconnect</button>
+</div>
+
 <section id="connection" class="setup" aria-label="Dropbox connection">
-<button id="connect" class="primary">Connect Dropbox</button>
-<label><input id="remember" type="checkbox"> Remember this connection on this device</label>
-<p>Sign in on Dropbox’s own page. Your files stay in Dropbox; this player requests read-only access. Remembering the connection stores Dropbox access credentials in this browser.</p>
-<details id="setup"><summary>First-time setup</summary>
-<p>Register a scoped app with <strong>Full Dropbox</strong> access in the <a href="https://www.dropbox.com/developers/apps" target="_blank" rel="noopener noreferrer">Dropbox App Console ↗</a>. Enable <code>files.metadata.read</code> and <code>files.content.read</code>, then add this exact redirect address:</p>
-<p><code id="callback"></code> <button id="copy">Copy address</button></p>
-<label for="app-key">Dropbox app key</label><input type="text" id="app-key" autocomplete="off" spellcheck="false" placeholder="App key, not app secret">
-<p>The app key identifies the player and is safe to use here. Never enter an app secret or your Dropbox password.</p>
-<button id="save-key">Save app key</button>
-</details></section>
-<p id="status" role="status" aria-live="polite"></p>
-<section id="browser" hidden aria-label="Music library">
-<div class="line"><button id="change-folder">Choose another music folder</button><button id="scan">Search whole music folder</button><button id="cancel-scan" hidden>Cancel search</button></div>
-<div class="library"><section>
-<h2 id="folder-title">Choose your music folder</h2><div class="line"><button id="up">↑ Parent folder</button><button id="select-folder" class="primary">Use this music folder</button></div>
-<p class="path" id="path"></p><input class="search" id="search" type="search" placeholder="Filter this folder…" aria-label="Filter music">
-<div class="line"><button id="play-folder">Play these tracks</button><button id="add-folder">Add these tracks to queue</button><button id="refresh">Refresh folder</button></div>
-<p class="muted" id="result-count"></p><ul class="list" id="files"></ul></section>
-<aside class="queue"><div class="line"><h2>Queue</h2><button id="clear-queue">Clear</button></div><p class="muted" id="queue-count">No tracks yet</p><ul class="list" id="queue"></ul></aside></div>
+ <h1>Music</h1>
+ <p class="lead">Your folders, your music, streamed from Dropbox.</p>
+ <button id="connect" type="button" class="connect"><span class="disc"><svg viewBox="0 0 24 24" fill="#0e0e0e" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>Connect Dropbox</button>
+ <label><input id="remember" type="checkbox"> Remember on this device</label>
+ <p>You sign in on Dropbox’s own page. The player only asks to read files; nothing is uploaded here. Remembering keeps the Dropbox connection in this browser.</p>
+ <details id="setup"><summary>First-time setup</summary>
+  <p>Register a scoped app with <strong>Full Dropbox</strong> access in the <a href="https://www.dropbox.com/developers/apps" target="_blank" rel="noopener noreferrer">Dropbox App Console ↗</a>. Enable <code>files.metadata.read</code> and <code>files.content.read</code>, then add this exact redirect address:</p>
+  <p><code id="callback"></code></p><button id="copy" type="button" class="act strong">Copy address</button>
+  <label class="field" for="app-key">Dropbox app key</label><input type="text" id="app-key" autocomplete="off" spellcheck="false" placeholder="App key, not app secret">
+  <p>The app key identifies the player and is safe here. Never enter an app secret or your Dropbox password.</p>
+  <button id="save-key" type="button" class="act strong">Save app key</button>
+ </details>
 </section>
-<footer>Streaming only. Playback formats and background audio depend on your browser. No music files are uploaded to this website.</footer>
+
+<p id="status" role="status" aria-live="polite"></p>
+
+<section id="browser" hidden aria-label="Music library">
+ <div class="library">
+  <section>
+   <div class="head">
+    <div><h1 id="folder-title">Choose your music folder</h1><p class="path" id="path"></p></div>
+    <div class="acts"><button id="up" type="button" class="act">↑ Up</button><button id="select-folder" type="button" class="act strong">Use this folder</button><button id="change-folder" type="button" class="act">Change folder</button></div>
+   </div>
+   <input class="search" id="search" type="search" placeholder="Filter this folder…" aria-label="Filter music" autocomplete="off">
+   <div class="acts"><button id="play-folder" type="button" class="act strong">Play all</button><button id="add-folder" type="button" class="act">Add all to queue</button><button id="scan" type="button" class="act">Search everything</button><button id="cancel-scan" type="button" class="act" hidden>Stop search</button><button id="refresh" type="button" class="act">Refresh</button></div>
+   <p class="count" id="result-count"></p>
+   <ul class="list" id="files"></ul>
+  </section>
+  <aside class="queue" aria-label="Queue">
+   <div class="qhead"><h2>Queue</h2><button id="clear-queue" type="button" class="act">Clear</button></div>
+   <p class="count" id="queue-count">No tracks yet</p>
+   <ul class="list" id="queue"></ul>
+  </aside>
+ </div>
+ <footer>Streaming only - nothing is uploaded to this website. Formats and background playback depend on your browser. Space plays and pauses; arrow keys skip.</footer>
+</section>
 </main>
+
 <section class="player" id="player" hidden aria-label="Music playback"><div class="player-inner">
-<div class="playing" id="now">Choose a track</div><audio id="audio" controls preload="none"></audio>
-<div class="line"><button id="previous">← Previous</button><button id="next">Next →</button><button id="shuffle" aria-pressed="false">Shuffle</button><button id="repeat">Repeat: off</button><button id="resume" hidden>Resume saved track</button></div>
-</div></section><script type="module" src="../assets/js/music/player.mjs"></script></body></html>
+ <div class="transport">
+  <button id="previous" type="button" class="skip" aria-label="Previous track"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 5h2v14H6zM20 5v14L9 12z"/></svg></button>
+  <button id="play" type="button" class="play" aria-label="Play"><svg viewBox="0 0 24 24" fill="#0e0e0e" aria-hidden="true"><path id="play-icon" d="M8 5v14l11-7z"/></svg></button>
+  <button id="next" type="button" class="skip" aria-label="Next track"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 5h2v14h-2zM4 5l11 7-11 7z"/></svg></button>
+ </div>
+ <div class="np">
+  <div class="playing" id="now">Choose a track</div>
+  <div class="progress"><span class="time mono" id="time-now">0:00</span><input class="seek" id="seek" type="range" min="0" max="1000" value="0" step="1" aria-label="Position in track" disabled><span class="time end mono" id="time-total">0:00</span></div>
+ </div>
+ <div class="modes">
+  <button id="shuffle" type="button" class="act" aria-pressed="false">Shuffle</button>
+  <button id="repeat" type="button" class="act">Repeat: off</button>
+  <button id="resume" type="button" class="act" hidden>Resume</button>
+ </div>
+ <audio id="audio" preload="none"></audio>
+</div></section>
+<script type="module" src="../assets/js/music/player.mjs"></script>
+<script type="module" src="../assets/js/music/ui.mjs"></script>
+</body></html>

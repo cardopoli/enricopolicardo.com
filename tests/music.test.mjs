@@ -10,3 +10,9 @@ test('revocation during token refresh cannot restore the disconnected session',a
 test('expired access refreshes on 401 once, and rate limits are surfaced',async()=>{let calls=0;const db=new Dropbox({key:'app',access_token:'old',refresh_token:'r',expires:Date.now()+120000},()=>{},async url=>{if(url.includes('oauth2/token'))return json({access_token:'new'});calls++;return calls===1?json({},401):json({entries:[],has_more:false});});await db.list('/music');assert.equal(calls,2);const busy=new Dropbox({access_token:'a',expires:Date.now()+120000},()=>{},async()=>json({},429));await assert.rejects(busy.list('/music'),/busy/);});
 test('streaming only accepts Dropbox HTTPS content addresses',async()=>{const db=new Dropbox({access_token:'a',expires:Date.now()+120000},()=>{},async()=>json({link:'https://evil.example/track.mp3'}));await assert.rejects(db.stream('/music/a.mp3'),/unexpected/);db.transport=async()=>json({link:'https://abc.dl.dropboxusercontent.com/music'});assert.equal(await db.stream('/music/a.mp3'),'https://abc.dl.dropboxusercontent.com/music');});
 test('shuffle preserves every entry exactly once',()=>{const list=[0,1,2,3,4];const a=shuffled(list,()=>0.25);assert.deepEqual([...a].sort(),list);assert.deepEqual(list,[0,1,2,3,4]);});
+
+test('browser fetch keeps its native receiver instead of the Dropbox instance',async()=>{
+ let count=0;
+ async function nativeLikeFetch(url){if(this!==undefined)throw TypeError("Failed to execute 'fetch' on 'Window': Illegal invocation");count++;return url.includes('oauth2/token')?json({access_token:'new',expires_in:14400}):json({entries:[],has_more:false});}
+ const db=new Dropbox({key:'app',refresh_token:'refresh'},()=>{},nativeLikeFetch);await db.list('/music');assert.equal(count,2);
+});

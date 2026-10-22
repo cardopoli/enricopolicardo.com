@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src https://api.dropboxapi.com; media-src https://*.dropboxusercontent.com; img-src 'self' data:; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>Music | Enrico Policardo</title><meta name="description" content="A personal Dropbox music player. Browse folders, queue tracks and listen.">
+<style>
+:root{color-scheme:dark;--bg:#131413;--fg:#edeee7;--muted:#a1a69e;--rule:#343932;--accent:#d6e8b2}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,sans-serif}main{max-width:1120px;margin:auto;padding:30px clamp(18px,4vw,48px) 220px}a{color:inherit}button,input{font:inherit;color:inherit}button{background:none;border:0;cursor:pointer;padding:10px 12px;min-height:44px;text-align:left}button:hover{color:var(--accent)}button:disabled{opacity:.4;cursor:default}button.primary{background:var(--accent);color:#171d10;border-radius:3px;padding:10px 18px}input:not([type=checkbox]){background:#1d211c;border:1px solid var(--rule);border-radius:3px;padding:11px;max-width:100%;min-height:44px}input[type=checkbox]{accent-color:var(--accent)}:focus-visible{outline:2px solid var(--accent);outline-offset:3px}[hidden]{display:none!important}.top{display:flex;justify-content:space-between;align-items:center;gap:12px}.top a{font-size:13px;text-decoration:none;color:var(--muted)}h1{font-size:clamp(36px,6vw,64px);font-weight:400;letter-spacing:-.05em;margin:35px 0 4px}h2{font-size:20px;font-weight:500;margin:0 0 12px}.muted,small{color:var(--muted)}.intro{max-width:55ch;margin:0 0 30px}.line{display:flex;gap:12px;align-items:center;flex-wrap:wrap}.setup{max-width:650px;border-top:1px solid var(--rule);padding-top:24px}.setup label{display:block;margin-top:18px}.setup input[type=text]{width:100%}.setup p{font-size:14px;color:var(--muted)}summary{cursor:pointer;padding:12px 0;min-height:44px}.library{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:40px;margin-top:28px}.path{word-break:break-word;margin:12px 0;color:var(--muted);font-size:14px}.search{width:100%;margin:16px 0}.list{list-style:none;padding:0;margin:12px 0}.row{display:flex;align-items:center;border-bottom:1px solid #252a23;gap:8px;min-width:0}.row .name{flex:1;min-width:0;overflow-wrap:anywhere}.row small{display:block;font-size:12px}.row.active{color:var(--accent)}.queue{border-left:1px solid var(--rule);padding-left:24px}.queue .list{max-height:55vh;overflow:auto}.queue button{font-size:13px}.player{position:fixed;bottom:0;left:0;right:0;background:#1c201b;border-top:1px solid var(--rule);padding:16px clamp(18px,4vw,48px);z-index:5}.player-inner{max-width:1024px;margin:auto}.playing{overflow-wrap:anywhere}.playing small{display:block}audio{width:100%;height:40px;margin-top:10px}.player .line{gap:4px}.player button{font-size:13px}.player button[aria-pressed=true]{color:var(--accent);text-decoration:underline;text-underline-offset:5px}#status{min-height:24px;font-size:14px;color:var(--muted);margin:18px 0}#status.error{color:#ffc6b6}kbd{font:inherit}footer{font-size:12px;color:var(--muted);margin-top:40px}@media(max-width:760px){.library{grid-template-columns:1fr;gap:28px}.queue{border-left:0;border-top:1px solid var(--rule);padding:20px 0 0}.queue .list{max-height:260px}main{padding-bottom:260px}.top{align-items:flex-start}h1{margin-top:25px}.player{padding:12px 18px}.player .line{gap:0}.player button{padding:8px;min-height:44px}}
+</style></head><body><main>
+<div class="top"><a href="../">← Tools · Enrico Policardo</a><button id="disconnect" hidden>Disconnect Dropbox</button></div>
+<h1>Music</h1><p class="intro muted">Your folders. Your music. A player for the collection you already have.</p>
+<section id="connection" class="setup" aria-label="Dropbox connection">
+<button id="connect" class="primary">Connect Dropbox</button>
+<label><input id="remember" type="checkbox"> Remember this connection on this device</label>
+<p>Sign in on Dropbox’s own page. Your files stay in Dropbox; this player requests read-only access. Remembering the connection stores Dropbox access credentials in this browser.</p>
+<details id="setup"><summary>First-time setup</summary>
+<p>Register a scoped app with <strong>Full Dropbox</strong> access in the <a href="https://www.dropbox.com/developers/apps" target="_blank" rel="noopener noreferrer">Dropbox App Console ↗</a>. Enable <code>files.metadata.read</code> and <code>files.content.read</code>, then add this exact redirect address:</p>
+<p><code id="callback"></code> <button id="copy">Copy address</button></p>
+<label for="app-key">Dropbox app key</label><input type="text" id="app-key" autocomplete="off" spellcheck="false" placeholder="App key, not app secret">
+<p>The app key identifies the player and is safe to use here. Never enter an app secret or your Dropbox password.</p>
+<button id="save-key">Save app key</button>
+</details></section>
+<p id="status" role="status" aria-live="polite"></p>
+<section id="browser" hidden aria-label="Music library">
+<div class="line"><button id="change-folder">Choose another music folder</button><button id="scan">Search whole music folder</button><button id="cancel-scan" hidden>Cancel search</button></div>
+<div class="library"><section>
+<h2 id="folder-title">Choose your music folder</h2><div class="line"><button id="up">↑ Parent folder</button><button id="select-folder" class="primary">Use this music folder</button></div>
+<p class="path" id="path"></p><input class="search" id="search" type="search" placeholder="Filter this folder…" aria-label="Filter music">
+<div class="line"><button id="play-folder">Play these tracks</button><button id="add-folder">Add these tracks to queue</button><button id="refresh">Refresh folder</button></div>
+<p class="muted" id="result-count"></p><ul class="list" id="files"></ul></section>
+<aside class="queue"><div class="line"><h2>Queue</h2><button id="clear-queue">Clear</button></div><p class="muted" id="queue-count">No tracks yet</p><ul class="list" id="queue"></ul></aside></div>
+</section>
+<footer>Streaming only. Playback formats and background audio depend on your browser. No music files are uploaded to this website.</footer>
+</main>
+<section class="player" id="player" hidden aria-label="Music playback"><div class="player-inner">
+<div class="playing" id="now">Choose a track</div><audio id="audio" controls preload="none"></audio>
+<div class="line"><button id="previous">← Previous</button><button id="next">Next →</button><button id="shuffle" aria-pressed="false">Shuffle</button><button id="repeat">Repeat: off</button><button id="resume" hidden>Resume saved track</button></div>
+</div></section><script type="module" src="../assets/js/music/player.mjs"></script></body></html>

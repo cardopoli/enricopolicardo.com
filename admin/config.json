@@ -325,6 +325,84 @@
           ]
         }
       ]
+    },
+    {
+      "name": "lingo",
+      "label": "Lingo modules",
+      "description": "Words and phrases for the Lingo tool (tools/lingo.html). Add a module, or add items to one. Use | between equally correct answers: the first one is the one shown.",
+      "files": [
+        {
+          "name": "modules",
+          "label": "Modules",
+          "file": "data/lingo/modules.json",
+          "format": "json",
+          "preview_path": "/enricopolicardo.com/tools/lingo.html",
+          "fields": [
+            {
+              "name": "modules",
+              "label": "Modules",
+              "widget": "list",
+              "summary": "{{fields.title_en}} / {{fields.title_it}}",
+              "fields": [
+                {
+                  "name": "id",
+                  "label": "Short id",
+                  "widget": "string",
+                  "pattern": [
+                    "^[a-z0-9-]+$",
+                    "Lowercase letters, numbers and hyphens only, e.g. at-the-market"
+                  ],
+                  "hint": "Never change it once people have practised: progress is tied to it."
+                },
+                {
+                  "name": "title_en",
+                  "label": "Title in English",
+                  "widget": "string"
+                },
+                {
+                  "name": "title_it",
+                  "label": "Title in Italian",
+                  "widget": "string"
+                },
+                {
+                  "name": "hidden",
+                  "label": "Hide this module",
+                  "widget": "boolean",
+                  "default": false,
+                  "required": false
+                },
+                {
+                  "name": "items",
+                  "label": "Words and phrases",
+                  "widget": "list",
+                  "summary": "{{fields.en}} = {{fields.it}}",
+                  "fields": [
+                    {
+                      "name": "en",
+                      "label": "English",
+                      "widget": "string",
+                      "hint": "e.g. how much is it?|how much does it cost?"
+                    },
+                    {
+                      "name": "it",
+                      "label": "Italian",
+                      "widget": "string",
+                      "hint": "e.g. quanto costa?"
+                    },
+                    {
+                      "name": "note",
+                      "label": "Note (optional)",
+                      "widget": "string",
+                      "required": false,
+                      "hint": "Shown when the word is first introduced"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ]
 }

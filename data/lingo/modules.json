@@ -1,0 +1,129 @@
+{
+  "modules": [
+    {
+      "id": "basics",
+      "title_en": "Basics",
+      "title_it": "Le basi",
+      "items": [
+        { "en": "hello|hi", "it": "ciao|salve" },
+        { "en": "good morning", "it": "buongiorno" },
+        { "en": "good evening", "it": "buonasera" },
+        { "en": "goodbye|bye", "it": "arrivederci|ciao" },
+        { "en": "please", "it": "per favore|per piacere" },
+        { "en": "thank you|thanks", "it": "grazie" },
+        { "en": "you're welcome", "it": "prego" },
+        { "en": "yes", "it": "sì" },
+        { "en": "no", "it": "no" },
+        { "en": "excuse me", "it": "scusi|mi scusi|scusa", "note": "scusi is polite, scusa is with friends" },
+        { "en": "I'm sorry", "it": "mi dispiace" },
+        { "en": "how are you?", "it": "come stai?|come sta?", "note": "come sta? is the polite form" },
+        { "en": "I'm fine, thank you", "it": "sto bene, grazie" },
+        { "en": "my name is Enrico", "it": "mi chiamo Enrico" },
+        { "en": "nice to meet you", "it": "piacere|piacere di conoscerti|piacere di conoscerla" }
+      ]
+    },
+    {
+      "id": "numbers-time",
+      "title_en": "Numbers & time",
+      "title_it": "Numeri e tempo",
+      "items": [
+        { "en": "one", "it": "uno" },
+        { "en": "two", "it": "due" },
+        { "en": "three", "it": "tre" },
+        { "en": "four", "it": "quattro" },
+        { "en": "five", "it": "cinque" },
+        { "en": "six", "it": "sei" },
+        { "en": "seven", "it": "sette" },
+        { "en": "eight", "it": "otto" },
+        { "en": "nine", "it": "nove" },
+        { "en": "ten", "it": "dieci" },
+        { "en": "twenty", "it": "venti" },
+        { "en": "a hundred|one hundred", "it": "cento" },
+        { "en": "what time is it?", "it": "che ore sono?|che ora è?" },
+        { "en": "today", "it": "oggi" },
+        { "en": "tomorrow", "it": "domani" },
+        { "en": "yesterday", "it": "ieri" }
+      ]
+    },
+    {
+      "id": "cafe-food",
+      "title_en": "Café & food",
+      "title_it": "Al bar e a tavola",
+      "items": [
+        { "en": "a coffee, please", "it": "un caffè, per favore", "note": "un caffè in Italy is an espresso" },
+        { "en": "water", "it": "acqua" },
+        { "en": "bread", "it": "pane" },
+        { "en": "wine", "it": "vino" },
+        { "en": "cheese", "it": "formaggio" },
+        { "en": "I would like", "it": "vorrei" },
+        { "en": "the bill, please", "it": "il conto, per favore" },
+        { "en": "a table for two", "it": "un tavolo per due" },
+        { "en": "it's delicious", "it": "è buonissimo|è delizioso|è buonissima|è deliziosa" },
+        { "en": "without sugar", "it": "senza zucchero" },
+        { "en": "breakfast", "it": "colazione|la colazione" },
+        { "en": "lunch", "it": "pranzo|il pranzo" },
+        { "en": "dinner", "it": "cena|la cena" },
+        { "en": "cheers!", "it": "salute!|cin cin!" }
+      ]
+    },
+    {
+      "id": "getting-around",
+      "title_en": "Getting around",
+      "title_it": "In giro",
+      "items": [
+        { "en": "where is the station?", "it": "dov'è la stazione?" },
+        { "en": "left", "it": "sinistra|a sinistra" },
+        { "en": "right", "it": "destra|a destra" },
+        { "en": "straight on|straight ahead", "it": "sempre dritto|dritto" },
+        { "en": "the train", "it": "il treno" },
+        { "en": "the bus", "it": "l'autobus" },
+        { "en": "a ticket", "it": "un biglietto" },
+        { "en": "a return ticket", "it": "un biglietto di andata e ritorno" },
+        { "en": "how much is it?|how much does it cost?", "it": "quanto costa?" },
+        { "en": "near|nearby", "it": "vicino" },
+        { "en": "far", "it": "lontano" },
+        { "en": "the street|the road", "it": "la strada" },
+        { "en": "I'm lost", "it": "mi sono perso|mi sono persa" }
+      ]
+    },
+    {
+      "id": "home-building",
+      "title_en": "Home & building",
+      "title_it": "Casa e cantiere",
+      "items": [
+        { "en": "the house|the home", "it": "la casa" },
+        { "en": "the wall", "it": "il muro" },
+        { "en": "the roof", "it": "il tetto" },
+        { "en": "the window", "it": "la finestra" },
+        { "en": "the door", "it": "la porta" },
+        { "en": "wood", "it": "legno|il legno" },
+        { "en": "stone", "it": "pietra|la pietra" },
+        { "en": "lime", "it": "calce|la calce", "note": "the building material, not the fruit" },
+        { "en": "the garden", "it": "il giardino|l'orto", "note": "l'orto is a vegetable garden" },
+        { "en": "the key", "it": "la chiave" },
+        { "en": "when can you come?", "it": "quando può venire?|quando puoi venire?" },
+        { "en": "how long will it take?", "it": "quanto tempo ci vuole?" },
+        { "en": "it's broken", "it": "è rotto|è rotta" }
+      ]
+    },
+    {
+      "id": "days-weather",
+      "title_en": "Days & weather",
+      "title_it": "Giorni e meteo",
+      "items": [
+        { "en": "Monday", "it": "lunedì" },
+        { "en": "Tuesday", "it": "martedì" },
+        { "en": "Wednesday", "it": "mercoledì" },
+        { "en": "Thursday", "it": "giovedì" },
+        { "en": "Friday", "it": "venerdì" },
+        { "en": "Saturday", "it": "sabato" },
+        { "en": "Sunday", "it": "domenica" },
+        { "en": "the week", "it": "la settimana" },
+        { "en": "it's raining", "it": "piove|sta piovendo" },
+        { "en": "it's sunny", "it": "c'è il sole" },
+        { "en": "it's cold", "it": "fa freddo" },
+        { "en": "it's hot", "it": "fa caldo" }
+      ]
+    }
+  ]
+}

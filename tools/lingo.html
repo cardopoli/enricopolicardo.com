@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="data:,">
+<title>Lingo | Enrico Policardo</title><meta name="description" content="English and Italian, a little every day.">
+<style>
+:root{color-scheme:dark;--bg:#0e0e0e;--ink:#ecebe7;--dim:rgba(236,235,231,.55);--faint:rgba(236,235,231,.12);--hair:rgba(236,235,231,.07);
+ --ok:#7ee0a8;--bad:#ff9d8a;--sans:system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;--mono:ui-monospace,'SF Mono',Menlo,'Courier New',monospace}
+*,*::before,*::after{box-sizing:border-box}
+html,body{background:var(--bg);color:var(--ink);margin:0}
+body{font:16px/1.45 var(--sans);-webkit-font-smoothing:antialiased;min-height:100svh}
+button,input{font:inherit;color:inherit}button{background:none;border:0;padding:0;cursor:pointer}button:disabled{cursor:default}
+:focus-visible{outline:1px solid var(--ink);outline-offset:4px}[hidden]{display:none!important}
+a{color:inherit;text-decoration:none}
+.mono,.act,.top,.label,.stat,.mod small,.kicker,.feedback small{font-family:var(--mono)}
+main{max-width:640px;margin:0 auto;padding:0 max(22px,env(safe-area-inset-left)) 48px}
+
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:max(18px,env(safe-area-inset-top)) 0 18px;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--dim)}
+.crumbs{display:flex;gap:10px;white-space:nowrap;overflow:hidden}.crumbs i{font-style:normal;opacity:.45}.crumbs .here{color:var(--ink)}
+.crumbs a:hover{color:#fff}.crumbs .short{display:none}
+@media(max-width:480px){.crumbs .long{display:none}.crumbs .short{display:inline}}
+.act{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--dim);padding:8px 0;min-height:36px}
+.act:hover:not(:disabled){color:#fff}.act.strong{color:var(--ink)}
+
+/* home */
+.switch{display:inline-flex;border:1px solid var(--faint);border-radius:999px;padding:3px;margin:6vh 0 22px}
+.switch button{padding:9px 16px;border-radius:999px;font-size:14px;color:var(--dim)}
+.switch button[aria-pressed=true]{background:var(--ink);color:var(--bg);font-weight:700}
+h1{font-size:clamp(38px,9vw,64px);font-weight:700;letter-spacing:-.03em;line-height:1;margin:0 0 10px}
+.lead{color:var(--dim);margin:0 0 28px;max-width:40ch}
+.stats{display:flex;gap:26px;flex-wrap:wrap;margin:0 0 30px}
+.stat{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--dim)}
+.stat b{display:block;font-family:var(--sans);font-size:28px;letter-spacing:-.02em;color:var(--ink);font-weight:700;text-transform:none}
+.goal{height:3px;background:var(--faint);margin-top:8px;width:120px}.goal i{display:block;height:100%;background:var(--ink);width:0}
+.go{display:flex;align-items:center;gap:14px;text-align:left;font-weight:700;font-size:18px;min-height:64px;margin:0 0 38px}
+.go .disc{width:64px;height:64px;border-radius:50%;background:var(--ink);display:grid;place-items:center;transition:transform .18s;flex:none}
+.go:hover .disc{transform:scale(1.05)}.go svg{width:22px;height:22px;margin-left:3px}
+.go small{display:block;font-family:var(--mono);font-weight:400;font-size:11px;letter-spacing:.5px;color:var(--dim);margin-top:3px}
+.label{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--dim);margin:0 0 8px}
+.mods{list-style:none;margin:0;padding:0}
+.mod{display:flex;align-items:center;gap:16px;width:100%;text-align:left;border-top:1px solid var(--hair);padding:14px 0;min-height:64px}
+.mods li:last-child .mod{border-bottom:1px solid var(--hair)}
+.mod .t{flex:1;min-width:0}.mod .t span{font-size:17px;font-weight:600}
+.mod small{display:block;font-size:11px;color:var(--dim);margin-top:3px;letter-spacing:.3px}
+.mod .bar{width:64px;height:3px;background:var(--faint);flex:none}.mod .bar i{display:block;height:100%;background:var(--ink)}
+.mod:hover .t span{text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px}
+.mod .due{font-family:var(--mono);font-size:10.5px;color:var(--bg);background:var(--ink);border-radius:999px;padding:2px 7px;flex:none}
+.foot{font-family:var(--mono);font-size:11px;line-height:1.7;color:var(--dim);margin-top:40px}
+.foot button{text-decoration:underline;text-underline-offset:3px;font-size:11px}
+
+/* lesson */
+.lesson{position:fixed;inset:0;background:var(--bg);z-index:10;display:flex;flex-direction:column}
+.lhead{display:flex;align-items:center;gap:16px;padding:max(14px,env(safe-area-inset-top)) max(22px,env(safe-area-inset-right)) 10px max(22px,env(safe-area-inset-left));max-width:640px;width:100%;margin:0 auto}
+.close{width:40px;height:40px;display:grid;place-items:center;color:var(--dim);font-size:22px;line-height:1}
+.close:hover{color:#fff}
+.progress{flex:1;height:4px;background:var(--faint);border-radius:2px;overflow:hidden}
+.progress i{display:block;height:100%;width:0;background:var(--ink);transition:width .3s ease}
+.lbody{flex:1;overflow:auto;width:100%;max-width:640px;margin:0 auto;padding:4vh max(22px,env(safe-area-inset-left)) 24px}
+.kicker{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--dim);margin:0 0 14px}
+.prompt{font-size:clamp(26px,6.5vw,38px);font-weight:700;letter-spacing:-.02em;line-height:1.15;margin:0 0 8px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.say{width:44px;height:44px;border-radius:50%;border:1px solid var(--faint);display:grid;place-items:center;flex:none;color:var(--ink)}
+.say:hover{border-color:var(--ink)}.say svg{width:20px;height:20px}
+.say.big{width:96px;height:96px;margin:10px 0 6px}.say.big svg{width:38px;height:38px}
+.note{font-family:var(--mono);font-size:12px;color:var(--dim);margin:0 0 24px}
+.intro-card{border:1px solid var(--faint);border-radius:14px;padding:26px 22px;margin:8px 0 0}
+.intro-card .other{font-family:var(--mono);font-size:13px;color:var(--dim);margin-top:10px;letter-spacing:.3px}
+.choices{display:grid;gap:10px;margin-top:22px}
+.choice{text-align:left;border:1px solid var(--faint);border-radius:12px;padding:15px 18px;font-size:17px;min-height:56px;transition:border-color .12s,background .12s}
+.choice:hover:not(:disabled){border-color:var(--dim)}
+.choice[aria-pressed=true]{border-color:var(--ink);background:rgba(236,235,231,.06)}
+.choice.right{border-color:var(--ok);color:var(--ok)}.choice.wrong{border-color:var(--bad);color:var(--bad)}
+.answer-line{min-height:62px;border-bottom:1px solid var(--faint);display:flex;flex-wrap:wrap;gap:8px;padding:10px 0;margin-top:22px}
+.bank{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.tile{border:1px solid var(--faint);border-radius:10px;padding:10px 14px;font-size:17px;min-height:46px;background:rgba(236,235,231,.03)}
+.tile:hover:not(:disabled){border-color:var(--dim)}
+.tile.used{opacity:.18}
+.typed{width:100%;background:none;border:0;border-bottom:1px solid var(--faint);font-size:22px;padding:12px 0;margin-top:22px;outline:none;border-radius:0}
+.typed:focus{border-color:var(--ink)}
+.accents{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+.accents button{border:1px solid var(--faint);border-radius:8px;width:40px;height:40px;font-size:17px}
+.accents button:hover{border-color:var(--dim)}
+.match{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:22px}
+.match .col{display:grid;gap:10px;align-content:start}
+.match .choice{font-size:15px;padding:12px 14px;min-height:52px}
+.match .done{opacity:.15;pointer-events:none}
+
+.lfoot{border-top:1px solid var(--faint);padding:14px max(22px,env(safe-area-inset-right)) max(16px,env(safe-area-inset-bottom)) max(22px,env(safe-area-inset-left));transition:background .2s}
+.lfoot-in{max-width:640px;margin:0 auto;display:flex;align-items:center;gap:16px;justify-content:space-between}
+.feedback{min-width:0;flex:1}
+.feedback b{display:block;font-size:18px}
+.feedback small{display:block;font-size:12px;color:var(--dim);margin-top:2px;overflow-wrap:anywhere}
+.lfoot.good{background:rgba(126,224,168,.10)}.lfoot.good b{color:var(--ok)}
+.lfoot.miss{background:rgba(255,157,138,.10)}.lfoot.miss b{color:var(--bad)}
+.check{background:var(--ink);color:var(--bg);font-weight:700;border-radius:999px;padding:14px 28px;min-height:52px;min-width:132px;transition:opacity .15s,transform .15s}
+.check:disabled{opacity:.25}.check:not(:disabled):active{transform:scale(.97)}
+.skip{font-family:var(--mono);font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--dim)}
+
+/* done */
+.done-screen{text-align:left;padding-top:10vh}
+.done-screen h2{font-size:clamp(34px,8vw,52px);letter-spacing:-.03em;line-height:1.02;margin:0 0 14px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<main id="home">
+ <div class="top">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="../" aria-label="Enrico Policardo"><span class="long">Enrico Policardo</span><span class="short">EP</span></a><i>/</i><a href="../#tools" data-t="tools">Tools</a><i>/</i><span class="here">Lingo</span></nav>
+ </div>
+ <div class="switch" role="group" aria-label="Course"><button type="button" id="course-it" aria-pressed="true">Learn Italiano</button><button type="button" id="course-en" aria-pressed="false">Impara English</button></div>
+ <h1 id="title">Italiano</h1>
+ <p class="lead" id="lead"></p>
+ <div class="stats">
+  <div class="stat"><b id="streak">0</b><span data-t="streak">day streak</span></div>
+  <div class="stat"><b id="today-xp">0</b><span data-t="today">XP today</span><div class="goal"><i id="goal"></i></div></div>
+  <div class="stat"><b id="words">0</b><span data-t="learnt">words learnt</span></div>
+ </div>
+ <button type="button" class="go" id="start"><span class="disc"><svg viewBox="0 0 24 24" fill="#0e0e0e" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span><span><span id="start-label">Start</span><small id="start-sub"></small></span></button>
+ <p class="label" data-t="modules">Modules</p>
+ <ul class="mods" id="mods"></ul>
+ <p class="foot" id="foot"></p>
+</main>
+
+<section class="lesson" id="lesson" hidden aria-live="polite">
+ <div class="lhead"><button type="button" class="close" id="quit" aria-label="Close lesson">×</button><div class="progress"><i id="bar"></i></div></div>
+ <div class="lbody" id="stage"></div>
+ <div class="lfoot" id="lfoot"><div class="lfoot-in"><div class="feedback" id="feedback"></div><button type="button" class="skip" id="skip"></button><button type="button" class="check" id="check" disabled></button></div></div>
+</section>
+<script type="module" src="../assets/js/lingo/app.mjs"></script>
+</body></html>

@@ -138,3 +138,33 @@ addEventListener('keydown', e => { if (e.key === 'Escape') closeFull(); });
 let startY = null;
 full.addEventListener('touchstart', e => { startY = e.target.closest('.progress') ? null : e.touches[0].clientY; }, { passive: true });
 full.addEventListener('touchend', e => { if (startY !== null && e.changedTouches[0].clientY - startY > 90) closeFull(); startY = null; }, { passive: true });
+
+// ── v3 navigation: Search and More in the top bar, album header, queue placement ──
+const browser = $('browser'), searchBox = $('searchbox'), more = $('more');
+const searchBtn = $('search-toggle'), moreBtn = $('more-toggle'), searchInput = $('search');
+function openSearch(open) {
+  searchBox.hidden = !open; searchBtn.setAttribute('aria-expanded', String(open));
+  if (open) { closeMore(); setTimeout(() => searchInput.focus(), 30); }
+  else if (searchInput.value) { searchInput.value = ''; searchInput.dispatchEvent(new Event('input')); }
+}
+function closeMore() { more.hidden = true; moreBtn.setAttribute('aria-expanded', 'false'); }
+searchBtn.addEventListener('click', () => openSearch(searchBox.hidden));
+$('search-done').addEventListener('click', () => openSearch(false));
+searchInput.addEventListener('keydown', e => { if (e.key === 'Escape') openSearch(false); });
+moreBtn.addEventListener('click', e => { e.stopPropagation(); const open = more.hidden; if (open) openSearch(false); more.hidden = !open; moreBtn.setAttribute('aria-expanded', String(open)); });
+more.addEventListener('click', e => { if (e.target.closest('button')) setTimeout(closeMore, 0); });
+document.addEventListener('click', e => { if (!more.hidden && !e.target.closest('#more,#more-toggle')) closeMore(); });
+// the album header repeats the folder name large, under the slim bar
+const albumName = $('album-name');
+const mirrorTitle = () => { albumName.textContent = $('folder-title').textContent; };
+new MutationObserver(mirrorTitle).observe($('folder-title'), { childList: true, characterData: true, subtree: true }); mirrorTitle();
+// opening another folder closes the menu and any search, and starts at the top
+new MutationObserver(() => { closeMore(); if (!searchInput.value) searchBox.hidden = true, searchBtn.setAttribute('aria-expanded', 'false'); scrollTo({ top: 0 }); })
+  .observe($('crumbs'), { childList: true });
+// thin progress line along the top of the slim phone bar
+audio.addEventListener('timeupdate', () => { const d = audio.duration; $('player').style.setProperty('--p', Number.isFinite(d) && d > 0 ? (audio.currentTime / d * 100) + '%' : '0%'); });
+audio.addEventListener('emptied', () => $('player').style.setProperty('--p', '0%'));
+// phones: the queue lives in the now-playing view; desktop: beside the library
+const queueBox = $('queue-box'), librarySlot = queueBox.parentElement, phone = matchMedia('(max-width: 860px)');
+const placeQueue = () => { if (phone.matches) $('full-queue').append(queueBox); else librarySlot.append(queueBox); };
+phone.addEventListener?.('change', placeQueue); placeQueue();

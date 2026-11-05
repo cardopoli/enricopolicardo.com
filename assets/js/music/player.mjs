@@ -63,7 +63,7 @@ function tracksShown(){return filtered().filter(f=>f['.tag']==='file'&&AUDIO.tes
 function updateMode(){
  $('shuffle').setAttribute('aria-pressed',String(shuffle));$('repeat').textContent='Repeat: '+repeat;
  $('scan').disabled=selecting||root===null||scanning;$('cancel-scan').hidden=!scanning;
- $('play-folder').disabled=$('add-folder').disabled=selecting||tracksShown().length===0;
+ $('play-folder').disabled=$('add-folder').disabled=selecting||tracksShown().length===0;if($('shuffle-folder'))$('shuffle-folder').disabled=$('play-folder').disabled;
  $('change-folder').hidden=selecting;$('select-folder').hidden=!selecting;
  $('up').disabled=folder==='' || (!selecting&&folder===root);
  $('search').placeholder=indexed||cachedIndex?'Search all music…':'Filter this folder…';drawShelf();
@@ -73,8 +73,8 @@ function drawFiles(){
  const files=filtered().filter(f=>f['.tag']==='folder'||AUDIO.test(f.name)).sort((a,b)=>(a['.tag']==='folder'?0:1)-(b['.tag']==='folder'?0:1)||a.name.localeCompare(b.name,undefined,{numeric:true}));
  $('result-count').textContent=files.length+' '+(files.length===1?'item':'items')+(searchingAll()?' · whole music folder':'');
  for(const f of files){
-  const li=element('li',null,'row'),isFolder=f['.tag']==='folder';
-  const name=button((isFolder?'↳ ':'')+(isFolder?f.name:title(f.name)),()=>{if(isFolder){displayNames[f.path_lower]=f.path_display||f.name;return browse(f.path_lower);}return playFromList(track(f));},(isFolder?'Open folder ':'Play ')+f.name);name.className='name';
+  const li=element('li',null,'row'+(f['.tag']==='folder'?' folder':' track')),isFolder=f['.tag']==='folder';
+  const name=button(isFolder?f.name:title(f.name),()=>{if(isFolder){displayNames[f.path_lower]=f.path_display||f.name;return browse(f.path_lower);}return playFromList(track(f));},(isFolder?'Open folder ':'Play ')+f.name);name.className='name';
   if(searchingAll()&&!isFolder)name.append(element('small',f.path_display?.slice(0,-f.name.length)||''));
   li.append(name);if(!isFolder&&!selecting)li.append(button('+',()=>{queue.push(track(f));drawQueue();save();},'Add '+f.name+' to queue'));
   if(selecting&&!isFolder)name.disabled=true;
@@ -91,14 +91,33 @@ function drawQueue(){
  }
  $('previous').disabled=$('next').disabled=!queue.length;
 }
+const nice=s=>{s=String(s||'');return s&&s===s.toLowerCase()?s[0].toUpperCase()+s.slice(1):s;};
+function drawCrumbs(){
+ const box=$('crumbs');if(!box)return;box.replaceChildren();
+ const base=selecting?'':(root||'');
+ const lower=folder.split('/').filter(Boolean), shown=String(displayNames[folder]||folder).split('/').filter(Boolean);
+ const start=base.split('/').filter(Boolean).length;
+ const levels=[{path:base,label:selecting?'Dropbox':nice(leaf(displayNames[base]||base))}];
+ for(let i=start;i<lower.length;i++)levels.push({path:'/'+lower.slice(0,i+1).join('/'),label:nice(shown.length===lower.length?shown[i]:lower[i])});
+ levels.forEach((l,i)=>{
+  if(i)box.append(element('span','›','sep'));
+  const last=i===levels.length-1, b=button(l.label,()=>browse(l.path),'Go to '+l.label);b.className='crumb'+(last?' here':'');if(last)b.setAttribute('aria-current','page');box.append(b);
+ });
+ box.scrollLeft=box.scrollWidth;
+ const view=$('browser');if(view){const audioHere=entries.some(f=>f['.tag']==='file'&&AUDIO.test(f.name));view.dataset.tracks=String(audioHere&&!selecting);view.dataset.top=String(!selecting&&folder===root);view.dataset.selecting=String(selecting);}
+}
+let fromHistory=false;
+window.addEventListener('popstate',e=>{const f=e.state&&e.state.musicFolder;if(typeof f!=='string'||!db)return;fromHistory=true;browse(f).catch(error).finally(()=>{fromHistory=false;});});
 async function browse(path){
  if(!db)return;
  if(!selecting&&root!==null&&!inFolder(path,root))throw Error('Choose another music folder to browse outside this library.');
  ++scanGeneration;scanning=false;const version=++browseGeneration,gen=accountGeneration;indexed=null;$('search').value='';status('Opening folder…');
  const data=await db.list(path);
  if(version!==browseGeneration||gen!==accountGeneration)return;
- folder=path;entries=data;const shown=displayNames[folder]||folder;$('path').textContent=shown||'Dropbox';$('folder-title').textContent=selecting?'Choose your music folder':(shown.split('/').pop()||'Music');
- drawFiles();save();status(data.length?'':'This folder is empty.');
+ folder=path;entries=data;const shown=displayNames[folder]||folder;$('path').textContent=shown||'Dropbox';$('folder-title').textContent=selecting?'Choose your music folder':(nice(shown.split('/').pop())||'Music');
+ drawFiles();drawCrumbs();save();status(data.length?'':'This folder is empty.');
+ // the phone's back gesture goes up a folder instead of leaving the player
+ if(!fromHistory){const st={musicFolder:path};if(window.history.state&&typeof window.history.state.musicFolder==='string'&&window.history.state.musicFolder!==path)window.history.pushState(st,'');else window.history.replaceState(st,'');}
  showArt($('folder-art'),null);if(!selecting)artFor(path,data).then(url=>{if(version===browseGeneration)showArt($('folder-art'),url);});
 }
 async function scan(){
@@ -182,6 +201,7 @@ $('select-folder').addEventListener('click',action(async()=>{++playGeneration;au
 $('change-folder').addEventListener('click',action(async()=>{stopScan();selecting=true;await browse('');}));
 $('scan').addEventListener('click',action(scan));$('pin')?.addEventListener('click',togglePin);$('cancel-scan').addEventListener('click',stopScan);$('search').addEventListener('input',drawFiles);
 $('play-folder').addEventListener('click',action(async()=>{queue=tracksShown();current=-1;resetOrder();await play(0);}));
+$('shuffle-folder')?.addEventListener('click',action(async()=>{const list=tracksShown();if(!list.length)return;queue=list;current=-1;resetOrder();shuffle=true;updateMode();upcoming=shuffled(queue.map((_,i)=>i));await play(upcoming.shift());}));
 $('add-folder').addEventListener('click',()=>{queue.push(...tracksShown());drawQueue();save();status('Tracks added to the queue.');});
 $('clear-queue').addEventListener('click',()=>{++playGeneration;audio.pause();audio.removeAttribute('src');audio.load();queue=[];current=-1;savedTime=0;resetOrder();$('now').textContent='Choose a track';$('resume').hidden=true;drawQueue();save();});
 $('previous').addEventListener('click',action(previous));$('next').addEventListener('click',action(()=>advance()));$('resume').addEventListener('click',action(()=>load(current,true,savedTime)));

@@ -174,12 +174,74 @@ body.full-open{overflow:hidden}
  .play{width:52px;height:52px}
 }
 @media (max-width:420px){.modes .act{font-size:10px;letter-spacing:.5px}.transport{gap:6px}}
+
+/* ── v3: navigation built for small screens ─────────────────────────────── */
+.head-sticky{position:sticky;top:0;z-index:4;background:rgba(14,14,14,.96);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);margin:0 calc(-1 * max(22px,env(safe-area-inset-left)));padding:0 max(22px,env(safe-area-inset-left));border-bottom:1px solid var(--hair)}
+.nav-bar{display:flex;align-items:center;gap:14px;min-height:60px}
+.back{width:44px;height:44px;margin-left:-12px;font-family:var(--mono);font-size:30px;line-height:1;color:var(--ink);display:grid;place-items:center;flex:none;border-radius:50%}
+.back:hover:not(:disabled){background:var(--faint)}
+.back:disabled{opacity:.18}
+.nav-title{flex:1;min-width:0;font-size:19px;font-weight:700;letter-spacing:-.01em;margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nav-bar .act{min-height:44px;padding:0 2px}
+.nav-bar .act[aria-expanded=true]{color:var(--ink)}
+.path-crumbs{display:flex;align-items:center;gap:2px;overflow-x:auto;white-space:nowrap;scrollbar-width:none;padding:0 0 10px;margin-top:-4px}
+.path-crumbs::-webkit-scrollbar{display:none}
+.crumb{font-family:var(--mono);font-size:11px;letter-spacing:.5px;text-transform:uppercase;color:var(--dim);padding:8px 4px;min-height:36px;flex:none;max-width:60vw;overflow:hidden;text-overflow:ellipsis}
+.crumb:hover{color:#fff}.crumb.here{color:var(--ink)}
+.path-crumbs .sep{font-family:var(--mono);color:var(--dim);opacity:.6;padding:0 2px;flex:none}
+.searchbox{padding:0 0 12px}
+.searchbox .search{margin:0 0 4px;font-size:18px;padding:10px 0}
+.menu{display:flex;flex-direction:column;align-items:flex-start;padding:2px 0 12px;border-top:1px solid var(--hair)}
+.menu .act{min-height:44px;font-size:12px}
+.select-bar{display:none;align-items:center;gap:16px;flex-wrap:wrap;margin:18px 0 0;color:var(--dim);font-size:13px}
+#browser[data-selecting=true] .select-bar{display:flex}
+.pill{font-weight:700;font-size:15px;border:1px solid var(--faint);border-radius:999px;padding:0 22px;min-height:44px}
+.pill:hover:not(:disabled){border-color:var(--ink)}
+.pill.solid{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.pill:disabled{opacity:.3}
+.album{display:none;gap:18px;align-items:center;margin:20px 0 6px}
+#browser[data-tracks=true] .album{display:flex}
+.album .folder-art{width:96px;height:96px;flex:none}
+.album-text{min-width:0;flex:1}
+.album-name{font-size:clamp(22px,4vw,34px);font-weight:700;letter-spacing:-.02em;line-height:1.08;overflow-wrap:anywhere;margin-bottom:12px}
+.album-acts{display:flex;gap:10px;flex-wrap:wrap}
+.shelf{margin:18px 0 0}
+#browser:not([data-top=true]) .shelf{display:none!important}
+.library{margin-top:0}
+.count{margin:16px 0 4px}
+/* rows: folders lead with their name and end in a type arrow; tracks keep + */
+.row.folder .name::after{content:'›';font-family:var(--mono);color:var(--dim);float:right;font-size:18px;line-height:1.1;margin-left:12px}
+.row.folder .name:hover::after{color:#fff}
+.row .name{padding:14px 0;min-height:52px}
+.row > button:not(.name){width:44px;height:44px;font-size:20px}
+.queue .row > button:not(.name){width:40px;height:40px;font-size:18px}
+#player{--p:0%}
+.full-queue .queue{position:static;margin-top:28px;text-align:left}
+.full-queue .queue .list{max-height:none}
+@media (max-width:860px){
+ :root{--bar:76px}
+ main{padding-bottom:calc(var(--bar) + 40px)}
+ .top{padding-bottom:4px}
+ .library{display:block}
+ .library > .queue{display:none}
+ /* one slim bar: cover and title on the left, play and next on the right; tap it for everything else */
+ .player-inner{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"np transport";gap:12px;padding-top:10px;padding-bottom:max(10px,env(safe-area-inset-bottom))}
+ .np{grid-area:np;grid-column:auto;grid-row:auto;gap:12px}
+ .np-art{width:48px;height:48px}
+ .playing{font-size:15px}
+ .np .progress,.modes,#previous{display:none!important}
+ .transport{grid-area:transport;grid-row:auto;grid-column:auto;gap:4px}
+ .play{width:48px;height:48px}.play svg{width:18px;height:18px}
+ #player::before{content:'';position:absolute;left:0;top:-1px;height:2px;width:var(--p);background:var(--ink)}
+ .full-inner{justify-content:flex-start;overflow-y:auto;padding-top:calc(max(18px,env(safe-area-inset-top)) + 48px);gap:18px}
+ .full-art{width:min(100%,38vh)}
+}
+@media (min-width:861px){.full-queue{display:none}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style></head><body><main>
 
 <div class="top">
  <nav class="crumbs" aria-label="Breadcrumb"><a href="../" aria-label="Enrico Policardo"><span class="long">Enrico Policardo</span><span class="short">EP</span></a><i>/</i><a href="../#tools">Tools</a><i>/</i><span class="here">Music</span></nav>
- <button id="disconnect" type="button" hidden>Disconnect</button>
 </div>
 
 <section id="connection" class="setup" aria-label="Dropbox connection">
@@ -200,20 +262,41 @@ body.full-open{overflow:hidden}
 <p id="status" role="status" aria-live="polite"></p>
 
 <section id="browser" hidden aria-label="Music library">
+ <div class="head-sticky">
+  <div class="nav-bar">
+   <button id="up" type="button" class="back" aria-label="Up one folder">‹</button>
+   <h1 id="folder-title" class="nav-title">Choose your music folder</h1>
+   <button id="search-toggle" type="button" class="act" aria-expanded="false">Search</button>
+   <button id="more-toggle" type="button" class="act" aria-expanded="false" aria-controls="more">More</button>
+  </div>
+  <nav class="path-crumbs" id="crumbs" aria-label="Folder path"></nav>
+  <p class="path" id="path" hidden></p>
+  <div class="searchbox" id="searchbox" hidden>
+   <input class="search" id="search" type="search" placeholder="Filter this folder…" aria-label="Search music" autocomplete="off">
+   <div class="acts"><button id="scan" type="button" class="act strong">Search whole library</button><button id="cancel-scan" type="button" class="act" hidden>Stop</button><button id="search-done" type="button" class="act">Done</button></div>
+  </div>
+  <div class="menu" id="more" hidden>
+   <button id="pin" type="button" class="act" aria-pressed="false" hidden>Pin</button>
+   <button id="add-folder" type="button" class="act">Add all to queue</button>
+   <button id="refresh" type="button" class="act">Refresh</button>
+   <button id="change-folder" type="button" class="act">Change music folder</button>
+   <button id="disconnect" type="button" class="act" hidden>Disconnect Dropbox</button>
+  </div>
+ </div>
+ <div class="select-bar"><button id="select-folder" type="button" class="pill solid">Use this folder</button><span>Open the folder that holds your music, then choose it.</span></div>
  <div class="library">
   <section>
-   <div class="head">
-    <div class="title-wrap"><img id="folder-art" class="folder-art" alt="" hidden><div><h1 id="folder-title">Choose your music folder</h1><p class="path" id="path"></p></div></div>
-    <div class="acts"><button id="up" type="button" class="act">↑ Up</button><button id="select-folder" type="button" class="act strong">Use this folder</button><button id="pin" type="button" class="act" aria-pressed="false" hidden>Pin</button><button id="change-folder" type="button" class="act">Change folder</button></div>
+   <div class="album" id="album">
+    <img id="folder-art" class="folder-art" alt="" hidden>
+    <div class="album-text"><div class="album-name" id="album-name"></div>
+     <div class="album-acts"><button id="play-folder" type="button" class="pill solid">Play</button><button id="shuffle-folder" type="button" class="pill">Shuffle</button></div></div>
    </div>
    <div class="shelf" id="shelf" hidden></div>
-   <input class="search" id="search" type="search" placeholder="Filter this folder…" aria-label="Filter music" autocomplete="off">
-   <div class="acts"><button id="play-folder" type="button" class="act strong">Play all</button><button id="add-folder" type="button" class="act">Add all to queue</button><button id="scan" type="button" class="act">Search everything</button><button id="cancel-scan" type="button" class="act" hidden>Stop search</button><button id="refresh" type="button" class="act">Refresh</button></div>
    <p class="count" id="result-count"></p>
    <ul class="list" id="files"></ul>
   </section>
-  <aside class="queue" aria-label="Queue">
-   <div class="qhead"><h2>Queue</h2><button id="clear-queue" type="button" class="act">Clear</button></div>
+  <aside class="queue" id="queue-box" aria-label="Queue">
+   <div class="qhead"><h2>Up next</h2><button id="clear-queue" type="button" class="act">Clear</button></div>
    <p class="count" id="queue-count">No tracks yet</p>
    <ul class="list" id="queue"></ul>
   </aside>
@@ -253,6 +336,7 @@ body.full-open{overflow:hidden}
    <button id="full-next" type="button" class="skip" aria-label="Next track"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 5h2v14h-2zM4 5l11 7-11 7z"/></svg></button>
   </div>
   <div class="modes full-modes"><button id="full-shuffle" type="button" class="act">Shuffle</button><button id="full-repeat" type="button" class="act">Repeat: off</button></div>
+  <div class="full-queue" id="full-queue"></div>
  </div>
 </section>
 <script type="module" src="../assets/js/music/player.mjs"></script>

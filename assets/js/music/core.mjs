@@ -15,6 +15,9 @@ export function validateCallback(pending, state, now = Date.now()) {
 export function inFolder(path, root) { const p=String(path).toLowerCase(), r=String(root).toLowerCase(); return r === '' || p === r || p.startsWith(r + '/'); }
 export function track(file) { return {id:file.id, name:file.name, path:file.path_lower, display:file.path_display || file.path_lower}; }
 export function shuffled(items, random = Math.random) { const a=[...items]; for(let i=a.length-1;i>0;i--){ const j=Math.floor(random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+// where an index ends up after moving one item from `from` to `to`
+export function moveMap(from, to) { return i => i===from ? to : (from<to && i>from && i<=to) ? i-1 : (from>to && i>=to && i<from) ? i+1 : i; }
+export function moveTo(list, from, to) { const a=[...list]; const [x]=a.splice(from,1); a.splice(to,0,x); return a; }
 export class Dropbox {
   constructor(session, save, transport = fetch) { this.session=session; this.save=save; this.transport=(...args)=>transport(...args); this.refreshing=null; this.closed=false; }
   async token(form) {

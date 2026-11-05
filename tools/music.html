@@ -226,17 +226,30 @@ body.full-open{overflow:hidden}
  .library > .queue{display:none}
  /* one slim bar: cover and title on the left, play and next on the right; tap it for everything else */
  .player-inner{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"np transport";gap:12px;padding-top:10px;padding-bottom:max(10px,env(safe-area-inset-bottom))}
- .np{grid-area:np;grid-column:auto;grid-row:auto;gap:12px}
+ .np{grid-area:np;gap:12px}
  .np-art{width:48px;height:48px}
  .playing{font-size:15px}
  .np .progress,.modes,#previous{display:none!important}
- .transport{grid-area:transport;grid-row:auto;grid-column:auto;gap:4px}
+ .transport{grid-area:transport;gap:4px}
  .play{width:48px;height:48px}.play svg{width:18px;height:18px}
  #player::before{content:'';position:absolute;left:0;top:-1px;height:2px;width:var(--p);background:var(--ink)}
  .full-inner{justify-content:flex-start;overflow-y:auto;padding-top:calc(max(18px,env(safe-area-inset-top)) + 48px);gap:18px}
  .full-art{width:min(100%,38vh)}
 }
 @media (min-width:861px){.full-queue{display:none}}
+
+/* v4: reorder the queue, play next */
+.queue .row > .grip{cursor:grab;touch-action:none;font-size:18px;opacity:1;color:var(--dim)}
+.queue .row{transition:transform .16s ease;background:var(--bg)}
+.full .queue .row{background:transparent}
+.queue .row.dragging{transition:none;position:relative;z-index:3;background:#1a1a19;box-shadow:0 10px 28px rgba(0,0,0,.55);border-color:transparent}
+body.reordering,body.reordering *{cursor:grabbing!important;user-select:none;-webkit-user-select:none}
+.row.track .name{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
+.row > button[aria-expanded=true]{opacity:1;color:var(--ink);background:var(--faint)}
+.track-menu{position:fixed;z-index:40;min-width:190px;max-width:calc(100vw - 24px);background:#151514;border:1px solid var(--faint);border-radius:14px;padding:6px 18px 8px;display:flex;flex-direction:column;align-items:flex-start;box-shadow:0 14px 40px rgba(0,0,0,.6);animation:rise .16s ease}
+.track-menu[hidden]{display:none}
+.track-menu .tm-name{margin:8px 0 2px;font-size:13px;color:var(--dim);max-width:260px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.track-menu .act{min-height:44px;font-size:12px;width:100%;text-align:left;color:var(--ink)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style></head><body><main>
 

@@ -1,6 +1,7 @@
 'use strict';
 const repo='cardopoli/enricopolicardo.com',api='https://api.github.com/repos/'+repo+'/git/trees/main?recursive=1';
 const known={
+ 'tools/shredder.html':{title:'Shredder',description:'Put type through the machine: photocopy, toner skip, ink bleed, 1-bit dither, glitch slices, torn strips, misregister. Reroll for a new take, export transparent PNGs.'},
  'tools/lingo.html':{title:'Lingo',description:'English and Italian, a little every day. Short lessons in modules, spoken by your device, with spaced review so words stick.'},
  'tools/music.html':{title:'Music',description:'Connect Dropbox, browse your albums and listen. A personal player with queue, shuffle, repeat and saved playback.'},
  'tools/pasto-semplice.html':{title:'Pasto Semplice / Simple Plate',description:'Simple seasonal recipes in Italian and English, weekly meal plans, combined shopping lists and TXT/PDF exports.'},

@@ -16,3 +16,12 @@ test('browser fetch keeps its native receiver instead of the Dropbox instance',a
  async function nativeLikeFetch(url){if(this!==undefined)throw TypeError("Failed to execute 'fetch' on 'Window': Illegal invocation");count++;return url.includes('oauth2/token')?json({access_token:'new',expires_in:14400}):json({entries:[],has_more:false});}
  const db=new Dropbox({key:'app',refresh_token:'refresh'},()=>{},nativeLikeFetch);await db.list('/music');assert.equal(count,2);
 });
+import {moveMap, moveTo} from '../assets/js/music/core.mjs';
+test('moving a queue item keeps every index pointing at the same track', () => {
+  const q=['a','b','c','d','e'];
+  for (const [from,to] of [[0,3],[4,1],[2,2],[1,0],[3,4]]) {
+    const moved=moveTo(q,from,to), m=moveMap(from,to);
+    assert.equal(moved[to], q[from]);
+    q.forEach((x,i)=>assert.equal(moved[m(i)], x));
+  }
+});

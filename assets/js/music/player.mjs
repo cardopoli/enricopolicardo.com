@@ -1,4 +1,4 @@
-import {AUDIO, Dropbox, random, challenge, callbackURL, authURL, validateCallback, inFolder, track, shuffled} from './core.mjs';
+import {AUDIO, Dropbox, random, challenge, callbackURL, authURL, validateCallback, inFolder, track, shuffled, moveMap, moveTo} from './core.mjs';
 const $=id=>document.getElementById(id), audio=$('audio');
 const KEY='ep-music-key-v1', AUTH='ep-music-auth-v1', PENDING='ep-music-pending-v1', STATE='ep-music-state-v1';
 const read=(storage,key,fallback=null)=>{try{return JSON.parse(storage.getItem(key))??fallback;}catch{return fallback;}};
@@ -76,7 +76,7 @@ function drawFiles(){
   const li=element('li',null,'row'+(f['.tag']==='folder'?' folder':' track')),isFolder=f['.tag']==='folder';
   const name=button(isFolder?f.name:title(f.name),()=>{if(isFolder){displayNames[f.path_lower]=f.path_display||f.name;return browse(f.path_lower);}return playFromList(track(f));},(isFolder?'Open folder ':'Play ')+f.name);name.className='name';
   if(searchingAll()&&!isFolder)name.append(element('small',f.path_display?.slice(0,-f.name.length)||''));
-  li.append(name);if(!isFolder&&!selecting)li.append(button('+',()=>{queue.push(track(f));drawQueue();save();},'Add '+f.name+' to queue'));
+  li.append(name);if(!isFolder&&!selecting){const plus=button('+',()=>openTrackMenu(track(f),plus),'Queue options for '+f.name);plus.setAttribute('aria-haspopup','menu');li.append(plus);holdFor(name,()=>openTrackMenu(track(f),plus));}
   if(selecting&&!isFolder)name.disabled=true;
   list.append(li);
  }
@@ -87,7 +87,11 @@ function drawQueue(){
  for(let i=0;i<queue.length;i++){
   const f=queue[i],li=element('li',null,'row'+(i===current?' active':''));
   const b=button(title(f.name),()=>play(i));b.className='name';if(i===current)b.setAttribute('aria-current','true');li.append(b);
-  li.append(button('×',()=>remove(i),'Remove '+f.name+' from queue'));$('queue').append(li);
+  b.addEventListener('keydown',e=>{if(e.altKey&&(e.key==='ArrowUp'||e.key==='ArrowDown')){e.preventDefault();moveKey(i,e.key==='ArrowUp'?-1:1,'.name');}});
+  li.append(button('×',()=>remove(i),'Remove '+f.name+' from queue'));
+  const grip=element('button','≡','grip');grip.type='button';grip.setAttribute('aria-label','Move '+title(f.name)+' - drag, or use the arrow keys');
+  grip.addEventListener('keydown',e=>{if(e.key==='ArrowUp'||e.key==='ArrowDown'){e.preventDefault();moveKey(i,e.key==='ArrowUp'?-1:1,'.grip');}});
+  grip.addEventListener('pointerdown',e=>startDrag(e,i,li));li.append(grip);$('queue').append(li);
  }
  $('previous').disabled=$('next').disabled=!queue.length;
 }
@@ -159,6 +163,66 @@ async function advance(ended=false){
  if(target!==undefined)await play(target);
 }
 async function previous(){if(audio.currentTime>3){audio.currentTime=0;return;}const target=history.pop();await load(target??Math.max(0,current-1));}
+function move(from,to){
+ to=Math.max(0,Math.min(queue.length-1,to));if(from===to||from<0||from>=queue.length)return false;
+ const m=moveMap(from,to);queue=moveTo(queue,from,to);if(current>=0)current=m(current);history=history.map(m);upcoming=upcoming.map(m);
+ drawQueue();save();warmNext();return true;
+}
+function moveKey(i,step,sel){if(move(i,i+step)){const row=$('queue').children[i+step];row?.querySelector(sel)?.focus();status(title(queue[i+step].name)+' moved to '+(i+step+1)+' of '+queue.length+'.');}}
+function insertAt(pos,t){const shift=i=>i>=pos?i+1:i;queue.splice(pos,0,t);if(current>=pos)current++;history=history.map(shift);upcoming=upcoming.map(shift);}
+function playNext(t){const pos=current>=0?current+1:0;insertAt(pos,t);if(shuffle)upcoming.unshift(pos);drawQueue();save();warmNext();status(title(t.name)+' plays next.');}
+function addToEnd(t){queue.push(t);if(shuffle&&upcoming.length)upcoming.splice(Math.floor(Math.random()*(upcoming.length+1)),0,queue.length-1);drawQueue();save();status(title(t.name)+' added to the end of the queue.');}
+// small menu for a track: Play next / Add to end
+let trackMenu=null,menuFrom=null;
+function closeTrackMenu(){if(!trackMenu||trackMenu.hidden)return;trackMenu.hidden=true;menuFrom?.setAttribute('aria-expanded','false');}
+function openTrackMenu(t,from){
+ if(!trackMenu){trackMenu=element('div',null,'track-menu');trackMenu.setAttribute('role','menu');trackMenu.hidden=true;document.body.append(trackMenu);
+  document.addEventListener('pointerdown',e=>{if(!trackMenu.hidden&&!trackMenu.contains(e.target)&&e.target!==menuFrom)closeTrackMenu();},true);
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!trackMenu.hidden){closeTrackMenu();menuFrom?.focus();}});
+  addEventListener('scroll',closeTrackMenu,true);addEventListener('resize',closeTrackMenu);}
+ if(!trackMenu.hidden&&menuFrom===from){closeTrackMenu();return;}
+ closeTrackMenu();menuFrom=from;from.setAttribute('aria-expanded','true');
+ const pick=(label,fn)=>{const b=element('button',label,'act');b.type='button';b.setAttribute('role','menuitem');b.addEventListener('click',()=>{closeTrackMenu();fn(t);from.focus({preventScroll:true});});return b;};
+ trackMenu.replaceChildren(element('p',title(t.name),'tm-name'),pick('Play next',playNext),pick('Add to end',addToEnd));trackMenu.hidden=false;
+ const r=from.getBoundingClientRect(),w=trackMenu.offsetWidth,h=trackMenu.offsetHeight,bar=$('player')?.offsetHeight||0;
+ let top=r.bottom+4;if(top+h>innerHeight-bar-8)top=Math.max(8,r.top-h-4);
+ trackMenu.style.left=Math.max(12,Math.min(innerWidth-w-12,r.right-w))+'px';trackMenu.style.top=top+'px';trackMenu.querySelector('.act').focus({preventScroll:true});
+}
+// long press on a track name opens the same menu instead of playing it
+let swallowClick=false;
+function holdFor(el,fn){
+ let timer=0,x=0,y=0,fired=false;const stop=()=>clearTimeout(timer);
+ el.addEventListener('pointerdown',e=>{swallowClick=false;fired=false;if(e.pointerType==='mouse')return;x=e.clientX;y=e.clientY;stop();timer=setTimeout(()=>{fired=swallowClick=true;navigator.vibrate?.(10);fn();},480);});
+ el.addEventListener('pointermove',e=>{if(Math.hypot(e.clientX-x,e.clientY-y)>8)stop();});
+ for(const ev of ['pointerup','pointercancel','pointerleave'])el.addEventListener(ev,stop);
+ el.addEventListener('contextmenu',e=>{e.preventDefault();stop();if(!fired)fn();});
+ el.addEventListener('click',e=>{if(swallowClick){swallowClick=false;e.preventDefault();e.stopImmediatePropagation();}},true);
+}
+// drag the ≡ handle to reorder the queue
+function scrollParent(el){for(let p=el;p&&p!==document.body;p=p.parentElement){const o=getComputedStyle(p).overflowY;if((o==='auto'||o==='scroll')&&p.scrollHeight>p.clientHeight)return p;}return document.scrollingElement;}
+function startDrag(e,from,li){
+ if(e.button>0||queue.length<2)return;e.preventDefault();
+ const list=$('queue'),rows=[...list.children],grip=e.currentTarget,scroller=scrollParent(list),page=scroller===document.scrollingElement;
+ const pos=y=>y-list.getBoundingClientRect().top;
+ const mids=rows.map(r=>{const b=r.getBoundingClientRect();return pos(b.top)+b.height/2;}),h=li.getBoundingClientRect().height,grab=pos(e.clientY)-mids[from];
+ let y=e.clientY,target=from,raf=0,live=true;
+ try{grip.setPointerCapture(e.pointerId);}catch{}
+ li.classList.add('dragging');document.body.classList.add('reordering');
+ const update=()=>{
+  const centre=pos(y)-grab;target=from;
+  for(let j=0;j<rows.length;j++){if(j===from)continue;if(j>from&&centre>mids[j])target=j;if(j<from&&centre<mids[j]&&target===from)target=j;}
+  rows.forEach((r,j)=>{if(j===from)return;const d=j>from&&j<=target?-h:j<from&&j>=target?h:0;r.style.transform=d?'translateY('+d+'px)':'';});
+  li.style.transform='translateY('+(centre-mids[from])+'px)';
+ };
+ const tick=()=>{if(!live)return;const top=page?0:scroller.getBoundingClientRect().top,bottom=page?innerHeight-($('player')?.offsetHeight||0):scroller.getBoundingClientRect().bottom;
+  const edge=60,v=y<top+edge?-Math.ceil((top+edge-y)/6):y>bottom-edge?Math.ceil((y-bottom+edge)/6):0;if(v){scroller.scrollTop+=v;update();}raf=requestAnimationFrame(tick);};
+ const moveH=ev=>{y=ev.clientY;update();};
+ const end=()=>{live=false;cancelAnimationFrame(raf);grip.removeEventListener('pointermove',moveH);grip.removeEventListener('pointerup',end);grip.removeEventListener('pointercancel',end);
+  document.body.classList.remove('reordering');rows.forEach(r=>{r.style.transform='';});li.classList.remove('dragging');
+  if(target!==from){move(from,target);$('queue').children[target]?.querySelector('.grip')?.focus({preventScroll:true});}};
+ grip.addEventListener('pointermove',moveH);grip.addEventListener('pointerup',end);grip.addEventListener('pointercancel',end);
+ update();raf=requestAnimationFrame(tick);
+}
 function remove(i){const wasCurrent=i===current;queue.splice(i,1);resetOrder();if(wasCurrent){++playGeneration;audio.pause();audio.removeAttribute('src');audio.load();current=-1;savedTime=0;$('now').textContent='Choose a track';}else if(i<current)current--;drawQueue();save();}
 async function connect(){
  const key=$('app-key').value.trim()||read(localStorage,KEY,'');if(!/^[A-Za-z0-9_-]{5,100}$/.test(key)){$('setup').open=true;$('app-key').focus();throw Error('Add your Dropbox app key in First-time setup, then connect.');}

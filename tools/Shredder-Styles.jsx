@@ -128,15 +128,24 @@ function applyBlending(cut, withUnderlying) {
   executeAction(cTID('setd'), d, DialogModes.NO);
 }
 
-function saveAsStyle(name) {
+function newStyle(name, usingRef, withOptions) {
   var d = new ActionDescriptor(), r = new ActionReference();
   r.putClass(cTID('StyC'));
   d.putReference(cTID('null'), r);
   d.putString(cTID('Nm  '), name);
-  d.putReference(cTID('Usng'), layerRef());
-  d.putBoolean(sTID('blendOptions'), true);
-  d.putBoolean(sTID('layerEffects'), true);
+  d.putReference(cTID('Usng'), usingRef);
+  if (withOptions) { d.putBoolean(sTID('blendOptions'), true); d.putBoolean(sTID('layerEffects'), true); }
   executeAction(cTID('Mk  '), d, DialogModes.NO);
+}
+// Photoshop versions differ in how they accept "New Style", so try the known forms in turn
+function saveAsStyle(name, layer) {
+  var byId = new ActionReference(); byId.putIdentifier(cTID('Lyr '), layer.id);
+  var fx = new ActionReference(); fx.putProperty(cTID('Prpr'), cTID('Lefx')); fx.putEnumerated(cTID('Lyr '), cTID('Ordn'), cTID('Trgt'));
+  var tries = [[layerRef(), true], [byId, true], [layerRef(), false], [fx, false]], last;
+  for (var i = 0; i < tries.length; i++) {
+    try { newStyle(name, tries[i][0], tries[i][1]); return true; } catch (e) { last = e; }
+  }
+  throw last;
 }
 
 // --- the textures -----------------------------------------------------------------
@@ -152,7 +161,21 @@ function definePattern(name) {
   executeAction(cTID('Mk  '), d, DialogModes.NO);
 }
 
+function patternExists(name) {
+  try {
+    var r = new ActionReference(); r.putProperty(cTID('Prpr'), sTID('presetManager')); r.putEnumerated(cTID('capp'), cTID('Ordn'), cTID('Trgt'));
+    var list = executeActionGet(r).getList(sTID('presetManager'));
+    for (var i = 0; i < list.count; i++) {
+      var item = list.getObjectValue(i);
+      if (list.getObjectType(i) !== cTID('PttR')) continue;
+      var names = item.getList(cTID('Nm  '));
+      for (var j = 0; j < names.count; j++) if (names.getString(j) === name) return true;
+    }
+  } catch (e) {}
+  return false;
+}
 function makeTextures() {
+  if (patternExists('Shredder - blotch')) return;      // already made on an earlier run
   var doc = app.documents.add(512, 512, 72, 'Shredder textures', NewDocumentMode.RGB, DocumentFill.WHITE);
   var layer = doc.activeLayer;
   function fresh() { doc.selection.selectAll(); doc.selection.fill(solid('808080')); doc.selection.deselect(); }
@@ -172,22 +195,22 @@ function makeTextures() {
 
 // --- build ------------------------------------------------------------------------
 function buildStyles() {
-  var doc = app.documents.add(1200, 400, 72, 'Shredder styles', NewDocumentMode.RGB, DocumentFill.WHITE);
-  var made = 0, failed = [];
+  var doc = app.documents.add(1400, 260 * STYLES.length, 72, 'Shredder styles', NewDocumentMode.RGB, DocumentFill.WHITE);
+  var made = 0, kept = [], failed = [];
   for (var i = 0; i < STYLES.length; i++) {
     var s = STYLES[i];
-    var t = doc.artLayers.add(); t.kind = LayerKind.TEXT;
-    t.textItem.contents = 'Shred'; t.textItem.size = 200;
+    var t = doc.artLayers.add(); t.kind = LayerKind.TEXT; t.name = 'Shredder - ' + s.name;
+    t.textItem.contents = s.name; t.textItem.size = 150; t.textItem.position = [60, 190 + 260 * i];
+    doc.activeLayer = t;
     try {
       applyEffects(effectsFor(s));
       try { applyBlending(s.cut, true); } catch (e1) { applyBlending(s.cut, false); }
-      saveAsStyle('Shredder - ' + s.name);
-      made++;
-    } catch (e) { failed.push(s.name + ': ' + e.message + (e.line ? ' (line ' + e.line + ')' : '')); }
-    t.remove();
+    } catch (e) { failed.push(s.name + ': ' + e.message + (e.line ? ' (line ' + e.line + ')' : '')); t.remove(); continue; }
+    try { saveAsStyle('Shredder - ' + s.name, t); made++; t.remove(); }
+    catch (e2) { kept.push(s.name); }       // leave the styled layer so it can be added by hand
   }
-  doc.close(SaveOptions.DONOTSAVECHANGES);
-  return { made: made, failed: failed };
+  if (!kept.length) doc.close(SaveOptions.DONOTSAVECHANGES);
+  return { made: made, kept: kept, failed: failed };
 }
 
 function main() {
@@ -196,10 +219,10 @@ function main() {
   app.foregroundColor = solid('000000'); app.backgroundColor = solid('ffffff');
   try {
     makeTextures();
-    var r = buildStyles();
-    var msg = r.made + ' Shredder styles added to Window > Styles.\n\nSelect a type layer and click one.';
+    var r = buildStyles(), msg = '';
+    if (r.made) msg += r.made + ' Shredder styles added to Window > Styles. Select a type layer and click one.\n\nTo save them as a .asl file: select them in the Styles panel, then panel menu > Export Selected Styles...';
+    if (r.kept.length) msg += (msg ? '\n\n' : '') + 'This version of Photoshop would not let a script save styles, so the ' + r.kept.length + ' styled layers are waiting in the open "Shredder styles" document.\n\nFor each one: click the layer, then click the + (Create new style) at the bottom of Window > Styles, and OK. Name and settings are already there.';
     if (r.failed.length) msg += '\n\nThese did not build:\n' + r.failed.join('\n');
-    else msg += '\n\nTo save them as a .asl file: select them in the Styles panel, then panel menu > Export Selected Styles...';
     alert(msg);
   } catch (e) {
     alert('Shredder Styles stopped: ' + e.message + (e.line ? ' (line ' + e.line + ')' : ''));

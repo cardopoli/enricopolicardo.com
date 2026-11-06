@@ -84,10 +84,11 @@ function grit(tmp, u, amount, grainPx) {
 // ---------------------------------------------------------------------------------
 function shred(doc, layer, key, amount) {
   var u = layerHeight(layer), a = amount / 100, seed = Math.floor(rnd(1, 999999));
+  var name = layer.name;                 // read it now: after the conversion the old layer no longer exists
   doc.activeLayer = layer;
   toSmartObject();
-  var so = doc.activeLayer;
-  so.name = layer.name + '  · shredded';
+  var so = doc.activeLayer;              // the new Smart Object (never touch `layer` again after this)
+  try { so.name = name + '  · shredded'; } catch (e) {}
 
   if (key === 'photocopy') {
     so.applyGaussianBlur(px(clampN(u * 0.008 * (0.5 + a), 0.3, 40)));

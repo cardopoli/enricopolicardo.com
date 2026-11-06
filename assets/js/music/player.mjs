@@ -59,7 +59,8 @@ function button(text,fn,label){const b=element('button',text);b.type='button';if
 const title=name=>String(name||'').replace(AUDIO,'');let displayNames=saved.names||{};
 function resetOrder(){history=[];upcoming=[];}
 function filtered(){const q=$('search').value.trim().toLowerCase();return (indexed||(q&&cachedIndex&&!selecting?cachedIndex:entries)).filter(f=>!q || (f.name+' '+(f.path_display||'')).toLowerCase().includes(q));}
-function tracksShown(){return filtered().filter(f=>f['.tag']==='file'&&AUDIO.test(f.name)).map(track);}
+const byName=(a,b)=>a.name.localeCompare(b.name,undefined,{numeric:true,sensitivity:'base'});
+function tracksShown(){return filtered().filter(f=>f['.tag']==='file'&&AUDIO.test(f.name)).sort(byName).map(track);}
 function updateMode(){
  $('shuffle').setAttribute('aria-pressed',String(shuffle));$('repeat').textContent='Repeat: '+repeat;
  $('scan').disabled=selecting||root===null||scanning;$('cancel-scan').hidden=!scanning;
@@ -70,7 +71,7 @@ function updateMode(){
 }
 function drawFiles(){
  const list=$('files');list.replaceChildren();
- const files=filtered().filter(f=>f['.tag']==='folder'||AUDIO.test(f.name)).sort((a,b)=>(a['.tag']==='folder'?0:1)-(b['.tag']==='folder'?0:1)||a.name.localeCompare(b.name,undefined,{numeric:true}));
+ const files=filtered().filter(f=>f['.tag']==='folder'||AUDIO.test(f.name)).sort((a,b)=>(a['.tag']==='folder'?0:1)-(b['.tag']==='folder'?0:1)||byName(a,b));
  $('result-count').textContent=files.length+' '+(files.length===1?'item':'items')+(searchingAll()?' · whole music folder':'');
  for(const f of files){
   const li=element('li',null,'row'+(f['.tag']==='folder'?' folder':' track')),isFolder=f['.tag']==='folder';
@@ -163,14 +164,15 @@ async function advance(ended=false){
  if(target!==undefined)await play(target);
 }
 async function previous(){if(audio.currentTime>3){audio.currentTime=0;return;}const target=history.pop();await load(target??Math.max(0,current-1));}
-function move(from,to){
+function move(from,to){nextFor=-2;
  to=Math.max(0,Math.min(queue.length-1,to));if(from===to||from<0||from>=queue.length)return false;
  const m=moveMap(from,to);queue=moveTo(queue,from,to);if(current>=0)current=m(current);history=history.map(m);upcoming=upcoming.map(m);
  drawQueue();save();warmNext();return true;
 }
 function moveKey(i,step,sel){if(move(i,i+step)){const row=$('queue').children[i+step];row?.querySelector(sel)?.focus();status(title(queue[i+step].name)+' moved to '+(i+step+1)+' of '+queue.length+'.');}}
 function insertAt(pos,t){const shift=i=>i>=pos?i+1:i;queue.splice(pos,0,t);if(current>=pos)current++;history=history.map(shift);upcoming=upcoming.map(shift);}
-function playNext(t){const pos=current>=0?current+1:0;insertAt(pos,t);if(shuffle)upcoming.unshift(pos);drawQueue();save();warmNext();status(title(t.name)+' plays next.');}
+let nextSlot=-1,nextFor=-2;
+function playNext(t){const pos=nextFor===current&&nextSlot>current&&nextSlot<=queue.length?nextSlot:current+1;nextSlot=pos+1;nextFor=current;insertAt(pos,t);if(shuffle)upcoming.unshift(pos);drawQueue();save();warmNext();status(title(t.name)+' plays next.');}
 function addToEnd(t){queue.push(t);if(shuffle&&upcoming.length)upcoming.splice(Math.floor(Math.random()*(upcoming.length+1)),0,queue.length-1);drawQueue();save();status(title(t.name)+' added to the end of the queue.');}
 // small menu for a track: Play next / Add to end
 let trackMenu=null,menuFrom=null;
@@ -223,7 +225,7 @@ function startDrag(e,from,li){
  grip.addEventListener('pointermove',moveH);grip.addEventListener('pointerup',end);grip.addEventListener('pointercancel',end);
  update();raf=requestAnimationFrame(tick);
 }
-function remove(i){const wasCurrent=i===current;queue.splice(i,1);resetOrder();if(wasCurrent){++playGeneration;audio.pause();audio.removeAttribute('src');audio.load();current=-1;savedTime=0;$('now').textContent='Choose a track';}else if(i<current)current--;drawQueue();save();}
+function remove(i){nextFor=-2;const wasCurrent=i===current;queue.splice(i,1);resetOrder();if(wasCurrent){++playGeneration;audio.pause();audio.removeAttribute('src');audio.load();current=-1;savedTime=0;$('now').textContent='Choose a track';}else if(i<current)current--;drawQueue();save();}
 async function connect(){
  const key=$('app-key').value.trim()||read(localStorage,KEY,'');if(!/^[A-Za-z0-9_-]{5,100}$/.test(key)){$('setup').open=true;$('app-key').focus();throw Error('Add your Dropbox app key in First-time setup, then connect.');}
  if(!crypto.subtle)throw Error('Open this player over HTTPS to connect Dropbox.');

@@ -1,5 +1,6 @@
 // Shredder - controls, type rendering, preview and export. The damage itself is in fx.mjs.
 import { TREATMENTS, apply, rng } from './fx.mjs';
+import { toSVG } from './trace.mjs';
 
 const $ = id => document.getElementById(id);
 const KEY = 'ep-shredder-v1', PREVIEW_U = 150, MAX_PIXELS = 36e6;
@@ -71,6 +72,7 @@ function render(u, canvas, { transparent = false } = {}) {
     const j = i * 4; d[j] = r; d[j + 1] = g; d[j + 2] = b; d[j + 3] = a * 255;
   }
   x.putImageData(img, 0, 0);
+  src.layers = layers;
   return src;
 }
 let timer, drawing = false, again = false;
@@ -155,19 +157,29 @@ addEventListener('dragover', e => e.preventDefault());
 addEventListener('drop', e => { e.preventDefault(); depth = 0; $('drop').hidden = true; useFile(e.dataTransfer.files[0]); });
 
 // ---- export ----------------------------------------------------------------------------
-$('export').addEventListener('click', async () => {
-  const btn = $('export'), label = btn.textContent; btn.disabled = true; btn.textContent = 'Shredding…';
+const fileName = ext => { const name = (image ? 'image' : (state.text || 'type').trim().split(/\s+/).slice(0, 3).join('-').toLowerCase().replace(/[^a-z0-9-]/g, '')) || 'type'; return `shredder-${name}-${state.seed}.${ext}`; };
+function download(blob, name) { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 5000); }
+async function busy(btn, fn) {
+  const label = btn.textContent; btn.disabled = true; btn.textContent = 'Shredding…';
   await new Promise(r => setTimeout(r, 30));
-  try {
-    let u = PREVIEW_U * state.scale; const area = out.width * out.height * state.scale * state.scale;
-    if (area > MAX_PIXELS) u = Math.floor(u * Math.sqrt(MAX_PIXELS / area));   // stay within what browsers can hold
-    const c = document.createElement('canvas'); render(u, c, { transparent: state.transparent });
-    const blob = await new Promise(r => c.toBlob(r, 'image/png'));
-    const name = (image ? 'image' : (state.text || 'type').trim().split(/\s+/).slice(0, 3).join('-').toLowerCase().replace(/[^a-z0-9-]/g, '')) || 'type';
-    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `shredder-${name}-${state.seed}.png`; a.click();
-    setTimeout(() => URL.revokeObjectURL(a.href), 5000);
-  } finally { btn.disabled = false; btn.textContent = label; }
-});
+  try { await fn(); } finally { btn.disabled = false; btn.textContent = label; }
+}
+$('export').addEventListener('click', () => busy($('export'), async () => {
+  let u = PREVIEW_U * state.scale; const area = out.width * out.height * state.scale * state.scale;
+  if (area > MAX_PIXELS) u = Math.floor(u * Math.sqrt(MAX_PIXELS / area));   // stay within what browsers can hold
+  const c = document.createElement('canvas'); render(u, c, { transparent: state.transparent });
+  download(await new Promise(r => c.toBlob(r, 'image/png')), fileName('png'));
+}));
+// SVG: the shredded ink traced into real outlines, one shape per ink colour - editable in Illustrator or InDesign
+const SVG_PIXELS = 6e6;
+$('export-svg').addEventListener('click', () => busy($('export-svg'), async () => {
+  let u = PREVIEW_U * 2; const area = out.width * out.height * 4;
+  if (area > SVG_PIXELS) u = Math.floor(u * Math.sqrt(SVG_PIXELS / area));
+  const c = document.createElement('canvas'), src = render(u, c, { transparent: true });
+  const svg = toSVG(src.layers, src.w, src.h, { inks: { 1: state.ink, 2: state.ink2 }, paper: state.transparent ? null : state.paper,
+    outWidth: out.width * state.scale, title: 'Shredder - ' + (image ? 'image' : (state.text || '').replace(/\s+/g, ' ').trim()) });
+  download(new Blob([svg], { type: 'image/svg+xml' }), fileName('svg'));
+}));
 
 drawSteps(); draw();
 document.fonts?.ready?.then(() => schedule());

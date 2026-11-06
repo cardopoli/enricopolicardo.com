@@ -2,6 +2,7 @@
 const repo='cardopoli/enricopolicardo.com',api='https://api.github.com/repos/'+repo+'/git/trees/main?recursive=1';
 const known={
  'tools/Shredder.jsx':{title:'Shredder for Photoshop',app:'Photoshop',description:'The Shredder treatments as a Photoshop script: your type becomes a Smart Object with Smart Filters and a grit mask, so the words stay editable. File > Scripts > Browse.'},
+ 'tools/Shredder-Styles.jsx':{title:'Shredder Styles for Photoshop',app:'Photoshop',description:'Eight trashed-type layer styles: photocopy, toner skip, sandpaper, worn stamp, ink bleed, dry brush, misregistered, faded fax. Run once to add them to your Styles panel, then one click on any type layer. Text stays live.'},
  'tools/shredder.html':{title:'Shredder',description:'Put type through the machine: photocopy, toner skip, ink bleed, 1-bit dither, glitch slices, torn strips, misregister. Reroll for a new take, export transparent PNGs.'},
  'tools/lingo.html':{title:'Lingo',description:'English and Italian, a little every day. Short lessons in modules, spoken by your device, with spaced review so words stick.'},
  'tools/music.html':{title:'Music',description:'Connect Dropbox, browse your albums and listen. A personal player with queue, shuffle, repeat and saved playback.'},

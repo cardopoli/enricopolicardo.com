@@ -125,10 +125,10 @@ TOMORROW</textarea>
   <div class="group">
    <div class="label">Export</div>
    <div class="row"><select id="scale" aria-label="Export size"><option value="1">Screen size</option><option value="3" selected>Print size (3×)</option><option value="5">Poster size (5×)</option></select></div>
-   <button class="btn primary" id="export" type="button">Download PNG</button>
+   <div class="row"><button class="btn primary" id="export" type="button">Download PNG</button><button class="btn" id="export-svg" type="button">Download SVG</button></div>
   </div>
-  <div class="group"><div class="label">Photoshop</div><p class="foot" style="margin:0">Want it live in Photoshop, with the type still editable? <a href="Shredder.jsx" download>Download Shredder for Photoshop</a> - then File &gt; Scripts &gt; Browse… and pick the file. Select a type layer first.<br>Prefer one-click layer styles? <a href="Shredder-Styles.jsx" download>Download Shredder Styles</a> - run it once and eight styles appear in Window &gt; Styles.</p></div>
-  <p class="foot">Runs in your browser - nothing is uploaded. Transparent PNGs drop straight into Photoshop, InDesign or Illustrator. Drop an image anywhere on the page to shred it.</p>
+  <div class="group"><div class="label">Photoshop</div><p class="foot" style="margin:0">Want it live in Photoshop, with the type still editable? <a href="Shredder.jsx" download>Download Shredder for Photoshop</a> - then File &gt; Scripts &gt; Browse… and pick the file. Select a type layer first. Tick "vector copy" for a shape layer you can paste into Illustrator.<br>Prefer one-click layer styles? <a href="Shredder-Styles.jsx" download>Download Shredder Styles</a> - run it once and eight styles appear in Window &gt; Styles.</p></div>
+  <p class="foot">Runs in your browser - nothing is uploaded. Transparent PNGs drop straight into Photoshop, InDesign or Illustrator. The SVG is the same result traced into vector shapes, one per ink colour. Drop an image anywhere on the page to shred it.</p>
  </aside>
 </div>
 <script type="module" src="../assets/js/shredder/app.mjs"></script>

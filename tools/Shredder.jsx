@@ -8,6 +8,7 @@
 //          The layer becomes a Smart Object with Smart Filters plus a layer mask,
 //          so the words stay editable: double-click the Smart Object, edit, save.
 //          Not quite right? Cmd/Ctrl+Z once and run it again - every run is a new take.
+//          Tick "vector copy" to also get a shape layer you can paste into Illustrator.
 #target photoshop
 
 var TREATMENTS = [
@@ -82,9 +83,11 @@ function grit(tmp, u, amount, grainPx) {
 }
 
 // ---------------------------------------------------------------------------------
-function shred(doc, layer, key, amount) {
+function shred(doc, layer, key, amount, vector) {
   var u = layerHeight(layer), a = amount / 100, seed = Math.floor(rnd(1, 999999));
   var name = layer.name;                 // read it now: after the conversion the old layer no longer exists
+  var ink = '000000';
+  try { if (layer.kind === LayerKind.TEXT) ink = layer.textItem.color.rgb.hexValue; } catch (e) {}
   doc.activeLayer = layer;
   toSmartObject();
   var so = doc.activeLayer;              // the new Smart Object (never touch `layer` again after this)
@@ -132,6 +135,44 @@ function shred(doc, layer, key, amount) {
   }
   doc.selection.deselect();
   doc.activeLayer = so;
+  if (vector) makeVector(doc, so, ink);
+}
+
+// ---------------------------------------------------------------------------------
+// Vector copy: bake the shredded look into pixels, trace it into a path, and make a
+// solid-colour shape layer from it. Copy that layer into Illustrator, or use
+// File > Export > Paths to Illustrator. The Smart Object stays underneath, hidden.
+function loadTransparency() {
+  var d = new ActionDescriptor(), r = new ActionReference(), t = new ActionReference();
+  r.putProperty(cTID('Chnl'), sTID('selection')); d.putReference(cTID('null'), r);
+  t.putEnumerated(cTID('Chnl'), cTID('Chnl'), cTID('Trsp')); d.putReference(cTID('T   '), t);
+  executeAction(cTID('setd'), d, DialogModes.NO);
+}
+function shapeLayerFromPath(hex) {
+  var d = new ActionDescriptor(), r = new ActionReference();
+  r.putClass(sTID('contentLayer')); d.putReference(cTID('null'), r);
+  var c = new ActionDescriptor();
+  c.putDouble(cTID('Rd  '), parseInt(hex.substr(0, 2), 16)); c.putDouble(cTID('Grn '), parseInt(hex.substr(2, 2), 16)); c.putDouble(cTID('Bl  '), parseInt(hex.substr(4, 2), 16));
+  var fill = new ActionDescriptor(); fill.putObject(cTID('Clr '), cTID('RGBC'), c);
+  var layer = new ActionDescriptor(); layer.putObject(cTID('Type'), sTID('solidColorLayer'), fill);
+  d.putObject(cTID('Usng'), sTID('contentLayer'), layer);
+  executeAction(cTID('Mk  '), d, DialogModes.NO);
+}
+function makeVector(doc, so, hex) {
+  var copy = so.duplicate(), blank = doc.artLayers.add();
+  blank.move(copy, ElementPlacement.PLACEAFTER);       // an empty layer just below the copy
+  doc.activeLayer = copy;
+  var baked = copy.merge();                             // bakes filters, mask and Dissolve into plain pixels
+  doc.activeLayer = baked;
+  loadTransparency();
+  doc.selection.makeWorkPath(1);                        // 1 px tolerance: keeps the grit, smooths the stair-steps
+  baked.remove();
+  doc.activeLayer = so;
+  shapeLayerFromPath(hex);
+  var shape = doc.activeLayer; shape.name = so.name.replace('shredded', 'vector');
+  try { doc.pathItems.getByName('Work Path').remove(); } catch (e) {}
+  so.visible = false;
+  return shape;
 }
 
 // ---------------------------------------------------------------------------------
@@ -147,18 +188,19 @@ function dialog() {
   var slider = g2.add('slider', undefined, parseInt($.getenv('SHREDDER_A') || '55', 10), 0, 100); slider.preferredSize.width = 200;
   var val = g2.add('statictext', undefined, String(Math.round(slider.value))); val.characters = 3;
   slider.onChanging = function () { val.text = String(Math.round(slider.value)); };
+  var vec = w.add('checkbox', undefined, 'Also make a vector copy (shape layer, for Illustrator)'); vec.value = $.getenv('SHREDDER_V') === '1';
   w.add('statictext', undefined, 'Every run is a new take. Not right? Cmd/Ctrl+Z, then run again.', { multiline: true });
   var b = w.add('group'); b.alignment = 'right';
   b.add('button', undefined, 'Cancel', { name: 'cancel' });
   b.add('button', undefined, 'Shred', { name: 'ok' });
   if (w.show() !== 1) return null;
-  $.setenv('SHREDDER_T', String(list.selection.index)); $.setenv('SHREDDER_A', String(Math.round(slider.value)));
-  return { key: TREATMENTS[list.selection.index].key, amount: Math.round(slider.value) };
+  $.setenv('SHREDDER_V', vec.value ? '1' : '0'); $.setenv('SHREDDER_T', String(list.selection.index)); $.setenv('SHREDDER_A', String(Math.round(slider.value)));
+  return { key: TREATMENTS[list.selection.index].key, amount: Math.round(slider.value), vector: vec.value };
 }
 
 // suspendHistory runs its code as text in the global scope, so the job is handed over here
 var SHREDDER_JOB = null;
-function runJob() { shred(SHREDDER_JOB.doc, SHREDDER_JOB.layer, SHREDDER_JOB.key, SHREDDER_JOB.amount); }
+function runJob() { shred(SHREDDER_JOB.doc, SHREDDER_JOB.layer, SHREDDER_JOB.key, SHREDDER_JOB.amount, SHREDDER_JOB.vector); }
 
 function main() {
   if (!app.documents.length) { alert('Open a document and select the layer to shred.'); return; }
@@ -168,7 +210,7 @@ function main() {
   var choice = dialog(); if (!choice) return;
   var units = app.preferences.rulerUnits; app.preferences.rulerUnits = Units.PIXELS;
   try {
-    SHREDDER_JOB = { doc: doc, layer: layer, key: choice.key, amount: choice.amount };
+    SHREDDER_JOB = { doc: doc, layer: layer, key: choice.key, amount: choice.amount, vector: choice.vector };
     doc.suspendHistory('Shredder: ' + choice.key, 'runJob()');
   } catch (e) {
     alert('Shredder stopped: ' + e.message + (e.line ? ' (line ' + e.line + ')' : '') + '\nUse Cmd/Ctrl+Z to step back if anything changed.');

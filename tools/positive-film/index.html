@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en-GB"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<script src="coi-serviceworker.js"></script>
+<title>Positive Film | Enrico Policardo</title>
+<meta name="description" content="The Ricoh GR's Positive Film look, measured and written down as numbers. Apply it to RAW files from any camera, in your browser.">
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" crossorigin="anonymous">
+<style>
+*{box-sizing:border-box}body{margin:0;background:#fff;color:#000;font:15px/1.6 'Averia Serif Libre',Georgia,serif}
+a{color:inherit;text-underline-offset:4px}main{max-width:1020px;margin:auto;padding:60px 40px 80px}
+header>a{font-size:12px;text-decoration:none}header>a:hover{text-decoration:underline}
+h1{font-size:26px;font-weight:400;line-height:1.3;margin:28px 0 10px}h2{font-size:18px;font-weight:400;margin:0 0 14px}h3{font-size:15px;font-weight:700;margin:24px 0 8px}
+p,li{max-width:680px}.intro{font-size:15px;color:#444;max-width:620px;margin:0 0 34px}.muted,small{color:#777}
+section{border-top:1px solid #ddd;padding:30px 0 10px;margin-top:10px}
+button,input,select{font:inherit;color:inherit}button,.button{background:#fff;border:1px solid #ddd;padding:7px 14px;cursor:pointer;font-size:14px;text-decoration:none;display:inline-block}button:hover,.button:hover{border-color:#000}button:disabled{opacity:.4;cursor:default}
+button:focus-visible,input:focus-visible,a:focus-visible,label:focus-within{outline:2px solid #000;outline-offset:4px}
+.drop{display:block;border:1px dashed #aaa;padding:34px 20px;text-align:center;cursor:pointer;font-size:14px}.drop.over{border-color:#000;background:#f6f6f6}.drop input{position:absolute;opacity:0;width:1px;height:1px}
+.controls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px 28px;margin:22px 0 10px;font-size:13px}
+.controls label{display:block}.controls input[type=range]{width:100%;accent-color:#000}.controls output{float:right;color:#777}
+.check{display:flex!important;gap:8px;align-items:center}
+.stage{position:relative;margin:18px 0 8px;background:#f4f4f4;line-height:0;user-select:none}
+.stage canvas{width:100%;height:auto;display:block}#before{position:absolute;top:0;left:0}
+.stage .tag{position:absolute;top:10px;font:11px/1 system-ui;background:#fff;padding:5px 7px}.tag.l{left:10px}.tag.r{right:10px}
+.split{width:100%;accent-color:#000;margin:6px 0 0}
+#status{font-size:13px;min-height:22px;color:#444}.actions{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 6px}
+table{border-collapse:collapse;font-size:14px;margin:8px 0 18px;min-width:min(100%,520px)}th,td{text-align:left;padding:7px 14px 7px 0;border-bottom:1px solid #eee;vertical-align:top}th{font-weight:400;color:#777;font-size:12px}
+.tables{display:grid;grid-template-columns:200px minmax(0,1fr);gap:40px;align-items:start}
+figure{margin:0 0 30px}figure img{width:100%;height:auto;display:block}figcaption{display:grid;grid-template-columns:repeat(3,1fr);font-size:12px;color:#777;margin-top:6px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+footer{border-top:1px solid #ddd;margin-top:40px;padding-top:16px;font-size:12px;color:#777}
+[hidden]{display:none!important}
+@media(max-width:760px){main{padding:30px 18px}.controls,.tables,.pair{grid-template-columns:1fr}}
+</style></head><body><main>
+<header><a href="../../">← Tools directory</a><h1>Positive Film</h1>
+<p class="intro">The Ricoh GR's Positive Film look, taken apart and written down as numbers. Drop in a RAW file from any camera and it comes out looking like a GR JPEG. Nothing is uploaded: your file is processed in this browser.</p></header>
+
+<section id="tool" aria-labelledby="tool-h"><h2 id="tool-h">Apply it</h2>
+<label class="drop" id="drop">Drop a RAW file (DNG, RW2, NEF, CR2, CR3, ARW, ORF, RAF, PEF) or a JPEG here, or click to choose
+<input type="file" id="file" accept=".dng,.rw2,.nef,.nrw,.cr2,.cr3,.arw,.orf,.raf,.pef,.srw,.3fr,.iiq,.jpg,.jpeg,.png,image/jpeg,image/png"></label>
+<div id="status" role="status" aria-live="polite"></div>
+<div id="view" hidden>
+<div class="controls">
+<label>Strength <output id="strengthOut">100%</output><input type="range" id="strength" min="0" max="100" value="100"></label>
+<label>Exposure <output id="evOut">0.0 stops</output><input type="range" id="ev" min="-2" max="2" step="0.1" value="0"></label>
+<label>Colour shifts <output id="colOut">100%</output><input type="range" id="colour" min="0" max="100" value="100"></label>
+</div>
+<div class="stage" id="stage"><canvas id="after"></canvas><canvas id="before"></canvas><span class="tag l">Before</span><span class="tag r">Positive Film</span></div>
+<input type="range" class="split" id="split" min="0" max="100" value="50" aria-label="Before and after divider">
+<div class="actions"><button id="save" type="button">Download JPEG</button><button id="reset" type="button">Reset sliders</button></div>
+</div>
+<label class="check muted" style="font-size:13px;margin-top:12px"><input type="checkbox" id="full"> Decode RAW files at full resolution (slower, uses more memory)</label>
+<p class="muted" style="font-size:13px">RAW files give the accurate result: the formula was measured from raw colour. A JPEG has already been through its own camera's curve, so the tool first estimates the light in the scene and then applies the look. Treat JPEG results as an approximation.</p>
+</section>
+
+<section aria-labelledby="what-h"><h2 id="what-h">What Positive Film does</h2>
+<p>It is less about adding colour than taking it away from the right places. Compared with a neutral render of the same RAW file, it:</p>
+<ul><li>pulls greens back by about half</li><li>turns yellow towards ochre and warms orange towards red</li><li>keeps reds and blues at full strength</li><li>crushes the blacks, keeps the mid-tones bright and clips hard about two and a half stops over mid grey</li><li>leaves a faint magenta-blue tint in the greys</li></ul>
+<p>Most of the look is one contrast curve applied to the red, green and blue channels separately. Because each channel goes through the curve on its own, the curve also adds saturation in the shadows and takes it out of the highlights. The colour shifts in the second table do the rest.</p>
+</section>
+
+<section aria-labelledby="num-h"><h2 id="num-h">The numbers</h2>
+<div class="tables"><div><h3>Tone curve</h3><table><thead><tr><th>Stops from mid grey</th><th>L*</th></tr></thead><tbody><tr><td>-4.0</td><td>2</td></tr><tr><td>-3.0</td><td>7</td></tr><tr><td>-2.5</td><td>14</td></tr><tr><td>-2.0</td><td>23</td></tr><tr><td>-1.5</td><td>35</td></tr><tr><td>-1.0</td><td>48</td></tr><tr><td>-0.5</td><td>59</td></tr><tr><td>+0.0</td><td>69</td></tr><tr><td>+0.5</td><td>77</td></tr><tr><td>+1.0</td><td>83</td></tr><tr><td>+1.5</td><td>89</td></tr><tr><td>+2.0</td><td>94</td></tr><tr><td>+2.5</td><td>98</td></tr></tbody></table><p class="muted" style="font-size:13px">Applied to each linear RGB channel, with 1.0 as the raw clipping point.</p></div>
+<div><h3>Colour, after the curve</h3><table><thead><tr><th>Colour</th><th>Saturation</th><th>Hue</th><th>Lightness</th><th>Data</th></tr></thead><tbody><tr><td>Red</td><td>+16%</td><td>unchanged</td><td>+1.7</td><td>solid</td></tr><tr><td>Orange</td><td>+19%</td><td>-15° towards red</td><td>+1.3</td><td>solid</td></tr><tr><td>Yellow</td><td>-15%</td><td>-26° towards orange</td><td>+1.1</td><td>solid</td></tr><tr><td>Green</td><td>-49%</td><td>+2° towards cyan</td><td>+0.1</td><td>solid</td></tr><tr><td>Cyan</td><td>0%</td><td>+40° towards blue</td><td>-2.5</td><td>thin data</td></tr><tr><td>Blue</td><td>+13%</td><td>+6° towards purple</td><td>+0.2</td><td>solid</td></tr><tr><td>Purple</td><td>-14%</td><td>unchanged</td><td>+0.7</td><td>solid</td></tr><tr><td>Magenta</td><td>+5%</td><td>+7° towards red</td><td>-3.6</td><td>thin data</td></tr></tbody></table>
+<p style="font-size:14px">Grey cast: a* +1.1, b* -0.7 (slightly magenta and blue). Saturation also rises 11% in the darkest tones and falls 6% in the lightest.</p>
+<p><a class="button" href="../../assets/positive-film/positive-film-formula.json" download>Download the formula (JSON)</a></p></div></div>
+<h3>How close it gets</h3>
+<p style="font-size:14px">Mean colour difference (ΔE 2000) between a RAW file put through the formula and the GR's own Positive Film JPEG of the same frame. Under 2 is hard to see side by side. The last column refits the formula without that photo and then tests on it, to check it isn't just memorising the test set.</p>
+<table><thead><tr><th>Test photo</th><th>Curve only</th><th>Full formula</th><th>Photo left out</th></tr></thead><tbody><tr><td>Street, shop front</td><td>3.4</td><td>2.0</td><td>2.0</td></tr><tr><td>Dog, overcast</td><td>3.9</td><td>1.4</td><td>1.5</td></tr><tr><td>Tower, blue sky</td><td>2.5</td><td>1.3</td><td>1.2</td></tr><tr><td>Portrait, interior</td><td>2.5</td><td>1.6</td><td>1.8</td></tr><tr><td>Interior, window</td><td>1.7</td><td>1.6</td><td>1.9</td></tr><tr><td>Festival, mixed light</td><td>3.6</td><td>2.1</td><td>2.4</td></tr></tbody></table>
+</section>
+
+<section aria-labelledby="cmp-h"><h2 id="cmp-h">Comparisons</h2>
+<figure><img src="../../assets/positive-film/dog.jpg" alt="Three versions of a grey dog in front of foliage: a neutral RAW render, the formula applied, and the Ricoh GR Positive Film JPEG" width="1952" height="483" loading="lazy"><figcaption><span>Neutral RAW</span><span>Formula</span><span>GR Positive Film JPEG</span></figcaption></figure>
+<div class="pair">
+<figure><img src="../../assets/positive-film/bkfoods.jpg" alt="Three versions of a closed shop front with a blue shutter and a red sign: neutral RAW, formula, GR JPEG" width="1469" height="644" loading="lazy"><figcaption><span>Neutral RAW</span><span>Formula</span><span>GR JPEG</span></figcaption></figure>
+<figure><img src="../../assets/positive-film/tower.jpg" alt="Three versions of a brick and white tower block against blue sky: neutral RAW, formula, GR JPEG" width="1469" height="644" loading="lazy"><figcaption><span>Neutral RAW</span><span>Formula</span><span>GR JPEG</span></figcaption></figure>
+</div></section>
+
+<section aria-labelledby="how-h"><h2 id="how-h">How it was measured</h2>
+<p>Six frames from an original Ricoh GR (2013), each shot as RAW plus a Positive Film JPEG, in daylight, overcast, interior and mixed light. Each RAW file was developed with LibRaw using the camera's white balance and no tone curve, then lined up with its JPEG to within a pixel. Clipped areas and sharp edges were left out.</p>
+<p>The curve was fitted on near-neutral pixels from all six frames together. It needed no per-photo exposure correction, which suggests the GR applies the same curve every time. The colour shifts were then fitted on top of the curve in CIE LCh, across eight hue bands and four lightness bands, with a fit that ignores outliers.</p>
+<h3>Limits</h3>
+<ul><li>Cyan and magenta were rare in the test frames, so those two rows are estimates.</li><li>Mixed artificial light fits worst (the festival frame).</li><li>Where highlights clip depends on each camera's sensor. Use the exposure slider if a file looks too bright or too dark.</li><li>Later GR models render Positive Film more gently. This is the original GR.</li></ul>
+<h3>Credits</h3>
+<p style="font-size:14px">An earlier measurement of the GR III's Positive Film by <a href="https://github.com/bastibe/Darktable-Film-Simulation-Panel">bastibe</a> (darktable, public domain) pointed the way. RAW decoding uses <a href="https://github.com/ybouane/LibRaw-Wasm">LibRaw-Wasm</a> (ISC), built on <a href="https://www.libraw.org/">LibRaw</a> (LGPL 2.1 / CDDL 1.0). Browser isolation for the decoder uses <a href="https://github.com/gzuidhof/coi-serviceworker">coi-serviceworker</a> (MIT). Positive Film is Ricoh's name for its own camera setting; this page is an independent measurement and is not connected to Ricoh.</p>
+</section>
+<footer>Positive Film / Enrico Policardo · Measured November 2026 · Free to use</footer>
+</main>
+<script type="module">
+import {pixel,uncurve,encode,decode} from '../../assets/js/positive-film/pf-core.js';
+const $=id=>document.getElementById(id);
+let src=null,prev=null,name='image';
+const MAXP=1600;
+const status=t=>{$('status').textContent=t};
+
+function downsample(s){
+  const f=Math.max(1,Math.ceil(Math.max(s.w,s.h)/MAXP));if(f===1)return s;
+  const w=Math.floor(s.w/f),h=Math.floor(s.h/f),d=new Float32Array(w*h*3),o=s.orig?new Float32Array(w*h*3):null,n=f*f;
+  for(let y=0;y<h;y++)for(let x=0;x<w;x++){let r=0,g=0,b=0,R=0,G=0,B=0;
+    for(let j=0;j<f;j++)for(let i=0;i<f;i++){const k=((y*f+j)*s.w+(x*f+i))*3;r+=s.data[k];g+=s.data[k+1];b+=s.data[k+2];if(o){R+=s.orig[k];G+=s.orig[k+1];B+=s.orig[k+2]}}
+    const q=(y*w+x)*3;d[q]=r/n;d[q+1]=g/n;d[q+2]=b/n;if(o){o[q]=R/n;o[q+1]=G/n;o[q+2]=B/n}}
+  return {w,h,data:d,orig:o,mode:s.mode};
+}
+const c01=v=>v<0?0:v>1?1:v;
+function render(s,before,after){
+  const k=Math.pow(2,+$('ev').value),st=$('strength').value/100,col=$('colour').value/100;
+  const A=new ImageData(s.w,s.h),B=before?new ImageData(s.w,s.h):null,o=new Float64Array(3);
+  for(let p=0,q=0;p<s.data.length;p+=3,q+=4){
+    const r=s.data[p]*k,g=s.data[p+1]*k,b=s.data[p+2]*k;
+    pixel(r,g,b,o,0,col);
+    let nr,ng,nb;
+    if(s.mode==='raw'){nr=encode(c01(r));ng=encode(c01(g));nb=encode(c01(b))}
+    else{nr=s.orig[p];ng=s.orig[p+1];nb=s.orig[p+2]}
+    const fr=encode(c01(o[0])),fg=encode(c01(o[1])),fb=encode(c01(o[2]));
+    A.data[q]=255*(nr+(fr-nr)*st);A.data[q+1]=255*(ng+(fg-ng)*st);A.data[q+2]=255*(nb+(fb-nb)*st);A.data[q+3]=255;
+    if(B){B.data[q]=255*nr;B.data[q+1]=255*ng;B.data[q+2]=255*nb;B.data[q+3]=255}
+  }
+  return {A,B};
+}
+function show(){
+  if(!prev)return;
+  const {A,B}=render(prev,true);
+  for(const [id,img] of [['after',A],['before',B]]){const c=$(id);c.width=prev.w;c.height=prev.h;c.getContext('2d').putImageData(img,0,0)}
+  clip();
+}
+function clip(){$('before').style.clipPath=`inset(0 ${100-$('split').value}% 0 0)`}
+let queued=false;function schedule(){if(queued)return;queued=true;requestAnimationFrame(()=>{queued=false;show()})}
+for(const [id,out,fmt] of [['strength','strengthOut',v=>v+'%'],['ev','evOut',v=>(+v).toFixed(1)+' stops'],['colour','colOut',v=>v+'%']]){
+  $(id).addEventListener('input',()=>{$(out).textContent=fmt($(id).value);schedule()});}
+$('split').addEventListener('input',clip);
+$('reset').addEventListener('click',()=>{$('strength').value=100;$('ev').value=0;$('colour').value=100;for(const e of ['strength','ev','colour'])$(e).dispatchEvent(new Event('input'))});
+
+async function loadRaw(file){
+  if(!self.crossOriginIsolated)throw new Error('This browser has not enabled the RAW decoder for this page yet. Reload the page once and try again.');
+  status('Loading the RAW decoder…');
+  const {default:LibRaw}=await import('./libraw/index.js');
+  const raw=new LibRaw();
+  try{
+    status('Decoding '+file.name+'…');
+    await raw.open(new Uint8Array(await file.arrayBuffer()),{useCameraWb:true,outputColor:1,outputBps:16,gamm:[1,1,0,0,0,0],noAutoBright:true,halfSize:!$('full').checked,userQual:3});
+    const img=await raw.imageData();
+    if(img.colors!==3)throw new Error('Unsupported colour layout in this RAW file.');
+    const n=img.width*img.height,d=new Float32Array(n*3),sc=img.bits===16?1/65535:1/255;
+    for(let i=0;i<n*3;i++)d[i]=img.data[i]*sc;
+    return {w:img.width,h:img.height,data:d,mode:'raw'};
+  }finally{raw.dispose&&raw.dispose()}
+}
+async function loadImage(file){
+  status('Reading '+file.name+'…');
+  const bmp=await createImageBitmap(file);const c=new OffscreenCanvas(bmp.width,bmp.height),x=c.getContext('2d');x.drawImage(bmp,0,0);
+  const px=x.getImageData(0,0,bmp.width,bmp.height).data,n=bmp.width*bmp.height,d=new Float32Array(n*3),o=new Float32Array(n*3);
+  const lut=new Float32Array(256);for(let i=0;i<256;i++)lut[i]=decode(i/255);
+  for(let i=0,p=0;i<n;i++,p+=4){const r=lut[px[p]],g=lut[px[p+1]],b=lut[px[p+2]],Y=0.2126*r+0.7152*g+0.0722*b,k=Y>1e-6?uncurve(Y)/Y:0;
+    d[i*3]=r*k;d[i*3+1]=g*k;d[i*3+2]=b*k;o[i*3]=px[p]/255;o[i*3+1]=px[p+1]/255;o[i*3+2]=px[p+2]/255}
+  return {w:bmp.width,h:bmp.height,data:d,orig:o,mode:'jpeg'};
+}
+async function load(file){
+  if(!file)return;name=file.name.replace(/\.[^.]+$/,'');
+  const isImg=/\.(jpe?g|png)$/i.test(file.name)||/^image\/(jpeg|png)$/.test(file.type);
+  try{
+    $('save').disabled=true;
+    src=isImg?await loadImage(file):await loadRaw(file);
+    prev=downsample(src);$('view').hidden=false;show();$('save').disabled=false;
+    status(`${file.name} · ${src.w} × ${src.h}${src.mode==='raw'?' · RAW':' · JPEG, approximate'}`);
+  }catch(e){console.error(e);status('Could not open '+file.name+'. '+(e.message||e))}
+}
+$('file').addEventListener('change',e=>load(e.target.files[0]));
+const drop=$('drop');
+for(const ev of ['dragenter','dragover'])drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.add('over')});
+for(const ev of ['dragleave','drop'])drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.remove('over')});
+drop.addEventListener('drop',e=>load(e.dataTransfer.files[0]));
+$('save').addEventListener('click',()=>{
+  if(!src)return;status('Processing full image…');$('save').disabled=true;
+  setTimeout(()=>{
+    const {A}=render(src,false);const c=document.createElement('canvas');c.width=src.w;c.height=src.h;c.getContext('2d').putImageData(A,0,0);
+    c.toBlob(b=>{const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=name+'-positive-film.jpg';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),5000);
+      status(`Saved ${name}-positive-film.jpg · ${src.w} × ${src.h}`);$('save').disabled=false},'image/jpeg',0.92);
+  },30);
+});
+</script></body></html>

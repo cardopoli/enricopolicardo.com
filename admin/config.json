@@ -65,6 +65,21 @@
           "preview_path": "/enricopolicardo.com/tools/mvmnt.html"
         },
         {
+          "name": "positive-film",
+          "label": "Positive Film",
+          "file": "tools/positive-film/index.html",
+          "format": "raw",
+          "fields": [
+            {
+              "name": "body",
+              "label": "File contents",
+              "widget": "text",
+              "hint": "The complete source file. Saving replaces its contents. Use the public link below to run HTML tools."
+            }
+          ],
+          "preview_path": "/enricopolicardo.com/tools/positive-film/"
+        },
+        {
           "name": "tender-tool",
           "label": "Tender tracker",
           "file": "tools/tender_tool.html",

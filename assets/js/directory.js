@@ -14,13 +14,14 @@ const known={
  'tools/deepgram_transcripts.html':{title:'Deepgram transcripts',description:'An audio transcription tool for This Was Tomorrow.'},
  'tools/property-toolkit.html':{title:'Property toolkit',description:'Buying anything from a ruin to a flat in Italy or Slovenia: search tools, checks, costs and every step to the notary, with a saved checklist per property.'},
  'tools/mvmnt.html':{title:'MVMNT',description:'Build, save and share movement routines.'},
+ 'tools/positive-film/index.html':{title:'Positive Film',description:'The Ricoh GR look, measured and written down as numbers. Drop in a RAW file from any camera and get a GR Positive Film render, in your browser.'},
  'tools/InDesign_Relinker.jsx':{title:'InDesign relinker',description:'A downloadable script for Adobe InDesign.'},
  'documents/this-was-tomorrow/field-guide-and-release.pdf':{title:'Field guide and release form',description:'This Was Tomorrow - information and release form.'}
 };
 let files=[...Object.keys(known).map(path=>({path,type:'blob'})),...['index.html','README.md','admin/index.html','admin/config.json','admin/README.md','data/documents.json','assets/css/directory.css','assets/js/directory.js'].map(path=>({path,type:'blob'}))];
 const $=id=>document.getElementById(id),ext=p=>p.split('.').pop().toLowerCase(),url=p=>'./'+p.split('/').map(encodeURIComponent).join('/');
 function visibleFile(f){return f.type==='blob'&&!f.path.split('/').some(p=>p.startsWith('.'))}
-function group(f){return f.path.startsWith('tests/')||f.path.startsWith('admin/')||f.path.startsWith('assets/')||f.path.startsWith('data/')||f.path.startsWith('This Was Tomorrow/')||f.path==='tools/writingtool.html'||f.path==='README.md'||f.path==='index.html'?'system':f.path.startsWith('tools/')?'tools':['pdf','doc','docx','txt','md','csv','xls','xlsx','ppt','pptx'].includes(ext(f.path))?'documents':'other'}
+function group(f){return f.path.startsWith('tests/')||f.path.startsWith('admin/')||f.path.startsWith('assets/')||f.path.startsWith('data/')||f.path.startsWith('This Was Tomorrow/')||f.path==='tools/writingtool.html'||(f.path.startsWith('tools/positive-film/')&&f.path!=='tools/positive-film/index.html')||f.path==='README.md'||f.path==='index.html'?'system':f.path.startsWith('tools/')?'tools':['pdf','doc','docx','txt','md','csv','xls','xlsx','ppt','pptx'].includes(ext(f.path))?'documents':'other'}
 function label(f){return known[f.path]?.title||f.path.split('/').pop().replace(/\.[^.]+$/,'').replace(/[_-]/g,' ')}
 function el(tag,text,cls){const e=document.createElement(tag);if(text)e.textContent=text;if(cls)e.className=cls;return e}
 function link(text,href,download=false){const a=el('a',text);a.href=href;if(download)a.setAttribute('download','');return a}

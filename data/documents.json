@@ -4,6 +4,21 @@
       "title": "This Was Tomorrow - field guide and release",
       "file": "/enricopolicardo.com/documents/this-was-tomorrow/field-guide-and-release.pdf",
       "notes": "Existing field guide and release form."
+    },
+    {
+      "title": "Positive Film - study (PDF)",
+      "file": "/enricopolicardo.com/documents/positive-film/positive-film-study.pdf",
+      "notes": "A measured formula for the Ricoh GR Positive Film look: method, numbers, accuracy and sources."
+    },
+    {
+      "title": "Positive Film - study (Markdown)",
+      "file": "/enricopolicardo.com/documents/positive-film/positive-film-study.md",
+      "notes": "The study as plain text."
+    },
+    {
+      "title": "Positive Film - analysis code",
+      "file": "/enricopolicardo.com/documents/positive-film/positive-film-pipeline.zip",
+      "notes": "Python pipeline and JavaScript formula for measuring a camera's JPEG look from RAW + JPEG pairs."
     }
   ]
 }

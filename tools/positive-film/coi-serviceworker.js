@@ -4,11 +4,11 @@ let coepCredentialless = false;
 if (typeof window === 'undefined') {
     // Positive Film additions: keep the tool on the device so it works offline
     // and repeat visits cost no bandwidth. Bump CACHE on every release.
-    const CACHE = "positive-film-v0.2";
+    const CACHE = "positive-film-v0.3";
     const PRECACHE = ["./", "./coi-serviceworker.js", "./manifest.webmanifest", "./icon-192.png", "./icon-512.png",
         "./libraw/index.js", "./libraw/worker.js", "./libraw/libraw.js", "./libraw/libraw.wasm",
-        "../../assets/js/positive-film/pf-core.js", "../../assets/positive-film/positive-film-formula.json",
-        "../../assets/positive-film/dog.jpg", "../../assets/positive-film/bkfoods.jpg", "../../assets/positive-film/tower.jpg"];
+        "../../assets/js/positive-film/pf-core.js", "../../assets/js/positive-film/looks.js", "../../assets/positive-film/positive-film-formula.json",
+        "../../assets/positive-film/dog.jpg", "../../assets/positive-film/bkfoods.jpg", "../../assets/positive-film/tower.jpg", "../../assets/positive-film/looks-dog-1.jpg", "../../assets/positive-film/looks-dog-2.jpg"];
     self.addEventListener("install", () => self.skipWaiting());
     self.addEventListener("activate", (event) => event.waitUntil(
         caches.keys().then((keys) => Promise.all(keys.filter((k) => k.startsWith("positive-film-") && k !== CACHE).map((k) => caches.delete(k))))

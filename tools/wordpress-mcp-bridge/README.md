@@ -14,8 +14,7 @@ The ZIP contains all PHP/JS source files, WordPress installation instructions, a
 
 ## Compatibility
 
-- **ChatGPT:** intended remote MCP / OAuth integration; previously used with v0.6.1 at ReThinkable.
-- **Claude / Claude Desktop:** intended remote MCP / OAuth Dynamic Client Registration. Add the exact `claude.ai` hostname in Settings → Universal MCP Bridge → Allowed OAuth callback domains. In Claude, choose automatic registration, not Claude's published identity mode.
+- **Claude:** remote MCP with OAuth dynamic client registration. End-to-end testing still to come. Add the exact `claude.ai` hostname in Settings → Universal MCP Bridge → Allowed OAuth callback domains. In Claude, choose automatic registration, not Claude's published identity mode.
 - **Other clients:** only those supporting appropriate remote MCP HTTP and OAuth. Compatibility may require client-specific setup.
 - **Testing:** no claim that this ZIP is verified with all assistants. Keep compatibility status in the bundled COMPATIBILITY.md.
 

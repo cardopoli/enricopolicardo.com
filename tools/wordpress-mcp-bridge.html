@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Free, self-hosted WordPress MCP bridge for compatible AI assistants. Open-source beta with OAuth and approval controls.">
+<meta name="description" content="A free, open-source WordPress plugin that lets Claude and other MCP clients read your site and draft changes, with your approval for anything that writes.">
 <title>Universal WordPress MCP Bridge - Free beta</title>
 <style>
 :root{color-scheme:light;--bg:#f5f2ea;--fg:#171715;--line:#c5c0b4;--muted:#5c5a54;--accent:#d88424}
@@ -32,42 +32,42 @@ footer{border-top:1px solid var(--line);padding-top:24px;font-size:12px;color:va
 <body>
 <main>
 <nav><a href="../">Enrico Policardo</a> / <a href="../">Tools</a> / WordPress MCP Bridge</nav>
-<p class="eyebrow">Free software / Optional support</p>
+<p class="eyebrow">Free software / WordPress plugin</p>
 <h1>WordPress,<br>meet your AI.</h1>
-<p class="lead">An open-source, self-hosted Model Context Protocol bridge for WordPress. Give a compatible AI assistant controlled access to manage content, inspect your website and propose changes without handing it your WordPress password.</p>
-<p class="meta">Version 0.6.2 public beta - GPL-2.0-or-later - self-hosted WordPress</p>
+<p class="lead">A free, open-source plugin that turns your WordPress site into an MCP server. Claude - or any assistant that supports remote MCP - can read your pages, check the site's health and draft changes. Anything that writes waits for your approval, and your WordPress password never leaves WordPress.</p>
+<p class="meta">Version 0.6.2 public beta - GPL-2.0-or-later - runs on your own WordPress</p>
 <div class="actions">
-<a class="primary" href="./Universal-WordPress-MCP-Bridge-v0.6.2-public-beta.zip" download>Download free WordPress plugin (ZIP)</a>
-<a href="https://github.com/cardopoli/enricopolicardo.com/tree/main/tools/wordpress-mcp-bridge">Documentation and source information</a>
+<a class="primary" href="./Universal-WordPress-MCP-Bridge-v0.6.2-public-beta.zip" download>Download the plugin (ZIP)</a>
+<a href="https://github.com/cardopoli/enricopolicardo.com/tree/main/tools/wordpress-mcp-bridge">Docs and source</a>
 </div>
-<div class="notice"><p><strong>Beta software.</strong> The package has passed local PHP syntax checks, but has not been independently security audited or tested end-to-end with every client. Test on staging before using it on a live WordPress site. Connections and changes require WordPress administrator authorisation.</p></div>
+<div class="notice"><p><strong>This is a beta.</strong> It passes PHP syntax checks, but it hasn't had an independent security audit, and it hasn't been tested end to end with every client. Try it on a staging copy first. Every connection, and every change, needs a WordPress administrator's approval.</p></div>
 <section>
-<h2>Works with compatible MCP clients</h2>
+<h2>What it does</h2>
 <div class="grid">
-<div><p><strong>ChatGPT</strong><br>Previously connected using the WordPress bridge's remote MCP and OAuth endpoint. Retest after upgrading to this build.</p></div>
-<div><p><strong>Claude / Claude Desktop</strong><br>Intended support using custom remote connector and automatic OAuth client registration (DCR). Add <code>claude.ai</code> to the permitted callback domains. End-to-end validation pending.</p></div>
-<div><p><strong>Other MCP-compatible clients</strong><br>Use a remote Streamable HTTP client supporting OAuth and dynamic registration. Some desktops require a loopback callback or intermediary. Check each client's own documentation.</p></div>
-<div><p><strong>Not every AI platform</strong><br>MCP is a protocol, not a promise that all assistants support remote servers or the same login flow.</p></div>
+<div><p><strong>Reads</strong><br>Pages, posts, media, plugins, site health and backup status. This is all it can do until you switch writing on.</p></div>
+<div><p><strong>Writes, if you let it</strong><br>Drafts, text and SEO edits, maintenance requests and small theme code fixes. Each one is off by default, and each change is approved inside WordPress. Code edits keep a rollback copy.</p></div>
+<div><p><strong>Connects to Claude</strong><br>Add it as a custom connector using your site's MCP address and choose automatic sign-in registration. Add <code>claude.ai</code> to the plugin's allowed callback domains first. Full end-to-end testing with Claude is still to come.</p></div>
+<div><p><strong>And other MCP clients</strong><br>Any client that supports remote MCP over HTTPS, with OAuth and dynamic client registration. Add its callback domain to the allowed list. Not every assistant supports remote MCP yet - check yours first.</p></div>
 </div>
 </section>
 <section>
-<h2>Start with read-only access</h2>
+<h2>Set it up, read-only first</h2>
 <ol>
-<li>Back up your WordPress website and database. Test restoration on staging.</li>
-<li>In WordPress open Plugins → Add New → Upload Plugin and select the downloaded ZIP.</li>
-<li>Go to Settings → Universal MCP Bridge and copy the MCP server URL shown there.</li>
-<li>Enable connections while leaving write, maintenance and code-edit tools off.</li>
-<li>In your AI client, add a custom remote MCP server with OAuth DCR. Set exact callback domains, then log in as a WordPress administrator and approve access.</li>
-<li>Test basic read tools before enabling controlled writes.</li>
+<li>Back up the site and database, and check that the backup actually restores.</li>
+<li>In WordPress, go to Plugins → Add New → Upload Plugin and choose the ZIP.</li>
+<li>Open Settings → Universal MCP Bridge, switch connections on and copy the MCP address. Leave writing, maintenance and code edits off for now.</li>
+<li>Add <code>claude.ai</code> - or your client's callback domain - to the allowed domains.</li>
+<li>In your AI client, add a custom connector with that address. Sign in as a WordPress administrator and approve access.</li>
+<li>Try the read tools. Switch writing on only when you're happy with what you see.</li>
 </ol>
-<p class="small">A client may impose its own account requirements, rate limits or costs. This plugin does not bypass them.</p>
+<p class="small">Your AI client may have its own plan requirements, limits or costs. The plugin doesn't change those.</p>
 </section>
 <section>
 <h2>Free. Support is optional.</h2>
-<p>The plugin is free to download, use, modify and redistribute under GPL-2.0-or-later. Donations can support maintenance and further client testing, but payment is not a condition for using the software. Professional setup, support and site-specific integrations could be offered separately.</p>
-<p class="small">A payment or donation link has not been configured. There is no hidden checkout.</p>
+<p>The plugin is free to download, use, change and share under GPL-2.0-or-later. Donations would help pay for maintenance and testing with more clients, but they're never required.</p>
+<p class="small">There's no payment or donation link yet.</p>
 </section>
-<footer>Universal WordPress MCP Bridge is an independent beta project, not affiliated with WordPress.org, Anthropic or OpenAI.</footer>
+<footer>Universal WordPress MCP Bridge is an independent beta project, not affiliated with WordPress.org or any AI company.</footer>
 </main>
 </body>
 </html>

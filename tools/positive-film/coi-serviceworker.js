@@ -4,7 +4,7 @@ let coepCredentialless = false;
 if (typeof window === 'undefined') {
     // Positive Film additions: keep the tool on the device so it works offline
     // and repeat visits cost no bandwidth. Bump CACHE on every release.
-    const CACHE = "positive-film-v0.3";
+    const CACHE = "positive-film-v0.4";
     const PRECACHE = ["./", "./coi-serviceworker.js", "./manifest.webmanifest", "./icon-192.png", "./icon-512.png",
         "./libraw/index.js", "./libraw/worker.js", "./libraw/libraw.js", "./libraw/libraw.wasm",
         "../../assets/js/positive-film/pf-core.js", "../../assets/js/positive-film/looks.js", "../../assets/positive-film/positive-film-formula.json",

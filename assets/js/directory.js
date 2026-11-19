@@ -14,7 +14,7 @@ const known={
  'tools/deepgram_transcripts.html':{title:'Deepgram transcripts',description:'An audio transcription tool for This Was Tomorrow.'},
  'tools/property-toolkit.html':{title:'Property toolkit',description:'Buying anything from a ruin to a flat in Italy or Slovenia: search tools, checks, costs and every step to the notary, with a saved checklist per property.'},
  'tools/mvmnt.html':{title:'MVMNT',description:'Build, save and share movement routines.'},
- 'tools/positive-film/index.html':{title:'Positive Film',description:'The Ricoh GR look, measured and written down as numbers. Drop in a RAW file from any camera and get a GR Positive Film render, in your browser.'},
+ 'tools/positive-film/index.html':{title:'Positive Film',description:'Seven film looks for any camera: the Ricoh GR Positive Film look (measured), portrait negative, 90s lab print, muted chrome, night tungsten and two black and whites. Runs in your browser.'},
  'tools/InDesign_Relinker.jsx':{title:'InDesign relinker',description:'A downloadable script for Adobe InDesign.'},
  'documents/this-was-tomorrow/field-guide-and-release.pdf':{title:'Field guide and release form',description:'This Was Tomorrow - information and release form.'}
 };

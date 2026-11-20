@@ -7,7 +7,7 @@ Public project documentation for the three site-specific plugin upgrades release
 The three plugins are independent, with **separate first-level WordPress sidebar entries**:
 
 1. **Homepage & Design** - ReThinkable Editorial Kit 1.1.0. ACF-assisted editing of homepage page 12467, multilingual copy and media, and optional styles.
-2. **Partners & Supporters** - ReThinkable Partners Manager 1.2.0. Edition-scoped partner/supporter database, linked names and logos, and a compact responsive footer inside the existing Inspiro layout.
+2. **Partners & Supporters** - ReThinkable Partners Manager 1.2.1. Edition-scoped partner/supporter database, linked names and logos, and a compact responsive footer inside the existing Inspiro layout.
 3. **AI Connection** - Universal WordPress MCP Bridge 0.6.3 (beta). WordPress-hosted MCP/OAuth endpoint and separately gated read/write/maintenance capabilities.
 
 They should not share a synthetic Settings submenu or a controlling umbrella plugin. Deactivating one should not remove another's management screen.
@@ -18,7 +18,7 @@ They should not share a synthetic Settings submenu or a controlling umbrella plu
 2. Download the three [release ZIP files](../../tools/rethinkable-wordpress-admin/README.md). Install or upgrade **one at a time** through **Plugins → Add New → Upload Plugin**. Choose **Replace existing**, not Delete.
 3. Check each WordPress sidebar entry. The original options and post meta are not deleted by a replacement upload.
 4. Verify the homepage in IT, SL and EN; inspect desktop/mobile responsive layout, images and video; check a live event's booking flow.
-5. Check 2026-27 partner names, logo order, linked URLs, supporter row and footer. If two sets of logos show, remove **only** the obsolete partner-logo widget after identifying it.
+5. Verify the four original footer widgets are unchanged: identity, historical Regione FVG / Io Sono FVG / GO!2025, Comune di Gorizia / Mestna občina Nova Gorica, and Links. The six RT.5 partner logos should be small in the existing footer row, with only Cassa Rurale FVG added to historic supporters. There should be **no duplicate section below the footer widgets**.
 6. Confirm fixed RT.5 partner credits in the programme and Media Kit, and dynamic current-edition credits on Chi siamo.
 7. Test MCP read-only connection before enabling extra capabilities. Allow only expected OAuth callback domains.
 

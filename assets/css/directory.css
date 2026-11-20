@@ -23,6 +23,7 @@ h1{font-size:clamp(15px,1.4vw,18px);font-weight:700;margin:0 0 6px;letter-spacin
 .search label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em}
 .search input{flex:1;min-width:0;border:0;background:none;padding:8px 0;font-size:clamp(20px,2.4vw,30px);font-weight:500;letter-spacing:-.02em;outline:none}
 .search input::placeholder{color:#b4b4b4}
+.search input::-webkit-search-cancel-button{-webkit-appearance:none;appearance:none;width:14px;height:14px;cursor:pointer;background:linear-gradient(45deg,transparent 45%,currentColor 45%,currentColor 55%,transparent 55%),linear-gradient(-45deg,transparent 45%,currentColor 45%,currentColor 55%,transparent 55%)}
 .search:focus-within{border-bottom-color:var(--accent)}
 #count{font-size:11px;white-space:nowrap;padding-bottom:6px}
 #refresh{background:none;border:0;padding:0 0 6px;font-size:11px;cursor:pointer;text-decoration:underline;text-underline-offset:3px}

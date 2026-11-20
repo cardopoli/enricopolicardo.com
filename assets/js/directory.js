@@ -1,7 +1,7 @@
 'use strict';
 const repo='cardopoli/enricopolicardo.com',api='https://api.github.com/repos/'+repo+'/git/trees/main?recursive=1';
 const known={
- 'tools/wordpress-mcp-bridge.html':{title:'WordPress MCP Bridge',description:'Free, open-source WordPress plugin to connect compatible AI assistants via MCP and OAuth. Download the public beta, read the installation guide and review the security notes.'},
+ 'tools/wordpress-mcp-bridge.html':{title:'WordPress MCP Bridge',description:'Free, open-source WordPress plugin to connect compatible AI assistants via MCP and OAuth. Download the 0.6.4 public beta, read the installation guide and review the security notes.'},
  'tools/Shredder.jsx':{title:'Shredder for Photoshop',app:'Photoshop',description:'The Shredder treatments as a Photoshop script: your type becomes a Smart Object with Smart Filters and a grit mask, so the words stay editable. Optional vector copy for Illustrator. File > Scripts > Browse.'},
  'tools/Shredder-Styles.jsx':{title:'Shredder Styles for Photoshop',app:'Photoshop',description:'Eight trashed-type layer styles: photocopy, toner skip, sandpaper, worn stamp, ink bleed, dry brush, misregistered, faded fax. Run once to add them to your Styles panel, then one click on any type layer. Text stays live.'},
  'tools/shredder.html':{title:'Shredder',description:'Put type through the machine: photocopy, toner skip, ink bleed, 1-bit dither, glitch slices, torn strips, misregister. Reroll for a new take, export transparent PNGs.'},
@@ -23,7 +23,7 @@ let files=[...Object.keys(known).map(path=>({path,type:'blob'})),...['index.html
 const $=id=>document.getElementById(id),ext=p=>p.split('.').pop().toLowerCase(),url=p=>'./'+p.split('/').map(encodeURIComponent).join('/');
 const hidden=new Set(['simili.pdf','tartine.pdf']);
 function visibleFile(f){return f.type==='blob'&&!hidden.has(f.path)&&!f.path.split('/').some(p=>p.startsWith('.'))}
-function group(f){return f.path.startsWith('tests/')||f.path.startsWith('admin/')||f.path.startsWith('assets/')||f.path.startsWith('data/')||f.path.startsWith('This Was Tomorrow/')||f.path==='tools/writingtool.html'||f.path==='tools/Universal-WordPress-MCP-Bridge-v0.6.2-public-beta.zip'||f.path.startsWith('tools/wordpress-mcp-bridge/')||f.path.startsWith('tools/rethinkable-wordpress-admin/')||(f.path.startsWith('tools/positive-film/')&&f.path!=='tools/positive-film/index.html')||f.path==='README.md'||f.path==='index.html'?'system':f.path.startsWith('tools/')?'tools':['pdf','doc','docx','txt','md','csv','xls','xlsx','ppt','pptx'].includes(ext(f.path))?'documents':'other'}
+function group(f){return f.path.startsWith('tests/')||f.path.startsWith('admin/')||f.path.startsWith('assets/')||f.path.startsWith('data/')||f.path.startsWith('This Was Tomorrow/')||f.path==='tools/writingtool.html'||f.path.startsWith('tools/wordpress-mcp-bridge/')||(f.path.startsWith('tools/positive-film/')&&f.path!=='tools/positive-film/index.html')||f.path==='README.md'||f.path==='index.html'?'system':f.path.startsWith('tools/')?'tools':['pdf','doc','docx','txt','md','csv','xls','xlsx','ppt','pptx'].includes(ext(f.path))?'documents':'other'}
 function label(f){return known[f.path]?.title||f.path.split('/').pop().replace(/\.[^.]+$/,'').replace(/[_-]/g,' ')}
 function el(tag,text,cls){const e=document.createElement(tag);if(text)e.textContent=text;if(cls)e.className=cls;return e}
 function link(text,href,download=false){const a=el('a',text);a.href=href;if(download)a.setAttribute('download','');return a}

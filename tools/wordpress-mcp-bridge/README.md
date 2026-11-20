@@ -20,6 +20,15 @@ The ZIP contains all PHP/JS source files, WordPress installation instructions, a
 - **Other clients:** only those supporting appropriate remote MCP HTTP and OAuth. Compatibility may require client-specific setup.
 - **Testing:** no claim that this ZIP is verified with all assistants. Keep compatibility status in the bundled COMPATIBILITY.md.
 
+## Works well with
+
+- **qTranslate-XT:** reads content with language markers intact; edits that would add or remove a language block are refused.
+- **Yoast SEO:** updates SEO title, meta description and social description, when Yoast is active.
+- **UpdraftPlus:** reads backup schedules, remote destination and history; warns when there's no off-site backup.
+- **Custom post types:** list and search any post type.
+
+Scheduled tasks belonging to WordPress core, UpdraftPlus, Wordfence and WooCommerce are protected from removal. So far used on one multilingual WordPress site.
+
 ## Security
 
 The bridge has privileges to inspect and propose changes to a WordPress installation. It is disabled by default. HTTPS and explicit administrator OAuth consent are required. Write, maintenance and theme code editing have separate controls. Do not open the callback allowlist to unknown domains; never publish server credentials or OAuth tokens. Test on staging first.

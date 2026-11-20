@@ -5,7 +5,7 @@ Three separate, versioned plugins used by the ReThinkable Festival website. Each
 | WordPress menu | Plugin | Version | Release |
 | --- | --- | --- | --- |
 | **Homepage & Design** | ReThinkable Editorial Kit | 1.1.0 | [ZIP](releases/rethinkable-editorial-kit-v1.1.0.zip) |
-| **Partners & Supporters** | ReThinkable Partners Manager | 1.2.0 | [ZIP](releases/rethinkable-partners-manager-v1.2.0.zip) |
+| **Partners & Supporters** | ReThinkable Partners Manager | 1.2.1 | [ZIP](releases/rethinkable-partners-manager-v1.2.1.zip) |
 | **AI Connection** | Universal WordPress MCP Bridge | 0.6.3 beta | [ZIP](releases/universal-wordpress-mcp-bridge-v0.6.3.zip) |
 
 Each ZIP includes readable PHP/CSS/JavaScript source and its own documentation, plus the nine RT.5 logo assets in Partners Manager. Releases are intended to be installed as WordPress plugins, not extracted into this GitHub Pages site.
@@ -23,7 +23,7 @@ Each ZIP includes readable PHP/CSS/JavaScript source and its own documentation, 
 
 ## Working practice
 
-- **Partners & Supporters**: change links, order, role, logos and visibility in WordPress; copy an edition before editing the next one. Publishing a new active edition requires an administrator. Historical programme and media-kit credits remain fixed to their own edition.
+- **Footer integration**: keep the original four-column widget content (branding, historical logos, municipalities, Links). The RT.5 partner logos are compact in a new column within that same row; only Cassa Rurale FVG is appended to existing supporters. No duplicate lower footer section.\n- **Partners & Supporters**: change links, order, role, logos and visibility in WordPress; copy an edition before editing the next one. Publishing a new active edition requires an administrator. Historical programme and media-kit credits remain fixed to their own edition.
 - **Homepage & Design**: edit the current RT.5 homepage using the ACF fields; its public rendering is disabled until an administrator explicitly activates it.
 - **AI Connection**: self-hosted OAuth-protected MCP endpoint. Start read-only, whitelist approved callback domains, keep administrator approval for modifications.
 

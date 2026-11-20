@@ -8,7 +8,7 @@ The three plugins are independent, with **separate first-level WordPress sidebar
 
 1. **Homepage & Design** - ReThinkable Editorial Kit 1.1.0. ACF-assisted editing of homepage page 12467, multilingual copy and media, and optional styles.
 2. **Partners & Supporters** - ReThinkable Partners Manager 1.2.1. Edition-scoped partner/supporter database, linked names and logos, and a compact responsive footer inside the existing Inspiro layout.
-3. **AI Connection** - Universal WordPress MCP Bridge 0.6.3 (beta). WordPress-hosted MCP/OAuth endpoint and separately gated read/write/maintenance capabilities.
+3. **AI Connection** - Universal WordPress MCP Bridge 0.6.4 (beta). WordPress-hosted MCP/OAuth endpoint and separately gated read/write/maintenance capabilities.
 
 They should not share a synthetic Settings submenu or a controlling umbrella plugin. Deactivating one should not remove another's management screen.
 

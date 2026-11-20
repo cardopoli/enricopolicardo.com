@@ -10,7 +10,7 @@ Recorded from ReThinkable WordPress on **20 November 2026**. Versions are a snap
 | Advanced Custom Fields | 6.8.11 | Required for Editorial Kit homepage fields |
 | ReThinkable Editorial Kit | Installed 1.0.0; proposed 1.1.0 | Homepage fields and styles (page ID 12467); public overrides opt-in |
 | ReThinkable Partners Manager | Installed 1.0.0; proposed 1.2.1 | Edition-partner storage, footer and linked credits |
-| Universal WordPress MCP Bridge | Installed 0.6.1; proposed 0.6.3 | MCP/OAuth integration, administrator controls |
+| Universal WordPress MCP Bridge | Installed 0.6.1; proposed 0.6.4 | MCP/OAuth integration, administrator controls |
 | qTranslate-XT | 3.16.1 | Existing IT / SL / EN content rendering |
 | Events Manager | 7.4.13 | Programme, event bookings and metadata |
 | Yoast SEO | 28.9 | Metadata / indexing |
@@ -24,7 +24,7 @@ Also in use: Max Mega Menu, Contact Form 7 and historical Smart Slider shortcode
 
 - **Partners Manager:** 1.2.1 moves its logos into the existing four-column Inspiro footer widgets in the browser. It does not create a second visible section, and skips duplicate historical supporter logos. Requires JS for the added logos. Automatic footer rendering assumes Inspiro's `template-parts/footer/site-info.php` is loaded. Another theme needs the `[rt_partners]` shortcode placed explicitly. CSS uses smaller responsive logo columns; it does not replace existing footer widgets.
 - **Editorial Kit:** ACF required for its fields. It edits a specific homepage post, currently **12467**. A new homepage ID needs deliberate code changes. Existing page content is preserved as fallback.
-- **MCP Bridge:** HTTPS, WordPress admin approval, allowed redirect hosts, OAuth authorization code + PKCE. Tested with ChatGPT previously on an earlier live build; **Claude and the 0.6.3 release still need end-to-end testing**. Do not promise cross-client compatibility or claim security certification.
+- **MCP Bridge:** HTTPS, WordPress admin approval, allowed redirect hosts, OAuth authorization code + PKCE. Used with an MCP client on an earlier live build; **Claude and the 0.6.4 release still need end-to-end testing**. Do not promise cross-client compatibility or claim security certification.
 - **Security / recovery:** upgrading theme or core may affect custom footer hooks and earlier parent-theme edits. Verify UpdraftPlus restoration off production. Website ownership, hosting, domain, privacy and incident-response controls are not solved by plugin installation.
 
 ## Versioned release discipline

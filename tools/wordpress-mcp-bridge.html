@@ -35,10 +35,10 @@ footer{border-top:1px solid var(--line);padding-top:24px;font-size:12px;color:va
 <p class="eyebrow">Free software / WordPress plugin</p>
 <h1>WordPress,<br>meet your AI.</h1>
 <p class="lead">A free, open-source plugin that turns your WordPress site into an MCP server. Claude - or any assistant that supports remote MCP - can read your pages, check the site's health and draft changes. Anything that writes waits for your approval, and your WordPress password never leaves WordPress.</p>
-<p class="meta">Version 0.6.3 public beta - GPL-2.0-or-later - runs on your own WordPress</p>
+<p class="meta">Version 0.6.4 public beta - GPL-2.0-or-later - runs on your own WordPress</p>
 <div class="actions">
-<a class="primary" href="./rethinkable-wordpress-admin/releases/universal-wordpress-mcp-bridge-v0.6.3.zip" download>Download the plugin (ZIP)</a>
-<a href="https://github.com/cardopoli/enricopolicardo.com/tree/main/tools/rethinkable-wordpress-admin">Docs and source</a>
+<a class="primary" href="./rethinkable-wordpress-admin/releases/universal-wordpress-mcp-bridge-v0.6.4.zip" download>Download the plugin (ZIP)</a>
+<a href="https://github.com/cardopoli/enricopolicardo.com/tree/main/tools/wordpress-mcp-bridge">Docs and source</a>
 </div>
 <div class="notice"><p><strong>This is a beta.</strong> It passes PHP syntax checks, but it hasn't had an independent security audit, and it hasn't been tested end to end with every client. Try it on a staging copy first. Every connection, and every change, needs a WordPress administrator's approval.</p></div>
 <section>
@@ -55,7 +55,7 @@ footer{border-top:1px solid var(--line);padding-top:24px;font-size:12px;color:va
 <ol>
 <li>Back up the site and database, and check that the backup actually restores.</li>
 <li>In WordPress, go to Plugins → Add New → Upload Plugin and choose the ZIP.</li>
-<li>Open AI Connection, switch connections on and copy the MCP address. Leave writing, maintenance and code edits off for now.</li>
+<li>Open <strong>AI Connection</strong> in the WordPress sidebar, switch connections on and copy the MCP address. Leave writing, maintenance and code edits off for now.</li>
 <li>Add <code>claude.ai</code> - or your client's callback domain - to the allowed domains.</li>
 <li>In your AI client, add a custom connector with that address. Sign in as a WordPress administrator and approve access.</li>
 <li>Try the read tools. Switch writing on only when you're happy with what you see.</li>

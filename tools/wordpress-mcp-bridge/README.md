@@ -1,12 +1,14 @@
-# Universal WordPress MCP Bridge - Public beta 0.6.2
+# Universal WordPress MCP Bridge - Public beta 0.6.4
 
 An independent, self-hosted WordPress Model Context Protocol (MCP) server.
 
-**Status:** beta; source and installation package in the ZIP beside this README. No independent security audit. Do not deploy to a live site without staging tests and a verified backup.
+**Status:** beta; source and installation package in the ZIP linked below. No independent security audit. Do not deploy to a live site without staging tests and a verified backup.
 
 ## Free download
 
-[Download the WordPress plugin ZIP](../Universal-WordPress-MCP-Bridge-v0.6.2-public-beta.zip)
+[Download the WordPress plugin ZIP (0.6.4)](../rethinkable-wordpress-admin/releases/universal-wordpress-mcp-bridge-v0.6.4.zip)
+
+Earlier releases, kept for rollback: [0.6.3](../rethinkable-wordpress-admin/releases/universal-wordpress-mcp-bridge-v0.6.3.zip), [0.6.2](../Universal-WordPress-MCP-Bridge-v0.6.2-public-beta.zip).
 
 [Open the tools page](../wordpress-mcp-bridge.html)
 
@@ -14,7 +16,7 @@ The ZIP contains all PHP/JS source files, WordPress installation instructions, a
 
 ## Compatibility
 
-- **Claude:** remote MCP with OAuth dynamic client registration. End-to-end testing still to come. Add the exact `claude.ai` hostname in Settings → Universal MCP Bridge → Allowed OAuth callback domains. In Claude, choose automatic registration, not Claude's published identity mode.
+- **Claude:** remote MCP with OAuth dynamic client registration. End-to-end testing still to come. Add the exact `claude.ai` hostname in **AI Connection** (WordPress sidebar) → Allowed OAuth callback domains. In Claude, choose automatic registration, not Claude's published identity mode.
 - **Other clients:** only those supporting appropriate remote MCP HTTP and OAuth. Compatibility may require client-specific setup.
 - **Testing:** no claim that this ZIP is verified with all assistants. Keep compatibility status in the bundled COMPATIBILITY.md.
 

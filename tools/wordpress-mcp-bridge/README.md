@@ -2,13 +2,13 @@
 
 An independent, self-hosted WordPress Model Context Protocol (MCP) server.
 
-**Status:** beta; source and installation package in the ZIP linked below. No independent security audit. Do not deploy to a live site without staging tests and a verified backup.
+**Status:** beta; source and installation package in the ZIP beside this README. No independent security audit. Do not deploy to a live site without staging tests and a verified backup.
 
 ## Free download
 
-[Download the WordPress plugin ZIP (0.6.4)](../rethinkable-wordpress-admin/releases/universal-wordpress-mcp-bridge-v0.6.4.zip)
+[Download the WordPress plugin ZIP (0.6.4)](universal-wordpress-mcp-bridge-v0.6.4.zip)
 
-Earlier releases, kept for rollback: [0.6.3](../rethinkable-wordpress-admin/releases/universal-wordpress-mcp-bridge-v0.6.3.zip), [0.6.2](../Universal-WordPress-MCP-Bridge-v0.6.2-public-beta.zip).
+SHA-256: `947fe69866b17930338fb9055428641dc37ce70ca4554692ebcc737aa78b8d32`
 
 [Open the tools page](../wordpress-mcp-bridge.html)
 

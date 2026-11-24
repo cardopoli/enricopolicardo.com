@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cookbook - Enrico Policardo</title>
+<meta name="description" content="Your recipes, kept in your own Dropbox. Send it a link and it files the recipe: ingredients, method, times, scaling and a kitchen mode.">
+<meta name="referrer" content="no-referrer">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml"><link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png"><link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#faf9f6;color:#23221f;font:16px/1.5 Georgia,serif}
+main{max-width:980px;margin:auto;padding:40px 28px 60px}
+h1{font-size:38px;font-weight:400;margin:24px 0 4px}
+h2{font-size:23px;font-weight:400;margin:0 0 14px}
+h3{font:600 12px/1.4 system-ui;letter-spacing:.04em;text-transform:uppercase;margin:28px 0 8px;color:#67645c}
+p{max-width:680px}.lead{color:#67645c;margin:0}
+a{color:inherit;text-underline-offset:3px}
+button,input,textarea{font:14px/1.5 system-ui;color:inherit}
+button{padding:9px 15px;border:1px solid #bab6aa;background:transparent;cursor:pointer}
+button:hover,button[aria-selected=true]{background:#23221f;color:#fff;border-color:#23221f}
+button.primary{background:#23221f;color:#fff;border-color:#23221f}
+input,textarea{padding:10px;border:1px solid #c9c5bb;background:#fff;width:100%;border-radius:0}
+textarea{min-height:90px}
+label{display:block;font:12px/1.5 system-ui;margin-bottom:14px}label input,label textarea{margin-top:5px}
+label.check{display:flex;gap:8px;align-items:center}label.check input{width:auto;margin:0}
+:focus-visible{outline:2px solid #816239;outline-offset:3px}
+[hidden]{display:none!important}
+#status{font:13px system-ui;min-height:22px;margin:14px 0 0;color:#67645c}#status.bad{color:#9b2c1c}
+nav{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:26px 0 22px;border-bottom:1px solid #bdb8ad;padding-bottom:18px}
+nav .spacer{flex:1}
+.notice{padding:12px 16px;border-left:3px solid #9a713c;background:#eee9df;font:13px/1.6 system-ui;margin:16px 0}
+details{border-top:1px solid #dedacf;padding:14px 0}summary{cursor:pointer;font:14px system-ui}
+details ol{font:14px/1.6 system-ui;padding-left:20px}details li{margin-bottom:8px}
+code{font:12px ui-monospace,monospace;background:#eee9df;padding:2px 5px;word-break:break-all}
+.row-actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:12px 0}
+.row-actions .spacer{flex:1}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}
+.chip{padding:5px 12px;border-radius:999px;font-size:13px}
+.chip[aria-pressed=true]{background:#9a713c;border-color:#9a713c;color:#fff}
+.list{list-style:none;padding:0;margin:8px 0 0}
+.row{display:flex;justify-content:space-between;align-items:baseline;gap:16px;width:100%;border:0;border-bottom:1px solid #dedacf;padding:16px 2px;text-align:left;background:none}
+.row:hover{background:#f1eee6;color:inherit}
+.row .title{font:22px/1.25 Georgia,serif}
+.row .meta{font:12px system-ui;color:#67645c;text-align:right;flex:none;max-width:45%}
+#count{font:12px system-ui;color:#67645c}
+.search{display:flex;gap:10px;align-items:center}
+.preview{border:1px solid #d7d2c6;background:#fff;padding:20px 22px;margin-top:20px}
+.preview h2{margin:0}.preview .meta{font:13px system-ui;color:#67645c;margin:4px 0 0}
+.preview ul{font:14px/1.6 system-ui;padding-left:18px;margin:12px 0}.preview .more{list-style:none;color:#67645c}
+.bm{display:inline-block;padding:8px 16px;border:1px dashed #9a713c;color:#9a713c;text-decoration:none;font:14px system-ui;cursor:grab}
+.recipe-head .source{font:13px system-ui;color:#67645c;margin:6px 0 0}
+.recipe-head .meta{font:13px system-ui;margin:4px 0 0}
+.cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr);gap:40px}
+.ingredients{list-style:none;padding:0;margin:0;font:15px/1.5 system-ui}
+.ingredients li{padding:9px 0;border-bottom:1px solid #dedacf}
+.steps{padding-left:22px;margin:0}.steps li{padding:0 0 14px 4px}
+.steps li.section{list-style:none;margin-left:-22px;font:600 12px system-ui;text-transform:uppercase;letter-spacing:.04em;color:#9a713c;padding-top:8px}
+.scale{display:flex;align-items:center;gap:10px;font:14px system-ui;margin:4px 0 12px}
+.scale button{padding:2px 12px;font-size:18px}.scale b{min-width:26px;text-align:center;font:22px Georgia,serif}
+.small{font:12px/1.5 system-ui;color:#67645c}
+footer{margin-top:50px;border-top:1px solid #ccc;padding-top:18px;font:12px system-ui;color:#67645c}
+#kitchen{position:fixed;inset:0;z-index:50;background:#faf9f6;overflow:auto;padding:22px clamp(18px,4vw,48px) 40px}
+#kitchen .k-top{display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:1px solid #23221f;padding-bottom:12px}
+#kitchen .k-title{font-size:clamp(22px,4vw,36px);margin:0}
+#k-list{list-style:none;padding:0;margin:0}
+#k-list .k-head{font:600 12px system-ui;text-transform:uppercase;letter-spacing:.05em;color:#9a713c;padding:22px 0 4px}
+#k-list button{display:block;width:100%;padding:clamp(12px,2vw,18px) 4px;border:0;border-bottom:1px solid #dedacf;background:none;text-align:left;color:#23221f;-webkit-tap-highlight-color:transparent}
+#k-list button.ing{font:clamp(20px,3.2vw,30px)/1.25 Georgia,serif}
+#k-list button.step{font:clamp(17px,2.4vw,22px)/1.45 Georgia,serif}
+#k-list button:hover,#k-list button:focus{background:none;color:#23221f}
+#k-list button[aria-pressed=true]{color:#a29d90;text-decoration:line-through;text-decoration-thickness:2px}
+#k-list button[aria-pressed=true] span::before{content:"✓ ";color:#9a713c;display:inline-block;margin-right:.3em}
+.k-foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;align-items:center;margin-top:18px;font:13px system-ui;color:#67645c}
+@media(max-width:760px){main{padding:22px 18px 40px}h1{font-size:30px}.cols{grid-template-columns:1fr;gap:10px}.row .title{font-size:19px}}
+@media print{nav,#status,footer,.row-actions,.scale button,#r-tags,#notes-wrap,#back{display:none!important}main{padding:0}}
+</style>
+</head>
+<body>
+<main>
+<a href="../">← Tools directory</a>
+<h1>Cookbook</h1>
+<p class="lead">Your recipes, kept in your own Dropbox. Send it a link and it files the recipe.</p>
+<div id="status" role="status" aria-live="polite"></div>
+
+<section id="connection">
+ <div class="row-actions"><button id="connect" class="primary" type="button">Connect Dropbox</button><label class="check"><input id="remember" type="checkbox"> Remember on this device</label></div>
+ <p class="small">Cookbook only sees its own folder in your Dropbox (<code>Apps/&lt;your app name&gt;/</code>). Nothing is stored on this website.</p>
+ <details id="setup"><summary>First-time setup (about five minutes, once)</summary>
+  <ol>
+   <li>Go to <a href="https://www.dropbox.com/developers/apps" target="_blank" rel="noopener noreferrer">dropbox.com/developers/apps</a> and choose <strong>Create app</strong>: <strong>Scoped access</strong>, then <strong>App folder</strong>. Name it, for example <em>Enrico Cookbook</em>.</li>
+   <li>In <strong>Permissions</strong>, tick <code>files.metadata.read</code>, <code>files.content.read</code> and <code>files.content.write</code>, then <strong>Submit</strong>.</li>
+   <li>In <strong>Settings → OAuth 2 → Redirect URIs</strong>, add exactly: <code id="callback"></code></li>
+   <li>Copy the <strong>App key</strong> (not the secret) into the box below, then press <strong>Connect Dropbox</strong>.</li>
+  </ol>
+  <label>Dropbox app key<input id="app-key" autocomplete="off" spellcheck="false" placeholder="e.g. a1b2c3d4e5f6g7h"></label>
+  <p class="small">The app key is a public identifier. Never paste an app secret or token here.</p>
+ </details>
+</section>
+
+<section id="app" hidden>
+ <nav aria-label="Cookbook">
+  <button type="button" data-view="library" aria-selected="true">Recipes</button>
+  <button type="button" data-view="add" aria-selected="false">Add</button>
+  <button type="button" data-view="books" aria-selected="false">Books</button>
+  <span class="spacer"></span>
+  <button id="disconnect" type="button">Disconnect</button>
+ </nav>
+
+ <div id="library">
+  <div class="search"><input id="search" type="search" placeholder="Search recipes, sites or tags" aria-label="Search recipes"><button id="reload" type="button" title="Reload from Dropbox">Refresh</button></div>
+  <div id="filters" class="chips" aria-label="Filter by tag"></div>
+  <div id="count"></div>
+  <ol id="recipes" class="list"></ol>
+  <p id="empty" class="notice" hidden>No recipes yet. Open <strong>Add</strong> and paste a link to a recipe page.</p>
+ </div>
+
+ <div id="add" hidden>
+  <h2>Add a recipe</h2>
+  <label>Recipe link<input id="link" type="url" inputmode="url" placeholder="https://…"></label>
+  <div class="row-actions"><button id="fetch" class="primary" type="button">Fetch recipe</button><span class="small">Dropbox fetches the page for you. No AI involved.</span></div>
+  <div id="preview" class="preview" hidden>
+   <h2 id="p-title"></h2><p id="p-meta" class="meta"></p>
+   <p id="p-exists" class="notice" hidden>You already have this recipe. Saving updates it.</p>
+   <ul id="p-ingredients"></ul>
+   <div class="small">Tags</div><div id="p-tags" class="chips"></div>
+   <div class="row-actions"><button id="p-save" class="primary" type="button">Save to Cookbook</button><button id="p-cancel" type="button">Discard</button></div>
+  </div>
+  <h3>Or use the button on the recipe page</h3>
+  <p class="small">Some sites won't let Dropbox fetch them. For those, save this button as a bookmark, then tap it while you're on the recipe:</p>
+  <p><a id="bm" class="bm" href="#">+ Cookbook</a></p>
+  <details><summary>How to add the button</summary>
+   <ol>
+    <li><strong>Computer:</strong> drag <em>+ Cookbook</em> onto your bookmarks bar.</li>
+    <li><strong>iPhone or iPad:</strong> bookmark any page, then edit that bookmark: name it <em>+ Cookbook</em> and replace its address with the button's. To copy the address, press and hold <em>+ Cookbook</em> and choose Copy Link.</li>
+    <li><strong>Android (Chrome):</strong> same as iPhone, then type the bookmark's name into the address bar on a recipe page and pick it from the list.</li>
+   </ol>
+  </details>
+ </div>
+
+ <div id="books" hidden>
+  <h2>Books</h2>
+  <p class="small">Put cookbook PDFs in the <code>books</code> folder inside Cookbook's folder in your Dropbox (<code>Apps/&lt;your app name&gt;/books</code>). They stay private.</p>
+  <ol id="book-list" class="list"></ol>
+  <p id="no-books" class="notice" hidden>No books yet. Add PDFs to the <code>books</code> folder in Dropbox, then open this tab again.</p>
+ </div>
+
+ <article id="recipe" hidden>
+  <button id="back" type="button">← All recipes</button>
+  <header class="recipe-head"><h1 id="r-title"></h1><p id="r-source" class="source"></p><p id="r-meta" class="meta"></p></header>
+  <p id="r-desc" class="small"></p>
+  <div class="row-actions"><button id="kitchen-open" class="primary" type="button">Kitchen mode</button></div>
+  <div class="cols">
+   <div>
+    <h3>Ingredients</h3>
+    <div id="scale" class="scale">Serves <button id="less" type="button" aria-label="Fewer servings">−</button><b id="serves"></b><button id="more" type="button" aria-label="More servings">+</button></div>
+    <p id="scale-note" class="small" hidden>Quantities scaled. Check spices and salt by taste.</p>
+    <ul id="r-ingredients" class="ingredients"></ul>
+   </div>
+   <div id="r-steps-wrap"><h3>Method</h3><ol id="r-steps" class="steps"></ol></div>
+  </div>
+  <h3>Tags</h3><div id="r-tags" class="chips"></div>
+  <div id="notes-wrap"><h3>My notes</h3><textarea id="r-notes" placeholder="What you changed, how it came out, what to try next time."></textarea>
+  <div class="row-actions"><button id="r-save-notes" type="button">Save notes</button><span class="spacer"></span><button id="r-delete" type="button">Delete recipe</button></div></div>
+ </article>
+</section>
+
+<div id="kitchen" hidden role="dialog" aria-modal="true" aria-labelledby="k-title">
+ <div class="k-top"><h2 class="k-title" id="k-title"></h2><button id="k-close" type="button">Done</button></div>
+ <ol id="k-list"></ol>
+ <div class="k-foot"><span id="k-progress" aria-live="polite"></span><span id="k-wake"></span><button id="k-reset" type="button">Untick all</button></div>
+</div>
+
+<footer>Cookbook / Enrico Policardo · Recipes are read from the page's own recipe data and saved to your Dropbox. Always credit and visit the original site.</footer>
+</main>
+<script type="module" src="../assets/js/kitchen/cookbook.mjs"></script>
+</body>
+</html>

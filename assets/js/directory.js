@@ -1,6 +1,7 @@
 'use strict';
 const repo='cardopoli/enricopolicardo.com',api='https://api.github.com/repos/'+repo+'/git/trees/main?recursive=1';
 const known={
+ 'tools/cookbook.html':{title:'Cookbook',description:'Your recipes, kept in your own Dropbox. Paste a link or tap the bookmarklet and it files the recipe: ingredients, method, times. Scale servings, add notes, cook in kitchen mode, open your cookbook PDFs.'},
  'tools/wordpress-mcp-bridge.html':{title:'WordPress MCP Bridge',description:'Free, open-source WordPress plugin to connect compatible AI assistants via MCP and OAuth. Download the 0.6.4 public beta, read the installation guide and review the security notes.'},
  'tools/Shredder.jsx':{title:'Shredder for Photoshop',app:'Photoshop',description:'The Shredder treatments as a Photoshop script: your type becomes a Smart Object with Smart Filters and a grit mask, so the words stay editable. Optional vector copy for Illustrator. File > Scripts > Browse.'},
  'tools/Shredder-Styles.jsx':{title:'Shredder Styles for Photoshop',app:'Photoshop',description:'Eight trashed-type layer styles: photocopy, toner skip, sandpaper, worn stamp, ink bleed, dry brush, misregistered, faded fax. Run once to add them to your Styles panel, then one click on any type layer. Text stays live.'},

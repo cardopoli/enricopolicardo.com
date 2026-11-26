@@ -26,10 +26,11 @@
   },
   {
    "name": "Creative Europe - Culture",
-   "kind": "html",
+   "kind": "manual",
    "url": "https://culture.ec.europa.eu/calls",
    "region": "EU",
-   "lang": "en"
+   "lang": "en",
+   "why": "page builds its list with JavaScript; check by hand"
   },
   {
    "name": "New European Bauhaus",
@@ -104,7 +105,8 @@
    "kind": "html",
    "url": "https://www.a-n.co.uk/jobs/",
    "region": "UK",
-   "lang": "en"
+   "lang": "en",
+   "offsite": true
   },
   {
    "name": "Monographica Open Calls",
@@ -187,10 +189,11 @@
   },
   {
    "name": "Creative Scotland - funding",
-   "kind": "html",
+   "kind": "manual",
    "url": "https://www.creativescotland.com/funding",
    "region": "UK",
-   "lang": "en"
+   "lang": "en",
+   "why": "page builds its list with JavaScript; check by hand"
   },
   {
    "name": "British Council - arts opportunities",
@@ -217,10 +220,11 @@
   },
   {
    "name": "Esmée Fairbairn Foundation",
-   "kind": "html",
+   "kind": "manual",
    "url": "https://esmeefairbairn.org.uk/what-we-fund",
    "region": "UK",
-   "lang": "en"
+   "lang": "en",
+   "why": "rolling funding with no call list; check by hand"
   },
   {
    "name": "Paul Hamlyn Foundation",
@@ -247,10 +251,11 @@
   },
   {
    "name": "Elephant Trust",
-   "kind": "html",
+   "kind": "manual",
    "url": "https://elephanttrust.org.uk/",
    "region": "UK",
-   "lang": "en"
+   "lang": "en",
+   "why": "page builds its list with JavaScript; check by hand"
   },
   {
    "name": "Arts Council Ireland - funding",
@@ -450,10 +455,11 @@
   },
   {
    "name": "Slovenski filmski center - razpisi",
-   "kind": "html",
+   "kind": "manual",
    "url": "https://www.film-center.si/sl/javni-razpisi/",
    "region": "SI",
-   "lang": "sl"
+   "lang": "sl",
+   "why": "page builds its list with JavaScript; check by hand"
   },
   {
    "name": "Booooooom - open calls",

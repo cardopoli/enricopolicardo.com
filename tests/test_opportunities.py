@@ -200,6 +200,24 @@ class Merging(unittest.TestCase):
         self.assertFalse(c.needs_details({'present': True, 'status': 'closed'}, TODAY))
 
 
+class Robustness(unittest.TestCase):
+    def test_accented_urls_are_encoded(self):
+        self.assertEqual(c.safe_url('https://x.it/bandi/attività 2027?a=è'), 'https://x.it/bandi/attivit%C3%A0%202027?a=%C3%A8')
+
+    def test_old_years_without_deadline_count_as_closed(self):
+        self.assertEqual(c.status_of({'title': 'Bando Officine Cultura 2025'}, TODAY), 'closed')
+        self.assertEqual(c.status_of({'title': 'Residency 2026-2027'}, TODAY), 'unknown')
+        self.assertEqual(c.status_of({'title': 'Bando 2025', 'deadline': '2027-01-01'}, TODAY), 'open')
+
+    def test_http_and_https_twins_merge(self):
+        html = '<a href="http://x.example/files/bando-cultura-2027.pdf">Bando cultura 2027 contributi</a><a href="https://x.example/files/bando-cultura-2027.pdf">Bando cultura 2027 contributi</a>'
+        self.assertEqual(len(c.listing_links(html, 'https://x.example/bandi', {})), 1)
+
+    def test_procurement_and_news_are_noise(self):
+        html = '<a href="/a/servizio-di-gestione-piattaforma-2027">Servizio di gestione e manutenzione della piattaforma bando</a><a href="/latest-news/grant-2025">Overview of our grant funding in 2025</a>'
+        self.assertEqual(c.listing_links(html, 'https://x.example/bandi', {}), [])
+
+
 class EU(unittest.TestCase):
     def test_budget_prefers_per_project_maximum(self):
         raw = json.dumps({'budgetTopicActionMap': {'1': [{'budgetYearMap': {'2027': 5000000}, 'maxContribution': 200000, 'minContribution': 50000}]}})
@@ -220,8 +238,51 @@ class Sources(unittest.TestCase):
             self.assertNotIn(s['name'], names)
             names.add(s['name'])
         self.assertGreaterEqual(len(data['sources']), 55)
-        self.assertGreaterEqual(sum(1 for s in data['sources'] if s['kind'] != 'manual'), 30)
+        self.assertGreaterEqual(sum(1 for s in data['sources'] if s['kind'] != 'manual'), 25)
 
 
 if __name__ == '__main__':
     unittest.main()
+
+
+import digest as dg  # noqa: E402
+
+
+class Digest(unittest.TestCase):
+    def setUp(self):
+        root = Path(__file__).resolve().parents[1]
+        self.fx = json.loads((root / 'tests/fixtures/opps-score.json').read_text())
+        self.profiles = json.loads((root / 'data/opportunity-profiles.json').read_text())['profiles']
+
+    def test_scores_match_the_page(self):
+        for p in self.profiles:
+            for it in self.fx['items']:
+                self.assertEqual(dg.score(it, p), self.fx['expected'][p['id']][it['id']], f"{p['id']}/{it['id']}")
+
+    def test_sections(self):
+        items = [dict(i, present=True, first_seen='2026-11-24T07:00:00+00:00' if i['id'] in 'ab' else '2026-10-01T07:00:00+00:00') for i in self.fx['items']]
+        data = {'items': items, 'sources': [{'name': 'Broken site', 'status': 'error'}, {'name': 'Fine', 'status': 'ok'}], 'checked_at': NOW}
+        d = dg.build(data, self.profiles, TODAY)
+        practice, projects = d['sections']
+        self.assertEqual([i['id'] for _, i in practice['new']], ['a'])
+        self.assertEqual([i['id'] for _, i in practice['soon']], ['d'])
+        self.assertEqual([i['id'] for _, i in projects['new']], ['b'])
+        self.assertEqual([s['name'] for s in d['broken']], ['Broken site'])
+        subject, text, html = dg.render(d, TODAY)
+        self.assertEqual(subject, 'Opportunities - 2 new, 1 closing soon (w/c 26 Nov)')
+        self.assertIn('Photography residency in Slovenia 2027', text)
+        self.assertIn('closes 20 Dec (24 days)', text)
+        self.assertIn('Broken site', html)
+        self.assertNotIn('Prize that has closed', text)
+
+    def test_no_secrets_means_no_send(self):
+        import os
+        for k in ('DIGEST_GMAIL_USER', 'DIGEST_GMAIL_APP_PASSWORD', 'DIGEST_TO'):
+            os.environ.pop(k, None)
+        self.assertFalse(dg.send('s', 't', '<p>h</p>'))
+
+    def test_money(self):
+        self.assertEqual(dg.money({'max': 200000, 'currency': 'EUR'}), '€200k')
+        self.assertEqual(dg.money({'max': 2500000, 'currency': 'GBP'}), '£2.5m')
+        self.assertEqual(dg.money({'max': 5000, 'currency': 'GBP'}), '£5,000')
+        self.assertEqual(dg.money(None), '')

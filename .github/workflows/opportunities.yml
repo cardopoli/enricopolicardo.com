@@ -1,0 +1,59 @@
+name: Opportunities - daily check
+on:
+  schedule:
+    - cron: '23 7 * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/opportunities/**'
+      - '.github/workflows/opportunities.yml'
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+concurrency:
+  group: opportunities-daily
+  cancel-in-progress: false
+jobs:
+  update:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 1
+      - name: Unit tests
+        run: python3 -m unittest discover -s tests -p 'test_*.py'
+      - name: Check sources
+        id: collect
+        continue-on-error: true
+        run: python3 scripts/opportunities/collect.py
+      - name: Save results
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          for attempt in 1 2 3; do
+            git add data/opportunities.json
+            if git diff --cached --quiet; then exit 0; fi
+            git commit -m 'Update opportunities'
+            if git push origin "HEAD:${GITHUB_REF_NAME}"; then exit 0; fi
+            if [ "$attempt" -eq 3 ]; then echo 'Could not save after three attempts' >&2; exit 1; fi
+            # Someone pushed meanwhile: keep our data file, take everything else from main.
+            cp data/opportunities.json /tmp/opportunities.json
+            git fetch --depth=1 origin "${GITHUB_REF_NAME}"
+            git reset --hard "origin/${GITHUB_REF_NAME}"
+            cp /tmp/opportunities.json data/opportunities.json
+          done
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: '.'
+      - uses: actions/deploy-pages@v4
+        id: deployment
+      - name: Report failed check
+        if: steps.collect.outcome == 'failure'
+        run: exit 1

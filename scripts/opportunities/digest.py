@@ -80,8 +80,9 @@ def line(item: dict, s: int, today: dt.date) -> tuple[str, str]:
     when = f"closes {dt.date.fromisoformat(item['deadline']).strftime('%-d %b')} ({d} days)" if d is not None else ('rolling' if item.get('status') == 'rolling' else 'deadline not found')
     bits = [item.get('source', ''), when, money(item.get('amount'))]
     meta = ' · '.join(b for b in bits if b)
-    text = f"- {item['title']}\n  {meta} · match {s}\n  {item['url']}"
-    h = (f'<li style="margin:0 0 14px"><a href="{html.escape(item["url"])}" style="color:#111;font-weight:600;text-decoration:none">{html.escape(item["title"])}</a>'
+    url = item.get('url') or PAGE
+    text = f"- {item['title']}\n  {meta} · match {s}\n  {url}"
+    h = (f'<li style="margin:0 0 14px"><a href="{html.escape(url)}" style="color:#111;font-weight:600;text-decoration:none">{html.escape(item["title"])}</a>'
          f'<br><span style="color:#666;font-size:13px">{html.escape(meta)} · match {s}</span></li>')
     return text, h
 

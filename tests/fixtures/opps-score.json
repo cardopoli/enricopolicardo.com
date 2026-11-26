@@ -1,0 +1,97 @@
+{
+ "items": [
+  {
+   "id": "a",
+   "title": "Photography residency in Slovenia 2027",
+   "summary": "For lens-based artists; stipend included",
+   "source": "TransArtists",
+   "region": "SI",
+   "kinds": [
+    "residency"
+   ],
+   "deadline": "2027-01-15",
+   "amount": {
+    "max": 3000,
+    "currency": "EUR"
+   },
+   "status": "open"
+  },
+  {
+   "id": "b",
+   "title": "Bando per la rigenerazione dei borghi rurali",
+   "summary": "Contributi per progetti culturali e di comunità",
+   "source": "Regione FVG - Cultura",
+   "region": "IT-FVG",
+   "kinds": [
+    "grant"
+   ],
+   "status": "unknown"
+  },
+  {
+   "id": "c",
+   "title": "Clinical research fellowship in oncology",
+   "summary": "",
+   "source": "EU",
+   "region": "EU",
+   "kinds": [
+    "fellowship"
+   ],
+   "deadline": "2027-02-01",
+   "status": "open"
+  },
+  {
+   "id": "d",
+   "title": "Open call: photobook prize",
+   "summary": "Award for documentary photography books",
+   "source": "PhMuseum",
+   "region": "International",
+   "kinds": [
+    "prize",
+    "open_call"
+   ],
+   "deadline": "2026-12-20",
+   "status": "open"
+  },
+  {
+   "id": "e",
+   "title": "Interreg Italia-Slovenija small projects fund for cross-border heritage",
+   "summary": "",
+   "source": "Interreg",
+   "region": "IT-SI",
+   "kinds": [
+    "grant"
+   ],
+   "status": "rolling"
+  },
+  {
+   "id": "f",
+   "title": "Prize that has closed",
+   "summary": "photography",
+   "source": "X",
+   "region": "UK",
+   "kinds": [
+    "prize"
+   ],
+   "deadline": "2026-01-01",
+   "status": "closed"
+  }
+ ],
+ "expected": {
+  "practice": {
+   "a": 80,
+   "b": 15,
+   "c": 0,
+   "d": 99,
+   "e": 17,
+   "f": 0
+  },
+  "projects": {
+   "a": 18,
+   "b": 100,
+   "c": 0,
+   "d": 10,
+   "e": 97,
+   "f": 0
+  }
+ }
+}

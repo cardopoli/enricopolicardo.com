@@ -38,7 +38,7 @@ MAX_ITEMS = 3000
 DEBUG: dict[str, dict] = {}   # filled with --report: what each listing page looked like
 
 OPP = re.compile(r"band[oi]\b|grant|open[\s-]?call|call for|calls? for (?:proposals|applications|artists|entries)|fund(?:ing|s)?\b|contribut|residen|rezidenc|award|prize|premi[oa]?\b|nagrad|finanziament|competition|concors|natečaj|razpis|commission|tender|appalt|fellowship|bursar|stipend|sovvenzion|sostegno|opportunit|programme for|application", re.I)
-NOISE = re.compile(r"archivi|archive|closed calls|bandi chiusi|graduatori|esiti|results? of|risultat|winners? announced|privacy|cookie|log ?in|sign ?in|newsletter|contatt|contact us|faq|terms|accessibil|chi siamo|about us|careers|lavora con noi|\bjobs?\b|vacanc|rendicont|deliberat|domande di contributo|gift|add (an )?opportunit|submit (an )?opportunit|recommend an opportunit|suggestions|delovno mesto|zasedb|direktorja|zaposlit|javno naročil|dražb|v najem|manager\b|officer\b|coordinator\b|producer\b", re.I)
+NOISE = re.compile(r"archivi|archive|closed calls|bandi chiusi|graduatori|esiti|results? of|risultat|winners? announced|privacy|cookie|log ?in|sign ?in|newsletter|contatt|contact us|faq|terms|accessibil|chi siamo|about us|careers|lavora con noi|\bjobs?\b|vacanc|rendicont|deliberat|domande di contributo|gift|add (an )?opportunit|submit (an )?opportunit|recommend an opportunit|suggestions|delovno mesto|zasedb|direktorja|zaposlit|javno naročil|dražb|v najem|manager\b|officer\b|coordinator\b|producer\b|manutenzione|servizio di gestione|determin|latest-news|our grant funding|who our funding", re.I)
 GENERIC = re.compile(r"^(all |our |open |current |view all |see all |more |read more|find out more|scopri di più|scopri il bando|visualizza il bando|vai al bando|leggi (tutto|di più)|per saperne di più|vedi tutti|tutti i bandi|apply now|apply|learn more|details|več|več o razpisu|preberi več|funding|grants?|funds|open calls|bandi|bandi (aperti|in corso)|progetti e bandi|opportunit(y|ies|à)|razpisi|javni razpisi)[.…\s]*$", re.I)
 
 KINDS = [
@@ -186,7 +186,8 @@ def listing_links(html: str, base: str, source: dict) -> list[dict]:
             continue
         if not source.get('offsite') and (parts.hostname or '').removeprefix('www.') != base_host.removeprefix('www.'):
             continue
-        url = urllib.parse.urlunsplit((parts.scheme, parts.netloc, parts.path, parts.query, ''))
+        scheme = 'https' if parts.scheme == 'http' and base.startswith('https:') else parts.scheme
+        url = urllib.parse.urlunsplit((scheme, parts.netloc, parts.path, parts.query, ''))
         if url.rstrip('/') == base.rstrip('/') or parts.path.rstrip('/') == urllib.parse.urlsplit(base).path.rstrip('/'):
             continue  # the listing itself, or the same page with filters
         if exclude and exclude.search(url):
@@ -373,6 +374,12 @@ def details_from_html(html: str, url: str, today: dt.date) -> dict:
 
 # ---------- network ----------
 
+def safe_url(url: str) -> str:
+    p = urllib.parse.urlsplit(url)
+    return urllib.parse.urlunsplit((p.scheme, p.netloc.encode('idna').decode('ascii') if any(ord(ch) > 127 for ch in p.netloc) else p.netloc,
+                                    urllib.parse.quote(p.path, safe="/%:@!$&'()*+,;=-._~"), urllib.parse.quote(p.query, safe="=&%/:+,;@-._~"), ''))
+
+
 class Net:
     def __init__(self, agent=AGENT, delay=HOST_DELAY):
         self.agent = agent; self.delay = delay
@@ -414,7 +421,7 @@ class Net:
         self._wait(host)
         h = {'User-Agent': self.agent, 'Accept': accept, 'Accept-Language': 'en,it;q=0.8,sl;q=0.6'}
         h.update(headers or {})
-        req = urllib.request.Request(url, data=data, headers=h)
+        req = urllib.request.Request(safe_url(url), data=data, headers=h)
         with urllib.request.urlopen(req, timeout=25) as r:
             body = r.read(limit)
             charset = r.headers.get_content_charset() or 'utf-8'
@@ -488,7 +495,7 @@ def collect_source(net: Net, source: dict, today: dt.date):
         if source['kind'] == 'sedia':
             return source, sedia_items(net, source, today), None
         text, final, ctype = net.get(source['url'], accept='application/rss+xml,application/xml,text/xml,text/html' if source['kind'] == 'rss' else 'text/html,application/xhtml+xml')
-        if re.search(r'verify you are human|just a moment\.\.\.|checking your browser|cf-browser-verification|captcha', text[:20000], re.I):
+        if re.search(r'verify you are human|just a moment\.\.\.|one moment, please|checking your browser|cf-browser-verification|sgcaptcha|captcha', text[:20000], re.I):
             raise RuntimeError('site asks for a browser check')
         if source['kind'] == 'rss':
             return source, rss_items(text, source), None
@@ -509,7 +516,12 @@ def status_of(item: dict, today: dt.date) -> str:
     d = item.get('deadline')
     if d:
         return 'closed' if dt.date.fromisoformat(d) < today else 'open'
-    return 'rolling' if item.get('rolling') else 'unknown'
+    if item.get('rolling'):
+        return 'rolling'
+    years = [int(y) for y in re.findall(r'\b(20\d\d)\b', item.get('title', ''))]
+    if years and max(years) < today.year:
+        return 'closed'  # e.g. "Bando Officine Cultura 2025" with no deadline found
+    return 'unknown'
 
 
 def merge(previous: dict, results: list, today: dt.date, now_iso: str) -> tuple[dict, list[dict]]:

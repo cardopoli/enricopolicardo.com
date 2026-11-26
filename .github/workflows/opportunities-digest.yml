@@ -1,0 +1,19 @@
+name: Opportunities - weekly email
+on:
+  schedule:
+    - cron: '41 7 * * 1'   # Mondays, after the daily check
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  digest:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+      - name: Send the weekly summary
+        env:
+          DIGEST_GMAIL_USER: ${{ secrets.DIGEST_GMAIL_USER }}
+          DIGEST_GMAIL_APP_PASSWORD: ${{ secrets.DIGEST_GMAIL_APP_PASSWORD }}
+          DIGEST_TO: ${{ secrets.DIGEST_TO }}
+        run: python3 scripts/opportunities/digest.py

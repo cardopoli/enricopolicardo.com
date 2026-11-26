@@ -81,7 +81,7 @@
    "url": "https://www.artconnect.com/opportunities",
    "region": "International",
    "lang": "en",
-   "include": "/opportunities?/"
+   "min_slug": 16
   },
   {
    "name": "CuratorSpace",
@@ -96,29 +96,31 @@
    "kind": "html",
    "url": "https://artquest.org.uk/opportunities/",
    "region": "UK",
-   "lang": "en"
+   "lang": "en",
+   "min_slug": 16
   },
   {
-   "name": "a-n - opportunities",
+   "name": "a-n / Artists Now - opportunities",
    "kind": "html",
    "url": "https://www.a-n.co.uk/jobs/",
    "region": "UK",
-   "lang": "en",
-   "include": "/jobs/"
+   "lang": "en"
   },
   {
    "name": "Monographica Open Calls",
    "kind": "html",
    "url": "https://opencalls.monographica.com",
    "region": "International",
-   "lang": "en"
+   "lang": "en",
+   "min_slug": 16
   },
   {
    "name": "PhMuseum - grants and open calls",
    "kind": "html",
    "url": "https://phmuseum.com/grants",
    "region": "International",
-   "lang": "en"
+   "lang": "en",
+   "min_slug": 16
   },
   {
    "name": "LensCulture - competitions",
@@ -130,10 +132,11 @@
   },
   {
    "name": "Magnum Foundation - grants",
-   "kind": "html",
+   "kind": "manual",
    "url": "https://www.magnumfoundation.org/news/category/open",
    "region": "International",
-   "lang": "en"
+   "lang": "en",
+   "why": "blocks automated checks"
   },
   {
    "name": "Photoworks",
@@ -318,10 +321,11 @@
   },
   {
    "name": "GAL Torre Natisone",
-   "kind": "html",
+   "kind": "manual",
    "url": "https://torrenatisonegal.com/bandi-aperti/",
    "region": "IT-FVG",
-   "lang": "it"
+   "lang": "it",
+   "why": "only lists attachments; check by hand"
   },
   {
    "name": "GAL Carso - Las Kras",
@@ -366,13 +370,6 @@
    "region": "IT",
    "lang": "it",
    "why": "page address changed; check by hand"
-  },
-  {
-   "name": "Funder35",
-   "kind": "html",
-   "url": "https://www.funder35.it/",
-   "region": "IT",
-   "lang": "it"
   },
   {
    "name": "Obiettivo Europa - bandi aperti",
@@ -430,18 +427,19 @@
   },
   {
    "name": "All About Photo - contests",
-   "kind": "html",
+   "kind": "manual",
    "url": "https://www.all-about-photo.com/photo-contests",
    "region": "International",
    "lang": "en",
-   "include": "/photography-contest/"
+   "why": "page address changed; check by hand"
   },
   {
    "name": "Magnum Foundation - opportunities",
-   "kind": "html",
+   "kind": "manual",
    "url": "https://www.magnumfoundation.org/opportunities",
    "region": "International",
-   "lang": "en"
+   "lang": "en",
+   "why": "blocks automated checks"
   },
   {
    "name": "Javna agencija za knjigo - razpisi",

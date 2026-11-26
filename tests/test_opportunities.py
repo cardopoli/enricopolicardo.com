@@ -61,6 +61,48 @@ class Listing(unittest.TestCase):
         self.assertEqual(c.rss_items('not xml', {}), [])
 
 
+class ListingRules(unittest.TestCase):
+    def test_generic_link_text_takes_title_from_slug_then_page(self):
+        html = '<a href="/it/contributi/linee-guida-per-i-festival-partecipativi-2027">SCOPRI IL BANDO</a><a href="/it/contributi/x">Scopri il bando</a>'
+        got = c.listing_links(html, 'https://csp.example/it/contributi/', {})
+        self.assertEqual(got, [{'title': 'Linee guida per i festival partecipativi 2027', 'url': 'https://csp.example/it/contributi/linee-guida-per-i-festival-partecipativi-2027', 'title_from_page': True}])
+        d = c.details_from_html('<html><head><meta property="og:title" content="Festival partecipativi: il bando 2027 | Compagnia"></head><body><h1>x</h1></body></html>', 'u', TODAY)
+        self.assertEqual(d['page_title'], 'Festival partecipativi: il bando 2027')
+
+    def test_filters_on_the_same_page_categories_and_jobs_are_dropped(self):
+        html = ('<a href="/news?f%5B0%5D=category%3A7">Residencies (28)</a>'
+                '<a href="/opportunities/residencies">Residencies open calls</a>'
+                '<a href="/opportunities/darkroom-residency-programme-2027">Darkroom residency programme 2027</a>'
+                '<a href="/jobs/studio-programme-manager">Studio Programme Manager for the residency</a>'
+                '<a href="/results-of-the-2026-prize">Results of the 2026 prize</a>')
+        got = c.listing_links(html, 'https://agg.example/news', {'min_slug': 16, 'offsite': False})
+        self.assertEqual([g['url'] for g in got], ['https://agg.example/opportunities/darkroom-residency-programme-2027'])
+
+    def test_links_inside_forms_are_read(self):
+        html = '<form><ul><li><a href="/grants/woodland-creation-planning-grant">Woodland Creation Planning Grant</a></li></ul></form>'
+        self.assertEqual(len(c.listing_links(html, 'https://gov.example/grants', {'include': '/grants/[a-z0-9-]+$'})), 1)
+
+
+class Enrichment(unittest.TestCase):
+    def test_budget_is_shared_between_sites(self):
+        class FakeNet:
+            def __init__(self): self.calls = []
+            def get(self, url, **kw):
+                self.calls.append(url)
+                return '<html><body><p>Deadline: 1 March 2027</p></body></html>', url, 'text/html'
+        items = {}
+        for host, n in (('big.example', 50), ('a.example', 2), ('b.example', 2)):
+            for k in range(n):
+                items[f'{host}{k}'] = {'id': f'{host}{k}', 'url': f'https://{host}/{k}', 'present': True, 'first_seen': NOW}
+        net = FakeNet()
+        done = c.enrich(net, items, TODAY, budget=10, per_host=25)
+        self.assertEqual(done, 10)
+        hosts = [u.split('/')[2] for u in net.calls]
+        self.assertEqual(hosts.count('a.example'), 2)
+        self.assertEqual(hosts.count('b.example'), 2)
+        self.assertEqual(items['a.example0']['deadline'], '2027-03-01')
+
+
 class Details(unittest.TestCase):
     def test_english_deadline_amount_summary(self):
         d = c.details_from_html(DETAIL_EN, 'https://x/a', TODAY)
@@ -178,7 +220,7 @@ class Sources(unittest.TestCase):
             self.assertNotIn(s['name'], names)
             names.add(s['name'])
         self.assertGreaterEqual(len(data['sources']), 55)
-        self.assertGreaterEqual(sum(1 for s in data['sources'] if s['kind'] != 'manual'), 35)
+        self.assertGreaterEqual(sum(1 for s in data['sources'] if s['kind'] != 'manual'), 30)
 
 
 if __name__ == '__main__':

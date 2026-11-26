@@ -28,7 +28,7 @@ ROOT = Path(__file__).resolve().parents[2]
 SOURCES = ROOT / 'scripts/opportunities/sources.json'
 OUTPUT = ROOT / 'data/opportunities.json'
 AGENT = 'EnricoPolicardoOpportunities/2.0 (+https://cardopoli.github.io/enricopolicardo.com/tools/opportunities.html)'
-MAX_DETAILS = 160          # detail pages opened per run
+MAX_DETAILS = 300          # detail pages opened per run (shared fairly between sites)
 MAX_PER_HOST = 25          # detail pages per site per run
 HOST_DELAY = 1.5           # seconds between requests to the same site
 RECHECK_DAYS = 14          # re-read open leads this often (deadlines change)
@@ -38,8 +38,8 @@ MAX_ITEMS = 3000
 DEBUG: dict[str, dict] = {}   # filled with --report: what each listing page looked like
 
 OPP = re.compile(r"band[oi]\b|grant|open[\s-]?call|call for|calls? for (?:proposals|applications|artists|entries)|fund(?:ing|s)?\b|contribut|residen|rezidenc|award|prize|premi[oa]?\b|nagrad|finanziament|competition|concors|natečaj|razpis|commission|tender|appalt|fellowship|bursar|stipend|sovvenzion|sostegno|opportunit|programme for|application", re.I)
-NOISE = re.compile(r"archivi|archive|closed calls|bandi chiusi|graduatori|esiti|results? of|winners? announced|privacy|cookie|log ?in|sign ?in|newsletter|contatt|contact us|faq|terms|accessibil|chi siamo|about us|careers|lavora con noi|job|vacanc", re.I)
-GENERIC = re.compile(r"^(all |our |open |current |view all |see all |more |read more|find out more|scopri di più|leggi tutto|vedi tutti|tutti i bandi|apply now|apply|funding|grants?|funds|open calls|bandi|bandi (aperti|in corso)|progetti e bandi|opportunit(y|ies|à)|razpisi|javni razpisi)\.?$", re.I)
+NOISE = re.compile(r"archivi|archive|closed calls|bandi chiusi|graduatori|esiti|results? of|risultat|winners? announced|privacy|cookie|log ?in|sign ?in|newsletter|contatt|contact us|faq|terms|accessibil|chi siamo|about us|careers|lavora con noi|\bjobs?\b|vacanc|rendicont|deliberat|domande di contributo|gift|add (an )?opportunit|submit (an )?opportunit|recommend an opportunit|suggestions|delovno mesto|zasedb|direktorja|zaposlit|javno naročil|dražb|v najem|manager\b|officer\b|coordinator\b|producer\b", re.I)
+GENERIC = re.compile(r"^(all |our |open |current |view all |see all |more |read more|find out more|scopri di più|scopri il bando|visualizza il bando|vai al bando|leggi (tutto|di più)|per saperne di più|vedi tutti|tutti i bandi|apply now|apply|learn more|details|več|več o razpisu|preberi več|funding|grants?|funds|open calls|bandi|bandi (aperti|in corso)|progetti e bandi|opportunit(y|ies|à)|razpisi|javni razpisi)[.…\s]*$", re.I)
 
 KINDS = [
     ('residency', re.compile(r'residen|rezidenc|retreat|artist[- ]in[- ]residence|air\b', re.I)),
@@ -93,7 +93,7 @@ def item_id(source_url: str, url: str) -> str:
 
 class Page(HTMLParser):
     """Collects links (outside nav/header/footer) and visible text."""
-    SKIP = {'nav', 'header', 'footer', 'script', 'style', 'noscript', 'aside', 'form', 'svg', 'template'}
+    SKIP = {'nav', 'header', 'footer', 'script', 'style', 'noscript', 'aside', 'svg', 'template'}
 
     def __init__(self):
         super().__init__(convert_charrefs=True)
@@ -187,22 +187,39 @@ def listing_links(html: str, base: str, source: dict) -> list[dict]:
         if not source.get('offsite') and (parts.hostname or '').removeprefix('www.') != base_host.removeprefix('www.'):
             continue
         url = urllib.parse.urlunsplit((parts.scheme, parts.netloc, parts.path, parts.query, ''))
-        if url.rstrip('/') == base.rstrip('/'):
-            continue
+        if url.rstrip('/') == base.rstrip('/') or parts.path.rstrip('/') == urllib.parse.urlsplit(base).path.rstrip('/'):
+            continue  # the listing itself, or the same page with filters
         if exclude and exclude.search(url):
             continue
         title = clean(title)
-        if len(title) < 10 or len(title) > 300 or GENERIC.match(title) or NOISE.search(title):
+        from_page = False
+        call_cta = bool(re.search(r'band|razpis|call|grant|apply|candidat', title, re.I))
+        last = parts.path.rstrip('/').rsplit('/', 1)[-1]
+        if source.get('min_slug') and len(last) < source['min_slug']:
+            continue  # category or index page on an aggregator
+        if GENERIC.match(title) or len(title) < 10:
+            if last.count('-') < 2 and not last.lower().endswith('.pdf'):
+                continue
+            title = slug_title(last); from_page = True
+        if len(title) > 300 or NOISE.search(title):
             continue
         if re.search(r'\.(jpe?g|png|gif|webp|zip|docx?|xlsx?)$', parts.path, re.I):
             continue
         if include:
             if not include.search(url):
                 continue
-        elif not OPP.search(title):
+        elif not (from_page and call_cta) and not OPP.search(title):
             continue
-        found.setdefault(url, {'title': title[:300], 'url': url})
+        if url in found and not found[url].get('title_from_page'):
+            continue
+        found[url] = {'title': title[:300], 'url': url, **({'title_from_page': True} if from_page else {})}
     return list(found.values())[:150]
+
+
+def slug_title(slug: str) -> str:
+    s = urllib.parse.unquote(re.sub(r'\.(pdf|html?|php|aspx?)$', '', slug, flags=re.I))
+    s = re.sub(r'[-_–]+', ' ', s).strip()
+    return (s[:1].upper() + s[1:])[:200]
 
 
 def rss_items(xml_text: str, source: dict) -> list[dict]:
@@ -336,7 +353,13 @@ def details_from_html(html: str, url: str, today: dt.date) -> dict:
                     if isinstance(v, str) and re.match(r'20\d\d-\d\d-\d\d', v):
                         deadline = to_date(*map(int, v[:10].split('-'))); snippet = f'{k}: {v[:10]}'
     head = text[:20000]
+    h1 = ''
+    m = re.search(r'<h1[^>]*>(.*?)</h1>', html, re.I | re.S)
+    if m:
+        h1 = clean(re.sub(r'<[^>]+>', ' ', m.group(1)))
+    page_title = (page.meta.get('og:title') or h1 or clean(page.title)).split(' | ')[0].split(' - ')[0].strip()
     return {
+        'page_title': page_title[:300] if len(page_title) >= 8 else '',
         'summary': clean(summary)[:400],
         'deadline': deadline.isoformat() if deadline else None,
         'deadline_text': snippet,
@@ -556,9 +579,20 @@ def needs_details(it: dict, today: dt.date) -> bool:
 
 def enrich(net: Net, items: dict, today: dt.date, budget=MAX_DETAILS, per_host=MAX_PER_HOST) -> int:
     todo = [i for i in items.values() if needs_details(i, today)]
-    todo = sorted(todo, key=lambda i: (bool(i.get('detail_checked')), i.get('first_seen', '')))[:budget]  # never-read leads first
+    todo.sort(key=lambda i: (bool(i.get('detail_checked')), i.get('first_seen', '')))  # never-read leads first
     hosts: dict[str, list] = {}
     for it in todo:
+        batch = hosts.setdefault(urllib.parse.urlsplit(it['url']).netloc, [])
+        if len(batch) < per_host:
+            batch.append(it)
+    # share the budget fairly: take one from each site in turn
+    picked, queues = [], [list(b) for b in hosts.values()]
+    while len(picked) < budget and any(queues):
+        for q in queues:
+            if q and len(picked) < budget:
+                picked.append(q.pop(0))
+    hosts = {}
+    for it in picked:
         hosts.setdefault(urllib.parse.urlsplit(it['url']).netloc, []).append(it)
     done = 0
 
@@ -568,7 +602,10 @@ def enrich(net: Net, items: dict, today: dt.date, budget=MAX_DETAILS, per_host=M
             try:
                 html, _, ctype = net.get(it['url'])
                 if 'html' in ctype or '<html' in html[:2000].lower():
-                    it.update(details_from_html(html, it['url'], today))
+                    got = details_from_html(html, it['url'], today)
+                    if it.get('title_from_page') and got.get('page_title'):
+                        it['title'] = got['page_title']; it.pop('title_from_page', None)
+                    it.update({k: v for k, v in got.items() if k != 'page_title'})
                 else:
                     it['detail_checked'] = today.isoformat()
                 n += 1

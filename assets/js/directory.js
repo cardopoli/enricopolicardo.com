@@ -24,7 +24,7 @@ const known={
 let files=[...Object.keys(known).filter(path=>!/^https?:/.test(path)).map(path=>({path,type:'blob'})),...['index.html','README.md','admin/index.html','admin/config.json','admin/README.md','data/documents.json','assets/css/directory.css','assets/js/directory.js'].map(path=>({path,type:'blob'}))];
 const $=id=>document.getElementById(id),ext=p=>p.split('.').pop().toLowerCase(),url=p=>/^https?:/.test(p)?p:'./'+p.split('/').map(encodeURIComponent).join('/');
 const external=[{path:'https://cardopoli.github.io/opportunities/',type:'blob',external:true}];
-const hidden=new Set(['simili.pdf','tartine.pdf','tools/tender_tool.html','tools/archive/writingtool.html']);
+const hidden=new Set(['simili.pdf','tartine.pdf','tools/tender_tool.html','tools/archive/writingtool.html','tools/deepgram_transcripts.html']);
 function visibleFile(f){return f.type==='blob'&&!hidden.has(f.path)&&!f.path.split('/').some(p=>p.startsWith('.'))}
 function group(f){return f.external?'tools':f.path.startsWith('tests/')||f.path.startsWith('admin/')||f.path.startsWith('assets/')||f.path.startsWith('data/')||f.path.startsWith('This Was Tomorrow/')||f.path==='tools/writingtool.html'||f.path.startsWith('tools/wordpress-mcp-bridge/')||(f.path.startsWith('tools/positive-film/')&&f.path!=='tools/positive-film/index.html')||f.path==='README.md'||f.path==='index.html'?'system':f.path.startsWith('tools/')?'tools':['pdf','doc','docx','txt','md','csv','xls','xlsx','ppt','pptx'].includes(ext(f.path))?'documents':'other'}
 function label(f){return known[f.path]?.title||f.path.split('/').pop().replace(/\.[^.]+$/,'').replace(/[_-]/g,' ')}

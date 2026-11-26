@@ -1,0 +1,25 @@
+{
+  "_note": "Matching profiles for Opportunities. Scores are 0-100: keyword hits + region + type + known deadline/amount, minus excluded words. No AI. The page can override these per device; the weekly email uses this file.",
+  "profiles": [
+    {
+      "id": "practice",
+      "name": "My practice",
+      "description": "Photography, art direction, multimedia: residencies, open calls, commissions, prizes, fellowships.",
+      "strong": ["photograph", "fotograf", "photobook", "photo book", "art direction", "multimedia", "documentary", "documentar", "lens-based", "visual art", "arti visive", "vizualn", "fotografij"],
+      "medium": ["residenc", "residenz", "rezidenc", "exhibition", "mostra", "razstav", "open call", "call for artists", "commission", "prize", "award", "premio", "nagrad", "fellowship", "artist", "artista", "umetni", "archive", "archivio", "architecture", "architettura", "housing", "modernis", "landscape", "paesaggio", "moving image", "video"],
+      "exclude": ["clinical", "medical", "oncolog", "military", "defence", "nuclear", "semiconductor", "hydrogen"],
+      "regions": {"UK": 10, "IT-SI": 12, "IT-FVG": 10, "SI": 10, "IT": 8, "EU": 6, "IE": 4, "CH": 4, "International": 6},
+      "kinds": {"residency": 10, "open_call": 10, "commission": 10, "prize": 8, "fellowship": 8, "grant": 5, "tender": 0, "training": 2}
+    },
+    {
+      "id": "projects",
+      "name": "Projects & organisations",
+      "description": "Grants and foundations for cultural, community, heritage, rural and cross-border projects.",
+      "strong": ["rural", "borg", "heritage", "patrimonio", "dedišč", "community", "comunit", "skupnost", "regenerat", "rigenera", "cross-border", "transfrontalier", "čezmej", "interreg", "leader", "cultural project", "progetti cultural", "cooperativ", "abitare", "housing"],
+      "medium": ["cultur", "kultur", "festival", "grant", "bando", "bandi", "contribut", "fund", "finanziament", "razpis", "foundation", "fondazione", "fundacij", "association", "associazion", "društv", "ets", "terzo settore", "education", "youth", "giovani", "mlad", "sustainab", "sostenibil", "trajnost", "tourism", "turism"],
+      "exclude": ["clinical", "medical", "oncolog", "military", "defence", "nuclear", "semiconductor", "hydrogen", "phd scholarship"],
+      "regions": {"IT-FVG": 15, "IT-SI": 15, "SI": 10, "EU": 10, "IT": 8, "UK": 8, "IE": 2, "CH": 2, "International": 2},
+      "kinds": {"grant": 12, "tender": 6, "commission": 4, "open_call": 3, "residency": 0, "prize": 0, "fellowship": 0, "training": 2}
+    }
+  ]
+}

@@ -1,61 +1,469 @@
 {
-  "_note": "Sources the daily collector checks. kind: sedia (EU Funding & Tenders API), rss (feed), html (listing page). region: where the funder works. lang: page language. include/exclude: optional regex on the link URL. Add a source by copying a line.",
-  "sources": [
-    {"name": "EU Funding & Tenders - culture, creative, heritage", "kind": "sedia", "url": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/calls-for-proposals", "region": "EU", "lang": "en", "queries": ["culture", "cultural heritage", "creative", "photography", "arts", "media", "rural", "community", "citizens", "housing", "Bauhaus", "audiovisual", "festival", "artist"]},
-    {"name": "Creative Europe - Culture", "kind": "html", "url": "https://culture.ec.europa.eu/calls", "region": "EU", "lang": "en"},
-    {"name": "New European Bauhaus", "kind": "html", "url": "https://new-european-bauhaus.europa.eu/get-involved/funding-opportunities_en", "region": "EU", "lang": "en"},
-    {"name": "Interreg Italia-Slovenija", "kind": "html", "url": "https://www.ita-slo.eu/en/calls", "region": "IT-SI", "lang": "en"},
-    {"name": "European Cultural Foundation", "kind": "html", "url": "https://culturalfoundation.eu/initiatives", "region": "EU", "lang": "en"},
-    {"name": "On the Move", "kind": "html", "url": "https://on-the-move.org/news", "region": "International", "lang": "en"},
-    {"name": "Res Artis - open calls", "kind": "html", "url": "https://resartis.org/open-calls/", "region": "International", "lang": "en"},
-    {"name": "TransArtists - calls", "kind": "html", "url": "https://www.transartists.org/en/transartists-calls", "region": "International", "lang": "en"},
-    {"name": "ArtConnect - opportunities", "kind": "html", "url": "https://www.artconnect.com/opportunities", "region": "International", "lang": "en", "include": "/opportunities?/"},
-    {"name": "CuratorSpace", "kind": "html", "url": "https://www.curatorspace.com/opportunities", "region": "UK", "lang": "en", "include": "/opportunities/"},
-    {"name": "Artquest", "kind": "html", "url": "https://artquest.org.uk/opportunities/", "region": "UK", "lang": "en"},
-    {"name": "a-n - opportunities", "kind": "html", "url": "https://www.a-n.co.uk/opportunities/", "region": "UK", "lang": "en", "include": "/opportunities/"},
-    {"name": "Monographica Open Calls", "kind": "html", "url": "https://opencalls.monographica.com", "region": "International", "lang": "en"},
-    {"name": "PhMuseum - grants and open calls", "kind": "html", "url": "https://phmuseum.com/grants", "region": "International", "lang": "en"},
-    {"name": "LensCulture - competitions", "kind": "html", "url": "https://www.lensculture.com/competitions", "region": "International", "lang": "en", "include": "/competitions?/|/awards?/"},
-    {"name": "Magnum Foundation - grants", "kind": "html", "url": "https://www.magnumfoundation.org/grants-fellowships", "region": "International", "lang": "en"},
-    {"name": "Photoworks", "kind": "html", "url": "https://photoworks.org.uk/opportunities/", "region": "UK", "lang": "en"},
-    {"name": "Picter - photography calls", "kind": "html", "url": "https://www.picter.com/calls", "region": "International", "lang": "en"},
-    {"name": "Contemporary Lynx - open calls", "kind": "html", "url": "https://contemporarylynx.co.uk/category/open-calls", "region": "International", "lang": "en"},
-    {"name": "Find a grant (UK government)", "kind": "html", "url": "https://www.find-government-grants.service.gov.uk/grants", "region": "UK", "lang": "en", "include": "/grants/[a-z0-9-]+$"},
-    {"name": "Arts Council England - funding", "kind": "html", "url": "https://www.artscouncil.org.uk/funding", "region": "UK", "lang": "en"},
-    {"name": "Arts Council England - Developing your creative practice", "kind": "html", "url": "https://www.artscouncil.org.uk/developing-your-creative-practice", "region": "UK", "lang": "en"},
-    {"name": "Creative Scotland - funding", "kind": "html", "url": "https://www.creativescotland.com/funding", "region": "UK", "lang": "en"},
-    {"name": "British Council - arts opportunities", "kind": "html", "url": "https://www.britishcouncil.org/arts/opportunities", "region": "International", "lang": "en"},
-    {"name": "National Lottery Heritage Fund", "kind": "html", "url": "https://www.heritagefund.org.uk/funding", "region": "UK", "lang": "en"},
-    {"name": "National Lottery Community Fund", "kind": "html", "url": "https://www.tnlcommunityfund.org.uk/funding/programmes", "region": "UK", "lang": "en", "include": "/programmes/"},
-    {"name": "Esmée Fairbairn Foundation", "kind": "html", "url": "https://esmeefairbairn.org.uk/what-we-fund", "region": "UK", "lang": "en"},
-    {"name": "Paul Hamlyn Foundation", "kind": "html", "url": "https://www.phf.org.uk/funding/", "region": "UK", "lang": "en"},
-    {"name": "Calouste Gulbenkian Foundation UK", "kind": "html", "url": "https://gulbenkian.pt/uk-branch/", "region": "UK", "lang": "en"},
-    {"name": "Garfield Weston Foundation", "kind": "html", "url": "https://garfieldweston.org/apply/", "region": "UK", "lang": "en"},
-    {"name": "Elephant Trust", "kind": "html", "url": "https://elephanttrust.org.uk/", "region": "UK", "lang": "en"},
-    {"name": "Arts Council Ireland - funding", "kind": "html", "url": "https://www.artscouncil.ie/available-funding/", "region": "IE", "lang": "en"},
-    {"name": "Ministero della Cultura - Creatività contemporanea", "kind": "html", "url": "https://creativitacontemporanea.cultura.gov.it/bandi/", "region": "IT", "lang": "it"},
-    {"name": "Ministero della Cultura - bandi", "kind": "html", "url": "https://cultura.gov.it/bandi", "region": "IT", "lang": "it"},
-    {"name": "Regione FVG - Cultura", "kind": "html", "url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/cultura-sport/attivita-culturali/FOGLIA20/", "region": "IT-FVG", "lang": "it"},
-    {"name": "Regione FVG - LEADER / Open Leader", "kind": "html", "url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/economia-imprese/agricoltura-foreste/sviluppo-rurale/FOGLIA210/", "region": "IT-FVG", "lang": "it"},
-    {"name": "Fondazione Friuli", "kind": "html", "url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/", "region": "IT-FVG", "lang": "it"},
-    {"name": "Fondazione CRTrieste", "kind": "html", "url": "https://www.fondazionecrtrieste.it/bandi/", "region": "IT-FVG", "lang": "it"},
-    {"name": "Fondazione Carigo (Gorizia)", "kind": "html", "url": "https://www.fondazionecarigo.it/bandi/", "region": "IT-FVG", "lang": "it"},
-    {"name": "GAL Euroleader", "kind": "html", "url": "https://www.euroleader.it/bandi", "region": "IT-FVG", "lang": "it"},
-    {"name": "GAL Torre Natisone", "kind": "html", "url": "https://torrenatisonegal.com/bandi-aperti/", "region": "IT-FVG", "lang": "it"},
-    {"name": "GAL Carso - Las Kras", "kind": "html", "url": "https://galcarso.eu/it/bandi-per-il-territorio/", "region": "IT-FVG", "lang": "it"},
-    {"name": "Fondosviluppo FVG", "kind": "html", "url": "https://www.fondosviluppofvg.it", "region": "IT-FVG", "lang": "it"},
-    {"name": "Fondazione Cariplo", "kind": "html", "url": "https://www.fondazionecariplo.it/contributi/bandi/", "region": "IT", "lang": "it"},
-    {"name": "Fondazione CRT (Torino)", "kind": "html", "url": "https://www.fondazionecrt.it/progetti-e-bandi/", "region": "IT", "lang": "it"},
-    {"name": "Compagnia di San Paolo", "kind": "html", "url": "https://www.compagniadisanpaolo.it/it/cosa-facciamo/contributi/", "region": "IT", "lang": "it"},
-    {"name": "Fondazione con il Sud", "kind": "html", "url": "https://www.fondazioneconilsud.it/bandi-e-iniziative/", "region": "IT", "lang": "it"},
-    {"name": "Funder35", "kind": "html", "url": "https://www.funder35.it/", "region": "IT", "lang": "it"},
-    {"name": "Obiettivo Europa - bandi aperti", "kind": "html", "url": "https://www.obiettivoeuropa.com/bandi/aperti/", "region": "EU", "lang": "it"},
-    {"name": "Ministrstvo za kulturo - razpisi", "kind": "html", "url": "https://www.gov.si/drzavni-organi/ministrstva/ministrstvo-za-kulturo/javne-objave/", "region": "SI", "lang": "sl"},
-    {"name": "JSKD - razpisi", "kind": "html", "url": "https://www.jskd.si/razpisi/", "region": "SI", "lang": "sl"},
-    {"name": "Center za kreativnost - razpisi", "kind": "html", "url": "https://czk.si/razpisi/", "region": "SI", "lang": "sl"},
-    {"name": "Mestna občina Nova Gorica - razpisi", "kind": "html", "url": "https://www.nova-gorica.si/za-obcane/javni-razpisi/", "region": "SI", "lang": "sl"},
-    {"name": "GO! 2025 / Nova Gorica-Gorizia", "kind": "html", "url": "https://www.go2025.eu/en/open-calls", "region": "IT-SI", "lang": "en"},
-    {"name": "Pro Helvetia - funding", "kind": "html", "url": "https://prohelvetia.ch/en/funding/", "region": "CH", "lang": "en"},
-    {"name": "e-flux announcements", "kind": "rss", "url": "https://www.e-flux.com/rss/announcements/", "region": "International", "lang": "en"}
-  ]
+ "_note": "Sources the daily collector checks. kind: sedia (EU Funding & Tenders API), rss (feed), html (listing page). region: where the funder works. lang: page language. include/exclude: optional regex on the link URL. Add a source by copying a line. kind manual = not checked automatically (the site blocks robots or the address needs confirming); shown on the page as a link to check by hand.",
+ "sources": [
+  {
+   "name": "EU Funding & Tenders - culture, creative, heritage",
+   "kind": "sedia",
+   "url": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/calls-for-proposals",
+   "region": "EU",
+   "lang": "en",
+   "queries": [
+    "culture",
+    "cultural heritage",
+    "creative",
+    "photography",
+    "arts",
+    "media",
+    "rural",
+    "community",
+    "citizens",
+    "housing",
+    "Bauhaus",
+    "audiovisual",
+    "festival",
+    "artist"
+   ]
+  },
+  {
+   "name": "Creative Europe - Culture",
+   "kind": "html",
+   "url": "https://culture.ec.europa.eu/calls",
+   "region": "EU",
+   "lang": "en"
+  },
+  {
+   "name": "New European Bauhaus",
+   "kind": "manual",
+   "url": "https://new-european-bauhaus.europa.eu/get-involved/funding-opportunities_en",
+   "region": "EU",
+   "lang": "en",
+   "why": "blocks automated checks"
+  },
+  {
+   "name": "Interreg Italia-Slovenija",
+   "kind": "html",
+   "url": "https://www.ita-slo.eu/en/calls",
+   "region": "IT-SI",
+   "lang": "en"
+  },
+  {
+   "name": "European Cultural Foundation",
+   "kind": "manual",
+   "url": "https://culturalfoundation.eu/initiatives",
+   "region": "EU",
+   "lang": "en",
+   "why": "page address changed; check by hand"
+  },
+  {
+   "name": "On the Move",
+   "kind": "html",
+   "url": "https://on-the-move.org/news",
+   "region": "International",
+   "lang": "en"
+  },
+  {
+   "name": "Res Artis - open calls",
+   "kind": "html",
+   "url": "https://resartis.org/open-calls/",
+   "region": "International",
+   "lang": "en"
+  },
+  {
+   "name": "TransArtists - calls",
+   "kind": "html",
+   "url": "https://www.transartists.org/en/transartists-calls",
+   "region": "International",
+   "lang": "en"
+  },
+  {
+   "name": "ArtConnect - opportunities",
+   "kind": "html",
+   "url": "https://www.artconnect.com/opportunities",
+   "region": "International",
+   "lang": "en",
+   "include": "/opportunities?/"
+  },
+  {
+   "name": "CuratorSpace",
+   "kind": "manual",
+   "url": "https://www.curatorspace.com/opportunities",
+   "region": "UK",
+   "lang": "en",
+   "why": "blocks automated checks"
+  },
+  {
+   "name": "Artquest",
+   "kind": "html",
+   "url": "https://artquest.org.uk/opportunities/",
+   "region": "UK",
+   "lang": "en"
+  },
+  {
+   "name": "a-n - opportunities",
+   "kind": "html",
+   "url": "https://www.a-n.co.uk/jobs/",
+   "region": "UK",
+   "lang": "en",
+   "include": "/jobs/"
+  },
+  {
+   "name": "Monographica Open Calls",
+   "kind": "html",
+   "url": "https://opencalls.monographica.com",
+   "region": "International",
+   "lang": "en"
+  },
+  {
+   "name": "PhMuseum - grants and open calls",
+   "kind": "html",
+   "url": "https://phmuseum.com/grants",
+   "region": "International",
+   "lang": "en"
+  },
+  {
+   "name": "LensCulture - competitions",
+   "kind": "manual",
+   "url": "https://www.lensculture.com/competitions",
+   "region": "International",
+   "lang": "en",
+   "why": "blocks automated checks"
+  },
+  {
+   "name": "Magnum Foundation - grants",
+   "kind": "html",
+   "url": "https://www.magnumfoundation.org/news/category/open",
+   "region": "International",
+   "lang": "en"
+  },
+  {
+   "name": "Photoworks",
+   "kind": "html",
+   "url": "https://photoworks.org.uk/opportunities/",
+   "region": "UK",
+   "lang": "en"
+  },
+  {
+   "name": "Picter - photography calls",
+   "kind": "manual",
+   "url": "https://www.picter.com/calls",
+   "region": "International",
+   "lang": "en",
+   "why": "page address changed; check by hand"
+  },
+  {
+   "name": "Contemporary Lynx - open calls",
+   "kind": "manual",
+   "url": "https://contemporarylynx.co.uk/category/open-calls",
+   "region": "International",
+   "lang": "en",
+   "why": "blocks automated checks"
+  },
+  {
+   "name": "Find a grant (UK government)",
+   "kind": "html",
+   "url": "https://www.find-government-grants.service.gov.uk/grants",
+   "region": "UK",
+   "lang": "en",
+   "include": "/grants/[a-z0-9-]+$"
+  },
+  {
+   "name": "Arts Council England - funding",
+   "kind": "manual",
+   "url": "https://www.artscouncil.org.uk/funding",
+   "region": "UK",
+   "lang": "en",
+   "why": "blocks automated checks"
+  },
+  {
+   "name": "Arts Council England - Developing your creative practice",
+   "kind": "manual",
+   "url": "https://www.artscouncil.org.uk/developing-your-creative-practice",
+   "region": "UK",
+   "lang": "en",
+   "why": "blocks automated checks"
+  },
+  {
+   "name": "Creative Scotland - funding",
+   "kind": "html",
+   "url": "https://www.creativescotland.com/funding",
+   "region": "UK",
+   "lang": "en"
+  },
+  {
+   "name": "British Council - arts opportunities",
+   "kind": "manual",
+   "url": "https://www.britishcouncil.org/arts/opportunities",
+   "region": "International",
+   "lang": "en",
+   "why": "blocks automated checks"
+  },
+  {
+   "name": "National Lottery Heritage Fund",
+   "kind": "html",
+   "url": "https://www.heritagefund.org.uk/funding",
+   "region": "UK",
+   "lang": "en"
+  },
+  {
+   "name": "National Lottery Community Fund",
+   "kind": "manual",
+   "url": "https://www.tnlcommunityfund.org.uk/funding/programmes",
+   "region": "UK",
+   "lang": "en",
+   "why": "page address changed; check by hand"
+  },
+  {
+   "name": "Esmée Fairbairn Foundation",
+   "kind": "html",
+   "url": "https://esmeefairbairn.org.uk/what-we-fund",
+   "region": "UK",
+   "lang": "en"
+  },
+  {
+   "name": "Paul Hamlyn Foundation",
+   "kind": "html",
+   "url": "https://www.phf.org.uk/funding/",
+   "region": "UK",
+   "lang": "en"
+  },
+  {
+   "name": "Calouste Gulbenkian Foundation UK",
+   "kind": "manual",
+   "url": "https://gulbenkian.pt/uk-branch/",
+   "region": "UK",
+   "lang": "en",
+   "why": "blocks automated checks"
+  },
+  {
+   "name": "Garfield Weston Foundation",
+   "kind": "manual",
+   "url": "https://garfieldweston.org/apply/",
+   "region": "UK",
+   "lang": "en",
+   "why": "page address changed; check by hand"
+  },
+  {
+   "name": "Elephant Trust",
+   "kind": "html",
+   "url": "https://elephanttrust.org.uk/",
+   "region": "UK",
+   "lang": "en"
+  },
+  {
+   "name": "Arts Council Ireland - funding",
+   "kind": "html",
+   "url": "https://www.artscouncil.ie/available-funding/",
+   "region": "IE",
+   "lang": "en"
+  },
+  {
+   "name": "Ministero della Cultura - Creatività contemporanea",
+   "kind": "html",
+   "url": "https://creativitacontemporanea.cultura.gov.it/bandi/",
+   "region": "IT",
+   "lang": "it"
+  },
+  {
+   "name": "Ministero della Cultura - bandi",
+   "kind": "manual",
+   "url": "https://cultura.gov.it/bandi",
+   "region": "IT",
+   "lang": "it",
+   "why": "page address changed; check by hand"
+  },
+  {
+   "name": "Regione FVG - Cultura",
+   "kind": "html",
+   "url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/cultura-sport/attivita-culturali/FOGLIA20/",
+   "region": "IT-FVG",
+   "lang": "it"
+  },
+  {
+   "name": "Regione FVG - LEADER / Open Leader",
+   "kind": "manual",
+   "url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/economia-imprese/agricoltura-foreste/sviluppo-rurale/FOGLIA210/",
+   "region": "IT-FVG",
+   "lang": "it",
+   "why": "page address changed; check by hand"
+  },
+  {
+   "name": "Fondazione Friuli",
+   "kind": "html",
+   "url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
+   "region": "IT-FVG",
+   "lang": "it"
+  },
+  {
+   "name": "Fondazione CRTrieste",
+   "kind": "html",
+   "url": "https://www.fondazionecrtrieste.it/bandi/",
+   "region": "IT-FVG",
+   "lang": "it"
+  },
+  {
+   "name": "Fondazione Carigo (Gorizia)",
+   "kind": "manual",
+   "url": "https://www.fondazionecarigo.it/bandi/",
+   "region": "IT-FVG",
+   "lang": "it",
+   "why": "page address changed; check by hand"
+  },
+  {
+   "name": "GAL Euroleader",
+   "kind": "manual",
+   "url": "https://www.euroleader.it/bandi",
+   "region": "IT-FVG",
+   "lang": "it",
+   "why": "blocks automated checks"
+  },
+  {
+   "name": "GAL Torre Natisone",
+   "kind": "html",
+   "url": "https://torrenatisonegal.com/bandi-aperti/",
+   "region": "IT-FVG",
+   "lang": "it"
+  },
+  {
+   "name": "GAL Carso - Las Kras",
+   "kind": "manual",
+   "url": "https://galcarso.eu/it/bandi-per-il-territorio/",
+   "region": "IT-FVG",
+   "lang": "it",
+   "why": "page address changed; check by hand"
+  },
+  {
+   "name": "Fondosviluppo FVG",
+   "kind": "html",
+   "url": "https://www.fondosviluppofvg.it",
+   "region": "IT-FVG",
+   "lang": "it"
+  },
+  {
+   "name": "Fondazione Cariplo",
+   "kind": "html",
+   "url": "https://www.fondazionecariplo.it/contributi/bandi/",
+   "region": "IT",
+   "lang": "it"
+  },
+  {
+   "name": "Fondazione CRT (Torino)",
+   "kind": "html",
+   "url": "https://www.fondazionecrt.it/progetti-e-bandi/",
+   "region": "IT",
+   "lang": "it"
+  },
+  {
+   "name": "Compagnia di San Paolo",
+   "kind": "html",
+   "url": "https://www.compagniadisanpaolo.it/it/cosa-facciamo/contributi/",
+   "region": "IT",
+   "lang": "it"
+  },
+  {
+   "name": "Fondazione con il Sud",
+   "kind": "manual",
+   "url": "https://www.fondazioneconilsud.it/bandi-e-iniziative/",
+   "region": "IT",
+   "lang": "it",
+   "why": "page address changed; check by hand"
+  },
+  {
+   "name": "Funder35",
+   "kind": "html",
+   "url": "https://www.funder35.it/",
+   "region": "IT",
+   "lang": "it"
+  },
+  {
+   "name": "Obiettivo Europa - bandi aperti",
+   "kind": "manual",
+   "url": "https://www.obiettivoeuropa.com/bandi/aperti/",
+   "region": "EU",
+   "lang": "it",
+   "why": "page address changed; check by hand"
+  },
+  {
+   "name": "Ministrstvo za kulturo - razpisi",
+   "kind": "html",
+   "url": "https://www.gov.si/drzavni-organi/ministrstva/ministrstvo-za-kulturo/javne-objave/",
+   "region": "SI",
+   "lang": "sl"
+  },
+  {
+   "name": "JSKD - razpisi",
+   "kind": "manual",
+   "url": "https://www.jskd.si/razpisi/",
+   "region": "SI",
+   "lang": "sl",
+   "why": "page address changed; check by hand"
+  },
+  {
+   "name": "Center za kreativnost - razpisi",
+   "kind": "html",
+   "url": "https://czk.si/razpisi/",
+   "region": "SI",
+   "lang": "sl"
+  },
+  {
+   "name": "Mestna občina Nova Gorica - razpisi",
+   "kind": "manual",
+   "url": "https://www.nova-gorica.si/za-obcane/javni-razpisi/",
+   "region": "SI",
+   "lang": "sl",
+   "why": "page address changed; check by hand"
+  },
+  {
+   "name": "Pro Helvetia - funding",
+   "kind": "manual",
+   "url": "https://prohelvetia.ch/en/funding/",
+   "region": "CH",
+   "lang": "en",
+   "why": "page address changed; check by hand"
+  },
+  {
+   "name": "ASEF culture360 - opportunities",
+   "kind": "html",
+   "url": "https://culture360.asef.org/opportunities/",
+   "region": "International",
+   "lang": "en",
+   "include": "/opportunities/[a-z0-9-]{12,}"
+  },
+  {
+   "name": "All About Photo - contests",
+   "kind": "html",
+   "url": "https://www.all-about-photo.com/photo-contests",
+   "region": "International",
+   "lang": "en",
+   "include": "/photography-contest/"
+  },
+  {
+   "name": "Magnum Foundation - opportunities",
+   "kind": "html",
+   "url": "https://www.magnumfoundation.org/opportunities",
+   "region": "International",
+   "lang": "en"
+  },
+  {
+   "name": "Javna agencija za knjigo - razpisi",
+   "kind": "html",
+   "url": "https://www.jakrs.si/javni-razpisi-in-pozivi/razpisi-in-pozivi",
+   "region": "SI",
+   "lang": "sl"
+  },
+  {
+   "name": "Slovenski filmski center - razpisi",
+   "kind": "html",
+   "url": "https://www.film-center.si/sl/javni-razpisi/",
+   "region": "SI",
+   "lang": "sl"
+  },
+  {
+   "name": "Booooooom - open calls",
+   "kind": "html",
+   "url": "https://www.booooooom.com/open-calls",
+   "region": "International",
+   "lang": "en",
+   "offsite": true
+  }
+ ]
 }

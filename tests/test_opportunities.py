@@ -173,11 +173,12 @@ class Sources(unittest.TestCase):
         data = json.loads((Path(__file__).resolve().parents[1] / 'scripts/opportunities/sources.json').read_text())
         names = set()
         for s in data['sources']:
-            self.assertIn(s['kind'], ('html', 'rss', 'sedia'))
+            self.assertIn(s['kind'], ('html', 'rss', 'sedia', 'manual'))
             self.assertTrue(s['url'].startswith('https://'), s['url'])
             self.assertNotIn(s['name'], names)
             names.add(s['name'])
-        self.assertGreaterEqual(len(data['sources']), 50)
+        self.assertGreaterEqual(len(data['sources']), 55)
+        self.assertGreaterEqual(sum(1 for s in data['sources'] if s['kind'] != 'manual'), 35)
 
 
 if __name__ == '__main__':

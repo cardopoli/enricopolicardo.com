@@ -35,6 +35,7 @@ RECHECK_DAYS = 14          # re-read open leads this often (deadlines change)
 KEEP_GONE_DAYS = 60        # keep leads no longer listed this long
 KEEP_CLOSED_DAYS = 45      # keep closed calls this long after their deadline
 MAX_ITEMS = 3000
+DEBUG: dict[str, dict] = {}   # filled with --report: what each listing page looked like
 
 OPP = re.compile(r"band[oi]\b|grant|open[\s-]?call|call for|calls? for (?:proposals|applications|artists|entries)|fund(?:ing|s)?\b|contribut|residen|rezidenc|award|prize|premi[oa]?\b|nagrad|finanziament|competition|concors|natečaj|razpis|commission|tender|appalt|fellowship|bursar|stipend|sovvenzion|sostegno|opportunit|programme for|application", re.I)
 NOISE = re.compile(r"archivi|archive|closed calls|bandi chiusi|graduatori|esiti|results? of|winners? announced|privacy|cookie|log ?in|sign ?in|newsletter|contatt|contact us|faq|terms|accessibil|chi siamo|about us|careers|lavora con noi|job|vacanc", re.I)
@@ -175,6 +176,7 @@ def listing_links(html: str, base: str, source: dict) -> list[dict]:
     exclude = re.compile(source['exclude'], re.I) if source.get('exclude') else None
     base_host = urllib.parse.urlsplit(base).hostname or ''
     found: dict[str, dict] = {}
+    DEBUG[source.get('url', base)] = {'anchors': len(page.links), 'sample': [t for _, t in page.links if len(t) >= 10][:12], 'page_title': clean(page.title)[:80]}
     for href, title in page.links:
         if not href or href.startswith(('#', 'mailto:', 'tel:', 'javascript:')):
             continue
@@ -580,11 +582,30 @@ def enrich(net: Net, items: dict, today: dt.date, budget=MAX_DETAILS, per_host=M
     return done
 
 
+def report(final: list, health: list):
+    """Diagnostics for tuning sources (printed in the job log)."""
+    errs: dict[str, int] = {}
+    for i in final:
+        if i.get('detail_error'):
+            errs[i['detail_error'][:60]] = errs.get(i['detail_error'][:60], 0) + 1
+    print('\nDetail errors:', sorted(errs.items(), key=lambda x: -x[1])[:10])
+    for h in health:
+        mine = [i for i in final if i.get('source') == h['name']]
+        with_dl = sum(1 for i in mine if i.get('deadline'))
+        read = sum(1 for i in mine if i.get('detail_checked') and not i.get('detail_error'))
+        print(f"\n## {h['name']} [{h['status']}] listings={h['listings']} read={read} deadlines={with_dl}")
+        dbg = DEBUG.get(h['url'])
+        if dbg and not h['listings']:
+            print(f"   page '{dbg['page_title']}' anchors={dbg['anchors']} sample={dbg['sample']}")
+        for i in mine[:4]:
+            print(f"   - {i['title'][:90]} | {i.get('deadline') or '-'} | {i['url'][:90]}")
+
+
 def main(argv=None):
     argv = argv or sys.argv[1:]
     today = now_utc().date()
     now_iso = now_utc().isoformat(timespec='seconds')
-    sources = json.loads(SOURCES.read_text())['sources']
+    sources = [s for s in json.loads(SOURCES.read_text())['sources'] if s['kind'] != 'manual']
     only = [a for a in argv if not a.startswith('-')]
     if only:
         sources = [s for s in sources if any(o.lower() in s['name'].lower() for o in only)]
@@ -608,6 +629,8 @@ def main(argv=None):
     for i in final:
         counts[i['status']] = counts.get(i['status'], 0) + 1
     print(f'{ok}/{len(health)} sources answered; {len(final)} leads ({counts}); {opened} detail pages read')
+    if '--report' in argv:
+        report(final, health)
     for h in health:
         print(f"  {'OK ' if h['status'] == 'ok' else 'ERR'} {h['listings']:4} new {h['new']:3}  {h['name']}" + (f"  - {h['error']}" if h['error'] else ''))
     if not ok:

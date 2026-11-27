@@ -55,7 +55,7 @@ footer{border-top:1px solid #ddd;margin-top:40px;padding-top:16px;font-size:12px
 <label>Strength <output id="strengthOut">100%</output><input type="range" id="strength" min="0" max="100" value="100"></label>
 <label>Exposure <output id="evOut">0.0 stops</output><input type="range" id="ev" min="-2" max="2" step="0.1" value="0"></label>
 <label id="colLabel">Colour <output id="colOut">100%</output><input type="range" id="colour" min="0" max="100" value="100"></label>
-<label id="grainLabel">Grain <output id="grainOut">100%</output><input type="range" id="grain" min="0" max="200" value="100"></label>
+<label id="grainLabel" title="Grain follows the ISO, the film and the size of the picture">Grain <output id="grainOut">As shot</output><input type="range" id="grain" min="0" max="23" step="1" value="1" aria-describedby="grainHelp"><small id="grainHelp" class="muted"></small></label>
 </div>
 <div class="stage" id="stage"><canvas id="after"></canvas><canvas id="before"></canvas><span class="tag l">Before</span><span class="tag r" id="lookTag">Positive Film</span></div>
 <input type="range" class="split" id="split" min="0" max="100" value="50" aria-label="Before and after divider">
@@ -74,13 +74,22 @@ footer{border-top:1px solid #ddd;margin-top:40px;padding-top:16px;font-size:12px
 
 <section aria-labelledby="looks-h"><h2 id="looks-h">The looks</h2>
 <p>Positive Film is measured. The other six are built by eye from published descriptions of each film and the most-used film recipes, then tuned on the same six test frames. Each one is a short list of readable numbers (tone curve, colour moves, grain, softness, edges), in <a href="../../assets/js/positive-film/looks.js">looks.js</a>.</p>
+<h3>Grain</h3>
+<p>Grain is set by ISO, not by a strength slider. It starts at the ISO your photo was shot at (read from the file) and only adds what the photo is missing: noise already in it is taken off first, so you never get grain on top of grain.</p>
+<ul>
+<li><b>Film looks</b> treat the picture as one 35 mm frame. Grain is calibrated to Kodak's published RMS granularity (Tri-X 400: 17; colour films from Kodak's Print Grain Index), then printed through paper contrast, as a real print or scan would be. Black and white is hard, neutral silver; colour is three softer dye layers.</li>
+<li><b>Per pixel, by tone.</b> Each pixel's value sets how many grains cover it (the Boolean grain model of Newson, Delon and Galerne), so grain peaks in the mid-tones and fades into clean whites and solid blacks.</li>
+<li><b>Size.</b> Grain lives on the film, not the pixels: a big export shows it finely, a small one averages it (Selwyn's law), and the character stays the same relative to the frame. Higher ISO means bigger, stronger grain; pushing a film gets grittier.</li>
+<li><b>Digital looks</b> (Positive Film, Classic Chrome) use sensor noise instead: photon shot noise plus read noise, worked out from the camera's sensor size, the pixel count and the ISO.</li>
+</ul>
+<p>The maths is in <a href="../../assets/js/positive-film/grain.js">grain.js</a>.</p>
 <figure class="lookgrid"><img src="../../assets/positive-film/looks-dog-1.jpg" alt="The same photo of a grey dog in front of foliage, four ways: neutral RAW, Positive Film, Portra 400 and One Hour Photo" width="1950" height="360" loading="lazy"><figcaption><span>Neutral RAW</span><span>Positive Film</span><span>Portra 400</span><span>One Hour Photo</span></figcaption></figure>
 <figure class="lookgrid"><img src="../../assets/positive-film/looks-dog-2.jpg" alt="The same photo four more ways: Classic Chrome, 800T, Tri-X and Shinjuku" width="1950" height="360" loading="lazy"><figcaption><span>Classic Chrome</span><span>800T</span><span>Tri-X</span><span>Shinjuku</span></figcaption></figure>
 <table><thead><tr><th>Look</th><th>What it does</th><th>In the spirit of</th></tr></thead><tbody>
 <tr><td>Positive Film</td><td>Measured from an original Ricoh GR. Greens pulled back, reds and blues kept, crushed blacks.</td><td>Ricoh GR (2013)</td></tr>
 <tr><td>Portra 400</td><td>Gentle contrast, open shadows, warm mid-tones, olive greens, softer skies. Fine grain.</td><td>Kodak Portra 400</td></tr>
 <tr><td>One Hour Photo</td><td>A '90s high-street minilab print: deep blacks, hard contrast, strong reds, yellows and greens, warm creamy mid-tones, slightly soft with darker corners.</td><td>Kodak Gold, Fujicolor Superia</td></tr>
-<tr><td>Classic Chrome</td><td>Firm shadows, colour turned down, deep reds, cyan skies, olive greens. No grain.</td><td>Fujifilm Classic Chrome</td></tr>
+<tr><td>Classic Chrome</td><td>Firm shadows, colour turned down, deep reds, cyan skies, olive greens. Digital sensor noise, only above the ISO you shot at.</td><td>Fujifilm Classic Chrome</td></tr>
 <tr><td>800T</td><td>Teal shadows, warm highlights and a red glow around bright lights. Best on night shots under street lights.</td><td>CineStill 800T</td></tr>
 <tr><td>Tri-X</td><td>Full tonal range, firm mid-tones, visible grain, gentle edge darkening.</td><td>Kodak Tri-X 400</td></tr>
 <tr><td>Shinjuku</td><td>Pushed film printed on hard paper: blacks crushed, whites blown, heavy grain, dark edges. Use the strength slider to calm it down.</td><td>After Daido Moriyama's Tokyo street work</td></tr>
@@ -133,35 +142,48 @@ footer{border-top:1px solid #ddd;margin-top:40px;padding-top:16px;font-size:12px
 </main>
 <script type="module">
 import {uncurve,decode} from '../../assets/js/positive-film/pf-core.js';
-import {LOOKS,lookById,hasGrain,renderLook} from '../../assets/js/positive-film/looks.js';
+import {LOOKS,lookById,hasGrain,stockOf,renderLook} from '../../assets/js/positive-film/looks.js';
+import {ISO_STEPS} from '../../assets/js/positive-film/grain.js';
 const $=id=>document.getElementById(id);
 const PAGE='https://cardopoli.github.io/enricopolicardo.com/tools/positive-film/';
-const KEY='positive-film-settings-v2';
+const KEY='positive-film-settings-v3';
 const RAWEXT=/\.(dng|rw2|nef|nrw|cr2|cr3|arw|orf|raf|pef|srw|3fr|iiq)$/i,IMGEXT=/\.(jpe?g|png)$/i;
 const MAXP=1600;
 let queue=[],current=-1,src=null,prev=null,busy=false;
 const status=t=>{$('status').textContent=t};
 
 // ---------- settings
-const S={look:'positive-film',strength:100,ev:0,colour:100,grain:100,size:'2048',quality:90,remember:true};
+const S={look:'positive-film',strength:100,ev:0,colour:100,iso:'shot',size:'2048',quality:90,remember:true};
 try{const v=JSON.parse(localStorage.getItem(KEY)||'null');if(v)Object.assign(S,v)}catch(e){}
 function saveSettings(){try{if(S.remember)localStorage.setItem(KEY,JSON.stringify(S));else localStorage.removeItem(KEY)}catch(e){}}
-const SL=[['strength','strengthOut',v=>v+'%'],['ev','evOut',v=>(+v).toFixed(1)+' stops'],['colour','colOut',v=>v+'%'],['grain','grainOut',v=>v+'%'],['quality','qOut',v=>v]];
+const SL=[['strength','strengthOut',v=>v+'%'],['ev','evOut',v=>(+v).toFixed(1)+' stops'],['colour','colOut',v=>v+'%'],['quality','qOut',v=>v]];
+// Grain slider: Off, As shot, then ISO 50-6400 in third stops
+const ISO_OPTS=['off','shot',...ISO_STEPS];
+const isoIdx=v=>Math.max(0,ISO_OPTS.indexOf(v));
+function drawIso(){
+  const l=look(),st=stockOf(l),shot=src&&src.meta&&src.meta.iso,v=S.iso;
+  $('grain').value=isoIdx(v);
+  $('grainOut').textContent=v==='off'?'Off':v==='shot'?(shot?`As shot · ISO ${shot}`:(st&&st.type!=='digital'?`ISO ${st.iso}`:'As shot')):`ISO ${v}`;
+  $('grainHelp').textContent=!st?'':st.type==='digital'?'Sensor noise: more with higher ISO and smaller pixels. Only adds what the photo is missing.'
+    :`${st.name}${st.type==='bw'?' · silver grain':' · dye grain'}, sized to a 35 mm frame. Only adds what the photo is missing.`;
+}
+$('grain').addEventListener('input',()=>{S.iso=ISO_OPTS[+$('grain').value];drawIso();saveSettings();schedule()});
 for(const [id,out,fmt] of SL){$(id).value=S[id];$(out).textContent=fmt(S[id]);
   $(id).addEventListener('input',()=>{S[id]=+$(id).value;$(out).textContent=fmt($(id).value);saveSettings();if(id!=='quality')schedule()})}
 $('size').value=S.size;$('size').addEventListener('change',()=>{S.size=$('size').value;saveSettings()});
 $('remember').checked=S.remember;$('remember').addEventListener('change',()=>{S.remember=$('remember').checked;saveSettings()});
-$('reset').addEventListener('click',()=>{for(const [id,out,fmt] of SL.slice(0,4)){const d=id==='ev'?0:100;S[id]=d;$(id).value=d;$(out).textContent=fmt(d)}saveSettings();schedule()});
+$('reset').addEventListener('click',()=>{for(const [id,out,fmt] of SL.slice(0,3)){const d=id==='ev'?0:100;S[id]=d;$(id).value=d;$(out).textContent=fmt(d)}S.iso=(stockOf(look())||{}).start||'shot';drawIso();saveSettings();schedule()});
 
 // ---------- looks
 const look=()=>lookById(S.look);
 function drawLooks(){
   const box=$('looks');box.textContent='';
   for(const l of LOOKS){const b=document.createElement('button');b.type='button';b.setAttribute('role','radio');b.setAttribute('aria-checked',l.id===S.look);b.textContent=l.name;
-    b.addEventListener('click',()=>{S.look=l.id;saveSettings();drawLooks();schedule()});box.appendChild(b)}
+    b.addEventListener('click',()=>{S.look=l.id;S.iso=(stockOf(l)||{}).start||'shot';saveSettings();drawLooks();schedule()});box.appendChild(b)}
   const l=look();$('lookBlurb').textContent=l.blurb;$('lookTag').textContent=l.name;
   $('grain').disabled=!hasGrain(l);$('grainLabel').classList.toggle('off',!hasGrain(l));
   $('colour').disabled=l.kind==='mono';$('colLabel').classList.toggle('off',l.kind==='mono');
+  drawIso();
 }
 drawLooks();
 
@@ -172,9 +194,9 @@ function shrink(s,f){
   for(let y=0;y<h;y++)for(let x=0;x<w;x++){let r=0,g=0,b=0,R=0,G=0,B=0;
     for(let j=0;j<f;j++){let k=((y*f+j)*s.w+x*f)*3;for(let i=0;i<f;i++,k+=3){r+=s.data[k];g+=s.data[k+1];b+=s.data[k+2];if(o){R+=s.orig[k];G+=s.orig[k+1];B+=s.orig[k+2]}}}
     const q=(y*w+x)*3;d[q]=r/n;d[q+1]=g/n;d[q+2]=b/n;if(o){o[q]=R/n;o[q+1]=G/n;o[q+2]=B/n}}
-  return {w,h,data:d,orig:o,mode:s.mode};
+  return {w,h,data:d,orig:o,mode:s.mode,meta:s.meta};
 }
-function render(s,withBefore){return renderLook(look(),s,{ev:S.ev,strength:S.strength/100,colour:S.colour/100,grain:S.grain/100},withBefore)}
+function render(s,withBefore){return renderLook(look(),s,{ev:S.ev,strength:S.strength/100,colour:S.colour/100,iso:S.iso},withBefore)}
 
 // ---------- preview
 function show(){
@@ -196,19 +218,38 @@ async function loadRaw(file,half){
   try{
     await raw.open(new Uint8Array(await file.arrayBuffer()),{useCameraWb:true,outputColor:1,outputBps:16,gamm:[1,1,0,0,0,0],noAutoBright:true,halfSize:half,userQual:3});
     const img=await raw.imageData();
+    let md={};try{md=await raw.metadata()||{}}catch(e){}
     if(img.colors!==3)throw new Error('Unsupported colour layout in this RAW file.');
     const n=img.width*img.height*3,d=new Float32Array(n),sc=img.bits===16?1/65535:1/255;
     for(let i=0;i<n;i++)d[i]=img.data[i]*sc;
-    return {w:img.width,h:img.height,data:d,mode:'raw'};
+    const meta={iso:Math.round(+md.iso_speed||0)||null,make:md.camera_make||'',model:md.camera_model||'',focal:+md.focal_len||0,focal35:+((md.lens||{}).FocalLengthIn35mmFormat||0),nativeLong:Math.max(img.width,img.height)*(half?2:1)};
+    return {w:img.width,h:img.height,data:d,mode:'raw',meta};
   }finally{raw.dispose&&raw.dispose()}
 }
 const DLUT=new Float32Array(256);for(let i=0;i<256;i++)DLUT[i]=decode(i/255);
+// The few EXIF fields grain needs: ISO, camera, focal lengths
+function readExif(buf){
+  const v=new DataView(buf),out={};
+  if(v.byteLength<4||v.getUint16(0)!==0xFFD8)return out;
+  let p=2;
+  while(p+4<v.byteLength){const mk=v.getUint16(p),len=v.getUint16(p+2);
+    if(mk===0xFFE1&&v.getUint32(p+4)===0x45786966){const t=p+10,le=v.getUint16(t)===0x4949,u16=o=>v.getUint16(t+o,le),u32=o=>v.getUint32(t+o,le);
+      const str=(o,n)=>{let s='';for(let i=0;i<n-1;i++)s+=String.fromCharCode(v.getUint8(t+o+i));return s.replace(/\0.*$/,'').trim()};
+      const ifd=(o,cb)=>{if(o<=0||t+o+2>v.byteLength)return;const n=u16(o);for(let i=0;i<n;i++){const e=o+2+i*12;if(t+e+12>v.byteLength)return;cb(u16(e),u16(e+2),u32(e+4),e+8)}};
+      const val=(type,count,at)=>type===3?u16(at):type===4?u32(at):type===5?u32(u32(at))/(u32(u32(at)+4)||1):type===2?str(count>4?u32(at):at,count):0;
+      let sub=0;ifd(u32(4),(tag,type,count,at)=>{if(tag===0x010F)out.make=val(type,count,at);else if(tag===0x0110)out.model=val(type,count,at);else if(tag===0x8769)sub=u32(at)});
+      ifd(sub,(tag,type,count,at)=>{if(tag===0x8827)out.iso=val(type,count,at);else if(tag===0x920A)out.focal=val(type,count,at);else if(tag===0xA405)out.focal35=val(type,count,at)});
+      return out}
+    if((mk&0xFF00)!==0xFF00)break;p+=2+len}
+  return out;
+}
 async function loadImage(file){
+  let ex={};try{ex=readExif(await file.slice(0,262144).arrayBuffer())}catch(e){}
   const bmp=await createImageBitmap(file);const c=new OffscreenCanvas(bmp.width,bmp.height),x=c.getContext('2d');x.drawImage(bmp,0,0);bmp.close&&bmp.close();
   const px=x.getImageData(0,0,c.width,c.height).data,n=c.width*c.height,d=new Float32Array(n*3),o=new Float32Array(n*3);
   for(let i=0,p=0;i<n;i++,p+=4){const r=DLUT[px[p]],g=DLUT[px[p+1]],b=DLUT[px[p+2]],Y=0.2126*r+0.7152*g+0.0722*b,k=Y>1e-6?uncurve(Y)/Y:0;
     d[i*3]=r*k;d[i*3+1]=g*k;d[i*3+2]=b*k;o[i*3]=px[p]/255;o[i*3+1]=px[p+1]/255;o[i*3+2]=px[p+2]/255}
-  return {w:c.width,h:c.height,data:d,orig:o,mode:'jpeg'};
+  return {w:c.width,h:c.height,data:d,orig:o,mode:'jpeg',meta:{iso:+ex.iso||null,make:ex.make||'',model:ex.model||'',focal:+ex.focal||0,focal35:+ex.focal35||0,nativeLong:Math.max(c.width,c.height)}};
 }
 const isRaw=f=>RAWEXT.test(f.name);
 const target=()=>S.size==='full'?Infinity:+S.size;
@@ -217,7 +258,7 @@ const decodeFor=(file,forExport)=>isRaw(file)?loadRaw(file,!(forExport&&target()
 // ---------- export
 const EXIFS={};
 function exifSegment(name){
-  const te=new TextEncoder(),d=te.encode(name+' look, made with the Positive Film tool: '+PAGE+'\0'),w=te.encode('Positive Film tool 0.3 - Enrico Policardo\0');
+  const te=new TextEncoder(),d=te.encode(name+' look, made with the Positive Film tool: '+PAGE+'\0'),w=te.encode('Positive Film tool 0.4 - Enrico Policardo\0');
   const ifd=2+2*12+4,off=8+ifd,len=off+d.length+w.length,b=new DataView(new ArrayBuffer(len)),u=new Uint8Array(b.buffer);
   u[0]=0x49;u[1]=0x49;b.setUint16(2,42,true);b.setUint32(4,8,true);b.setUint16(8,2,true);
   const entry=(at,tag,count,vo)=>{b.setUint16(at,tag,true);b.setUint16(at+2,2,true);b.setUint32(at+4,count,true);b.setUint32(at+8,vo,true)};
@@ -272,7 +313,7 @@ function drawQueue(){
 }
 async function preview(i){
   if(busy||!queue[i])return;current=i;drawQueue();const f=queue[i].file;
-  try{setBusy(true);status('Opening '+f.name+'…');src=await decodeFor(f,false);prev=shrink(src,Math.ceil(Math.max(src.w,src.h)/MAXP));show();
+  try{setBusy(true);status('Opening '+f.name+'…');src=await decodeFor(f,false);prev=shrink(src,Math.ceil(Math.max(src.w,src.h)/MAXP));drawIso();show();
     status(`${f.name} · ${src.w} × ${src.h}${src.mode==='raw'?' · RAW':' · JPEG, approximate'} · ${queue.length} in the list`)}
   catch(e){console.error(e);queue[i].state='failed: '+(e.message||e);status('Could not open '+f.name+'. '+(e.message||e))}
   finally{setBusy(false);drawQueue()}

@@ -29,6 +29,23 @@ export const STOCKS = {
   'positive-film': {type: 'digital'},
   'classic-chrome': {type: 'digital'},
 };
+// The speeds each film is really shot at: box speed, pulled (rated slower) and pushed (rated faster, developed longer).
+const B = 'box speed';
+export const SPEEDS = {
+  'tri-x': [[200, 'pulled'], [400, B], [800, 'pushed 1'], [1600, 'pushed 2'], [3200, 'pushed 3']],
+  'shinjuku': [[800, 'pushed 1'], [1600, 'pushed 2'], [3200, 'pushed 3']],
+  'portra-400': [[200, 'rated 200'], [400, B], [800, 'pushed 1']],
+  'one-hour-photo': [[100, 'rated 100'], [200, B], [400, 'pushed 1']],
+  '800t': [[400, 'rated 400'], [800, B], [1600, 'pushed 1'], [3200, 'pushed 2']],
+};
+const DIGITAL = [100, 200, 400, 800, 1600, 3200, 6400];
+// Options for the grain buttons: [value, label, note]. Film starts at its box speed (Shinjuku pushed), digital as shot.
+export function isoOptions(lookId) {
+  const st = STOCKS[lookId];
+  if (!st) return {options: [], start: 'off'};
+  if (st.type === 'digital') return {options: [['shot', 'As shot', ''], ...DIGITAL.map(v => [v, String(v), '']), ['off', 'Off', '']], start: 'shot'};
+  return {options: [...SPEEDS[lookId].map(([v, n]) => [v, String(v), n === B ? 'box' : n]), ['off', 'Off', '']], start: st.start || st.iso};
+}
 export const ISO_STEPS = [50, 64, 80, 100, 125, 160, 200, 250, 320, 400, 500, 640, 800, 1000, 1250, 1600, 2000, 2500, 3200, 4000, 5000, 6400];
 
 // Sensor long edge in mm, for working out pixel size. Fallback: from the 35 mm-equivalent focal length.

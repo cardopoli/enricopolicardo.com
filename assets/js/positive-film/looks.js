@@ -33,8 +33,8 @@ export const LOOKS = [
    vignette:{stops:0.3}},
   {id:'shinjuku', name:'Shinjuku', kind:'mono',
    blurb:'After Daido Moriyama. Pushed film on hard paper: deep blacks, blown whites, heavy grain, dark edges.',
-   mix:[0.27,0.60,0.13], autoEv:true, ev:-0.45, tone:{lo:0, span:100, k:1.75, s0:0.1, stretch:[10,95]},
-   vignette:{stops:1.1}},
+   mix:[0.27,0.60,0.13], autoEv:true, ev:0, tone:{lo:0, span:100, k:2.3, s0:0, stretch:[6,90]},
+   vignette:{stops:0.75}},
 ];
 export const lookById = id => LOOKS.find(l => l.id === id) || LOOKS[0];
 export const hasGrain = l => !!STOCKS[l.id];

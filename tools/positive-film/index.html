@@ -2,80 +2,119 @@
 <html lang="en-GB"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <script src="coi-serviceworker.js"></script>
-<title>Positive Film | Enrico Policardo</title>
+<title>Positive Film</title>
 <link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#ffffff"><link rel="apple-touch-icon" href="icon-192.png"><link rel="icon" href="icon-192.png">
 <meta name="description" content="The Ricoh GR's Positive Film look, measured and written down as numbers, plus six classic film looks. Apply them to RAW files or JPEGs from any camera, in your browser.">
 <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" crossorigin="anonymous">
 <style>
 *{box-sizing:border-box}body{margin:0;background:#fff;color:#000;font:15px/1.6 'Averia Serif Libre',Georgia,serif}
-a{color:inherit;text-underline-offset:4px}main{max-width:1020px;margin:auto;padding:60px 40px 80px}
+a{color:inherit;text-underline-offset:4px}main{max-width:1180px;margin:auto;padding:48px 40px 80px}
 header>a{font-size:12px;text-decoration:none}header>a:hover{text-decoration:underline}
-h1{font-size:26px;font-weight:400;line-height:1.3;margin:28px 0 10px}h2{font-size:18px;font-weight:400;margin:0 0 14px}h3{font-size:15px;font-weight:700;margin:24px 0 8px}
-p,li{max-width:680px}.intro{font-size:15px;color:#444;max-width:620px;margin:0 0 34px}.muted,small{color:#777}
-section{border-top:1px solid #ddd;padding:30px 0 10px;margin-top:10px}
+h1{font-size:26px;font-weight:400;line-height:1.3;margin:24px 0 6px}h2{font-size:18px;font-weight:400;margin:0 0 14px}h3{font-size:15px;font-weight:700;margin:24px 0 8px}
+p,li{max-width:680px}.intro{font-size:15px;color:#444;max-width:620px;margin:0 0 26px}.muted,small{color:#777}
 button,input,select{font:inherit;color:inherit}button,.button{background:#fff;border:1px solid #ddd;padding:7px 14px;cursor:pointer;font-size:14px;text-decoration:none;display:inline-block}button:hover,.button:hover{border-color:#000}button:disabled{opacity:.4;cursor:default}
-button:focus-visible,input:focus-visible,a:focus-visible,label:focus-within{outline:2px solid #000;outline-offset:4px}
-.drop{display:block;border:1px dashed #aaa;padding:34px 20px;text-align:center;cursor:pointer;font-size:14px}.drop.over{border-color:#000;background:#f6f6f6}.drop input{position:absolute;opacity:0;width:1px;height:1px}
-.controls{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px 28px;margin:22px 0 10px;font-size:13px}
-.controls label{display:block}.controls input[type=range]{width:100%;accent-color:#000}.controls output{float:right;color:#777}
+button:focus-visible,input:focus-visible,a:focus-visible,summary:focus-visible,label:focus-within{outline:2px solid #000;outline-offset:3px}
+.primary{background:#000;color:#fff;border-color:#000}.primary:hover{background:#333}
+.drop{display:block;border:1px dashed #aaa;padding:46px 20px 40px;text-align:center;cursor:pointer}.drop.over{border-color:#000;background:#f6f6f6}
+.drop b{display:block;font-size:20px;font-weight:400}.drop .sub{font-size:13px;color:#777;margin:4px auto 0}
+.drop .pick{display:flex;gap:10px;justify-content:center;margin-top:18px;flex-wrap:wrap}.drop .pick .button{position:relative}.drop .pick input{position:absolute;opacity:0;width:1px;height:1px}
+.teaser{margin:22px 0 0}.teaser img{width:100%;height:auto;display:block}.teaser figcaption{display:grid;grid-template-columns:repeat(4,1fr);font-size:12px;color:#777;margin-top:6px}
+.install{font-size:13px;margin:10px 0 0;color:#777}.install button{font-size:12px;padding:3px 9px;margin-left:6px}
+#status{font-size:13px;min-height:22px;color:#444;margin-top:6px}
+/* workspace: photo first, controls beside it */
+.app{display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:30px;align-items:start;margin-top:6px}
+.app>*{min-width:0}.stagewrap{position:sticky;top:12px}
+.stage{position:relative;background:#f4f4f4;line-height:0;user-select:none;-webkit-user-select:none;touch-action:none;cursor:pointer}
+.stage canvas{width:100%;height:auto;max-height:calc(100vh - 110px);object-fit:contain;display:block}
+#before{position:absolute;inset:0;width:100%;height:100%;opacity:0}.stage.hold #before{opacity:1}
+.stage .tag{position:absolute;top:10px;left:10px;font:11px/1 system-ui;background:#fff;padding:5px 7px;line-height:1}.stage .tag.b{display:none}.stage.hold .tag.b{display:block}.stage.hold .tag.a{display:none}
+.hint{font-size:12px;color:#777;margin:6px 0 0;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.nav{display:flex;gap:6px;align-items:center}.nav button{padding:2px 10px;font-size:13px}
+.panel{font-size:13px}.panel .lbl{display:flex;justify-content:space-between;font-size:13px;margin:16px 0 4px}.panel .lbl output,.panel .lbl span{color:#777}
+.looks{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.looks button{padding:0;border:2px solid transparent;background:none;text-align:center;font-size:11px;line-height:1.3}.looks button:hover{border-color:#ddd}
+.looks button canvas{width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;display:block;background:#eee}.looks button span{display:block;padding:3px 0 2px}
+.looks button[aria-checked=true]{border-color:#000}
+#lookBlurb{font-size:12px;margin:8px 0 0;min-height:36px;color:#777}
+.panel input[type=range]{width:100%;accent-color:#000;margin:0}.panel .off{opacity:.35}
+.seg{display:flex;flex-wrap:wrap;gap:4px}.seg button{padding:4px 8px;font-size:12px;line-height:1.25;text-align:center}.seg button small{display:block;font-size:10px;color:#777}.seg button[aria-pressed=true]{background:#000;color:#fff;border-color:#000}.seg button[aria-pressed=true] small{color:#ccc}
+#grainHelp{font-size:12px;margin:6px 0 0}
+.save{margin-top:22px;border-top:1px solid #ddd;padding-top:16px}.save .row{display:flex;gap:8px;flex-wrap:wrap}.save .row button{flex:1}
+.save details{margin-top:10px}.save summary{cursor:pointer;color:#777;font-size:12px}.save label{display:block;margin-top:8px}.save select{width:100%;font-size:13px;padding:4px;margin-top:4px;border:1px solid #ddd;background:#fff}
+.links{display:flex;gap:14px;margin-top:14px;font-size:12px}.links button{border:0;padding:0;font-size:12px;text-decoration:underline;text-underline-offset:3px;color:#777}
+.progress{height:3px;background:#eee;margin:10px 0}.progress div{height:3px;background:#000;width:0;transition:width .2s}
+.queue{width:100%;font-size:12px;margin:8px 0 0}.queue td{padding:4px 8px 4px 0;border-bottom:1px solid #eee}.queue td:last-child{text-align:right}.queue button{font-size:11px;padding:2px 8px}.queue tr.on td{font-weight:700}.queue .err{color:#a00}
 .check{display:flex!important;gap:8px;align-items:center}
-.looks{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 6px}.looks button[aria-checked=true]{background:#000;color:#fff;border-color:#000}
-#lookBlurb{font-size:13px;margin:4px 0 0;min-height:21px}.controls label.off{opacity:.35}
-.lookgrid figcaption{grid-template-columns:repeat(4,1fr)}
-.stage{position:relative;margin:18px 0 8px;background:#f4f4f4;line-height:0;user-select:none}
-.stage canvas{width:100%;height:auto;display:block}#before{position:absolute;top:0;left:0}
-.stage .tag{position:absolute;top:10px;font:11px/1 system-ui;background:#fff;padding:5px 7px}.tag.l{left:10px}.tag.r{right:10px}
-.split{width:100%;accent-color:#000;margin:6px 0 0}
-#status{font-size:13px;min-height:22px;color:#444}.actions{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 6px}
+/* reading, folded away */
+details.more{border-top:1px solid #ddd;margin:0}details.more:last-of-type{border-bottom:1px solid #ddd}
+details.more>summary{list-style:none;cursor:pointer;padding:14px 0;font-size:17px}details.more>summary::-webkit-details-marker{display:none}
+details.more>summary::before{content:'+';display:inline-block;width:22px}details.more[open]>summary::before{content:'\2212'}
+details.more>.body{padding:0 0 26px}
+.reading{margin-top:56px}
 table{border-collapse:collapse;font-size:14px;margin:8px 0 18px;min-width:min(100%,520px)}th,td{text-align:left;padding:7px 14px 7px 0;border-bottom:1px solid #eee;vertical-align:top}th{font-weight:400;color:#777;font-size:12px}
 .tables{display:grid;grid-template-columns:200px minmax(0,1fr);gap:40px;align-items:start}
 figure{margin:0 0 30px}figure img{width:100%;height:auto;display:block}figcaption{display:grid;grid-template-columns:repeat(3,1fr);font-size:12px;color:#777;margin-top:6px}
-.pair{display:grid;grid-template-columns:1fr 1fr;gap:24px}
-footer{border-top:1px solid #ddd;margin-top:40px;padding-top:16px;font-size:12px;color:#777}
-.drop .pick{display:flex;gap:10px;justify-content:center;margin-top:14px;flex-wrap:wrap}.drop .pick .button{position:relative}.drop .pick input{position:absolute;opacity:0;width:1px;height:1px}
-.export select{width:100%;font-size:13px;padding:4px;margin-top:4px;border:1px solid #ddd;background:#fff}
-.progress{height:3px;background:#eee;margin:10px 0}.progress div{height:3px;background:#000;width:0;transition:width .2s}
-.queue{width:100%;font-size:13px}.queue td:last-child{text-align:right}.queue button{font-size:12px;padding:3px 9px}.queue tr.on td{font-weight:700}.queue .err{color:#a00}
-.install{font-size:13px;margin:10px 0 0}.install button{font-size:12px;padding:3px 9px;margin-left:6px}
+.lookgrid figcaption{grid-template-columns:repeat(4,1fr)}.pair{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+footer{margin-top:40px;padding-top:16px;font-size:12px;color:#777}
 [hidden]{display:none!important}
-@media(max-width:760px){main{padding:30px 18px}.controls,.tables,.pair{grid-template-columns:1fr}}
+@media(max-width:860px){main{padding:24px 16px 60px}.app{grid-template-columns:1fr;gap:12px}
+  .stagewrap{top:0;z-index:2;background:#fff;padding-top:6px}.stage canvas{max-height:44vh}
+  .looks{display:flex;overflow-x:auto;gap:6px;scroll-snap-type:x mandatory;padding-bottom:4px}.looks button{flex:0 0 76px;scroll-snap-align:start}
+  .tables,.pair{grid-template-columns:1fr}.teaser figcaption{font-size:11px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 </style></head><body><main>
 <header><a href="../../">← Tools directory</a><h1>Positive Film</h1>
-<p class="intro">The Ricoh GR's Positive Film look, taken apart and written down as numbers, plus six of the film looks people reach for most: Portra 400, One Hour Photo, Classic Chrome, 800T, Tri-X and Shinjuku. Drop in a RAW file or JPEG from any camera. Nothing is uploaded: your files are processed in this browser.</p></header>
+<p class="intro">The Ricoh GR's Positive Film look and six film looks, for your RAW and JPEG files. Nothing leaves your device.</p></header>
 
-<section id="tool" aria-labelledby="tool-h"><h2 id="tool-h">Apply it</h2>
-<div class="drop" id="drop" tabindex="0" role="button" aria-label="Add files">Drop RAW files (DNG, RW2, NEF, CR2, CR3, ARW, ORF, RAF, PEF) or JPEGs here - one, a selection or a whole folder
-<div class="pick"><label class="button">Choose files<input type="file" id="file" multiple accept=".dng,.rw2,.nef,.nrw,.cr2,.cr3,.arw,.orf,.raf,.pef,.srw,.3fr,.iiq,.jpg,.jpeg,.png,image/jpeg,image/png"></label><label class="button">Choose a folder<input type="file" id="folder" webkitdirectory multiple></label></div></div>
-<p class="install muted"><span id="offlineNote">Works offline once installed or visited: nothing is uploaded, your device does the processing.</span> <button id="install" type="button" hidden>Install as an app</button></p>
+<section id="tool" aria-label="Apply a look">
+<div id="empty">
+<div class="drop" id="drop" tabindex="0" role="button" aria-label="Add photos"><b>Drop photos here</b><p class="sub">RAW or JPEG · one, a few, or a whole folder</p>
+<div class="pick"><label class="button primary">Choose photos<input type="file" id="file" multiple accept=".dng,.rw2,.nef,.nrw,.cr2,.cr3,.arw,.orf,.raf,.pef,.srw,.3fr,.iiq,.jpg,.jpeg,.png,image/jpeg,image/png"></label><label class="button">Choose a folder<input type="file" id="folder" webkitdirectory multiple></label></div></div>
+<figure class="teaser"><img src="../../assets/positive-film/looks-dog-1.jpg" alt="The same photo of a grey dog four ways: neutral RAW, Positive Film, Portra 400 and One Hour Photo" width="1950" height="360"><figcaption><span>Neutral RAW</span><span>Positive Film</span><span>Portra 400</span><span>One Hour Photo</span></figcaption></figure>
+<p class="install"><span id="offlineNote">Works offline once visited.</span> <button id="install" type="button" hidden>Install as an app</button></p>
+</div>
 <div id="status" role="status" aria-live="polite"></div>
 <div id="view" hidden>
-<div class="looks" id="looks" role="radiogroup" aria-label="Look"></div><p id="lookBlurb" class="muted"></p>
-<div class="controls">
-<label>Strength <output id="strengthOut">100%</output><input type="range" id="strength" min="0" max="100" value="100"></label>
-<label>Exposure <output id="evOut">0.0 stops</output><input type="range" id="ev" min="-2" max="2" step="0.1" value="0"></label>
-<label id="colLabel">Colour <output id="colOut">100%</output><input type="range" id="colour" min="0" max="100" value="100"></label>
-<label id="grainLabel" title="Grain follows the ISO, the film and the size of the picture">Grain <output id="grainOut">As shot</output><input type="range" id="grain" min="0" max="23" step="1" value="1" aria-describedby="grainHelp"><small id="grainHelp" class="muted"></small></label>
+<div class="app">
+ <div class="stagewrap">
+  <div class="stage" id="stage" tabindex="0" aria-label="Your photo. Press and hold, or hold B, to see the original"><canvas id="after"></canvas><canvas id="before"></canvas><span class="tag a" id="lookTag">Positive Film</span><span class="tag b">Original</span></div>
+  <div class="hint"><span>Press and hold the photo to see the original</span><span class="nav" id="nav" hidden><button id="prevBtn" type="button" aria-label="Previous photo">‹</button><span id="navPos"></span><button id="nextBtn" type="button" aria-label="Next photo">›</button></span></div>
+ </div>
+ <div class="panel">
+  <div class="looks" id="looks" role="radiogroup" aria-label="Look"></div><p id="lookBlurb"></p>
+  <label class="lbl" for="strength">Strength <output id="strengthOut">100%</output></label><input type="range" id="strength" min="0" max="100" value="100">
+  <label class="lbl" for="ev">Exposure <output id="evOut">0.0 stops</output></label><input type="range" id="ev" min="-2" max="2" step="0.1" value="0">
+  <div id="colLabel"><label class="lbl" for="colour">Saturation <output id="colOut">100%</output></label><input type="range" id="colour" min="0" max="100" value="100"></div>
+  <div id="grainLabel"><div class="lbl"><span style="color:#000">Grain</span><span id="grainOut"></span></div><div class="seg" id="grainSeg" role="group" aria-label="Grain: ISO"></div><p id="grainHelp" class="muted"></p></div>
+  <div class="save">
+   <div class="row"><button id="save" type="button" class="primary">Save</button><button id="zip" type="button" hidden>Save all</button></div>
+   <button id="dir" type="button" hidden style="width:100%;margin-top:8px">Save all to a folder</button>
+   <div class="progress" id="progress" hidden><div id="bar"></div></div>
+   <details><summary>Size and quality</summary>
+    <label>Size <select id="size"><option value="1080">1080 px (Instagram)</option><option value="2048">2048 px (web)</option><option value="4096">4096 px (print)</option><option value="full">Full resolution</option></select></label>
+    <label>JPEG quality <output id="qOut">90</output><input type="range" id="quality" min="60" max="100" value="90" style="width:100%;accent-color:#000"></label>
+    <label class="check"><input type="checkbox" id="remember" checked> Remember my settings</label>
+   </details>
+   <details id="listBox" hidden><summary id="listSum">All photos</summary><table class="queue" id="queue"><tbody id="qbody"></tbody></table></details>
+   <div class="links"><button id="reset" type="button">Reset</button><button id="clear" type="button">Start again</button></div>
+  </div>
+ </div>
 </div>
-<div class="stage" id="stage"><canvas id="after"></canvas><canvas id="before"></canvas><span class="tag l">Before</span><span class="tag r" id="lookTag">Positive Film</span></div>
-<input type="range" class="split" id="split" min="0" max="100" value="50" aria-label="Before and after divider">
-<div class="controls export" style="grid-template-columns:repeat(3,minmax(0,1fr))">
-<label>Export size <select id="size"><option value="1080">1080 px long edge (Instagram)</option><option value="2048">2048 px long edge (web, social)</option><option value="4096">4096 px long edge (print, large)</option><option value="full">Full resolution</option></select></label>
-<label>JPEG quality <output id="qOut">90</output><input type="range" id="quality" min="60" max="100" value="90"></label>
-<label class="check" style="align-self:end"><input type="checkbox" id="remember" checked> Remember these settings</label>
 </div>
-<div class="actions"><button id="save" type="button">Download this image</button><button id="zip" type="button">Process all as ZIP</button><button id="dir" type="button" hidden>Save all to a folder</button><button id="reset" type="button">Reset sliders</button><button id="clear" type="button">Clear list</button></div>
-<div class="progress" id="progress" hidden><div id="bar"></div></div>
-<table class="queue" id="queue" hidden><thead><tr><th>File</th><th>Type</th><th>Status</th><th></th></tr></thead><tbody id="qbody"></tbody></table>
-</div>
-<p class="muted" style="font-size:13px">The look and sliders apply to every file in the list; check a few with Preview before running the batch. RAW files give the accurate result: Positive Film was measured from raw colour. A JPEG has already been through its own camera's curve, so the tool first estimates the light in the scene and then applies the look - treat JPEG results as an approximation. Downloads carry a short note in their file details saying they were made with this tool, with a link back here. Large batches at full resolution can take a while and use a lot of memory; 2048 px is quick.</p>
 </section>
 
+<div class="reading">
+<details class="more"><summary>Notes on RAW, JPEG and batches</summary><div class="body">
+<p>RAW files give the accurate result: Positive Film was measured from raw colour. A JPEG has already been through its own camera's curve, so the tool first estimates the light in the scene and then applies the look; treat JPEG results as an approximation. Supported RAW: DNG, RW2, NEF, CR2, CR3, ARW, ORF, RAF, PEF and more.</p>
+<p>The look and settings apply to every photo you add; check a few before saving them all. Large batches at full resolution can take a while and use a lot of memory; 2048 px is quick. Downloads carry a short note in their file details saying they were made with this tool, with a link back here.</p>
+</div></details>
 
-<section aria-labelledby="looks-h"><h2 id="looks-h">The looks</h2>
+
+<details class="more"None><summary>The looks and the grain</summary><div class="body">
 <p>Positive Film is measured. The other six are built by eye from published descriptions of each film and the most-used film recipes, then tuned on the same six test frames. Each one is a short list of readable numbers (tone curve, colour moves, grain, softness, edges), in <a href="../../assets/js/positive-film/looks.js">looks.js</a>.</p>
 <h3>Grain</h3>
-<p>Grain is set by ISO, not by a strength slider. It starts at the ISO your photo was shot at (read from the file) and only adds what the photo is missing: noise already in it is taken off first, so you never get grain on top of grain.</p>
+<p>Grain is set by ISO, and each film only offers the speeds it is really shot at: its box speed, pulled or pushed. The digital looks start at the ISO your photo was shot at (read from the file). Either way it only adds what the photo is missing: noise already in it is taken off first, so you never get grain on top of grain.</p>
 <ul>
 <li><b>Film looks</b> treat the picture as one 35 mm frame. Grain is calibrated to Kodak's published RMS granularity (Tri-X 400: 17; colour films from Kodak's Print Grain Index), then printed through paper contrast, as a real print or scan would be. Black and white is hard, neutral silver; colour is three softer dye layers.</li>
 <li><b>Per pixel, by tone.</b> Each pixel's value sets how many grains cover it (the Boolean grain model of Newson, Delon and Galerne), so grain peaks in the mid-tones and fades into clean whites and solid blacks.</li>
@@ -95,15 +134,15 @@ footer{border-top:1px solid #ddd;margin-top:40px;padding-top:16px;font-size:12px
 <tr><td>Shinjuku</td><td>Pushed film printed on hard paper: blacks crushed, whites blown, heavy grain, dark edges. Use the strength slider to calm it down.</td><td>After Daido Moriyama's Tokyo street work</td></tr>
 </tbody></table>
 <p class="muted" style="font-size:13px">Film and camera names (Portra, Gold, Tri-X, Classic Chrome, Fujicolor, CineStill 800T, Positive Film) belong to their owners: Kodak, Fujifilm, CineStill and Ricoh. They are used only to say which style each look is modelled on. None of these companies made, measured or endorses these looks, and Positive Film is an independent measurement. Shinjuku is a homage to the look of Daido Moriyama's photographs; it is not connected to him or his foundation.</p>
-</section>
+</div></details>
 
-<section aria-labelledby="what-h"><h2 id="what-h">What Positive Film does</h2>
+<details class="more"None><summary>What Positive Film does</summary><div class="body">
 <p>It is less about adding colour than taking it away from the right places. Compared with a neutral render of the same RAW file, it:</p>
 <ul><li>pulls greens back by about half</li><li>turns yellow towards ochre and warms orange towards red</li><li>keeps reds and blues at full strength</li><li>crushes the blacks, keeps the mid-tones bright and clips hard about two and a half stops over mid grey</li><li>leaves a faint magenta-blue tint in the greys</li></ul>
 <p>Most of the look is one contrast curve applied to the red, green and blue channels separately. Because each channel goes through the curve on its own, the curve also adds saturation in the shadows and takes it out of the highlights. The colour shifts in the second table do the rest.</p>
-</section>
+</div></details>
 
-<section aria-labelledby="num-h"><h2 id="num-h">The numbers</h2>
+<details class="more"None><summary>The numbers</summary><div class="body">
 <div class="tables"><div><h3>Tone curve</h3><table><thead><tr><th>Stops from mid grey</th><th>L*</th></tr></thead><tbody><tr><td>-4.0</td><td>2</td></tr><tr><td>-3.0</td><td>7</td></tr><tr><td>-2.5</td><td>14</td></tr><tr><td>-2.0</td><td>23</td></tr><tr><td>-1.5</td><td>35</td></tr><tr><td>-1.0</td><td>48</td></tr><tr><td>-0.5</td><td>59</td></tr><tr><td>+0.0</td><td>69</td></tr><tr><td>+0.5</td><td>77</td></tr><tr><td>+1.0</td><td>83</td></tr><tr><td>+1.5</td><td>89</td></tr><tr><td>+2.0</td><td>94</td></tr><tr><td>+2.5</td><td>98</td></tr></tbody></table><p class="muted" style="font-size:13px">Applied to each linear RGB channel, with 1.0 as the raw clipping point.</p></div>
 <div><h3>Colour, after the curve</h3><table><thead><tr><th>Colour</th><th>Saturation</th><th>Hue</th><th>Lightness</th><th>Data</th></tr></thead><tbody><tr><td>Red</td><td>+16%</td><td>unchanged</td><td>+1.7</td><td>solid</td></tr><tr><td>Orange</td><td>+19%</td><td>-15° towards red</td><td>+1.3</td><td>solid</td></tr><tr><td>Yellow</td><td>-15%</td><td>-26° towards orange</td><td>+1.1</td><td>solid</td></tr><tr><td>Green</td><td>-49%</td><td>+2° towards cyan</td><td>+0.1</td><td>solid</td></tr><tr><td>Cyan</td><td>0%</td><td>+40° towards blue</td><td>-2.5</td><td>thin data</td></tr><tr><td>Blue</td><td>+13%</td><td>+6° towards purple</td><td>+0.2</td><td>solid</td></tr><tr><td>Purple</td><td>-14%</td><td>unchanged</td><td>+0.7</td><td>solid</td></tr><tr><td>Magenta</td><td>+5%</td><td>+7° towards red</td><td>-3.6</td><td>thin data</td></tr></tbody></table>
 <p style="font-size:14px">Grey cast: a* +1.1, b* -0.7 (slightly magenta and blue). Saturation also rises 11% in the darkest tones and falls 6% in the lightest.</p>
@@ -111,24 +150,24 @@ footer{border-top:1px solid #ddd;margin-top:40px;padding-top:16px;font-size:12px
 <h3>How close it gets</h3>
 <p style="font-size:14px">Mean colour difference (ΔE 2000) between a RAW file put through the formula and the GR's own Positive Film JPEG of the same frame. Under 2 is hard to see side by side. The last column refits the formula without that photo and then tests on it, to check it isn't just memorising the test set.</p>
 <table><thead><tr><th>Test photo</th><th>Curve only</th><th>Full formula</th><th>Photo left out</th></tr></thead><tbody><tr><td>Street, shop front</td><td>3.4</td><td>2.0</td><td>2.0</td></tr><tr><td>Dog, overcast</td><td>3.9</td><td>1.4</td><td>1.5</td></tr><tr><td>Tower, blue sky</td><td>2.5</td><td>1.3</td><td>1.2</td></tr><tr><td>Portrait, interior</td><td>2.5</td><td>1.6</td><td>1.8</td></tr><tr><td>Interior, window</td><td>1.7</td><td>1.6</td><td>1.9</td></tr><tr><td>Festival, mixed light</td><td>3.6</td><td>2.1</td><td>2.4</td></tr></tbody></table>
-</section>
+</div></details>
 
-<section aria-labelledby="cmp-h"><h2 id="cmp-h">Comparisons</h2>
+<details class="more"None><summary>Comparisons</summary><div class="body">
 <figure><img src="../../assets/positive-film/dog.jpg" alt="Three versions of a grey dog in front of foliage: a neutral RAW render, the formula applied, and the Ricoh GR Positive Film JPEG" width="1952" height="483" loading="lazy"><figcaption><span>Neutral RAW</span><span>Formula</span><span>GR Positive Film JPEG</span></figcaption></figure>
 <div class="pair">
 <figure><img src="../../assets/positive-film/bkfoods.jpg" alt="Three versions of a closed shop front with a blue shutter and a red sign: neutral RAW, formula, GR JPEG" width="1469" height="644" loading="lazy"><figcaption><span>Neutral RAW</span><span>Formula</span><span>GR JPEG</span></figcaption></figure>
 <figure><img src="../../assets/positive-film/tower.jpg" alt="Three versions of a brick and white tower block against blue sky: neutral RAW, formula, GR JPEG" width="1469" height="644" loading="lazy"><figcaption><span>Neutral RAW</span><span>Formula</span><span>GR JPEG</span></figcaption></figure>
-</div></section>
+</div></div></details>
 
-<section aria-labelledby="how-h"><h2 id="how-h">How it was measured</h2>
+<details class="more"None><summary>How it was measured</summary><div class="body">
 <p>Six frames from an original Ricoh GR (2013), each shot as RAW plus a Positive Film JPEG, in daylight, overcast, interior and mixed light. Each RAW file was developed with LibRaw using the camera's white balance and no tone curve, then lined up with its JPEG to within a pixel. Clipped areas and sharp edges were left out.</p>
 <p>The curve was fitted on near-neutral pixels from all six frames together. It needed no per-photo exposure correction, which suggests the GR applies the same curve every time. The colour shifts were then fitted on top of the curve in CIE LCh, across eight hue bands and four lightness bands, with a fit that ignores outliers.</p>
 <h3>Limits</h3>
 <ul><li>Cyan and magenta were rare in the test frames, so those two rows are estimates.</li><li>Mixed artificial light fits worst (the festival frame).</li><li>Where highlights clip depends on each camera's sensor. Use the exposure slider if a file looks too bright or too dark.</li><li>Later GR models render Positive Film more gently. This is the original GR.</li></ul>
 <h3>Credits</h3>
 <p style="font-size:14px">An earlier measurement of the GR III's Positive Film by <a href="https://github.com/bastibe/Darktable-Film-Simulation-Panel">bastibe</a> (darktable, public domain) pointed the way. RAW decoding uses <a href="https://github.com/ybouane/LibRaw-Wasm">LibRaw-Wasm</a> (ISC), built on <a href="https://www.libraw.org/">LibRaw</a> (LGPL 2.1 / CDDL 1.0). Browser isolation for the decoder uses <a href="https://github.com/gzuidhof/coi-serviceworker">coi-serviceworker</a> (MIT). Positive Film is Ricoh's name for its own camera setting; this page is an independent measurement and is not connected to Ricoh.</p>
-</section>
-<section aria-labelledby="dl-h" id="downloads"><h2 id="dl-h">Study and resources</h2>
+</div></details>
+<details class="more" id="downloads"><summary>Study and resources</summary><div class="body">
 <p style="font-size:14px">Everything behind this page, for anyone who wants to check it, extend it or measure another camera.</p>
 <table><tbody>
 <tr><td><a href="../../documents/positive-film/positive-film-study.pdf" download>The study (PDF)</a></td><td class="muted">Method, full formula, accuracy, limits and sources. 5 pages.</td></tr>
@@ -137,16 +176,17 @@ footer{border-top:1px solid #ddd;margin-top:40px;padding-top:16px;font-size:12px
 <tr><td><a href="../../assets/js/positive-film/looks.js" download>All the looks (JavaScript)</a></td><td class="muted">The seven looks as plain numbers, with the image code that applies them. Free to use.</td></tr>
 <tr><td><a href="../../documents/positive-film/positive-film-pipeline.zip" download>Analysis code (ZIP)</a></td><td class="muted">Python pipeline to measure any camera's JPEG look from RAW + JPEG pairs, plus the JavaScript formula. Photos not included.</td></tr>
 </tbody></table>
-</section>
+</div></details>
+</div>
 <footer>Positive Film / Enrico Policardo · Measured November 2026 · Seven looks added November 2026 · Free to use</footer>
 </main>
 <script type="module">
 import {uncurve,decode} from '../../assets/js/positive-film/pf-core.js';
 import {LOOKS,lookById,hasGrain,stockOf,renderLook} from '../../assets/js/positive-film/looks.js';
-import {ISO_STEPS} from '../../assets/js/positive-film/grain.js';
+import {isoOptions} from '../../assets/js/positive-film/grain.js';
 const $=id=>document.getElementById(id);
 const PAGE='https://cardopoli.github.io/enricopolicardo.com/tools/positive-film/';
-const KEY='positive-film-settings-v3';
+const KEY='positive-film-settings-v4';
 const RAWEXT=/\.(dng|rw2|nef|nrw|cr2|cr3|arw|orf|raf|pef|srw|3fr|iiq)$/i,IMGEXT=/\.(jpe?g|png)$/i;
 const MAXP=1600;
 let queue=[],current=-1,src=null,prev=null,busy=false;
@@ -157,34 +197,53 @@ const S={look:'positive-film',strength:100,ev:0,colour:100,iso:'shot',size:'2048
 try{const v=JSON.parse(localStorage.getItem(KEY)||'null');if(v)Object.assign(S,v)}catch(e){}
 function saveSettings(){try{if(S.remember)localStorage.setItem(KEY,JSON.stringify(S));else localStorage.removeItem(KEY)}catch(e){}}
 const SL=[['strength','strengthOut',v=>v+'%'],['ev','evOut',v=>(+v).toFixed(1)+' stops'],['colour','colOut',v=>v+'%'],['quality','qOut',v=>v]];
-// Grain slider: Off, As shot, then ISO 50-6400 in third stops
-const ISO_OPTS=['off','shot',...ISO_STEPS];
-const isoIdx=v=>Math.max(0,ISO_OPTS.indexOf(v));
+// Grain: only the speeds each film is really shot at; digital looks use camera ISO
 function drawIso(){
-  const l=look(),st=stockOf(l),shot=src&&src.meta&&src.meta.iso,v=S.iso;
-  $('grain').value=isoIdx(v);
-  $('grainOut').textContent=v==='off'?'Off':v==='shot'?(shot?`As shot · ISO ${shot}`:(st&&st.type!=='digital'?`ISO ${st.iso}`:'As shot')):`ISO ${v}`;
-  $('grainHelp').textContent=!st?'':st.type==='digital'?'Sensor noise: more with higher ISO and smaller pixels. Only adds what the photo is missing.'
-    :`${st.name}${st.type==='bw'?' · silver grain':' · dye grain'}, sized to a 35 mm frame. Only adds what the photo is missing.`;
+  const l=look(),st=stockOf(l),{options,start}=isoOptions(l.id),shot=src&&src.meta&&src.meta.iso;
+  if(!options.some(o=>o[0]===S.iso))S.iso=start;
+  const box=$('grainSeg');box.textContent='';
+  for(const [v,label,note] of options){const b=document.createElement('button');b.type='button';b.setAttribute('aria-pressed',S.iso===v);
+    b.append(v==='shot'&&shot?`As shot ${shot}`:label);if(note){const n=document.createElement('small');n.textContent=note;b.append(n)}
+    b.addEventListener('click',()=>{S.iso=v;drawIso();saveSettings();schedule()});box.append(b)}
+  $('grainOut').textContent=S.iso==='off'?'Off':S.iso==='shot'?(shot?`ISO ${shot}`:''):`ISO ${S.iso}`;
+  $('grainHelp').textContent=!st?'':st.type==='digital'?'Camera noise. At the ISO you shot at it adds nothing; higher adds what that ISO would really give.'
+    :`${st.name}: ${st.type==='bw'?'silver':'dye'} grain, at the speeds this film is really shot at. Pushing makes it grittier.`;
 }
-$('grain').addEventListener('input',()=>{S.iso=ISO_OPTS[+$('grain').value];drawIso();saveSettings();schedule()});
 for(const [id,out,fmt] of SL){$(id).value=S[id];$(out).textContent=fmt(S[id]);
   $(id).addEventListener('input',()=>{S[id]=+$(id).value;$(out).textContent=fmt($(id).value);saveSettings();if(id!=='quality')schedule()})}
 $('size').value=S.size;$('size').addEventListener('change',()=>{S.size=$('size').value;saveSettings()});
 $('remember').checked=S.remember;$('remember').addEventListener('change',()=>{S.remember=$('remember').checked;saveSettings()});
-$('reset').addEventListener('click',()=>{for(const [id,out,fmt] of SL.slice(0,3)){const d=id==='ev'?0:100;S[id]=d;$(id).value=d;$(out).textContent=fmt(d)}S.iso=(stockOf(look())||{}).start||'shot';drawIso();saveSettings();schedule()});
+$('reset').addEventListener('click',()=>{for(const [id,out,fmt] of SL.slice(0,3)){const d=id==='ev'?0:100;S[id]=d;$(id).value=d;$(out).textContent=fmt(d)}S.iso=isoOptions(look().id).start;drawIso();saveSettings();schedule();drawThumbs()});
+// double-click a slider to reset it
+for(const id of ['strength','ev','colour'])$(id).addEventListener('dblclick',()=>{const d=id==='ev'?0:100;S[id]=d;$(id).value=d;$(id).dispatchEvent(new Event('input'))});
 
 // ---------- looks
 const look=()=>lookById(S.look);
+// Look buttons are tiny previews of your own photo
+const thumbs={};
+function setLook(id){S.look=id;S.iso=isoOptions(id).start;saveSettings();drawLooks();schedule()}
 function drawLooks(){
-  const box=$('looks');box.textContent='';
-  for(const l of LOOKS){const b=document.createElement('button');b.type='button';b.setAttribute('role','radio');b.setAttribute('aria-checked',l.id===S.look);b.textContent=l.name;
-    b.addEventListener('click',()=>{S.look=l.id;S.iso=(stockOf(l)||{}).start||'shot';saveSettings();drawLooks();schedule()});box.appendChild(b)}
+  const box=$('looks');
+  if(!box.children.length)for(const l of LOOKS){const b=document.createElement('button');b.type='button';b.setAttribute('role','radio');b.dataset.id=l.id;b.title=l.blurb;
+    const c=document.createElement('canvas');c.width=c.height=1;thumbs[l.id]=c;const t=document.createElement('span');t.textContent=l.name;b.append(c,t);
+    b.addEventListener('click',()=>setLook(l.id));box.appendChild(b)}
+  for(const b of box.children)b.setAttribute('aria-checked',b.dataset.id===S.look);
   const l=look();$('lookBlurb').textContent=l.blurb;$('lookTag').textContent=l.name;
-  $('grain').disabled=!hasGrain(l);$('grainLabel').classList.toggle('off',!hasGrain(l));
+  $('grainLabel').classList.toggle('off',!hasGrain(l));
   $('colour').disabled=l.kind==='mono';$('colLabel').classList.toggle('off',l.kind==='mono');
   drawIso();
 }
+function drawThumbs(){
+  if(!prev)return;
+  const t=shrink(prev,Math.max(1,Math.floor(Math.min(prev.w,prev.h)/110)));
+  for(const l of LOOKS){const {A}=renderLook(l,t,{ev:S.ev,strength:1,colour:1,iso:'off'},false),c=thumbs[l.id];c.width=t.w;c.height=t.h;c.getContext('2d').putImageData(A,0,0)}
+}
+let thumbT=0;$('ev').addEventListener('input',()=>{clearTimeout(thumbT);thumbT=setTimeout(drawThumbs,250)});
+// left and right arrow keys flip through the looks
+addEventListener('keydown',e=>{if(!prev||/INPUT|SELECT|TEXTAREA/.test(e.target.tagName)&&e.target.type!=='checkbox')return;
+  if(e.key==='ArrowRight'||e.key==='ArrowLeft'){const i=LOOKS.findIndex(l=>l.id===S.look),n=LOOKS.length;setLook(LOOKS[(i+(e.key==='ArrowRight'?1:n-1))%n].id);e.preventDefault()}
+  if((e.key==='b'||e.key==='B')&&!e.repeat)$('stage').classList.add('hold')});
+addEventListener('keyup',e=>{if(e.key==='b'||e.key==='B')$('stage').classList.remove('hold')});
 drawLooks();
 
 // ---------- image maths
@@ -203,11 +262,13 @@ function show(){
   if(!prev)return;
   const {A,B}=render(prev,true);
   for(const [id,img] of [['after',A],['before',B]]){const c=$(id);c.width=prev.w;c.height=prev.h;c.getContext('2d').putImageData(img,0,0)}
-  clip();
 }
-function clip(){$('before').style.clipPath=`inset(0 ${100-$('split').value}% 0 0)`}
 let queued=false;function schedule(){if(queued||!prev)return;queued=true;requestAnimationFrame(()=>{queued=false;show()})}
-$('split').addEventListener('input',clip);
+// press and hold the photo to see the original
+const stage=$('stage'),hold=on=>stage.classList.toggle('hold',on);
+stage.addEventListener('pointerdown',e=>{hold(true);stage.setPointerCapture&&stage.setPointerCapture(e.pointerId)});
+for(const ev of ['pointerup','pointercancel','lostpointercapture'])stage.addEventListener(ev,()=>hold(false));
+stage.addEventListener('contextmenu',e=>e.preventDefault());
 
 // ---------- decoding
 let LibRaw=null;
@@ -299,22 +360,24 @@ function addFiles(files){
   for(const f of fresh)queue.push({file:f,state:'ready'});
   drawQueue();
   if(!fresh.length){status(skipped?'No RAW or JPEG files found in that selection.':'');return}
-  $('view').hidden=false;
+  $('view').hidden=false;$('empty').hidden=true;
   status(`${queue.length} file${queue.length>1?'s':''} in the list${skipped?` (${skipped} other file${skipped>1?'s':''} skipped)`:''}`);
   if(current<0)preview(queue.length-fresh.length);
 }
 function drawQueue(){
-  $('queue').hidden=!queue.length;const tb=$('qbody');tb.textContent='';
+  const many=queue.length>1;$('listBox').hidden=!many;$('nav').hidden=!many;$('zip').hidden=!many;$('dir').hidden=!many||!('showDirectoryPicker' in self);
+  $('navPos').textContent=`${current+1} of ${queue.length}`;$('listSum').textContent=`All ${queue.length} photos`;$('save').textContent=many?'Save this one':'Save';
+  const tb=$('qbody');tb.textContent='';
   queue.forEach((q,i)=>{const tr=document.createElement('tr');if(i===current)tr.className='on';
-    const cells=[q.file.webkitRelativePath||q.file.name,isRaw(q.file)?'RAW':'JPEG',q.state];
+    const cells=[q.file.webkitRelativePath||q.file.name,q.state==='ready'?'':q.state];
     for(const t of cells){const td=document.createElement('td');td.textContent=t;if(q.state.startsWith('failed')&&t===q.state)td.className='err';tr.appendChild(td)}
-    const td=document.createElement('td'),b=document.createElement('button');b.type='button';b.textContent='Preview';b.disabled=busy;b.addEventListener('click',()=>preview(i));td.appendChild(b);tr.appendChild(td);tb.appendChild(tr)});
-  $('zip').textContent=`Process all as ZIP (${queue.length})`;$('dir').textContent=`Save all to a folder (${queue.length})`;
+    const td=document.createElement('td'),b=document.createElement('button');b.type='button';b.textContent='View';b.disabled=busy;b.addEventListener('click',()=>preview(i));td.appendChild(b);tr.appendChild(td);tb.appendChild(tr)});
+  $('zip').textContent=`Save all ${queue.length}`;$('dir').textContent=`Save all ${queue.length} to a folder`;
 }
 async function preview(i){
   if(busy||!queue[i])return;current=i;drawQueue();const f=queue[i].file;
-  try{setBusy(true);status('Opening '+f.name+'…');src=await decodeFor(f,false);prev=shrink(src,Math.ceil(Math.max(src.w,src.h)/MAXP));drawIso();show();
-    status(`${f.name} · ${src.w} × ${src.h}${src.mode==='raw'?' · RAW':' · JPEG, approximate'} · ${queue.length} in the list`)}
+  try{setBusy(true);status('Opening '+f.name+'…');src=await decodeFor(f,false);prev=shrink(src,Math.ceil(Math.max(src.w,src.h)/MAXP));drawIso();show();drawThumbs();
+    const m=src.meta||{};status([f.name,src.mode==='raw'?'RAW':'JPEG (approximate)',m.model,m.iso?`ISO ${m.iso}`:''].filter(Boolean).join(' · '))}
   catch(e){console.error(e);queue[i].state='failed: '+(e.message||e);status('Could not open '+f.name+'. '+(e.message||e))}
   finally{setBusy(false);drawQueue()}
 }
@@ -345,10 +408,12 @@ async function runAll(sink){
 }
 $('zip').addEventListener('click',()=>{const z=new Zip(),d=new Date().toISOString().slice(0,10);
   runAll({add:async(n,b)=>z.add(n,b),finish:async()=>{if(z.n)download(z.blob(),`${S.look}-${d}.zip`)}})});
-if('showDirectoryPicker' in self){$('dir').hidden=false;
+if('showDirectoryPicker' in self){
   $('dir').addEventListener('click',async()=>{let dir;try{dir=await showDirectoryPicker({mode:'readwrite'})}catch(e){return}
     runAll({add:async(n,b)=>{const fh=await dir.getFileHandle(n,{create:true}),w=await fh.createWritable();await w.write(b);await w.close()},finish:async()=>{}})})}
-$('clear').addEventListener('click',()=>{if(busy)return;queue=[];current=-1;src=prev=null;drawQueue();$('view').hidden=true;status('')});
+$('clear').addEventListener('click',()=>{if(busy)return;queue=[];current=-1;src=prev=null;drawQueue();$('view').hidden=true;$('empty').hidden=false;status('')});
+$('prevBtn').addEventListener('click',()=>preview((current-1+queue.length)%queue.length));
+$('nextBtn').addEventListener('click',()=>preview((current+1)%queue.length));
 
 // ---------- inputs
 $('file').addEventListener('change',e=>{addFiles(e.target.files);e.target.value=''});
@@ -370,5 +435,5 @@ drop.addEventListener('drop',async e=>{
 let installEvt=null;
 addEventListener('beforeinstallprompt',e=>{e.preventDefault();installEvt=e;$('install').hidden=false});
 $('install').addEventListener('click',async()=>{if(!installEvt)return;installEvt.prompt();await installEvt.userChoice;installEvt=null;$('install').hidden=true});
-if(/iPhone|iPad|iPod/.test(navigator.userAgent))$('offlineNote').textContent+=' On iPhone or iPad: Share, then Add to Home Screen.';
+if(/iPhone|iPad|iPod/.test(navigator.userAgent))$('offlineNote').textContent+=' On iPhone or iPad: Share, then Add to Home Screen to keep it.';
 </script></body></html>

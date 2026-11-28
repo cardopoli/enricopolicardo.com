@@ -1,12 +1,12 @@
 {
   "schema": 1,
-  "checked_at": "2026-11-27T17:32:10+00:00",
-  "successful_sources": 18,
+  "checked_at": "2026-11-28T16:16:55+00:00",
+  "successful_sources": 17,
   "sources": [
     {
       "name": "GAL Euroleader",
       "url": "https://www.euroleader.it/bandi",
-      "checked_at": "2026-11-27T17:32:10+00:00",
+      "checked_at": "2026-11-28T16:16:55+00:00",
       "status": "error",
       "error": "<urlopen error [Errno 111] Connection refused>",
       "last_success": null,
@@ -15,16 +15,16 @@
     {
       "name": "GAL Torre Natisone",
       "url": "https://torrenatisonegal.com/bandi-aperti/",
-      "checked_at": "2026-11-27T17:32:10+00:00",
+      "checked_at": "2026-11-28T16:16:55+00:00",
       "status": "ok",
       "error": null,
-      "last_success": "2026-11-27T17:32:10+00:00",
+      "last_success": "2026-11-28T16:16:55+00:00",
       "listings": 1
     },
     {
       "name": "GAL Carso — Las Kras",
       "url": "https://galcarso.eu/it/bandi-per-il-territorio/",
-      "checked_at": "2026-11-27T17:32:10+00:00",
+      "checked_at": "2026-11-28T16:16:55+00:00",
       "status": "error",
       "error": "HTTP Error 404: Not Found",
       "last_success": "2026-11-26T17:48:07+00:00",
@@ -33,25 +33,25 @@
     {
       "name": "GAL Open Leader",
       "url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/economia-imprese/agricoltura-foreste/psr-programma-sviluppo-rurale/FOGLIA115/",
-      "checked_at": "2026-11-27T17:32:10+00:00",
+      "checked_at": "2026-11-28T16:16:55+00:00",
       "status": "ok",
       "error": null,
-      "last_success": "2026-11-27T17:32:10+00:00",
+      "last_success": "2026-11-28T16:16:55+00:00",
       "listings": 7
     },
     {
       "name": "Regione FVG — Cultura",
       "url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/cultura-sport/attivita-culturali/",
-      "checked_at": "2026-11-27T17:32:10+00:00",
+      "checked_at": "2026-11-28T16:16:55+00:00",
       "status": "ok",
       "error": null,
-      "last_success": "2026-11-27T17:32:10+00:00",
+      "last_success": "2026-11-28T16:16:55+00:00",
       "listings": 27
     },
     {
       "name": "Fondazione Friuli",
       "url": "https://fondazionefriuli.it/contributi-e-bandi/bandi-online/",
-      "checked_at": "2026-11-27T17:32:10+00:00",
+      "checked_at": "2026-11-28T16:16:55+00:00",
       "status": "error",
       "error": "Source disallows automated checks",
       "last_success": "2026-11-26T17:48:07+00:00",
@@ -60,16 +60,16 @@
     {
       "name": "Fondosviluppo FVG",
       "url": "https://www.fondosviluppofvg.it",
-      "checked_at": "2026-11-27T17:32:10+00:00",
+      "checked_at": "2026-11-28T16:16:55+00:00",
       "status": "ok",
       "error": null,
-      "last_success": "2026-11-27T17:32:10+00:00",
+      "last_success": "2026-11-28T16:16:55+00:00",
       "listings": 0
     },
     {
       "name": "Obiettivo Europa",
       "url": "https://www.obiettivoeuropa.com/bandi/aperti/",
-      "checked_at": "2026-11-27T17:32:10+00:00",
+      "checked_at": "2026-11-28T16:16:55+00:00",
       "status": "error",
       "error": "HTTP Error 404: Not Found",
       "last_success": null,
@@ -78,61 +78,61 @@
     {
       "name": "Fondazione Cariplo",
       "url": "https://www.fondazionecariplo.it/contributi/bandi/",
-      "checked_at": "2026-11-27T17:32:10+00:00",
+      "checked_at": "2026-11-28T16:16:55+00:00",
       "status": "ok",
       "error": null,
-      "last_success": "2026-11-27T17:32:10+00:00",
+      "last_success": "2026-11-28T16:16:55+00:00",
       "listings": 0
     },
     {
       "name": "Fondazione CRT (Torino)",
       "url": "https://www.fondazionecrt.it/progetti-e-bandi/",
-      "checked_at": "2026-11-27T17:32:10+00:00",
+      "checked_at": "2026-11-28T16:16:55+00:00",
       "status": "ok",
       "error": null,
-      "last_success": "2026-11-27T17:32:10+00:00",
+      "last_success": "2026-11-28T16:16:55+00:00",
       "listings": 3
     },
     {
       "name": "Compagnia di San Paolo",
       "url": "https://www.compagniadisanpaolo.it/it/cosa-facciamo/contributi/",
-      "checked_at": "2026-11-27T17:32:10+00:00",
+      "checked_at": "2026-11-28T16:16:55+00:00",
       "status": "ok",
       "error": null,
-      "last_success": "2026-11-27T17:32:10+00:00",
+      "last_success": "2026-11-28T16:16:55+00:00",
       "listings": 12
     },
     {
       "name": "Fondazione con il Sud",
       "url": "https://www.fondazioneconilsud.it",
-      "checked_at": "2026-11-27T17:32:10+00:00",
+      "checked_at": "2026-11-28T16:16:55+00:00",
       "status": "ok",
       "error": null,
-      "last_success": "2026-11-27T17:32:10+00:00",
+      "last_success": "2026-11-28T16:16:55+00:00",
       "listings": 7
     },
     {
       "name": "Artquest",
       "url": "https://artquest.org.uk/opportunities/",
-      "checked_at": "2026-11-27T17:32:10+00:00",
+      "checked_at": "2026-11-28T16:16:55+00:00",
       "status": "ok",
       "error": null,
-      "last_success": "2026-11-27T17:32:10+00:00",
+      "last_success": "2026-11-28T16:16:55+00:00",
       "listings": 16
     },
     {
       "name": "On the Move",
       "url": "https://on-the-move.org/news",
-      "checked_at": "2026-11-27T17:32:10+00:00",
+      "checked_at": "2026-11-28T16:16:55+00:00",
       "status": "ok",
       "error": null,
-      "last_success": "2026-11-27T17:32:10+00:00",
-      "listings": 7
+      "last_success": "2026-11-28T16:16:55+00:00",
+      "listings": 0
     },
     {
       "name": "Picter",
       "url": "https://submit.picter.com/",
-      "checked_at": "2026-11-27T17:32:10+00:00",
+      "checked_at": "2026-11-28T16:16:55+00:00",
       "status": "error",
       "error": "HTTP Error 429: Too Many Requests",
       "last_success": null,
@@ -141,7 +141,7 @@
     {
       "name": "Arts Council England",
       "url": "https://www.artscouncil.org.uk/our-open-funds",
-      "checked_at": "2026-11-27T17:32:10+00:00",
+      "checked_at": "2026-11-28T16:16:55+00:00",
       "status": "error",
       "error": "HTTP Error 403: Forbidden",
       "last_success": null,
@@ -150,70 +150,70 @@
     {
       "name": "Esmée Fairbairn Foundation",
       "url": "https://esmeefairbairn.org.uk/what-we-fund",
-      "checked_at": "2026-11-27T17:32:10+00:00",
+      "checked_at": "2026-11-28T16:16:55+00:00",
       "status": "ok",
       "error": null,
-      "last_success": "2026-11-27T17:32:10+00:00",
+      "last_success": "2026-11-28T16:16:55+00:00",
       "listings": 2
     },
     {
       "name": "Paul Hamlyn Foundation",
       "url": "https://www.phf.org.uk/funding/",
-      "checked_at": "2026-11-27T17:32:10+00:00",
+      "checked_at": "2026-11-28T16:16:55+00:00",
       "status": "ok",
       "error": null,
-      "last_success": "2026-11-27T17:32:10+00:00",
-      "listings": 15
+      "last_success": "2026-11-28T16:16:55+00:00",
+      "listings": 0
     },
     {
       "name": "Calouste Gulbenkian Foundation UK",
       "url": "https://gulbenkian.pt/uk-branch/",
-      "checked_at": "2026-11-27T17:32:10+00:00",
-      "status": "ok",
-      "error": null,
+      "checked_at": "2026-11-28T16:16:55+00:00",
+      "status": "error",
+      "error": "HTTP Error 403: Forbidden",
       "last_success": "2026-11-27T17:32:10+00:00",
-      "listings": 5
+      "listings": 0
     },
     {
       "name": "INTERREG Italia-Slovenia",
       "url": "https://www.ita-slo.eu/en/calls",
-      "checked_at": "2026-11-27T17:32:10+00:00",
+      "checked_at": "2026-11-28T16:16:55+00:00",
       "status": "ok",
       "error": null,
-      "last_success": "2026-11-27T17:32:10+00:00",
+      "last_success": "2026-11-28T16:16:55+00:00",
       "listings": 0
     },
     {
       "name": "Creative Europe",
       "url": "https://culture.ec.europa.eu/creative-europe",
-      "checked_at": "2026-11-27T17:32:10+00:00",
+      "checked_at": "2026-11-28T16:16:55+00:00",
       "status": "ok",
       "error": null,
-      "last_success": "2026-11-27T17:32:10+00:00",
+      "last_success": "2026-11-28T16:16:55+00:00",
       "listings": 0
     },
     {
       "name": "PhMuseum",
       "url": "https://phmuseum.com/grants",
-      "checked_at": "2026-11-27T17:32:10+00:00",
+      "checked_at": "2026-11-28T16:16:55+00:00",
       "status": "ok",
       "error": null,
-      "last_success": "2026-11-27T17:32:10+00:00",
+      "last_success": "2026-11-28T16:16:55+00:00",
       "listings": 33
     },
     {
       "name": "Monographica Open Calls",
       "url": "https://opencalls.monographica.com",
-      "checked_at": "2026-11-27T17:32:10+00:00",
+      "checked_at": "2026-11-28T16:16:55+00:00",
       "status": "ok",
       "error": null,
-      "last_success": "2026-11-27T17:32:10+00:00",
-      "listings": 15
+      "last_success": "2026-11-28T16:16:55+00:00",
+      "listings": 14
     },
     {
       "name": "Contemporary Lynx",
       "url": "https://contemporarylynx.co.uk",
-      "checked_at": "2026-11-27T17:32:10+00:00",
+      "checked_at": "2026-11-28T16:16:55+00:00",
       "status": "error",
       "error": "HTTP Error 403: Forbidden",
       "last_success": "2026-10-07T14:36:27+00:00",
@@ -222,14 +222,34 @@
     {
       "name": "New European Bauhaus",
       "url": "https://new-european-bauhaus.europa.eu",
-      "checked_at": "2026-11-27T17:32:10+00:00",
+      "checked_at": "2026-11-28T16:16:55+00:00",
       "status": "ok",
       "error": null,
-      "last_success": "2026-11-27T17:32:10+00:00",
+      "last_success": "2026-11-28T16:16:55+00:00",
       "listings": 0
     }
   ],
   "items": [
+    {
+      "title": "Curatorial Research Fellowship 2027 · Les Rencontres d'Arles",
+      "url": "https://opencalls.monographica.com/curatorial-research-fellowship-2027-les-rencontres-d-arles/",
+      "source": "Monographica Open Calls",
+      "source_url": "https://opencalls.monographica.com",
+      "id": "0c532650fa47c117712c",
+      "first_seen": "2026-11-28T16:16:55+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
+      "present": true
+    },
+    {
+      "title": "Walk of Water Photostory Contest: Out of Sight · Onewater",
+      "url": "https://opencalls.monographica.com/walk-of-water-photostory-contest-out-of-sight-onewater/",
+      "source": "Monographica Open Calls",
+      "source_url": "https://opencalls.monographica.com",
+      "id": "dad14d31ce9fcfc64139",
+      "first_seen": "2026-11-28T16:16:55+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
+      "present": true
+    },
     {
       "title": "Vital Impacts Environmental Photography Fellowships and Mentorships 2027",
       "url": "https://opencalls.monographica.com/vital-impacts-environmental-photography-fellowships-2027/",
@@ -237,7 +257,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "fe21eec8c9e513ddde89",
       "first_seen": "2026-11-26T17:48:07+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -247,7 +267,7 @@
       "source_url": "https://artquest.org.uk/opportunities/",
       "id": "8cda98c0e342e9e6a960",
       "first_seen": "2026-11-24T18:57:59+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -257,7 +277,7 @@
       "source_url": "https://artquest.org.uk/opportunities/",
       "id": "0a88a3ff7a0d19ed6c9d",
       "first_seen": "2026-11-24T18:57:59+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -267,7 +287,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "b06ff20e7390d59bcb74",
       "first_seen": "2026-11-24T18:57:59+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -277,7 +297,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "661cde8c06cfd103811e",
       "first_seen": "2026-11-24T18:57:59+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -287,7 +307,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "6af8655bd92054a5530a",
       "first_seen": "2026-11-24T18:57:59+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -308,7 +328,7 @@
       "id": "a2cf510ec74cf078ef71",
       "first_seen": "2026-11-23T19:20:58+00:00",
       "last_seen": "2026-11-27T17:32:10+00:00",
-      "present": true
+      "present": false
     },
     {
       "title": "The James Parker “Open Door” Grant · Artspace Gallery",
@@ -318,7 +338,7 @@
       "id": "d830380b085d5db7b359",
       "first_seen": "2026-11-23T19:20:58+00:00",
       "last_seen": "2026-11-27T17:32:10+00:00",
-      "present": true
+      "present": false
     },
     {
       "title": "TBG+S/TOKAS International Residency Exchange 2027 · Temple Bar Gallery + Studios",
@@ -328,7 +348,7 @@
       "id": "9ad21d66db2f38a651e9",
       "first_seen": "2026-11-23T19:20:58+00:00",
       "last_seen": "2026-11-27T17:32:10+00:00",
-      "present": true
+      "present": false
     },
     {
       "title": "SO THEY SAY — SaveArtSpace Bus Shelter Exhibition",
@@ -377,7 +397,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "515646a82928d0d7a2cd",
       "first_seen": "2026-11-21T15:27:27+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -457,7 +477,7 @@
       "source_url": "https://artquest.org.uk/opportunities/",
       "id": "d9edaa8c814f1563b97e",
       "first_seen": "2026-11-18T16:34:13+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -467,7 +487,7 @@
       "source_url": "https://artquest.org.uk/opportunities/",
       "id": "8564476b326da91ef912",
       "first_seen": "2026-11-18T16:34:13+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -537,7 +557,7 @@
       "source_url": "https://artquest.org.uk/opportunities/",
       "id": "8da475c4fc0dc368845e",
       "first_seen": "2026-11-17T16:57:19+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -547,7 +567,7 @@
       "source_url": "https://phmuseum.com/grants",
       "id": "33670c36be1dffcfe7cf",
       "first_seen": "2026-11-17T16:57:19+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -578,7 +598,7 @@
       "id": "f4ed21b2d99995610b2c",
       "first_seen": "2026-11-17T16:57:19+00:00",
       "last_seen": "2026-11-27T17:32:10+00:00",
-      "present": true
+      "present": false
     },
     {
       "title": "12th Regional Juried Photography Exhibition · Rehoboth Art League",
@@ -747,7 +767,7 @@
       "source_url": "https://artquest.org.uk/opportunities/",
       "id": "a2d3e3f48caddc732256",
       "first_seen": "2026-11-14T14:19:17+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -827,7 +847,7 @@
       "source_url": "https://artquest.org.uk/opportunities/",
       "id": "7a4ad5f7c28d85e41099",
       "first_seen": "2026-11-10T15:40:22+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -847,7 +867,7 @@
       "source_url": "https://www.fondazioneconilsud.it",
       "id": "a2b919440e32568a3d5d",
       "first_seen": "2026-11-08T14:22:55+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -877,7 +897,7 @@
       "source_url": "https://artquest.org.uk/opportunities/",
       "id": "73a1842a202c4d237b14",
       "first_seen": "2026-11-02T17:14:21+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -887,7 +907,7 @@
       "source_url": "https://artquest.org.uk/opportunities/",
       "id": "54093b708b4b0b6bad8e",
       "first_seen": "2026-11-02T17:14:21+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -987,7 +1007,7 @@
       "source_url": "https://artquest.org.uk/opportunities/",
       "id": "a92243ae41b21bed5ee7",
       "first_seen": "2026-10-28T14:07:55+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -1097,7 +1117,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "e8a60215689a6ef48190",
       "first_seen": "2026-10-24T12:05:35+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -1147,7 +1167,7 @@
       "source_url": "https://www.compagniadisanpaolo.it/it/cosa-facciamo/contributi/",
       "id": "5f640cca4a151e5ebf40",
       "first_seen": "2026-10-22T13:02:40+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -1567,7 +1587,7 @@
       "source_url": "https://www.compagniadisanpaolo.it/it/cosa-facciamo/contributi/",
       "id": "3a0db8ccb4d7e161cdce",
       "first_seen": "2026-10-14T12:56:34+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -1757,7 +1777,7 @@
       "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/cultura-sport/attivita-culturali/",
       "id": "8307e32089360e0bdcc1",
       "first_seen": "2026-10-10T13:51:57+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -1767,7 +1787,7 @@
       "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/cultura-sport/attivita-culturali/",
       "id": "795414f90864f56a2134",
       "first_seen": "2026-10-10T13:51:57+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -1898,7 +1918,7 @@
       "id": "b22ce5210ffa6b338e5b",
       "first_seen": "2026-10-06T14:17:19+00:00",
       "last_seen": "2026-11-27T17:32:10+00:00",
-      "present": true
+      "present": false
     },
     {
       "title": "43rd Five State Photography Competition & Exhibition · Hays Arts Council",
@@ -1948,7 +1968,7 @@
       "id": "457d629278996d44027a",
       "first_seen": "2026-10-05T16:11:48+00:00",
       "last_seen": "2026-11-27T17:32:10+00:00",
-      "present": true
+      "present": false
     },
     {
       "title": "Delfina Foundation — Brooks International Fellowship 2027",
@@ -1977,7 +1997,7 @@
       "source_url": "https://torrenatisonegal.com/bandi-aperti/",
       "id": "1b73d5935de7b3868e96",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -1987,7 +2007,7 @@
       "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/economia-imprese/agricoltura-foreste/psr-programma-sviluppo-rurale/FOGLIA115/",
       "id": "ee6631190a334d6fe01d",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -1997,7 +2017,7 @@
       "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/cultura-sport/attivita-culturali/",
       "id": "66678e59af5ad236a13d",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -2007,7 +2027,7 @@
       "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/cultura-sport/attivita-culturali/",
       "id": "682f7f9a000ea25cfcf5",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -2017,7 +2037,7 @@
       "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/cultura-sport/attivita-culturali/",
       "id": "c948a20aaaa476e6f0d6",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -2027,7 +2047,7 @@
       "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/cultura-sport/attivita-culturali/",
       "id": "f104d251700f04304e09",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -2047,7 +2067,7 @@
       "source_url": "https://artquest.org.uk/opportunities/",
       "id": "6b9910c931ed79a69bb2",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -2057,7 +2077,7 @@
       "source_url": "https://artquest.org.uk/opportunities/",
       "id": "34efe66fbdad401abb7c",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -2067,7 +2087,7 @@
       "source_url": "https://artquest.org.uk/opportunities/",
       "id": "a657bf1d30454388c9c3",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -2077,7 +2097,7 @@
       "source_url": "https://artquest.org.uk/opportunities/",
       "id": "d49ca16493f62f24d7ae",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -2137,7 +2157,7 @@
       "source_url": "https://artquest.org.uk/opportunities/",
       "id": "f8f9e1de41449f9db40f",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -2157,7 +2177,7 @@
       "source_url": "https://artquest.org.uk/opportunities/",
       "id": "2e56f4b43283b58d3dc3",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -2208,7 +2228,7 @@
       "id": "c3b343637fb9da6ca428",
       "first_seen": "2026-10-04T17:56:34+00:00",
       "last_seen": "2026-11-27T17:32:10+00:00",
-      "present": true
+      "present": false
     },
     {
       "title": "Fellowships (7)",
@@ -2218,7 +2238,7 @@
       "id": "5cb67035aa8ebcf3fea2",
       "first_seen": "2026-10-04T17:56:34+00:00",
       "last_seen": "2026-11-27T17:32:10+00:00",
-      "present": true
+      "present": false
     },
     {
       "title": "Project Funding (7)",
@@ -2228,7 +2248,7 @@
       "id": "f6c9d62533a934666e2f",
       "first_seen": "2026-10-04T17:56:34+00:00",
       "last_seen": "2026-11-27T17:32:10+00:00",
-      "present": true
+      "present": false
     },
     {
       "title": "Residencies (28)",
@@ -2238,7 +2258,7 @@
       "id": "e56e059203d9d9c7d3d8",
       "first_seen": "2026-10-04T17:56:34+00:00",
       "last_seen": "2026-11-27T17:32:10+00:00",
-      "present": true
+      "present": false
     },
     {
       "title": "Training (6)",
@@ -2248,7 +2268,7 @@
       "id": "c40ded99d197ac3602a9",
       "first_seen": "2026-10-04T17:56:34+00:00",
       "last_seen": "2026-11-27T17:32:10+00:00",
-      "present": true
+      "present": false
     },
     {
       "title": "Education & Training (9)",
@@ -2258,7 +2278,7 @@
       "id": "82edbcf301fdcc41b5e5",
       "first_seen": "2026-10-04T17:56:34+00:00",
       "last_seen": "2026-11-27T17:32:10+00:00",
-      "present": true
+      "present": false
     },
     {
       "title": "15 apr 2026 Gabriel Abrantes presents first solo exhibition in the UK",
@@ -2277,17 +2297,17 @@
       "source_url": "https://phmuseum.com/grants",
       "id": "5440c52f8582d0ba1516",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
-      "title": "NYC exhibition",
+      "title": "Solo exhibition",
       "url": "https://opencalls.monographica.com/prize/exhibition/",
       "source": "Monographica Open Calls",
       "source_url": "https://opencalls.monographica.com",
       "id": "3fc75d8af95def88204e",
       "first_seen": "2026-10-04T17:56:34+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -2877,7 +2897,7 @@
       "source_url": "https://www.fondazionecrt.it/progetti-e-bandi/",
       "id": "523964711fc4ba18804d",
       "first_seen": "2026-10-04T17:39:04+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -2887,7 +2907,7 @@
       "source_url": "https://www.fondazionecrt.it/progetti-e-bandi/",
       "id": "37c3f35fa6f62d1c14dd",
       "first_seen": "2026-10-04T17:39:04+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -2897,7 +2917,7 @@
       "source_url": "https://www.fondazionecrt.it/progetti-e-bandi/",
       "id": "ed229ae151e2a925e827",
       "first_seen": "2026-10-04T17:39:04+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -2907,7 +2927,7 @@
       "source_url": "https://www.compagniadisanpaolo.it/it/cosa-facciamo/contributi/",
       "id": "c7190acfd419a7364e67",
       "first_seen": "2026-10-04T17:39:04+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -2917,7 +2937,7 @@
       "source_url": "https://www.compagniadisanpaolo.it/it/cosa-facciamo/contributi/",
       "id": "5bfc99b4b69864c3c888",
       "first_seen": "2026-10-04T17:39:04+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -2927,7 +2947,7 @@
       "source_url": "https://www.compagniadisanpaolo.it/it/cosa-facciamo/contributi/",
       "id": "88363ca04bf068fb7d20",
       "first_seen": "2026-10-04T17:39:04+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -2937,7 +2957,7 @@
       "source_url": "https://www.compagniadisanpaolo.it/it/cosa-facciamo/contributi/",
       "id": "c5a767d7221cf433900c",
       "first_seen": "2026-10-04T17:39:04+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -2947,7 +2967,7 @@
       "source_url": "https://www.compagniadisanpaolo.it/it/cosa-facciamo/contributi/",
       "id": "2b7dd28946e6df0e23a8",
       "first_seen": "2026-10-04T17:39:04+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -2957,7 +2977,7 @@
       "source_url": "https://www.compagniadisanpaolo.it/it/cosa-facciamo/contributi/",
       "id": "332305d9d9393bc82258",
       "first_seen": "2026-10-04T17:39:04+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -2967,7 +2987,7 @@
       "source_url": "https://www.compagniadisanpaolo.it/it/cosa-facciamo/contributi/",
       "id": "72d1eb55a33dae2d6fd5",
       "first_seen": "2026-10-04T17:39:04+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -2977,7 +2997,7 @@
       "source_url": "https://www.compagniadisanpaolo.it/it/cosa-facciamo/contributi/",
       "id": "3e0e26d11ba82a23e485",
       "first_seen": "2026-10-04T17:39:04+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -2987,7 +3007,7 @@
       "source_url": "https://www.compagniadisanpaolo.it/it/cosa-facciamo/contributi/",
       "id": "45218b3781c5220c6dd1",
       "first_seen": "2026-10-04T17:39:04+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -2997,7 +3017,7 @@
       "source_url": "https://www.compagniadisanpaolo.it/it/cosa-facciamo/contributi/",
       "id": "49fdf4b7b9c75ba960bf",
       "first_seen": "2026-10-04T17:39:04+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -3028,7 +3048,7 @@
       "id": "f7f7655a2bad420dc33c",
       "first_seen": "2026-10-04T17:39:04+00:00",
       "last_seen": "2026-11-27T17:32:10+00:00",
-      "present": true
+      "present": false
     },
     {
       "title": "Migration Fund",
@@ -3038,7 +3058,7 @@
       "id": "d135a0150078b8b94059",
       "first_seen": "2026-10-04T17:39:04+00:00",
       "last_seen": "2026-11-27T17:32:10+00:00",
-      "present": true
+      "present": false
     },
     {
       "title": "Arts-based Learning Fund",
@@ -3048,7 +3068,7 @@
       "id": "62ddc127c55d7943ab0a",
       "first_seen": "2026-10-04T17:39:04+00:00",
       "last_seen": "2026-11-27T17:32:10+00:00",
-      "present": true
+      "present": false
     },
     {
       "title": "Ideas and Pioneers Fund",
@@ -3058,7 +3078,7 @@
       "id": "7b9214369febf538866e",
       "first_seen": "2026-10-04T17:39:04+00:00",
       "last_seen": "2026-11-27T17:32:10+00:00",
-      "present": true
+      "present": false
     },
     {
       "title": "Awards for Artists",
@@ -3068,7 +3088,7 @@
       "id": "8b95b3ce536ae080496d",
       "first_seen": "2026-10-04T17:39:04+00:00",
       "last_seen": "2026-11-27T17:32:10+00:00",
-      "present": true
+      "present": false
     },
     {
       "title": "Backbone Fund",
@@ -3078,7 +3098,7 @@
       "id": "18d43b99cf1d1d38b722",
       "first_seen": "2026-10-04T17:39:04+00:00",
       "last_seen": "2026-11-27T17:32:10+00:00",
-      "present": true
+      "present": false
     },
     {
       "title": "Find out more about our invitation-only funds",
@@ -3088,7 +3108,7 @@
       "id": "fca0d367f2177f404a4b",
       "first_seen": "2026-10-04T17:39:04+00:00",
       "last_seen": "2026-11-27T17:32:10+00:00",
-      "present": true
+      "present": false
     },
     {
       "title": "Arts Fund sample application form DOCX 162.919 KB",
@@ -3098,7 +3118,7 @@
       "id": "f2612a99b8f437efab95",
       "first_seen": "2026-10-04T17:39:04+00:00",
       "last_seen": "2026-11-27T17:32:10+00:00",
-      "present": true
+      "present": false
     },
     {
       "title": "Arts-based Learning Fund sample application form DOCX 146.857 KB",
@@ -3108,7 +3128,7 @@
       "id": "28f193d6289703593f4f",
       "first_seen": "2026-10-04T17:39:04+00:00",
       "last_seen": "2026-11-27T17:32:10+00:00",
-      "present": true
+      "present": false
     },
     {
       "title": "Migration Fund sample application form DOCX 150.23 KB",
@@ -3118,7 +3138,7 @@
       "id": "45af0ea0553f8b09a7fc",
       "first_seen": "2026-10-04T17:39:04+00:00",
       "last_seen": "2026-11-27T17:32:10+00:00",
-      "present": true
+      "present": false
     },
     {
       "title": "Teacher Development Fund sample application form DOCX 150.262 KB",
@@ -3128,7 +3148,7 @@
       "id": "bc1fd014bd5b90bee5b1",
       "first_seen": "2026-10-04T17:39:04+00:00",
       "last_seen": "2026-11-27T17:32:10+00:00",
-      "present": true
+      "present": false
     },
     {
       "title": "Ideas and Pioneers Fund sample application form DOCX 152.564 KB",
@@ -3138,7 +3158,7 @@
       "id": "9a1aa6926f352fda953b",
       "first_seen": "2026-10-04T17:39:04+00:00",
       "last_seen": "2026-11-27T17:32:10+00:00",
-      "present": true
+      "present": false
     },
     {
       "title": "Youth Fund sample application form DOCX 147.851 KB",
@@ -3148,7 +3168,7 @@
       "id": "24ba50a2e8104169731e",
       "first_seen": "2026-10-04T17:39:04+00:00",
       "last_seen": "2026-11-27T17:32:10+00:00",
-      "present": true
+      "present": false
     },
     {
       "title": "Visit our grants database",
@@ -3158,7 +3178,7 @@
       "id": "99e15c691c2a5f895c07",
       "first_seen": "2026-10-04T17:39:04+00:00",
       "last_seen": "2026-11-27T17:32:10+00:00",
-      "present": true
+      "present": false
     },
     {
       "title": "BANDI DI CONCORSO",
@@ -3237,7 +3257,7 @@
       "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/economia-imprese/agricoltura-foreste/psr-programma-sviluppo-rurale/FOGLIA115/",
       "id": "380d00ab6e3a5d2d6e7c",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -3247,7 +3267,7 @@
       "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/economia-imprese/agricoltura-foreste/psr-programma-sviluppo-rurale/FOGLIA115/",
       "id": "e3556d14bd1669ca0584",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -3257,7 +3277,7 @@
       "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/economia-imprese/agricoltura-foreste/psr-programma-sviluppo-rurale/FOGLIA115/",
       "id": "9b65ae2458d24692f86f",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -3267,7 +3287,7 @@
       "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/economia-imprese/agricoltura-foreste/psr-programma-sviluppo-rurale/FOGLIA115/",
       "id": "6f4154044b237f091b88",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -3277,7 +3297,7 @@
       "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/economia-imprese/agricoltura-foreste/psr-programma-sviluppo-rurale/FOGLIA115/",
       "id": "1538d856f24237008708",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -3287,7 +3307,7 @@
       "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/economia-imprese/agricoltura-foreste/psr-programma-sviluppo-rurale/FOGLIA115/",
       "id": "f68750ef40f2d6e2dd49",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -3297,7 +3317,7 @@
       "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/cultura-sport/attivita-culturali/",
       "id": "b5edef2a64eca082b98a",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -3307,7 +3327,7 @@
       "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/cultura-sport/attivita-culturali/",
       "id": "f79a24c2ea08e441dff5",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -3317,7 +3337,7 @@
       "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/cultura-sport/attivita-culturali/",
       "id": "257b37ed51ef7e07f4f7",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -3327,7 +3347,7 @@
       "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/cultura-sport/attivita-culturali/",
       "id": "ec6579cb17a6ed03bcdb",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -3337,7 +3357,7 @@
       "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/cultura-sport/attivita-culturali/",
       "id": "3480220317483afdae4e",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -3347,7 +3367,7 @@
       "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/cultura-sport/attivita-culturali/",
       "id": "4cfdf408856b3a349c33",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -3357,7 +3377,7 @@
       "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/cultura-sport/attivita-culturali/",
       "id": "b7a97c48c7e0287f05e5",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -3367,7 +3387,7 @@
       "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/cultura-sport/attivita-culturali/",
       "id": "cfe1f9d15b141969e421",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -3377,7 +3397,7 @@
       "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/cultura-sport/attivita-culturali/",
       "id": "05b73ca21db618e37268",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -3387,7 +3407,7 @@
       "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/cultura-sport/attivita-culturali/",
       "id": "d1d0aaab30b6ee30a10f",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -3397,7 +3417,7 @@
       "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/cultura-sport/attivita-culturali/",
       "id": "7080985996c098d9f2f2",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -3407,7 +3427,7 @@
       "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/cultura-sport/attivita-culturali/",
       "id": "2ecee3c5654bd1b4ccf5",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -3417,7 +3437,7 @@
       "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/cultura-sport/attivita-culturali/",
       "id": "82eff9ac0d67ecfd11d9",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -3427,7 +3447,7 @@
       "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/cultura-sport/attivita-culturali/",
       "id": "5829b627c58e3ea5ef3f",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -3437,7 +3457,7 @@
       "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/cultura-sport/attivita-culturali/",
       "id": "431e0b20cb2449eaeac3",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -3447,7 +3467,7 @@
       "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/cultura-sport/attivita-culturali/",
       "id": "b466dc1aec13f6df4654",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -3457,7 +3477,7 @@
       "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/cultura-sport/attivita-culturali/",
       "id": "719a71beb5de26616fe7",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -3467,7 +3487,7 @@
       "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/cultura-sport/attivita-culturali/",
       "id": "0998f763a3c99921338e",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -3477,7 +3497,7 @@
       "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/cultura-sport/attivita-culturali/",
       "id": "faf264c00c023670eaee",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -3497,7 +3517,7 @@
       "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/cultura-sport/attivita-culturali/",
       "id": "f4e633e3dde57205f395",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -3507,7 +3527,7 @@
       "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/cultura-sport/attivita-culturali/",
       "id": "2e30de5bfdaec48cb6e1",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -4597,7 +4617,7 @@
       "source_url": "https://www.fondazioneconilsud.it",
       "id": "ce7c89f70383737e7cb4",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -4607,7 +4627,7 @@
       "source_url": "https://www.fondazioneconilsud.it",
       "id": "615b9cbabc9f361edd07",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -4617,7 +4637,7 @@
       "source_url": "https://www.fondazioneconilsud.it",
       "id": "7205e3fca7e42d334a3e",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -4627,7 +4647,7 @@
       "source_url": "https://www.fondazioneconilsud.it",
       "id": "e039ac97960a82718bb0",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -4637,7 +4657,7 @@
       "source_url": "https://www.fondazioneconilsud.it",
       "id": "b4b6a1a0ecc75351776a",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -4647,7 +4667,7 @@
       "source_url": "https://www.fondazioneconilsud.it",
       "id": "dc94134a77eb9d3aa48f",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -4677,7 +4697,7 @@
       "source_url": "https://esmeefairbairn.org.uk/what-we-fund",
       "id": "0c62a981c50ac6790269",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -4687,7 +4707,7 @@
       "source_url": "https://esmeefairbairn.org.uk/what-we-fund",
       "id": "bfd71e904b3b3ad008ff",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -4827,7 +4847,7 @@
       "source_url": "https://phmuseum.com/grants",
       "id": "2649afde1d23d937d234",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -4837,7 +4857,7 @@
       "source_url": "https://phmuseum.com/grants",
       "id": "8660c2ce8b925a83ea49",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -4847,7 +4867,7 @@
       "source_url": "https://phmuseum.com/grants",
       "id": "47720a22a4853d376cee",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -4857,7 +4877,7 @@
       "source_url": "https://phmuseum.com/grants",
       "id": "17b524bc026aa8963ec7",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -4867,7 +4887,7 @@
       "source_url": "https://phmuseum.com/grants",
       "id": "266f77432730abfe4db2",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -4877,7 +4897,7 @@
       "source_url": "https://phmuseum.com/grants",
       "id": "782f9cf5d184f3399e67",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -4887,7 +4907,7 @@
       "source_url": "https://phmuseum.com/grants",
       "id": "1951ed1c302a1092614f",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -4897,7 +4917,7 @@
       "source_url": "https://phmuseum.com/grants",
       "id": "e7ab479aaa54ac6d0374",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -4907,7 +4927,7 @@
       "source_url": "https://phmuseum.com/grants",
       "id": "0592f438db903ec4ba8c",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -4917,7 +4937,7 @@
       "source_url": "https://phmuseum.com/grants",
       "id": "ba13dcdd735422ccd44f",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -4927,7 +4947,7 @@
       "source_url": "https://phmuseum.com/grants",
       "id": "2c44a27a36911edcda9b",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -4937,7 +4957,7 @@
       "source_url": "https://phmuseum.com/grants",
       "id": "a1f6a9b4792a13498b79",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -4947,7 +4967,7 @@
       "source_url": "https://phmuseum.com/grants",
       "id": "2cd77a1a455f68bdf153",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -4957,7 +4977,7 @@
       "source_url": "https://phmuseum.com/grants",
       "id": "0678f58b990402bb49bd",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -4967,7 +4987,7 @@
       "source_url": "https://phmuseum.com/grants",
       "id": "d31b767a1b077efcedf6",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -4977,7 +4997,7 @@
       "source_url": "https://phmuseum.com/grants",
       "id": "75afe0ba840d6b939e30",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -4987,7 +5007,7 @@
       "source_url": "https://phmuseum.com/grants",
       "id": "9510855bbed546372fd7",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -4997,7 +5017,7 @@
       "source_url": "https://phmuseum.com/grants",
       "id": "23b2c72968e61836c0e0",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -5007,7 +5027,7 @@
       "source_url": "https://phmuseum.com/grants",
       "id": "3fb0d6473c8e98f88907",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -5017,7 +5037,7 @@
       "source_url": "https://phmuseum.com/grants",
       "id": "c82c0b04685b50714b8b",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -5027,7 +5047,7 @@
       "source_url": "https://phmuseum.com/grants",
       "id": "7d0b1000af11fd9fa034",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -5037,7 +5057,7 @@
       "source_url": "https://phmuseum.com/grants",
       "id": "6c0033d2bff1f9ebee5d",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -5047,7 +5067,7 @@
       "source_url": "https://phmuseum.com/grants",
       "id": "19cc9d4a8048a39c025d",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -5057,7 +5077,7 @@
       "source_url": "https://phmuseum.com/grants",
       "id": "96f86c86bc1372b62e60",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -5067,7 +5087,7 @@
       "source_url": "https://phmuseum.com/grants",
       "id": "4dc4f2dd3bf9e0e47a25",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -5077,7 +5097,7 @@
       "source_url": "https://phmuseum.com/grants",
       "id": "bb954552fb48f2f55567",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -5087,7 +5107,7 @@
       "source_url": "https://phmuseum.com/grants",
       "id": "4c347903852072c27529",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -5097,7 +5117,7 @@
       "source_url": "https://phmuseum.com/grants",
       "id": "e7e716c30d4f5d579370",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -5107,7 +5127,7 @@
       "source_url": "https://phmuseum.com/grants",
       "id": "c4076ad362bf1ab1c393",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -5117,7 +5137,7 @@
       "source_url": "https://phmuseum.com/grants",
       "id": "a8abe81a7be02cec5274",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -5127,7 +5147,7 @@
       "source_url": "https://phmuseum.com/grants",
       "id": "12b914cff12e69d30284",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -5347,7 +5367,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "5665a488cf03334316b3",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -6037,7 +6057,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "589dddc106d439eec3e8",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -6057,7 +6077,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "83dc85810cdbcb17322c",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -6067,7 +6087,7 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "2c0492d7c79d209d4547",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-11-27T17:32:10+00:00",
+      "last_seen": "2026-11-28T16:16:55+00:00",
       "present": true
     },
     {
@@ -6077,8 +6097,8 @@
       "source_url": "https://opencalls.monographica.com",
       "id": "06c0df29a32f7eaf7bae",
       "first_seen": "2026-10-04T17:37:00+00:00",
-      "last_seen": "2026-10-04T17:39:04+00:00",
-      "present": false
+      "last_seen": "2026-11-28T16:16:55+00:00",
+      "present": true
     },
     {
       "title": "Prairie Ronde Artist Residency — Spring 2027",
